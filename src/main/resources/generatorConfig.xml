@@ -3,77 +3,51 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
+<!-- 使用 mvn mybatis-generator:generate -->
 <generatorConfiguration>
-  <!-- 指定mysql的驱动包 --> 
-  <classPathEntry location="/blog/doc/mysql-connector-java-5.1.22.jar" />
-  <context id="bosTables" targetRuntime="MyBatis3">
+    <!-- 配置文件 -->
+    <properties resource="jdbc.properties" />
+    <context id="shiroTables" targetRuntime="MyBatis3" defaultModelType="flat">
 
-    <!-- 取消生成的代码注释 -->
-    <commentGenerator><property name="suppressAllComments" value="true" /></commentGenerator>
+        <!-- plugin -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
 
-    <!-- 连接配置 -->
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://localhost:3306/blog"
-        userId="root"
-        password="root">
-    </jdbcConnection>
+        <!-- 取消生成的代码注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
 
-    <!-- javaModelGenerator是模型的生成信息，这里将指定这些Java model类的生成路径 -->
-    <javaModelGenerator targetPackage="com.wangzhixuan.blog.model"
-        targetProject="D:\blog\blog-core\src\main\java">
-        <property name="trimStrings" value="true" />  
-    </javaModelGenerator>
+        <!-- 连接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="${jdbc.url}" userId="${jdbc.username}"
+            password="${jdbc.password}">
+        </jdbcConnection>
 
-    <!-- 生成Mapper 配置文件，给Dao使用 -->
-    <sqlMapGenerator targetPackage="sqlMapperXml"
-        targetProject="D:\blog\blog-core\src\main\resources">
-    </sqlMapGenerator>
+        <!-- javaModelGenerator是模型的生成信息，这里将指定这些Java model类的生成路径 -->
+        <javaModelGenerator targetPackage="com.wangzhixuan.model"
+            targetProject="src/main/java">
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
 
-    <!-- javaClientGenerator是应用接口的生成信息  -->
-    <javaClientGenerator type="XMLMAPPER" targetPackage="com.wangzhixuan.blog.dao"
-        targetProject="D:\blog\blog-core\src\main\java">
-        <property name="enableSubPackages" value="true"/>
-    </javaClientGenerator>
+        <!-- 生成Mapper 配置文件 -->
+        <sqlMapGenerator targetPackage="sqlMapperXml"
+            targetProject="src/main/resources">
+        </sqlMapGenerator>
 
-    <!-- oracle 使用 schema 对应 用户名称空间  mysql 使用 catalog 对应 数据库 -->
-     <table schema="blog" tableName="Resource" domainObjectName="Resource"
-        enableCountByExample="false"
-        enableDeleteByExample="false"
-        enableUpdateByExample="false"
-        selectByExampleQueryId="false"
-        enableSelectByExample="false">
-    </table>
+        <!-- javaClientGenerator是应用接口的生成信息 -->
+        <javaClientGenerator type="XMLMAPPER"
+            targetPackage="com.wangzhixuan.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
 
-    <table schema="blog" tableName="Role" domainObjectName="Role"
-        enableCountByExample="false"
-        enableDeleteByExample="false"
-        enableUpdateByExample="false"
-        selectByExampleQueryId="false"
-        enableSelectByExample="false">
-    </table>
-
-    <table schema="blog" tableName="RoleResourceRef" domainObjectName="RoleResourceRef"
-        enableCountByExample="false"
-        enableDeleteByExample="false"
-        enableUpdateByExample="false"
-        selectByExampleQueryId="false"
-        enableSelectByExample="false">
-    </table>
-    <table schema="blog" tableName="Staff" domainObjectName="Staff"
-        enableCountByExample="false"
-        enableDeleteByExample="false"
-        enableUpdateByExample="false"
-        selectByExampleQueryId="false"
-        enableSelectByExample="false">
-    </table>
-    <table schema="blog" tableName="StaffRoleRef" domainObjectName="StaffRoleRef"
-        enableCountByExample="false"
-        enableDeleteByExample="false"
-        enableUpdateByExample="false"
-        selectByExampleQueryId="false"
-        enableSelectByExample="false">
-    </table>
-  </context>
+        <!-- oracle 使用 schema 对应 用户名称空间 mysql 使用 catalog 对应 数据库 -->
+        <table schema="shiro" tableName="%" enableCountByExample="false"
+            enableDeleteByExample="false" enableUpdateByExample="false"
+            selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>
+    </context>
 </generatorConfiguration>
 
 <!-- 步骤一：maven导入plugin -->

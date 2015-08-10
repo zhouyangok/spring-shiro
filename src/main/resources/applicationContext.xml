@@ -16,7 +16,7 @@
     http://www.springframework.org/schema/cache 
     http://www.springframework.org/schema/cache/spring-cache.xsd">
     <!-- 扫描service、dao -->
-    <context:component-scan base-package="com.wangzhixuan.blog">
+    <context:component-scan base-package="com.wangzhixuan">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
@@ -38,7 +38,7 @@
     <!-- MyBatis 动态实现  -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 对Dao 接口动态实现，需要知道接口在哪  -->
-        <property name="basePackage" value="com.wangzhixuan.blog.dao" />
+        <property name="basePackage" value="com.wangzhixuan.mapper" />
     </bean>
 
     <!-- 事务管理 -->
@@ -59,6 +59,6 @@
     </tx:advice>
     <!-- 配置切面 -->
     <aop:config>
-        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.wangzhixuan.blog.service..*.*(..))"/>
+        <aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.wangzhixuan.service..*.*(..))"/>
     </aop:config>
 </beans>
