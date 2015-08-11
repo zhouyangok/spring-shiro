@@ -15,6 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSON;
+import com.wangzhixuan.utils.Result;
 
 /**
  * @Description：后台登录
@@ -42,7 +46,6 @@ public class LoginController {
         if(SecurityUtils.getSubject().isAuthenticated()){
             return "redirect:/index";
         }
-        model.addAttribute("message", "");
         return "/login";
     }
 
@@ -52,32 +55,35 @@ public class LoginController {
      * @param：
      */
     @RequestMapping(value = "/login",method=RequestMethod.POST)
+    @ResponseBody
     public String loginPost(String username, String password, HttpServletRequest request, Model model){
-        logger.info("GET请求登录");
+        logger.info("POST请求登录");
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
         token.setRememberMe(true);
+        Result result = new Result();
         try {
             //调用 com.wangzhixuan.shiro.ShiroDbRealm
             user.login(token);
         } catch (UnknownAccountException e) {
-            model.addAttribute("error", "账号不存在!");
-            logger.error("账号不存在---{}", e.getMessage());
-            return "/login";
+            logger.error("账号不存在：{}", e.getMessage());
+            result.setMsg("账号不存在");
+            return JSON.toJSONString(result);
         }  catch (DisabledAccountException e) {
-            model.addAttribute("error", "账号未启用!");
-            logger.error("账号未启用---{}", e.getMessage());
-            return "/login";
+            logger.error("账号未启用：{}", e.getMessage());
+            result.setMsg("账号未启用");
+            return JSON.toJSONString(result);
         }catch (IncorrectCredentialsException e) {
-            model.addAttribute("error", "密码错误!");
-            logger.error("密码错误---{}", e.getMessage());
-            return "/login";
+            logger.error("密码错误：{}", e.getMessage());
+            result.setMsg("密码错误");
+            return JSON.toJSONString(result);
         } catch (Exception e) {
-            model.addAttribute("error", "未知错误,请联系管理员!");
-            logger.error("未知错误,请联系管理员---{}", e.getMessage());
-            return "/login";
+            logger.error("未知错误,请联系管理员：{}", e.getMessage());
+            result.setMsg("未知错误,请联系管理员");
+            return JSON.toJSONString(result);
         }
-        return "redirect:/index";
+        result.setSuccess(true);
+        return JSON.toJSONString(result);
     }
 
     /**
