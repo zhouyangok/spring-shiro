@@ -17,7 +17,7 @@
 
     var sessionInfo_userId = '${sessionInfo.id}';
     if (sessionInfo_userId) {//如果登录,直接跳转到index页面
-        window.location.href='${ctx}/admin/index';
+        window.location.href='${ctx}/index';
     }
 
     $(function() {
@@ -35,9 +35,6 @@
             success:function(result){
                 progressClose();
                 result = $.parseJSON(result);
-                alert(result);
-                alert(result.success+'--1');
-                alert(result.msg+'--1');
                 if (result.success) {
                     window.location.href='${ctx}/index';
                 }else{

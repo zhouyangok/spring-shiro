@@ -9,11 +9,11 @@
 <script type="text/javascript" src="${ctx}/static/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 
 <!-- [jQuery] -->
-<script src="${ctx}/static/easyui1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="${ctx}/static/easyui1.4.2/jquery.min.js" charset="utf-8"></script>
 
 <!-- [EasyUI] -->
-<link id="easyuiTheme" rel="static/stylesheet" href="${ctx}/static/easyui1.4.2/themes/<c:out value="${cookie.easyuiThemeName.value}" default="gray"/>/easyui.css" type="text/css">
-<link id="easyuiTheme" rel="static/stylesheet" href="${ctx}/static/easyui1.4.2/themes/icon.css" type="text/css">
+<link id="easyuiTheme" rel="stylesheet" type="text/css" href="${ctx}/static/easyui1.4.2/themes/gray/easyui.css" />
+<link id="easyuiTheme" rel="stylesheet" type="text/css" href="${ctx}/static/easyui1.4.2/themes/icon.css" />
 <script type="text/javascript" src="${ctx}/static/easyui1.4.2/jquery.easyui.min.js" charset="utf-8"></script>
 <script type="text/javascript" src="${ctx}/static/easyui1.4.2/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
 
@@ -21,4 +21,4 @@
 <script type="text/javascript" src="${ctx}/static/extJs.js" charset="utf-8"></script>
 
 <!-- [扩展lightmvc样式] -->
-<link rel="static/stylesheet" href="${ctx}/static/style/css/lightmvc.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="${ctx}/static/style/css/lightmvc.css" />
