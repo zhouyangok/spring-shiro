@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<%@ include file="/commons/global.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="inc.jsp"></jsp:include>
+<%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页</title>
 <script type="text/javascript">
@@ -14,12 +13,13 @@
 	var layout_west_tree;
 	var layout_west_tree_url = '';
 	
-	var sessionInfo_userId = '${sessionInfo.id}';
+/* 	var sessionInfo_userId = '${sessionInfo.id}';
 	if (sessionInfo_userId) {//如果没有登录,直接跳转到登录页面
-		layout_west_tree_url = '${ctx}/resource/tree';
+		layout_west_tree_url = '${path }/resource/tree';
 	}else{
-		window.location.href='${ctx}/admin/index';
-	}
+		window.location.href='${path }/admin/index';
+	} */
+		layout_west_tree_url = '${path }/resource/tree';
 	$(function() {
 		index_layout = $('#index_layout').layout({
 			fit : true
@@ -57,7 +57,7 @@
 			lines : true,
 			onClick : function(node) {
 				if (node.attributes && node.attributes.url) {
-					var url = '${ctx}' + node.attributes.url;
+					var url = '${path }' + node.attributes.url;
 					addTab({
 						url : url,
 						title : node.text,
@@ -90,10 +90,10 @@
 		$.messager.confirm('提示','确定要退出?',function(r){
 			if (r){
 				progressLoad();
-				$.post( '${ctx}/admin/logout', function(result) {
+				$.post( '${path }/admin/logout', function(result) {
 					if(result.success){
 						progressClose();
-						window.location.href='${ctx}/admin/index';
+						window.location.href='${path }/admin/index';
 					}
 				}, 'json');
 			}
@@ -106,7 +106,7 @@
 			title : '修改密码',
 			width : 300,
 			height : 250,
-			href : '${ctx}/user/editPwdPage',
+			href : '${path }/user/editPwdPage',
 			buttons : [ {
 				text : '修改',
 				handler : function() {
@@ -117,12 +117,11 @@
 		});
 	}
 
-	
 </script>
 </head>
 <body>
 	<div id="loading" style="position: fixed;top: -50%;left: -50%;width: 200%;height: 200%;background: #fff;z-index: 100;overflow: hidden;">
-	<img src="${ctx}/style/images/ajax-loader.gif" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;"/>
+	<img src="${staticPath }/static/style/images/ajax-loader.gif" style="position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;"/>
 	</div>
 	<div id="index_layout">
 		<div data-options="region:'north',border:false" style=" overflow: hidden;" >

@@ -22,6 +22,14 @@
     from resource
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <!-- 查询所有菜单 -->
+  <select id="findResourceAllBytype" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resource
+    where resourcetype = #{resourcemenu}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from resource
     where id = #{id,jdbcType=BIGINT}

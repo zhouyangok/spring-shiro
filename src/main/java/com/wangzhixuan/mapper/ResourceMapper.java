@@ -1,5 +1,7 @@
 package com.wangzhixuan.mapper;
 
+import java.util.List;
+
 import com.wangzhixuan.model.Resource;
 
 public interface ResourceMapper {
@@ -14,4 +16,6 @@ public interface ResourceMapper {
     int updateByPrimaryKeySelective(Resource record);
 
     int updateByPrimaryKey(Resource record);
+
+    List<Resource> findResourceAllBytype(Integer resourcemenu);
 }

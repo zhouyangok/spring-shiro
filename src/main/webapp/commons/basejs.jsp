@@ -1,17 +1,24 @@
 <%--标签 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="/commons/global.jsp" %>
 
-<!-- 导入jquery核心类库 -->
-<script type="text/javascript" src="${staticPath }/static/plug/easyui/jquery.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="edge" />
+<link rel="shortcut icon" href="${staticPath }/static/style/images/favicon.png" />
 
-<!-- 导入easyui类库 -->
-<link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/plug/easyui/themes/bootstrap/easyui.css" />
-<link rel="stylesheet" type="text/css" href="${staticPath }/static/plug/easyui/themes/icon.css" />
-<link rel="stylesheet" type="text/css" href="${staticpath }/static/css/icommon.css">
-<script type="text/javascript" src="${staticPath }/static/plug/easyui/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="${staticPath }/static/plug/easyui/locale/easyui-lang-zh_CN.js"></script>
+<!-- [my97日期时间控件] -->
+<script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
 
-<!-- 导入ztree类库 -->
-<link rel="stylesheet" type="text/css" href="${staticpath }/static/plug/zTree_v3/css/zTreeStyle/zTreeStyle.css" />
-<script type="text/javascript" src="${staticpath }/static/plug/zTree_v3/js/jquery.ztree.all-3.5.js"></script>
+<!-- [jQuery] -->
+<script type="text/javascript" src="${staticPath }/static/easyui1.4.2/jquery.min.js" charset="utf-8"></script>
+
+<!-- [EasyUI] -->
+<link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui1.4.2/themes/gray/easyui.css" />
+<link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui1.4.2/themes/icon.css" />
+<script type="text/javascript" src="${staticPath }/static/easyui1.4.2/jquery.easyui.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="${staticPath }/static/easyui1.4.2/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
+
+<!-- [扩展JS] -->
+<script type="text/javascript" src="${staticPath }/static/extJs.js" charset="utf-8"></script>
+
+<!-- [扩展lightmvc样式] -->
+<link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/lightmvc.css" />

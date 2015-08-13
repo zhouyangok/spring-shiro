@@ -8,13 +8,18 @@ import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
-    
+
     @Autowired
     private UserMapper userMapper;
 
     @Override
-    public User findUserByloginname(String username) {
-        return userMapper.findUserByloginname(username);
+    public User findUserByLoginname(String username) {
+        return userMapper.findUserByLoginname(username);
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return userMapper.findUserById(id);
     }
 
 }

@@ -26,11 +26,19 @@
   </select>
 
   <!-- 根据登录名查询用户 -->
-  <select id="findUserByloginname" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="findUserByLoginname" resultMap="BaseResultMap" parameterType="java.lang.String">
     select 
     <include refid="Base_Column_List" />
     from user
     where loginname = #{username}
+  </select>
+
+  <!-- 根据id查询用户 -->
+  <select id="findUserById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

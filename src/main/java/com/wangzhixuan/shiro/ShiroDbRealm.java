@@ -32,7 +32,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
         logger.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         String username = token.getUsername();
-        User user = userService.findUserByloginname(username);
+        User user = userService.findUserByLoginname(username);
         // 账号不存在
         if(user == null){
             return null;

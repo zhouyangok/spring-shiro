@@ -9,17 +9,8 @@
 
 <%--basePath --%>
 <c:set var="base" value="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}" />
+<%--静态文件目录 --%>
 <c:set var="path" value="${base}" />
+<%--项目路径 --%>
+<c:set var="staticPath" value="${base }" />
 
-<c:set var="staticPath" value="${path }" />
-<%--域名 --%>
-<c:set var="domain" value="${path }" />
-<%--
-<c:set var="domain" value="http://h5.228.cn" />
- --%>
-<%--版本信息 --%>
-<c:set var="v" value="?v=2014101300123121" />
-<c:set var="min" value="" />
-<%--
-<c:set var="min" value=".min" />
- --%>

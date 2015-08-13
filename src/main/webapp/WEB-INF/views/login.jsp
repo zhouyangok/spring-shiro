@@ -1,29 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<%@ include file="/commons/global.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="inc.jsp"></jsp:include>
+<%@ include file="/commons/basejs.jsp" %>
 <meta charset="utf-8">
 <title>用户登录</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width">
-<link href="${ctx}/static/style/css/base.css" rel="stylesheet" type="text/css">
-<link href="${ctx}/static/style/css/login.css" rel="stylesheet" type="text/css">
+<link href="${staticPath }/static/style/css/base.css" rel="stylesheet" type="text/css">
+<link href="${staticPath }/static/style/css/login.css" rel="stylesheet" type="text/css">
 
 <script>
 
-    var sessionInfo_userId = '${sessionInfo.id}';
+/*     var sessionInfo_userId = '${sessionInfo.id}';
     if (sessionInfo_userId) {//如果登录,直接跳转到index页面
-        window.location.href='${ctx}/index';
-    }
+        window.location.href='${path }/index';
+    } */
 
     $(function() {
-
         $('#loginform').form({
-            url:'${ctx}/login',
+            url:'${path }/login',
             onSubmit : function() {
                 progressLoad();
                 var isValid = $(this).form('validate');
@@ -36,7 +34,7 @@
                 progressClose();
                 result = $.parseJSON(result);
                 if (result.success) {
-                    window.location.href='${ctx}/index';
+                    window.location.href='${path }/index';
                 }else{
                      $.messager.show({
                         title:'提示',
