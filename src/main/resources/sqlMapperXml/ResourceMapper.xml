@@ -7,7 +7,7 @@
     <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="icon" property="icon" jdbcType="VARCHAR" />
-    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="BIGINT" />
     <result column="seq" property="seq" jdbcType="TINYINT" />
     <result column="state" property="state" jdbcType="TINYINT" />
     <result column="resourcetype" property="resourcetype" jdbcType="TINYINT" />
@@ -22,12 +22,20 @@
     from resource
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <!-- 查询所有菜单 -->
+  <!-- 查询所有父菜单 -->
   <select id="findResourceAllBytype" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select distinct
     <include refid="Base_Column_List" />
     from resource
     where resourcetype = #{resourcemenu}
+  </select>
+  <!-- 查询所有子菜单-->
+  <select id="findResourceAllBytypeAndPid" resultMap="BaseResultMap" >
+    select distinct
+    <include refid="Base_Column_List" />
+    from resource
+    where resourcetype = #{resourcemenu}
+    and pid = #{pid}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
@@ -42,7 +50,7 @@
       icon, pid, seq, state, 
       resourcetype, createdate)
     values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{seq,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
+      #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{seq,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, 
       #{resourcetype,jdbcType=TINYINT}, #{createdate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.Resource" >
@@ -93,7 +101,7 @@
         #{icon,jdbcType=VARCHAR},
       </if>
       <if test="pid != null" >
-        #{pid,jdbcType=INTEGER},
+        #{pid,jdbcType=BIGINT},
       </if>
       <if test="seq != null" >
         #{seq,jdbcType=TINYINT},
@@ -125,7 +133,7 @@
         icon = #{icon,jdbcType=VARCHAR},
       </if>
       <if test="pid != null" >
-        pid = #{pid,jdbcType=INTEGER},
+        pid = #{pid,jdbcType=BIGINT},
       </if>
       <if test="seq != null" >
         seq = #{seq,jdbcType=TINYINT},
@@ -148,7 +156,7 @@
       url = #{url,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},
-      pid = #{pid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=BIGINT},
       seq = #{seq,jdbcType=TINYINT},
       state = #{state,jdbcType=TINYINT},
       resourcetype = #{resourcetype,jdbcType=TINYINT},

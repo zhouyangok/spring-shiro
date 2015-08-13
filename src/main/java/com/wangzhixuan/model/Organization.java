@@ -14,7 +14,7 @@ public class Organization implements Serializable {
 
     private String icon;
 
-    private Integer pid;
+    private Long pid;
 
     private Integer seq;
 
@@ -62,11 +62,11 @@ public class Organization implements Serializable {
         this.icon = icon == null ? null : icon.trim();
     }
 
-    public Integer getPid() {
+    public Long getPid() {
         return pid;
     }
 
-    public void setPid(Integer pid) {
+    public void setPid(Long pid) {
         this.pid = pid;
     }
 

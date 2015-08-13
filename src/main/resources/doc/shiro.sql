@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : mysql
 Source Server Version : 50527
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : shiro
 
 Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2015-08-06 11:09:05
+Date: 2015-08-14 00:04:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `organization` (
   `address` varchar(100) DEFAULT NULL,
   `code` varchar(64) NOT NULL,
   `icon` varchar(32) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `pid` bigint(19) DEFAULT NULL,
   `seq` tinyint(1) NOT NULL DEFAULT '0',
   `createdate` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -46,7 +46,7 @@ CREATE TABLE `resource` (
   `url` varchar(100) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `icon` varchar(32) DEFAULT NULL,
-  `pid` int(11) DEFAULT NULL,
+  `pid` bigint(19) DEFAULT NULL,
   `seq` tinyint(1) NOT NULL DEFAULT '0',
   `state` tinyint(1) NOT NULL DEFAULT '0',
   `resourcetype` tinyint(1) NOT NULL DEFAULT '0',
@@ -113,8 +113,8 @@ INSERT INTO `role` VALUES ('1', '超级管理员', '0', '超级管理员，拥�
 DROP TABLE IF EXISTS `role_resource`;
 CREATE TABLE `role_resource` (
   `id` bigint(19) NOT NULL AUTO_INCREMENT,
-  `role_id` smallint(5) NOT NULL,
-  `resource_id` smallint(5) NOT NULL,
+  `role_id` bigint(19) NOT NULL,
+  `resource_id` bigint(19) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='角色资源';
 
@@ -184,8 +184,8 @@ INSERT INTO `user` VALUES ('1', 'admin', '超级管理员', '21232f297a57a5a7438
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `id` bigint(19) NOT NULL AUTO_INCREMENT,
-  `user_id` smallint(5) NOT NULL,
-  `role_id` smallint(5) NOT NULL,
+  `user_id` bigint(19) NOT NULL,
+  `role_id` bigint(19) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='用户角色';
 

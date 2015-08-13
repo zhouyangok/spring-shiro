@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class RoleResource implements Serializable {
     private Long id;
 
-    private Short roleId;
+    private Long roleId;
 
-    private Short resourceId;
+    private Long resourceId;
 
     private static final long serialVersionUID = 1L;
 
@@ -19,19 +19,19 @@ public class RoleResource implements Serializable {
         this.id = id;
     }
 
-    public Short getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Short roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
-    public Short getResourceId() {
+    public Long getResourceId() {
         return resourceId;
     }
 
-    public void setResourceId(Short resourceId) {
+    public void setResourceId(Long resourceId) {
         this.resourceId = resourceId;
     }
 

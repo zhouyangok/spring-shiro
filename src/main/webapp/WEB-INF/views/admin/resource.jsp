@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="../inc.jsp"></jsp:include>
+<%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="edge" />
 <c:if test="${fn:contains(sessionInfo.resourceList, '/resource/edit')}">
 	<script type="text/javascript">

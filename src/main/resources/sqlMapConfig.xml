@@ -8,10 +8,12 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
     <typeAliases>
         <!-- 为类型 起了别名 -->
         <typeAlias type="com.wangzhixuan.model.User" alias="User" />
+        <typeAlias type="com.wangzhixuan.model.Resource" alias="Resource" />
     </typeAliases>
 
     <!-- 引入自定义 mapper 文件 -->
     <mappers>
         <mapper resource="sqlMapperXml/UserMapper.xml" /> 
+        <mapper resource="sqlMapperXml/ResourceMapper.xml" /> 
     </mappers>
 </configuration> 

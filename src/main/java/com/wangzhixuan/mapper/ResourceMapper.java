@@ -2,6 +2,8 @@ package com.wangzhixuan.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.wangzhixuan.model.Resource;
 
 public interface ResourceMapper {
@@ -18,4 +20,6 @@ public interface ResourceMapper {
     int updateByPrimaryKey(Resource record);
 
     List<Resource> findResourceAllBytype(Integer resourcemenu);
+
+    List<Resource> findResourceAllBytypeAndPid(@Param("resourcemenu")Integer resourcemenu, @Param("pid")Long pid);
 }
