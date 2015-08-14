@@ -2,8 +2,6 @@ package com.wangzhixuan.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
 import com.wangzhixuan.vo.Tree;
@@ -22,12 +21,35 @@ public class ResourceController extends BaseController {
     @Autowired
     private ResourceService resourceService;
 
+    /**
+     * @Description：菜单树
+     * @return
+     * @author：Wangzhixuan
+     */
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
-    public String tree(HttpServletRequest request) {
+    public String tree() {
         User currentUser = getCurrentUser();
         List<Tree> tree = resourceService.tree(currentUser);
         return JSON.toJSONString(tree);
+    }
+
+    /**
+     * @Description：资源管理
+     * @return
+     * @author：Wangzhixuan
+     */
+    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+    public String manager() {
+        return "admin/resource";
+    }
+
+    @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
+    @ResponseBody
+    public String treeGrid() {
+        List<Resource> treeGrid = resourceService.treeGrid();
+        String treeGrids = JSON.toJSONString(treeGrid).replaceAll("icon", "iconCls");
+        return JSON.toJSONString(treeGrids);
     }
 
 /*    @RequestMapping("/allTree")

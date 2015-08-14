@@ -21,22 +21,47 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<Tree> tree(User currentUser) {
         List<Tree> trees = Lists.newArrayList();
+
         List<Resource> resourceFather = null;
+
         if(currentUser.getLoginname().equals("admin")){
-            resourceFather = resourceMapper.findResourceAllBytype(Config.resourceMenu);
+            resourceFather = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
         }else{
-                
+            
         }
         if(resourceFather != null){
-            for (Resource resource : resourceFather) {
-                Tree tree = new Tree();
-                List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.resourceMenu, resource.getId());
+            for (Resource resourceOne : resourceFather) {
+                Tree treeOne = new Tree();
+
+                treeOne.setId(resourceOne.getId().toString());
+                treeOne.setText(resourceOne.getName());
+                treeOne.setIconCls(resourceOne.getIcon());
+                treeOne.setAttributes(resourceOne.getUrl());
+                List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
+
                 if(resourceSon != null){
-                    
+                    List<Tree> tree = Lists.newArrayList();
+                    for (Resource resourceTwo : resourceSon) {
+                        Tree treeTwo = new Tree();
+                        treeTwo.setId(resourceTwo.getId().toString());
+                        treeTwo.setText(resourceTwo.getName());
+                        treeTwo.setIconCls(resourceTwo.getIcon());
+                        treeTwo.setAttributes(resourceTwo.getUrl());
+                        tree.add(treeTwo);
+                    }
+                    treeOne.setChildren(tree);
+                }else{
+                    treeOne.setState("closed");
                 }
+                trees.add(treeOne);
             }
         }
-        return null;
+        return trees;
+    }
+
+    @Override
+    public List<Resource> treeGrid() {
+        return resourceMapper.findResourceAll();
     }
 
 }

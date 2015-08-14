@@ -12,5 +12,5 @@
 <%--静态文件目录 --%>
 <c:set var="path" value="${base}" />
 <%--项目路径 --%>
-<c:set var="staticPath" value="${base }" />
+<c:set var="staticPath" value="${base}" />
 

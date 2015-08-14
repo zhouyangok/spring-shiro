@@ -9,13 +9,13 @@
     <result column="sex" property="sex" jdbcType="TINYINT" />
     <result column="age" property="age" jdbcType="TINYINT" />
     <result column="usertype" property="usertype" jdbcType="TINYINT" />
-    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
     <result column="organization_id" property="organizationId" jdbcType="INTEGER" />
     <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, loginname, name, password, sex, age, usertype, state, organization_id, createdate, 
+    id, loginname, name, password, sex, age, usertype, status, organization_id, createdate, 
     phone
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -51,11 +51,11 @@
     </selectKey>
     insert into user (loginname, name, password, 
       sex, age, usertype, 
-      state, organization_id, createdate, 
+      status, organization_id, createdate, 
       phone)
     values (#{loginname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{sex,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{usertype,jdbcType=TINYINT}, 
-      #{state,jdbcType=TINYINT}, #{organizationId,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{organizationId,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
       #{phone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.User" >
@@ -82,8 +82,8 @@
       <if test="usertype != null" >
         usertype,
       </if>
-      <if test="state != null" >
-        state,
+      <if test="status != null" >
+        status,
       </if>
       <if test="organizationId != null" >
         organization_id,
@@ -114,8 +114,8 @@
       <if test="usertype != null" >
         #{usertype,jdbcType=TINYINT},
       </if>
-      <if test="state != null" >
-        #{state,jdbcType=TINYINT},
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
       </if>
       <if test="organizationId != null" >
         #{organizationId,jdbcType=INTEGER},
@@ -149,8 +149,8 @@
       <if test="usertype != null" >
         usertype = #{usertype,jdbcType=TINYINT},
       </if>
-      <if test="state != null" >
-        state = #{state,jdbcType=TINYINT},
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
       </if>
       <if test="organizationId != null" >
         organization_id = #{organizationId,jdbcType=INTEGER},
@@ -172,7 +172,7 @@
       sex = #{sex,jdbcType=TINYINT},
       age = #{age,jdbcType=TINYINT},
       usertype = #{usertype,jdbcType=TINYINT},
-      state = #{state,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
       organization_id = #{organizationId,jdbcType=INTEGER},
       createdate = #{createdate,jdbcType=TIMESTAMP},
       phone = #{phone,jdbcType=VARCHAR}

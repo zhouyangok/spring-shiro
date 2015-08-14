@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
+Source Server         : localhost
 Source Server Version : 50527
-Source Host           : localhost:3306
+Source Host           : 127.0.0.1:3306
 Source Database       : shiro
 
 Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2015-08-14 00:04:24
+Date: 2015-08-14 19:11:54
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,7 +48,7 @@ CREATE TABLE `resource` (
   `icon` varchar(32) DEFAULT NULL,
   `pid` bigint(19) DEFAULT NULL,
   `seq` tinyint(1) NOT NULL DEFAULT '0',
-  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
   `resourcetype` tinyint(1) NOT NULL DEFAULT '0',
   `createdate` datetime NOT NULL,
   PRIMARY KEY (`id`)
@@ -60,7 +60,7 @@ CREATE TABLE `resource` (
 INSERT INTO `resource` VALUES ('1', '系统管理', '', '系统管理', 'icon-company', null, '7', '0', '0', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('11', '资源管理', '/resource/manager', '资源管理', 'icon-folder', '1', '1', '0', '0', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('111', '列表', '/resource/treeGrid', '资源列表', 'icon-btn', '11', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('112', '添加', '/resource/add', '资源添加', 'icon-btn', '11', '0', '0', '1', '2014-02-19 01:00:00');
+INSERT INTO `resource` VALUES ('112', '添加', '/resource/add', '资源添加', 'icon-btn', '11', '0', '1', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('113', '编辑', '/resource/edit', '资源编辑', 'icon-btn', '11', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('114', '删除', '/resource/delete', '资源删除', 'icon-btn', '11', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('12', '角色管理', '/role/manager', '角色管理', 'icon-folder', '1', '2', '0', '0', '2014-02-19 01:00:00');
@@ -166,7 +166,7 @@ CREATE TABLE `user` (
   `sex` tinyint(1) NOT NULL DEFAULT '0',
   `age` tinyint(1) NOT NULL DEFAULT '0',
   `usertype` tinyint(1) NOT NULL DEFAULT '0',
-  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '0',
   `organization_id` int(11) NOT NULL DEFAULT '0',
   `createdate` datetime NOT NULL,
   `phone` varchar(20) DEFAULT NULL,

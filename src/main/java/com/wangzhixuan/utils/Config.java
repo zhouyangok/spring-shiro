@@ -6,8 +6,10 @@ package com.wangzhixuan.utils;
  */
 public interface Config {
     // 菜单
-    Integer resourceMenu = 0;
+    Integer RESOURCE_MENU = 0;
     // 按钮
-    Integer resourceButton = 1;
+    Integer RESOURCE_BUTTON = 1;
+    // Pid
+    Long PID = -1L;
 
 }

@@ -18,7 +18,7 @@ public class Resource implements Serializable {
 
     private Integer seq;
 
-    private Integer state;
+    private Integer status;
 
     private Integer resourcetype;
 
@@ -82,12 +82,12 @@ public class Resource implements Serializable {
         this.seq = seq;
     }
 
-    public Integer getState() {
-        return state;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setState(Integer state) {
-        this.state = state;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public Integer getResourcetype() {
@@ -119,7 +119,7 @@ public class Resource implements Serializable {
         sb.append(", icon=").append(icon);
         sb.append(", pid=").append(pid);
         sb.append(", seq=").append(seq);
-        sb.append(", state=").append(state);
+        sb.append(", status=").append(status);
         sb.append(", resourcetype=").append(resourcetype);
         sb.append(", createdate=").append(createdate);
         sb.append(", serialVersionUID=").append(serialVersionUID);

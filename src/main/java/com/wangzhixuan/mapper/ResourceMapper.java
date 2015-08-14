@@ -22,4 +22,8 @@ public interface ResourceMapper {
     List<Resource> findResourceAllBytype(Integer resourcemenu);
 
     List<Resource> findResourceAllBytypeAndPid(@Param("resourcemenu")Integer resourcemenu, @Param("pid")Long pid);
+
+    List<Resource> findResourceAll();
+
+    List<Resource> findResourceAllBytypeAndPidNull(Integer resourceMenu);
 }
