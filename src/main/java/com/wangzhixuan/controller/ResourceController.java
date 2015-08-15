@@ -2,6 +2,8 @@ package com.wangzhixuan.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
+import com.wangzhixuan.vo.ResourceVo;
 import com.wangzhixuan.vo.Tree;
 
 @Controller
 @RequestMapping("/resource")
 public class ResourceController extends BaseController {
-
+    
+    private static Logger logger = LoggerFactory.getLogger(ResourceController.class);
+    
     @Autowired
     private ResourceService resourceService;
 
@@ -47,9 +51,8 @@ public class ResourceController extends BaseController {
     @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
     @ResponseBody
     public String treeGrid() {
-        List<Resource> treeGrid = resourceService.treeGrid();
-        String treeGrids = JSON.toJSONString(treeGrid).replaceAll("icon", "iconCls");
-        return JSON.toJSONString(treeGrids);
+        List<ResourceVo> treeGrid = resourceService.treeGrid();
+        return JSON.toJSONString(treeGrid);
     }
 
 /*    @RequestMapping("/allTree")

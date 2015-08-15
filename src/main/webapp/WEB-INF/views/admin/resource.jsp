@@ -44,17 +44,9 @@
                 title : '排序',
                 width : 40
             }, {
-                field : 'icon',
+                field : 'iconCls',
                 title : '图标',
-                width : 100,
-                formatter : function(value, row, index) {
-                    switch (value) {
-                    case 0:
-                        return '菜单';
-                    case 1:
-                        return '按钮';
-                    }
-                }
+                width : 100
             }, {
                 field : 'resourcetype',
                 title : '资源类型',

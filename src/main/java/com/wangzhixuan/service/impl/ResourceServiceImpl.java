@@ -2,19 +2,26 @@ package com.wangzhixuan.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.wangzhixuan.controller.ResourceController;
 import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
 import com.wangzhixuan.utils.Config;
+import com.wangzhixuan.vo.ResourceVo;
 import com.wangzhixuan.vo.Tree;
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
+    private static Logger logger = LoggerFactory.getLogger(ResourceServiceImpl.class);
+    
     @Autowired
     private ResourceMapper resourceMapper;
 
@@ -60,8 +67,21 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<Resource> treeGrid() {
-        return resourceMapper.findResourceAll();
+    public List<ResourceVo> treeGrid() {
+        List<ResourceVo> resourceVos = Lists.newArrayList();
+        List<Resource> resources = resourceMapper.findResourceAll();
+        for (Resource resource : resources) {
+            ResourceVo resourceVo = new ResourceVo();
+            try {
+                BeanUtils.copyProperties(resourceVo, resource);
+            } catch (Exception e) {
+                logger.error("类型转换异常");
+                throw new RuntimeException("类型转换异常");
+            } 
+            resourceVo.setIconCls(resource.getIcon());
+            resourceVos.add(resourceVo);
+        }
+        return resourceVos;
     }
 
 }
