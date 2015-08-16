@@ -8,8 +8,8 @@ import com.wangzhixuan.vo.Tree;
 
 public interface ResourceService {
 
-    List<Tree> tree(User currentUser);
+    List<Tree> findTree(User currentUser);
 
-    List<ResourceVo> treeGrid();
+    List<ResourceVo> findTreeGrid();
 
 }

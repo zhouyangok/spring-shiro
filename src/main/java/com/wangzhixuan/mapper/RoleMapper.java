@@ -1,6 +1,9 @@
 package com.wangzhixuan.mapper;
 
+import java.util.List;
+
 import com.wangzhixuan.model.Role;
+import com.wangzhixuan.utils.PageInfo;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,8 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List findRolePageCondition(PageInfo pageInfo);
+
+    int findRolePageCount(PageInfo pageInfo);
 }

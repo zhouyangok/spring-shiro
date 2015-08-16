@@ -21,7 +21,7 @@ import com.wangzhixuan.vo.Tree;
 public class ResourceController extends BaseController {
     
     private static Logger logger = LoggerFactory.getLogger(ResourceController.class);
-    
+
     @Autowired
     private ResourceService resourceService;
 
@@ -34,7 +34,7 @@ public class ResourceController extends BaseController {
     @ResponseBody
     public String tree() {
         User currentUser = getCurrentUser();
-        List<Tree> tree = resourceService.tree(currentUser);
+        List<Tree> tree = resourceService.findTree(currentUser);
         return JSON.toJSONString(tree);
     }
 
@@ -51,7 +51,7 @@ public class ResourceController extends BaseController {
     @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
     @ResponseBody
     public String treeGrid() {
-        List<ResourceVo> treeGrid = resourceService.treeGrid();
+        List<ResourceVo> treeGrid = resourceService.findTreeGrid();
         return JSON.toJSONString(treeGrid);
     }
 

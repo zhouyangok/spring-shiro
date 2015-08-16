@@ -26,7 +26,7 @@
   </select>
 
   <!-- 根据登录名查询用户 -->
-  <select id="findUserByLoginname" resultMap="BaseResultMap" parameterType="java.lang.String">
+  <select id="findUserByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
     select 
     <include refid="Base_Column_List" />
     from user
@@ -35,6 +35,20 @@
 
   <!-- 根据id查询用户 -->
   <select id="findUserById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id}
+  </select>
+
+  <select id="findUserPageCondition" resultMap="BaseResultMap" parameterType="PageInfo">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id}
+  </select>
+
+  <select id="findUserPageCount" resultType="java.lang.Integer" parameterType="PageInfo">
     select 
     <include refid="Base_Column_List" />
     from user

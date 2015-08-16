@@ -1,21 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<%@ include file="/commons/global.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="edge" />
-<c:if test="${fn:contains(sessionInfo.resourceList, '/user/edit')}">
+<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/user/edit')}">
 	<script type="text/javascript">
 		$.canEdit = true;
 	</script>
-</c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/user/delete')}">
+</c:if> --%>
+<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/user/delete')}">
 	<script type="text/javascript">
 	</script>
-</c:if>
+</c:if> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户管理</title>
 	<script type="text/javascript">
@@ -24,7 +22,7 @@
 	$(function() {
 	
 		organizationTree = $('#organizationTree').tree({
-			url : '${ctx}/organization/tree',
+			url : '${path }/organization/tree',
 			parentField : 'pid',
 			lines : true,
 			onClick : function(node) {
@@ -35,7 +33,7 @@
 		});
 	
 		dataGrid = $('#dataGrid').datagrid({
-			url : '${ctx}/user/dataGrid',
+			url : '${path }/user/dataGrid',
 			fit : true,
 			striped : true,
 			rownumbers : true,
@@ -139,13 +137,9 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if(row.isdefault!=0){
-						if ($.canEdit) {
 							str += $.formatString('<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
-						}
-						if ($.canDelete) {
 						str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
 							str += $.formatString('<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
-						}
 					}
 					return str;
 				}
@@ -159,7 +153,7 @@
 			title : '添加',
 			width : 500,
 			height : 300,
-			href : '${ctx}/user/addPage',
+			href : '${path }/user/addPage',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -183,7 +177,7 @@
 				var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
 				if (currentUserId != id) {
 					progressLoad();
-					$.post('${ctx}/user/delete', {
+					$.post('${path }/user/delete', {
 						id : id
 					}, function(result) {
 						if (result.success) {
@@ -213,7 +207,7 @@
 			title : '编辑',
 			width : 500,
 			height : 300,
-			href : '${ctx}/user/editPage?id=' + id,
+			href : '${path }/user/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -256,9 +250,9 @@
 		</ul>
 	</div>
 	<div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/user/add')}">
+<%-- 		<c:if test="${fn:contains(sessionInfo.resourceList, '/user/add')}"> --%>
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
-		</c:if>
+<%-- 		</c:if> --%>
 	</div>
 </body>
 </html>

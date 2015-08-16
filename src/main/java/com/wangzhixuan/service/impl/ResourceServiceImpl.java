@@ -26,7 +26,7 @@ public class ResourceServiceImpl implements ResourceService {
     private ResourceMapper resourceMapper;
 
     @Override
-    public List<Tree> tree(User currentUser) {
+    public List<Tree> findTree(User currentUser) {
         List<Tree> trees = Lists.newArrayList();
 
         List<Resource> resourceFather = null;
@@ -67,12 +67,13 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<ResourceVo> treeGrid() {
+    public List<ResourceVo> findTreeGrid() {
         List<ResourceVo> resourceVos = Lists.newArrayList();
         List<Resource> resources = resourceMapper.findResourceAll();
         for (Resource resource : resources) {
             ResourceVo resourceVo = new ResourceVo();
             try {
+                // BeanUtils.copyProperties(目标对象, 源对象);
                 BeanUtils.copyProperties(resourceVo, resource);
             } catch (Exception e) {
                 logger.error("类型转换异常");

@@ -1,6 +1,9 @@
 package com.wangzhixuan.mapper;
 
+import java.util.List;
+
 import com.wangzhixuan.model.User;
+import com.wangzhixuan.utils.PageInfo;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
@@ -15,7 +18,11 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    User findUserByLoginname(String username);
+    User findUserByLoginName(String username);
 
     User findUserById(Long id);
+
+    List findUserPageCondition(PageInfo pageInfo);
+
+    int findUserPageCount(PageInfo pageInfo);
 }
