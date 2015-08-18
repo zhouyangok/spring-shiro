@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
-import com.wangzhixuan.controller.ResourceController;
 import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
@@ -31,12 +30,12 @@ public class ResourceServiceImpl implements ResourceService {
 
         List<Resource> resourceFather = null;
 
-        if(currentUser.getLoginname().equals("admin")){
+        if(currentUser.getLoginname().equals("admin")) {
             resourceFather = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
         }else{
             
         }
-        if(resourceFather != null){
+        if(resourceFather != null) {
             for (Resource resourceOne : resourceFather) {
                 Tree treeOne = new Tree();
 
@@ -46,7 +45,7 @@ public class ResourceServiceImpl implements ResourceService {
                 treeOne.setAttributes(resourceOne.getUrl());
                 List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
-                if(resourceSon != null){
+                if(resourceSon != null) {
                     List<Tree> tree = Lists.newArrayList();
                     for (Resource resourceTwo : resourceSon) {
                         Tree treeTwo = new Tree();

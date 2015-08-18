@@ -36,14 +36,14 @@ public class LoginController {
     }
         
     @RequestMapping(value = "/index")
-    public String index(Model model)  {
+    public String index(Model model) {
         return "/index";
     }
 
     @RequestMapping(value = "/login",method=RequestMethod.GET)
-    public String login(Model model,HttpServletRequest request){
+    public String login(Model model,HttpServletRequest request) {
         logger.info("GET请求登录");
-        if(SecurityUtils.getSubject().isAuthenticated()){
+        if(SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
         return "/login";
@@ -56,7 +56,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/login",method=RequestMethod.POST)
     @ResponseBody
-    public String loginPost(String username, String password, HttpServletRequest request, Model model){
+    public String loginPost(String username, String password, HttpServletRequest request, Model model) {
         logger.info("POST请求登录");
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
@@ -92,8 +92,8 @@ public class LoginController {
      * @param：
      */
     @RequestMapping(value = "/unauth")
-    public String unauth(Model model){
-        if(SecurityUtils.getSubject().isAuthenticated() == false){
+    public String unauth(Model model) {
+        if(SecurityUtils.getSubject().isAuthenticated() == false) {
             return "redirect:/login";
         }
         return "/unauth";
@@ -106,7 +106,7 @@ public class LoginController {
      * @param：
      */
     @RequestMapping(value="/logout")
-    public void logout(HttpServletRequest request){
+    public void logout(HttpServletRequest request) {
         logger.info("登出");
         Subject subject = SecurityUtils.getSubject();
         subject.logout();

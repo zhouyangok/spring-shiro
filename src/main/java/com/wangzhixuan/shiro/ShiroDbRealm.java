@@ -46,6 +46,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
         return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
         
     }
+
     /**
      * Shiro权限认证
      */

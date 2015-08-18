@@ -32,22 +32,18 @@
     <!-- 配置哪些是静态资源，缺省Servlet 直接返回 -->
     <mvc:resources location="/static/" mapping="/static/**"/>
 
-    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射,解决@ResponseBody乱码问题, 需要在annotation-driven之前,否则乱码问题同样无法解决 -->  
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
-        <property name="messageConverters">  
-            <list>  
-                <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
-                    <property name="supportedMediaTypes">  
-                        <list>  
-                            <value>text/html;charset=UTF-8</value>  
-                        </list>  
-                    </property>  
-                </bean>  
-            </list>  
-        </property>  
-    </bean>
-
-    <mvc:annotation-driven />
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+<!--             将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8" />
+            </bean>
+<!--             将Jackson2HttpMessageConverter的默认格式化输出设为true -->
+            <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+                <property name="prettyPrint" value="true"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
 
     <!-- 文件上传 -->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

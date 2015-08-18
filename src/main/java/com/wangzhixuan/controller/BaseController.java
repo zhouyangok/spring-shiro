@@ -14,7 +14,7 @@ public class BaseController {
 	
     private User userInfo;
     
-    public User getCurrentUser(){
+    public User getCurrentUser() {
 		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		userInfo = userService.findUserById(user.id);
     	return userInfo;

@@ -15,8 +15,11 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
 
     <!-- 引入自定义 mapper 文件 -->
     <mappers>
-        <mapper resource="sqlMapperXml/UserMapper.xml" /> 
-        <mapper resource="sqlMapperXml/ResourceMapper.xml" /> 
-        <mapper resource="sqlMapperXml/RoleMapper.xml" /> 
+        <!-- 从库测试 -->
+        <mapper resource="sqlMapperXml/SlaveMapper.xml" />
+
+        <mapper resource="sqlMapperXml/UserMapper.xml" />
+        <mapper resource="sqlMapperXml/ResourceMapper.xml" />
+        <mapper resource="sqlMapperXml/RoleMapper.xml" />
     </mappers>
 </configuration> 
