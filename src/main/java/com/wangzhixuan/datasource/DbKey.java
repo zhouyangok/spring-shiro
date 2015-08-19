@@ -1,9 +1,9 @@
 package com.wangzhixuan.datasource;
 
 /**
- * @Description：定义数据源
- * @author：Wangzhixuan 
- * @date：2015年8月18日 下午3:52:33
+ * 数据源定义
+ * @author liujinjie
+ *
  */
 public class DbKey {
 	/**
