@@ -45,14 +45,11 @@
     select 
     <include refid="Base_Column_List" />
     from user
-    where id = #{id}
   </select>
 
   <select id="findUserPageCount" resultType="java.lang.Integer" parameterType="PageInfo">
-    select 
-    <include refid="Base_Column_List" />
+    select count(*) count
     from user
-    where id = #{id}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
