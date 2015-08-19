@@ -106,19 +106,6 @@
 				}
 			},{
 				width : '60',
-				title : '是否默认',
-				field : 'isdefault',
-				sortable : true,
-				formatter : function(value, row, index) {
-					switch (value) {
-					case 0:
-						return '默认';
-					case 1:
-						return '否';
-					}
-				}
-			},{
-				width : '60',
 				title : '状态',
 				field : 'state',
 				sortable : true,

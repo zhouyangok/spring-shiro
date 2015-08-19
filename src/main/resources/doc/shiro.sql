@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : mysql
 Source Server Version : 50527
-Source Host           : 127.0.0.1:3306
+Source Host           : localhost:3306
 Source Database       : shiro
 
 Target Server Type    : MYSQL
 Target Server Version : 50527
 File Encoding         : 65001
 
-Date: 2015-08-14 19:11:54
+Date: 2015-08-20 00:04:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `organization` (
   `code` varchar(64) NOT NULL,
   `icon` varchar(32) DEFAULT NULL,
   `pid` bigint(19) DEFAULT NULL,
-  `seq` tinyint(1) NOT NULL DEFAULT '0',
+  `seq` tinyint(2) NOT NULL DEFAULT '0',
   `createdate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='组织机构';
@@ -47,9 +47,9 @@ CREATE TABLE `resource` (
   `description` varchar(255) DEFAULT NULL,
   `icon` varchar(32) DEFAULT NULL,
   `pid` bigint(19) DEFAULT NULL,
-  `seq` tinyint(1) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `resourcetype` tinyint(1) NOT NULL DEFAULT '0',
+  `seq` tinyint(2) NOT NULL DEFAULT '0',
+  `status` tinyint(2) NOT NULL DEFAULT '0',
+  `resourcetype` tinyint(2) NOT NULL DEFAULT '0',
   `createdate` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=216 DEFAULT CHARSET=utf8 COMMENT='资源';
@@ -89,6 +89,7 @@ INSERT INTO `resource` VALUES ('213', '编辑', '/demo/edit', '编辑', 'icon-bt
 INSERT INTO `resource` VALUES ('214', '删除', '/demo/delete', '删除', 'icon-btn', '21', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('215', '查看', '/demo/view', '查看', 'icon-btn', '21', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('22', 'EASYUI', 'http://www.jeasyui.com', 'EASYUI', 'icon-folder', '2', '1', '0', '0', '2014-02-19 01:00:00');
+INSERT INTO `resource` VALUES ('23', '从库', '/slave/test', '从库', 'icon-folder', '2', '1', '0', '0', '2015-08-18 23:49:38');
 
 -- ----------------------------
 -- Table structure for role
@@ -97,7 +98,7 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
   `id` bigint(19) NOT NULL AUTO_INCREMENT,
   `name` varchar(64) NOT NULL,
-  `seq` tinyint(1) NOT NULL DEFAULT '0',
+  `seq` tinyint(2) NOT NULL DEFAULT '0',
   `description` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='角色';
@@ -163,10 +164,10 @@ CREATE TABLE `user` (
   `loginname` varchar(64) NOT NULL,
   `name` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
-  `sex` tinyint(1) NOT NULL DEFAULT '0',
-  `age` tinyint(1) NOT NULL DEFAULT '0',
-  `usertype` tinyint(1) NOT NULL DEFAULT '0',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `sex` tinyint(2) NOT NULL DEFAULT '0',
+  `age` tinyint(2) NOT NULL DEFAULT '0',
+  `usertype` tinyint(2) NOT NULL DEFAULT '0',
+  `status` tinyint(2) NOT NULL DEFAULT '0',
   `organization_id` int(11) NOT NULL DEFAULT '0',
   `createdate` datetime NOT NULL,
   `phone` varchar(20) DEFAULT NULL,

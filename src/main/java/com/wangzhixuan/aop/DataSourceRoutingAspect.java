@@ -21,8 +21,8 @@ import com.wangzhixuan.utils.ReflectUtil;
  * 2013-8-1 上午11:51:40
  * @since v1.0
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class DataSourceRoutingAspect {
 
     protected static final ThreadLocal<String> preDatasourceHolder = new ThreadLocal<String>();

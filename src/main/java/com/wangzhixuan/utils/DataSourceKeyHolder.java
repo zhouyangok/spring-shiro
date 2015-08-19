@@ -2,14 +2,10 @@ package com.wangzhixuan.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
 /**
- * Created with IntelliJ IDEA.
- * User: vic
- * Date: 13-5-18
- * Time: 下午4:35
- * 将数据源的键存入ThreadLocal中
+ * @description：将数据源的键存入ThreadLocal中
+ * @author：Wangzhixuan
+ * @date：2015年8月19日 下午10:57:41
  */
 public class DataSourceKeyHolder {
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();

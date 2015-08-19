@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.UserService;
@@ -27,7 +26,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public String dataGrid(User user, Integer page, Integer rows) {
+	public PageInfo dataGrid(User user, Integer page, Integer rows) {
 	    PageInfo pageInfo = new PageInfo(page, rows);
         Map<String, Object> condition = Maps.newHashMap();
 
@@ -41,7 +40,7 @@ public class UserController extends BaseController {
 
         userService.findDataGrid(pageInfo);
         
-        return JSON.toJSONString(pageInfo);
+        return pageInfo;
 	}
 
 /*	@RequestMapping("/editPwdPage")

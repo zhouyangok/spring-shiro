@@ -24,7 +24,7 @@ public class PageInfo {
     private int nowpage; // 当前页 
     @JsonIgnore
     private int pagesize; // 每页显示的记录数 
-
+    @JsonIgnore
     private Map<String, Object> condition; //查询条件
 
     //构造方法

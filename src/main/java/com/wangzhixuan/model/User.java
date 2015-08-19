@@ -3,6 +3,8 @@ package com.wangzhixuan.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class User implements Serializable {
     private Long id;
 
@@ -22,6 +24,7 @@ public class User implements Serializable {
 
     private Integer organizationId;
 
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date createdate;
 
     private String phone;

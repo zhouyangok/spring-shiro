@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.wangzhixuan.utils.Result;
 
 /**
@@ -56,7 +55,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/login",method=RequestMethod.POST)
     @ResponseBody
-    public String loginPost(String username, String password, HttpServletRequest request, Model model) {
+    public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
         logger.info("POST请求登录");
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
@@ -68,22 +67,22 @@ public class LoginController {
         } catch (UnknownAccountException e) {
             logger.error("账号不存在：{}", e.getMessage());
             result.setMsg("账号不存在");
-            return JSON.toJSONString(result);
+            return result;
         }  catch (DisabledAccountException e) {
             logger.error("账号未启用：{}", e.getMessage());
             result.setMsg("账号未启用");
-            return JSON.toJSONString(result);
+            return result;
         }catch (IncorrectCredentialsException e) {
             logger.error("密码错误：{}", e.getMessage());
             result.setMsg("密码错误");
-            return JSON.toJSONString(result);
+            return result;
         } catch (Exception e) {
             logger.error("未知错误,请联系管理员：{}", e.getMessage());
             result.setMsg("未知错误,请联系管理员");
-            return JSON.toJSONString(result);
+            return result;
         }
         result.setSuccess(true);
-        return JSON.toJSONString(result);
+        return result;
     }
 
     /**
