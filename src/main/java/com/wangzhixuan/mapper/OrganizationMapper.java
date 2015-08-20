@@ -1,5 +1,7 @@
 package com.wangzhixuan.mapper;
 
+import java.util.List;
+
 import com.wangzhixuan.model.Organization;
 
 public interface OrganizationMapper {
@@ -14,4 +16,10 @@ public interface OrganizationMapper {
     int updateByPrimaryKeySelective(Organization record);
 
     int updateByPrimaryKey(Organization record);
+
+    List<Organization> findOrganizationAllByPidNull();
+
+    List<Organization> findOrganizationAllByPid(Long pid);
+
+    List<Organization> findOrganizationAll();
 }

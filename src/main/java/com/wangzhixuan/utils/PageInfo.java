@@ -3,7 +3,7 @@ package com.wangzhixuan.utils;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @description：分页实体类 (结合jqery easyui)

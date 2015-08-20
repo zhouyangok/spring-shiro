@@ -2,8 +2,8 @@ package com.wangzhixuan.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +18,8 @@ import com.wangzhixuan.vo.Tree;
 @RequestMapping("/organization")
 public class OrganizationController extends BaseController {
 
+    private static Logger logger = LoggerFactory.getLogger(OrganizationController.class);
+
 	@Autowired
 	private OrganizationService organizationService;
 
@@ -26,17 +28,20 @@ public class OrganizationController extends BaseController {
 		return "/admin/organization";
 	}
 
-/*	@RequestMapping("/treeGrid")
-	@ResponseBody
-	public List<Organization> treeGrid() {
-		return organizationService.treeGrid();
-	}*/
-
 	@RequestMapping(value = "/tree", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Tree> tree() {
-		return organizationService.findTree();
+	    List<Tree> trees = organizationService.findTree();
+		return trees;
 	}
+	
+	@RequestMapping("/treeGrid")
+    @ResponseBody
+    public List<Organization> treeGrid() {
+	    List<Organization> treeGrid =organizationService.findTreeGrid();
+        return treeGrid;
+    }
+
 
 /*	@RequestMapping("/addPage")
 	public String addPage() {

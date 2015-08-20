@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
-import com.wangzhixuan.vo.ResourceVo;
 import com.wangzhixuan.vo.Tree;
 
 @Controller
@@ -49,8 +49,8 @@ public class ResourceController extends BaseController {
 
     @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
     @ResponseBody
-    public List<ResourceVo> treeGrid() {
-        List<ResourceVo> treeGrid = resourceService.findTreeGrid();
+    public List<Resource> treeGrid() {
+        List<Resource> treeGrid = resourceService.findTreeGrid();
         return treeGrid;
     }
 

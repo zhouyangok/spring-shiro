@@ -20,8 +20,8 @@
 
         <!-- 连接配置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-            connectionURL="${jdbc.url}" userId="${jdbc.username}"
-            password="${jdbc.password}">
+            connectionURL="${master_driverUrl}" userId="${master_username}"
+            password="${master_password}">
         </jdbcConnection>
 
         <!-- javaModelGenerator是模型的生成信息，这里将指定这些Java model类的生成路径 -->

@@ -46,7 +46,7 @@
             }, {
                 field : 'iconCls',
                 title : '图标',
-                width : 100
+                width : 90
             }, {
                 field : 'resourcetype',
                 title : '资源类型',

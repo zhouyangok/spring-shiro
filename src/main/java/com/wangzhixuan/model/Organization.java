@@ -3,6 +3,9 @@ package com.wangzhixuan.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Organization implements Serializable {
     private Long id;
 
@@ -12,12 +15,14 @@ public class Organization implements Serializable {
 
     private String code;
 
+    @JsonProperty("iconCls")
     private String icon;
 
     private Long pid;
 
     private Integer seq;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createdate;
 
     private static final long serialVersionUID = 1L;

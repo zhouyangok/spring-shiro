@@ -13,6 +13,7 @@
     <logback.version>1.0.13</logback.version>
     <spring.version>3.2.9.RELEASE</spring.version>
     <shiro.version>1.2.2</shiro.version>
+    <jackson.version>2.2.2</jackson.version>
   </properties>
 
   <dependencies>
@@ -54,6 +55,11 @@
         <groupId>org.aspectj</groupId>
         <artifactId>aspectjrt</artifactId>
         <version>1.6.11</version>
+      </dependency>
+      <dependency>
+        <groupId>cglib</groupId>
+        <artifactId>cglib-nodep</artifactId>
+        <version>3.1</version>
       </dependency>
 
       <dependency>
@@ -162,20 +168,14 @@
       </dependency>
 
       <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-core-asl</artifactId>
-        <version>1.9.13</version>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>${jackson.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-mapper-asl</artifactId>
-        <version>1.9.13</version>
-      </dependency>
-
-      <dependency>
-        <groupId>cglib</groupId>
-        <artifactId>cglib-nodep</artifactId>
-        <version>3.1</version>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>${jackson.version}</version>
       </dependency>
 
       <dependency>

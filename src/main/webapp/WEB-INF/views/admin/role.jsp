@@ -50,19 +50,6 @@
                 field : 'seq',
                 sortable : true
             }, {
-                width : '80',
-                title : '是否默认',
-                field : 'isdefault',
-                sortable : true,
-                formatter : function(value, row, index) {
-                    switch (value) {
-                    case 0:
-                        return '默认';
-                    case 1:
-                        return '否';    
-                    }
-                }
-            }, {
                 width : '200',
                 title : '描述',
                 field : 'description'
