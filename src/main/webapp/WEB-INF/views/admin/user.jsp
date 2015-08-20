@@ -5,22 +5,12 @@
 <head>
 <%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="edge" />
-<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/user/edit')}">
-    <script type="text/javascript">
-        $.canEdit = true;
-    </script>
-</c:if> --%>
-<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/user/delete')}">
-    <script type="text/javascript">
-    </script>
-</c:if> --%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户管理</title>
     <script type="text/javascript">
     var dataGrid;
     var organizationTree;
     $(function() {
-    
         organizationTree = $('#organizationTree').tree({
             url : '${path }/organization/tree',
             parentField : 'pid',
@@ -90,6 +80,12 @@
                 width : '120',
                 title : '电话',
                 field : 'phone',
+                sortable : true
+            }, 
+            {
+                width : '200',
+                title : '角色',
+                field : 'roles',
                 sortable : true
             }, {
                 width : '60',
@@ -237,9 +233,7 @@
         </ul>
     </div>
     <div id="toolbar" style="display: none;">
-<%--         <c:if test="${fn:contains(sessionInfo.resourceList, '/user/add')}"> --%>
             <a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
-<%--         </c:if> --%>
     </div>
 </body>
 </html>

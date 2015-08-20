@@ -5,15 +5,6 @@
 <head>
 <%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="edge" />
-<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/resource/edit')}">
-    <script type="text/javascript">
-        $.canEdit = true;
-    </script>
-</c:if> --%>
-<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/resource/delete')}">
-    <script type="text/javascript">
-    </script>
-</c:if> --%>
 <title>资源管理</title>
 <script type="text/javascript">
     var treeGrid;
@@ -138,7 +129,7 @@
             });
         }
     }
-    
+
     function addFun() {
         parent.$.modalDialog({
             title : '添加',

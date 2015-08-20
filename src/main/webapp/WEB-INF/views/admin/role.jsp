@@ -5,20 +5,6 @@
 <head>
 <%@ include file="/commons/basejs.jsp" %>
 <meta http-equiv="X-UA-Compatible" content="edge" />
-<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/role/edit')}">
-    <script type="text/javascript">
-        $.canEdit = true;
-    </script>
-</c:if> --%>
-<%-- <c:if test="${fn:contains(sessionInfo.resourceList, '/role/delete')}">
-    <script type="text/javascript">
-    </script>
-</c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/role/grant')}">
-    <script type="text/javascript">
-        $.canGrant = true;
-    </script>
-</c:if> --%>
 <title>角色管理</title>
     <script type="text/javascript">
     var dataGrid;
@@ -167,9 +153,7 @@
         <table id="dataGrid" data-options="fit:true,border:false"></table>
     </div>
     <div id="toolbar" style="display: none;">
-<%--         <c:if test="${fn:contains(sessionInfo.resourceList, '/role/add')}"> --%>
             <a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
-<%--         </c:if> --%>
     </div>
 </body>
 </html>
