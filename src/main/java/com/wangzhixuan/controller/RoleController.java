@@ -23,13 +23,13 @@ public class RoleController extends BaseController {
 
     @Autowired
     private RoleService roleService;
-    
-    @RequestMapping("/manager")
+
+    @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String manager() {
         return "/admin/role";
     }
 
-    @RequestMapping("/dataGrid")
+    @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
     public String dataGrid(Role role, Integer page, Integer rows) {
         PageInfo pageInfo = new PageInfo(page, rows);
