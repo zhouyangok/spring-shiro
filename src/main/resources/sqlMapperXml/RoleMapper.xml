@@ -16,22 +16,25 @@
     from role
     where id = #{id,jdbcType=BIGINT}
   </select>
-  
-  
+
   <select id="findRolePageCondition" resultMap="BaseResultMap" parameterType="PageInfo" >
     select 
     <include refid="Base_Column_List" />
     from role
   </select>
-  
-  
+
   <select id="findRolePageCount" resultType="java.lang.Integer" parameterType="PageInfo" >
+    select 
+    count(*) count
+    from role
+  </select>
+
+  <select id="findRoleAll" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
     from role
   </select>
-  
-  
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from role
     where id = #{id,jdbcType=BIGINT}

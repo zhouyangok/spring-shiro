@@ -21,4 +21,6 @@ public interface RoleMapper {
     List findRolePageCondition(PageInfo pageInfo);
 
     int findRolePageCount(PageInfo pageInfo);
+
+    List<Role> findRoleAll();
 }
