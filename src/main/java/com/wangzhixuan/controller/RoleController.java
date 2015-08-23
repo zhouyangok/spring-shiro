@@ -3,24 +3,28 @@ package com.wangzhixuan.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
+import com.wangzhixuan.code.Result;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.service.RoleService;
 import com.wangzhixuan.utils.PageInfo;
-import com.wangzhixuan.utils.Result;
 import com.wangzhixuan.vo.Tree;
 
 @Controller
 @RequestMapping("/role")
 public class RoleController extends BaseController {
 
+    private static Logger logger = LoggerFactory.getLogger(RoleController.class);
     @Autowired
     private RoleService roleService;
 
@@ -31,9 +35,8 @@ public class RoleController extends BaseController {
 
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
-    public String dataGrid(Role role, Integer page, Integer rows) {
-        PageInfo pageInfo = new PageInfo(page, rows);
-
+    public PageInfo dataGrid(Role role, Integer page, Integer rows, String sort, String order) {
+        PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = Maps.newHashMap();
 
 /*        if(StringUtils.isNoneBlank(username)){
@@ -45,7 +48,7 @@ public class RoleController extends BaseController {
         pageInfo.setCondition(condition);
 
         roleService.findDataGrid(pageInfo);
-        return JSON.toJSONString(pageInfo);
+        return pageInfo;
     }
 
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
@@ -72,20 +75,42 @@ public class RoleController extends BaseController {
         }
         return result;
     }
-//
-//    @RequestMapping("/delete")
-//    @ResponseBody
-//    public Json delete(Long id) {
-//        Json j = new Json();
-//        try {
-//            roleService.delete(id);
-//            j.setMsg("删除成功！");
-//            j.setSuccess(true);
-//        } catch (Exception e) {
-//            j.setMsg(e.getMessage());
-//        }
-//        return j;
-//    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(Long id) {
+        Result result = new Result();
+        try {
+            roleService.deleteRole(id);
+            result.setMsg("删除成功！");
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping("/editPage")
+    public String editPage(HttpServletRequest request, Long id) {
+        Role role = roleService.findRoleById(id);
+        request.setAttribute("role", role);
+        return "/admin/roleEdit";
+    }
+    
+  @RequestMapping("/edit")
+  @ResponseBody
+  public Result edit(Role role) {
+      Result result = new Result();
+      try {
+          roleService.updateRole(role);
+          result.setSuccess(true);
+          result.setMsg("编辑成功！");
+      } catch (Exception e) {
+          result.setMsg(e.getMessage());
+      }
+      return result;
+  }
+
 //
 //    @RequestMapping("/get")
 //    @ResponseBody
@@ -93,25 +118,20 @@ public class RoleController extends BaseController {
 //        return roleService.get(id);
 //    }
 //    
-//    @RequestMapping("/editPage")
-//    public String editPage(HttpServletRequest request, Long id) {
-//        Role r = roleService.get(id);
-//        request.setAttribute("role", r);
-//        return "/admin/roleEdit";
-//    }
+
 //
 //    @RequestMapping("/edit")
 //    @ResponseBody
-//    public Json edit(Role role) {
-//        Json j = new Json();
+//    public Result edit(Role role) {
+//        Result result = new Result();
 //        try {
 //            roleService.edit(role);
-//            j.setSuccess(true);
-//            j.setMsg("编辑成功！");
+//            result.setSuccess(true);
+//            result.setMsg("编辑成功！");
 //        } catch (Exception e) {
-//            j.setMsg(e.getMessage());
+//            result.setMsg(e.getMessage());
 //        }
-//        return j;
+//        return result;
 //    }
 //    
 //    @RequestMapping("/grantPage")
@@ -123,16 +143,16 @@ public class RoleController extends BaseController {
 //
 //    @RequestMapping("/grant")
 //    @ResponseBody
-//    public Json grant(Role role) {
-//        Json j = new Json();
+//    public Result grant(Role role) {
+//        Result result = new Result();
 //        try {
 //            roleService.grant(role);
-//            j.setMsg("授权成功！");
-//            j.setSuccess(true);
+//            result.setMsg("授权成功！");
+//            result.setSuccess(true);
 //        } catch (Exception e) {
-//            j.setMsg(e.getMessage());
+//            result.setMsg(e.getMessage());
 //        }
-//        return j;
+//        return result;
 //    }
 
 }

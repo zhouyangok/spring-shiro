@@ -6,21 +6,18 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="seq" property="seq" jdbcType="TINYINT" />
     <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, seq, description
+    id, name, seq, description, status
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from role
-    where id = #{id,jdbcType=BIGINT}
-  </select>
 
   <select id="findRolePageCondition" resultMap="BaseResultMap" parameterType="PageInfo" >
     select 
     <include refid="Base_Column_List" />
     from role
+    order by ${sort} ${order}
+    limit #{from}, #{size}
   </select>
 
   <select id="findRolePageCount" resultType="java.lang.Integer" parameterType="PageInfo" >
@@ -32,22 +29,49 @@
   <select id="findRoleAll" resultMap="BaseResultMap" >
     select 
     <include refid="Base_Column_List" />
-    from role
+    from role order by seq
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from role
+  <select id="findRoleById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from role
     where id = #{id,jdbcType=BIGINT}
-  </delete>
+  </select>
+
   <insert id="insert" parameterType="com.wangzhixuan.model.Role" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into role (name, seq, description
-      )
-    values (#{name,jdbcType=VARCHAR}, #{seq,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}
-      )
+    insert into role (name, seq, description, status)
+    values (#{name,jdbcType=VARCHAR}, #{seq,jdbcType=TINYINT}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT})
   </insert>
+
+  <update id="updateRole" parameterType="com.wangzhixuan.model.Role" >
+    update role
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="seq != null" >
+        seq = #{seq,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+
+  <delete id="deleteRoleById" parameterType="java.lang.Long" >
+    delete from role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.Role" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()

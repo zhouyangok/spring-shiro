@@ -11,4 +11,8 @@ public interface UserService {
 
     void findDataGrid(PageInfo pageInfo);
 
+    void addUser(User user);
+
+    void updateUserPwdById(Long userId, String pwd);
+
 }

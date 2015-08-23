@@ -9,7 +9,8 @@ public interface Config {
     Integer RESOURCE_MENU = 0;
     // 按钮
     Integer RESOURCE_BUTTON = 1;
-    // Pid
-    Long PID = -1L;
+    
+    Integer STATUS_OFF = 0;
+    Integer STATUS_NO = 1;
 
 }

@@ -8,6 +8,29 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户管理</title>
     <script type="text/javascript">
+    /* easyui1.4.2 formatter处理json内嵌数据undefined */
+    (function($){
+        var renderEmptyRow = $.fn.datagrid.defaults.view.renderEmptyRow;
+        $.extend($.fn.datagrid.defaults.view, {
+            renderEmptyRow:function(target){
+                var fields = $(target).datagrid('getColumnFields');
+                for(var i=0; i<fields.length; i++){
+                    var col = $(target).datagrid('getColumnOption', fields[i]);
+                    col.formatter1 = col.formatter;
+                    col.styler1 = col.styler;
+                    col.formatter = col.styler = undefined;
+                }
+                renderEmptyRow.call(this, target);
+                for(var i=0; i<fields.length; i++){
+                    var col = $(target).datagrid('getColumnOption', fields[i]);
+                    col.formatter = col.formatter1;
+                    col.styler = col.styler1;
+                    col.formatter1 = col.styler1 = undefined;
+                }
+            }
+        })
+    })(jQuery);
+
     var dataGrid;
     var organizationTree;
     $(function() {
@@ -21,7 +44,7 @@
                 });
             }
         });
-    
+
         dataGrid = $('#dataGrid').datagrid({
             url : '${path }/user/dataGrid',
             fit : true,
@@ -32,7 +55,7 @@
             idField : 'id',
             sortName : 'createdate',
             sortOrder : 'asc',
-            pageSize : 30,
+            pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
                 width : '80',
@@ -85,17 +108,24 @@
             {
                 width : '200',
                 title : '角色',
-                field : 'roles',
-                sortable : true
+                field : 'rolesList',
+                sortable : true,
+                formatter : function(value, row, index) {
+                    var roles = [];
+                    for(var i = 0; i< value.length; i++) {
+                        roles.push(value[i].name);  
+                    }
+                    return(roles.join('\n'));
+                }
             }, {
                 width : '60',
                 title : '用户类型',
                 field : 'usertype',
                 sortable : true,
                 formatter : function(value, row, index) {
-                    if(value==0){
+                    if(value == 0) {
                         return "管理员";
-                    }else if(value==1){
+                    }else if(value == 1) {
                         return "用户";
                     }
                     return "未知类型";
@@ -119,11 +149,9 @@
                 width : 100,
                 formatter : function(value, row, index) {
                     var str = '';
-                    if(row.isdefault!=0){
-                            str += $.formatString('<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
+                        str += $.formatString('<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
                         str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
-                    }
+                        str += $.formatString('<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
                     return str;
                 }
             }] ],
@@ -203,7 +231,17 @@
     }
     
     function searchFun() {
-        dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
+        console.log('---1');
+        var abc = $.serializeObject($('#searchForm'));
+        console.log(abc.name);
+        console.log(abc.createdatetimeStart);
+        console.log(abc.createdatetimeEnd);
+        // dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
+        dataGrid.datagrid('load', {    
+            //name: '王志轩'
+        createdatetimeStart : '2015-08-21 23:23:48',
+        createdatetimeEnd : '2015-08-25 23:23:48'
+        });  
     }
     function cleanFun() {
         $('#searchForm input').val('');
@@ -219,8 +257,10 @@
                     <th>姓名:</th>
                     <td><input name="name" placeholder="请输入用户姓名"/></td>
                     <th>创建时间:</th>
-                    <td><input name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至<input  name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
-                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true" onclick="cleanFun();">清空</a></td>
+                    <td>
+                    <input name="createdatetimeStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至<input  name="createdatetimeEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                    <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true" onclick="cleanFun();">清空</a>
+                    </td>
                 </tr>
             </table>
         </form>

@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wangzhixuan.model.Role;
 
 public class UserVo implements Serializable {
@@ -32,10 +31,14 @@ public class UserVo implements Serializable {
 
     private String phone;
 
-    @JsonIgnore
     private List<Role> rolesList;
-    
-    private String roles = "";
+
+    private String organizationName;
+
+    private String roleIds;
+
+    private Date createdatetimeStart;
+    private Date createdatetimeEnd;
 
     private static final long serialVersionUID = 1L;
 
@@ -135,17 +138,36 @@ public class UserVo implements Serializable {
         this.rolesList = rolesList;
     }
 
-    public String getRoles() {
-        if(rolesList != null){
-            for (Role role : rolesList) {
-                String roleName = role.getName() + " ";
-                roles += roleName;
-            }
-        }
-        return roles;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setRoles(String roles) {
-        this.roles = roles;
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
+
+    public String getRoleIds() {
+        return roleIds;
+    }
+
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
+    }
+
+    public Date getCreatedatetimeStart() {
+        return createdatetimeStart;
+    }
+
+    public void setCreatedatetimeStart(Date createdatetimeStart) {
+        this.createdatetimeStart = createdatetimeStart;
+    }
+
+    public Date getCreatedatetimeEnd() {
+        return createdatetimeEnd;
+    }
+
+    public void setCreatedatetimeEnd(Date createdatetimeEnd) {
+        this.createdatetimeEnd = createdatetimeEnd;
+    }
+
 }

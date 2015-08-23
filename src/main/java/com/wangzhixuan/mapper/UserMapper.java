@@ -2,6 +2,8 @@ package com.wangzhixuan.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.utils.PageInfo;
 
@@ -25,4 +27,6 @@ public interface UserMapper {
     List findUserPageCondition(PageInfo pageInfo);
 
     int findUserPageCount(PageInfo pageInfo);
+
+    void updateUserPwdById(@Param("userId") Long userId, @Param("pwd") String pwd);
 }

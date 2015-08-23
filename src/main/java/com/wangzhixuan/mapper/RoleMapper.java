@@ -23,4 +23,10 @@ public interface RoleMapper {
     int findRolePageCount(PageInfo pageInfo);
 
     List<Role> findRoleAll();
+
+    Role findRoleById(Long id);
+
+    int updateRole(Role role);
+
+    int deleteRoleById(Long id);
 }

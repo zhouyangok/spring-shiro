@@ -29,4 +29,14 @@ public class UserServiceImpl implements UserService {
         pageInfo.setTotal(userMapper.findUserPageCount(pageInfo));
     }
 
+    @Override
+    public void addUser(User user) {
+        userMapper.insert(user);
+    }
+
+    @Override
+    public void updateUserPwdById(Long userId, String pwd) {
+        userMapper.updateUserPwdById(userId, pwd);
+    }
+
 }

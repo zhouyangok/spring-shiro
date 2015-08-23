@@ -27,6 +27,9 @@
     <result column="organization_id" property="organizationId" jdbcType="INTEGER" />
     <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
+
+    <result column="organizationName" property="organizationName" jdbcType="VARCHAR" />
+
     <collection property="rolesList" ofType="Role">
         <id column="roleId" property="id" />
         <result column="roleName" property="name"/>
@@ -61,23 +64,31 @@
 
   <select id="findUserPageCondition" resultMap="userVoResultMap" parameterType="PageInfo">
     SELECT
-        t.id AS id,
+        t.id,
         loginname,
         t.`name`,
         `password`,
         sex,
         age,
         usertype,
-        `status`,
-        organization_id AS organizationId,
-        createdate,
+        t.`status`,
+        organization_id,
+        t.createdate,
         phone,
+        s.`name` AS organizationName,
         o.id AS roleId,
         o.`name` AS roleName
     FROM
         USER t
     LEFT JOIN user_role r ON t.id = r.user_id
-    LEFT JOIN role o ON r.role_id = o.id;
+    LEFT JOIN role o ON r.role_id = o.id
+    LEFT JOIN organization s ON s.id = t.organization_id
+    <where>
+        <if test=" condition.name != null and condition.name != '' ">
+            t.name = #{condition.name}
+        </if>
+    </where>
+    LIMIT #{from}, #{size}
   </select>
 
   <select id="findUserPageCount" resultType="java.lang.Integer" parameterType="PageInfo">
@@ -89,6 +100,7 @@
     delete from user
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.wangzhixuan.model.User" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -99,9 +111,17 @@
       phone)
     values (#{loginname,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{sex,jdbcType=TINYINT}, #{age,jdbcType=TINYINT}, #{usertype,jdbcType=TINYINT}, 
-      #{status,jdbcType=TINYINT}, #{organizationId,jdbcType=INTEGER}, #{createdate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{organizationId,jdbcType=INTEGER}, now(),
       #{phone,jdbcType=VARCHAR})
   </insert>
+
+  <update id="updateUserPwdById">
+    update user
+    set password = #{pwd,jdbcType=VARCHAR},
+    createdate = now()
+    where id = #{userId,jdbcType=BIGINT}
+  </update>
+
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.User" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -172,6 +192,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.wangzhixuan.model.User" >
     update user
     <set >

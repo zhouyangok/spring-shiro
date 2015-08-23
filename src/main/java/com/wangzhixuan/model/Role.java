@@ -10,6 +10,8 @@ public class Role implements Serializable {
     private Integer seq;
 
     private String description;
+    
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
 
@@ -44,6 +46,14 @@ public class Role implements Serializable {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+    
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
@@ -55,6 +65,7 @@ public class Role implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", seq=").append(seq);
         sb.append(", description=").append(description);
+        sb.append(", status=").append(status);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
