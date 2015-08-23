@@ -231,17 +231,7 @@
     }
     
     function searchFun() {
-        console.log('---1');
-        var abc = $.serializeObject($('#searchForm'));
-        console.log(abc.name);
-        console.log(abc.createdatetimeStart);
-        console.log(abc.createdatetimeEnd);
-        // dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
-        dataGrid.datagrid('load', {    
-            //name: '王志轩'
-        createdatetimeStart : '2015-08-21 23:23:48',
-        createdatetimeEnd : '2015-08-25 23:23:48'
-        });  
+        dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
     }
     function cleanFun() {
         $('#searchForm input').val('');
@@ -258,7 +248,7 @@
                     <td><input name="name" placeholder="请输入用户姓名"/></td>
                     <th>创建时间:</th>
                     <td>
-                    <input name="createdatetimeStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至<input  name="createdatetimeEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
+                    <input name="createdateStart" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />至<input  name="createdateEnd" placeholder="点击选择时间" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" />
                     <a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true" onclick="cleanFun();">清空</a>
                     </td>
                 </tr>

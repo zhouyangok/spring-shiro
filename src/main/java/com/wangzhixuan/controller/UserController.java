@@ -45,9 +45,12 @@ public class UserController extends BaseController {
         if(StringUtils.isNoneBlank(userVo.getName())){
             condition.put("name", userVo.getName());
         }
-/*        if(StringUtils.isNoneBlank(nickname)){
-            condition.put("nickname", nickname);
-        }*/
+        if(userVo.getCreatedateStart() != null){
+            condition.put("startTime", userVo.getCreatedateStart());
+        }
+        if(userVo.getCreatedateEnd() != null){
+            condition.put("endTime", userVo.getCreatedateEnd());
+        }
         pageInfo.setCondition(condition);
         userService.findDataGrid(pageInfo);
         return pageInfo;

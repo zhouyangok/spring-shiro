@@ -79,7 +79,7 @@
         o.id AS roleId,
         o.`name` AS roleName
     FROM
-        USER t
+        user t
     LEFT JOIN user_role r ON t.id = r.user_id
     LEFT JOIN role o ON r.role_id = o.id
     LEFT JOIN organization s ON s.id = t.organization_id
@@ -87,13 +87,38 @@
         <if test=" condition.name != null and condition.name != '' ">
             t.name = #{condition.name}
         </if>
+        <if test="condition.startTime != null">
+           <![CDATA[
+            and t.createdate >= #{condition.startTime}
+           ]]>
+        </if>
+        <if test="condition.endTime != null">
+            <![CDATA[
+            and t.createdate <= #{condition.endTime}
+            ]]>
+        </if>
     </where>
     LIMIT #{from}, #{size}
   </select>
 
   <select id="findUserPageCount" resultType="java.lang.Integer" parameterType="PageInfo">
     select count(*) count
-    from user
+    from user t
+    <where>
+        <if test=" condition.name != null and condition.name != '' ">
+            t.name = #{condition.name}
+        </if>
+        <if test="condition.startTime != null">
+           <![CDATA[
+            and t.createdate >= #{condition.startTime}
+           ]]>
+        </if>
+        <if test="condition.endTime != null">
+            <![CDATA[
+            and t.createdate <= #{condition.endTime}
+            ]]>
+        </if>
+    </where>
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

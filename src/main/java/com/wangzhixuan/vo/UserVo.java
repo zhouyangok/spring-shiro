@@ -37,8 +37,8 @@ public class UserVo implements Serializable {
 
     private String roleIds;
 
-    private Date createdatetimeStart;
-    private Date createdatetimeEnd;
+    private Date createdateStart;
+    private Date createdateEnd;
 
     private static final long serialVersionUID = 1L;
 
@@ -154,20 +154,19 @@ public class UserVo implements Serializable {
         this.roleIds = roleIds;
     }
 
-    public Date getCreatedatetimeStart() {
-        return createdatetimeStart;
+    public Date getCreatedateStart() {
+        return createdateStart;
     }
 
-    public void setCreatedatetimeStart(Date createdatetimeStart) {
-        this.createdatetimeStart = createdatetimeStart;
+    public void setCreatedateStart(Date createdateStart) {
+        this.createdateStart = createdateStart;
     }
 
-    public Date getCreatedatetimeEnd() {
-        return createdatetimeEnd;
+    public Date getCreatedateEnd() {
+        return createdateEnd;
     }
 
-    public void setCreatedatetimeEnd(Date createdatetimeEnd) {
-        this.createdatetimeEnd = createdatetimeEnd;
+    public void setCreatedateEnd(Date createdateEnd) {
+        this.createdateEnd = createdateEnd;
     }
-
 }
