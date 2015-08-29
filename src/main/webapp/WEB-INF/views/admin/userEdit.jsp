@@ -1,30 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
+<%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-    
+
         $('#organizationId').combotree({
-            url : '${ctx}/organization/tree',
+            url : '${path }/organization/tree',
             parentField : 'pid',
             lines : true,
             panelHeight : 'auto',
             value : '${user.organizationId}'
         });
-        
+
         $('#roleIds').combotree({
-            url : '${ctx}/role/tree',
+            url : '${path }/role/tree',
             parentField : 'pid',
             lines : true,
             panelHeight : 'auto',
             multiple : true,
-            required: true,
+            required : true,
             cascadeCheck : false,
-            value : $.stringToList('${user.roleIds}')
+            // value : $.stringToList('${user.roleIds}')
+            value : '${user.rolesList }'
         });
-        
+
         $('#userEditForm').form({
-            url : '${ctx}/user/edit',
+            url : '${path }/user/edit',
             onSubmit : function() {
                 progressLoad();
                 var isValid = $(this).form('validate');
@@ -46,14 +46,14 @@
         });
         $("#sex").val('${user.sex}');
         $("#usertype").val('${user.usertype}');
-        $("#state").val('${user.state}');
+        $("#status").val('${user.status}');
     });
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
         <form id="userEditForm" method="post">
             <div class="light-info" style="overflow: hidden;padding: 3px;">
-                <div>密码不修改请留空。</div>
+                <div>密码不修改请留空。${user.rolesList }</div>
             </div>
             <table class="grid">
                 <tr>
@@ -93,7 +93,7 @@
                         <input type="text" name="phone" class="easyui-numberbox" value="${user.phone}"/>
                     </td>
                     <td>用户类型</td>
-                    <td><select id="state" name="state" value="${user.state}" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <td><select id="state" name="status" value="${user.status}" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">正常</option>
                             <option value="1">停用</option>
                     </select></td>

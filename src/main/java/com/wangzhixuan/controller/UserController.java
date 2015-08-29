@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -63,14 +64,14 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public Result add(User user) {
+    public Result add(UserVo userVo) {
         Result result = new Result();
-        User u = userService.findUserByLoginName(user.getLoginname());
+        User u = userService.findUserByLoginName(userVo.getLoginname());
         if (u != null) {
             result.setMsg("用户名已存在!");
         } else {
             try {
-                userService.addUser(user);
+                userService.addUser(userVo);
                 result.setSuccess(true);
                 result.setMsg("添加成功！");
             } catch (Exception e) {
@@ -79,6 +80,13 @@ public class UserController extends BaseController {
 
         }
         return result;
+    }
+
+    @RequestMapping("/editPage")
+    public String editPage(Long id, Model model) {
+        UserVo userVo = userService.findUserVoById(id);
+        model.addAttribute("user", userVo);
+        return "/admin/userEdit";
     }
 
     @RequestMapping(value = "/editPwdPage", method = RequestMethod.GET)
@@ -104,39 +112,34 @@ public class UserController extends BaseController {
         return result;
     }
 
-/*    @RequestMapping("/delete")
-    @ResponseBody
-    public Result delete(Long id) {
-        Result j = new Result();
-        try {
-            userService.delete(id);
-            j.setMsg("删除成功！");
-            j.setSuccess(true);
-        } catch (Exception e) {
-            j.setMsg(e.getMessage());
-        }
-        return j;
-    }
+//    @RequestMapping("/delete")
+//    @ResponseBody
+//    public Result delete(Long id) {
+//        Result j = new Result();
+//        try {
+//            userService.delete(id);
+//            j.setMsg("删除成功！");
+//            j.setSuccess(true);
+//        } catch (Exception e) {
+//            j.setMsg(e.getMessage());
+//        }
+//        return j;
+//    }
 
-    @RequestMapping("/editPage")
-    public String editPage(HttpServletRequest request, Long id) {
-        User u = userService.get(id);
-        request.setAttribute("user", u);
-        return "/admin/userEdit";
-    }
 
-    @RequestMapping("/edit")
-    @ResponseBody
-    public Result edit(User user) {
-        Result j = new Result();
-        try {
-            userService.edit(user);
-            j.setSuccess(true);
-            j.setMsg("编辑成功！");
-        } catch (ServiceException e) {
-            j.setMsg(e.getMessage());
-        }
-        return j;
-    }*/
+
+//    @RequestMapping("/edit")
+//    @ResponseBody
+//    public Result edit(User user) {
+//        Result j = new Result();
+//        try {
+//            userService.edit(user);
+//            j.setSuccess(true);
+//            j.setMsg("编辑成功！");
+//        } catch (ServiceException e) {
+//            j.setMsg(e.getMessage());
+//        }
+//        return j;
+//    }
 
 }

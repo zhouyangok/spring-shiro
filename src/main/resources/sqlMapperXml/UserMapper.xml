@@ -55,6 +55,33 @@
   </select>
 
   <!-- 根据id查询用户 -->
+  <select id="findUserVoById" resultMap="userVoResultMap" parameterType="java.lang.Long">
+    SELECT
+        t.id,
+        loginname,
+        t.`name`,
+        `password`,
+        sex,
+        age,
+        usertype,
+        t.`status`,
+        organization_id,
+        t.createdate,
+        phone,
+        s.`name` AS organizationName,
+        o.id AS roleId,
+        o.`name` AS roleName
+    FROM
+        user t
+    LEFT JOIN user_role r ON t.id = r.user_id
+    LEFT JOIN role o ON r.role_id = o.id
+    LEFT JOIN organization s ON s.id = t.organization_id
+    <where>
+        t.id = #{id}
+    </where>
+  </select>
+
+  <!-- 根据id查询用户 -->
   <select id="findUserById" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select 
     <include refid="Base_Column_List" />

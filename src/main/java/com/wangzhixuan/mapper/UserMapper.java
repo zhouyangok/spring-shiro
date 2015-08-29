@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.vo.UserVo;
 
 public interface UserMapper {
     int deleteByPrimaryKey(Long id);
@@ -29,4 +30,6 @@ public interface UserMapper {
     int findUserPageCount(PageInfo pageInfo);
 
     void updateUserPwdById(@Param("userId") Long userId, @Param("pwd") String pwd);
+
+    UserVo findUserVoById(Long id);
 }

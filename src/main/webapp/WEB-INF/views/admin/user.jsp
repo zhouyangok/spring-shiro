@@ -33,6 +33,7 @@
 
     var dataGrid;
     var organizationTree;
+
     $(function() {
         organizationTree = $('#organizationTree').tree({
             url : '${path }/organization/tree',

@@ -17,6 +17,9 @@ import com.wangzhixuan.utils.StringEscapeEditor;
 
 public class BaseController {
     
+    @Autowired
+    private UserService userService;
+
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
         /**
@@ -30,15 +33,10 @@ public class BaseController {
         binder.registerCustomEditor(String.class, new StringEscapeEditor(true, false));
     }
 
-	@Autowired
-    private UserService userService;
-	
-    private User userInfo;
-    
     public User getCurrentUser() {
-		ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-		userInfo = userService.findUserById(user.id);
-    	return userInfo;
+        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        User currentUser = userService.findUserById(user.id);
+        return currentUser;
     }
 
     public Long getUserId() {

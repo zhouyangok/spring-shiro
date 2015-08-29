@@ -1,5 +1,5 @@
-/**@Description：
- * @author：Wangzhixuan 
- * @date：2015年8月13日 下午5:38:24 
+/**@description：
+ * @author：Wangzhixuan
+ * @date：2015年8月10日 下午10:23:34
  */
 package com.wangzhixuan.vo;

@@ -2,6 +2,7 @@ package com.wangzhixuan.service;
 
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.vo.UserVo;
 
 public interface UserService {
 
@@ -11,8 +12,10 @@ public interface UserService {
 
     void findDataGrid(PageInfo pageInfo);
 
-    void addUser(User user);
+    void addUser(UserVo userVo);
 
     void updateUserPwdById(Long userId, String pwd);
+
+    UserVo findUserVoById(Long id);
 
 }

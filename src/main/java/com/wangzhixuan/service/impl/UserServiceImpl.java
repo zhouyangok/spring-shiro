@@ -1,17 +1,27 @@
 package com.wangzhixuan.service.impl;
 
+import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wangzhixuan.mapper.UserMapper;
+import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.User;
+import com.wangzhixuan.model.UserRole;
 import com.wangzhixuan.service.UserService;
 import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.vo.UserVo;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public User findUserByLoginName(String username) {
@@ -30,13 +40,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(UserVo userVo) {
+        User user = new User();
+        try {
+            PropertyUtils.copyProperties(user, userVo);
+        } catch (Exception e) {
+            logger.error("类转换异常：{}",e.getMessage());
+        }
         userMapper.insert(user);
+
+        Long id = user.getId();
+        String[] roles = userVo.getRoleIds().split(",");
+        UserRole userRole = new UserRole();
+
+        for (String string : roles) {
+            userRole.setUserId(id);
+            userRole.setRoleId(Long.valueOf(string));
+            userRoleMapper.insert(userRole);
+        }
     }
 
     @Override
     public void updateUserPwdById(Long userId, String pwd) {
         userMapper.updateUserPwdById(userId, pwd);
+    }
+
+    @Override
+    public UserVo findUserVoById(Long id) {
+        return userMapper.findUserVoById(id);
     }
 
 }
