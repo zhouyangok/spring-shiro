@@ -19,6 +19,7 @@
     delete from user_role
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.wangzhixuan.model.UserRole" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -26,6 +27,7 @@
     insert into user_role (user_id, role_id)
     values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
   </insert>
+
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.UserRole" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()

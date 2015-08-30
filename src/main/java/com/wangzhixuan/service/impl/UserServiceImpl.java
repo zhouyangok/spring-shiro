@@ -70,4 +70,25 @@ public class UserServiceImpl implements UserService {
         return userMapper.findUserVoById(id);
     }
 
+    @Override
+    public void updateUser(UserVo userVo) {
+        User user = new User();
+        try {
+            PropertyUtils.copyProperties(user, userVo);
+        } catch (Exception e) {
+            logger.error("类转换异常：{}",e.getMessage());
+        }
+        userMapper.insert(user);
+
+        Long id = user.getId();
+        String[] roles = userVo.getRoleIds().split(",");
+        UserRole userRole = new UserRole();
+
+        for (String string : roles) {
+            userRole.setUserId(id);
+            userRole.setRoleId(Long.valueOf(string));
+            userRoleMapper.updateRole(userRole);
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.wangzhixuan.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.wangzhixuan.code.Result;
+import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.UserService;
 import com.wangzhixuan.utils.PageInfo;
@@ -85,9 +89,36 @@ public class UserController extends BaseController {
     @RequestMapping("/editPage")
     public String editPage(Long id, Model model) {
         UserVo userVo = userService.findUserVoById(id);
+        List<Role> rolesList = userVo.getRolesList();
+        List<Long> ids = Lists.newArrayList();
+        for (Role role : rolesList) {
+            ids.add(role.getId());
+        }
+        model.addAttribute("roleIds", ids);
         model.addAttribute("user", userVo);
         return "/admin/userEdit";
     }
+    
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Result edit(UserVo userVo) {
+        Result result = new Result();
+        User u = userService.findUserByLoginName(userVo.getLoginname());
+        if (u != null) {
+            result.setMsg("用户名已存在!");
+        } else {
+            try {
+                userService.updateUser(userVo);
+                result.setSuccess(true);
+                result.setMsg("添加成功！");
+            } catch (Exception e) {
+                result.setMsg(e.getMessage());
+            }
+
+        }
+        return result;
+    }
+
 
     @RequestMapping(value = "/editPwdPage", method = RequestMethod.GET)
     public String editPwdPage() {
@@ -128,18 +159,5 @@ public class UserController extends BaseController {
 
 
 
-//    @RequestMapping("/edit")
-//    @ResponseBody
-//    public Result edit(User user) {
-//        Result j = new Result();
-//        try {
-//            userService.edit(user);
-//            j.setSuccess(true);
-//            j.setMsg("编辑成功！");
-//        } catch (ServiceException e) {
-//            j.setMsg(e.getMessage());
-//        }
-//        return j;
-//    }
 
 }

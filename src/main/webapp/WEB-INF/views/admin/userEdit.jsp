@@ -2,7 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-
+        var roleIds = ${roleIds };
         $('#organizationId').combotree({
             url : '${path }/organization/tree',
             parentField : 'pid',
@@ -19,8 +19,7 @@
             multiple : true,
             required : true,
             cascadeCheck : false,
-            // value : $.stringToList('${user.roleIds}')
-            value : '${user.rolesList }'
+            value : roleIds
         });
 
         $('#userEditForm').form({
@@ -53,7 +52,7 @@
     <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
         <form id="userEditForm" method="post">
             <div class="light-info" style="overflow: hidden;padding: 3px;">
-                <div>密码不修改请留空。${user.rolesList }</div>
+                <div>密码不修改请留空。</div>
             </div>
             <table class="grid">
                 <tr>

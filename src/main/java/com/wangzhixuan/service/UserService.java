@@ -18,4 +18,6 @@ public interface UserService {
 
     UserVo findUserVoById(Long id);
 
+    void updateUser(UserVo userVo);
+
 }
