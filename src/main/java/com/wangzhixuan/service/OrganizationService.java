@@ -11,4 +11,8 @@ public interface OrganizationService {
 
     List<Organization> findTreeGrid();
 
+    void addOrganization(Organization organization);
+
+    Organization findOrganizationById(Long id);
+
 }

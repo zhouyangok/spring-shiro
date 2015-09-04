@@ -1,5 +1,7 @@
 package com.wangzhixuan.service.impl;
 
+import java.util.List;
+
 import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,16 +80,30 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             logger.error("类转换异常：{}",e.getMessage());
         }
-        userMapper.insert(user);
+        userMapper.updateUser(user);
 
-        Long id = user.getId();
+        Long id = userVo.getId();
+        List<UserRole> UserRoles = userRoleMapper.findUserRoleByUserId(id);
+        for (UserRole userRole : UserRoles) {
+            userRoleMapper.deleteById(userRole.getId());
+        }
+
         String[] roles = userVo.getRoleIds().split(",");
         UserRole userRole = new UserRole();
-
         for (String string : roles) {
             userRole.setUserId(id);
             userRole.setRoleId(Long.valueOf(string));
-            userRoleMapper.updateRole(userRole);
+            userRoleMapper.insert(userRole);
+        }
+
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
+        userMapper.deleteById(id);
+        List<UserRole> UserRoles = userRoleMapper.findUserRoleByUserId(id);
+        for (UserRole userRole : UserRoles) {
+            userRoleMapper.deleteById(userRole.getId());
         }
     }
 

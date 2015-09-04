@@ -55,4 +55,14 @@ public class OrganizationServiceImpl implements OrganizationService {
         return organizationMapper.findOrganizationAll();
     }
 
+    @Override
+    public void addOrganization(Organization organization) {
+        organizationMapper.insert(organization);
+    }
+
+    @Override
+    public Organization findOrganizationById(Long id) {
+        return organizationMapper.findOrganizationById(id);
+    }
+
 }

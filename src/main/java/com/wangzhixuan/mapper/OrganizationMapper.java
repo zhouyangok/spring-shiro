@@ -22,4 +22,6 @@ public interface OrganizationMapper {
     List<Organization> findOrganizationAllByPid(Long pid);
 
     List<Organization> findOrganizationAll();
+
+    Organization findOrganizationById(Long id);
 }

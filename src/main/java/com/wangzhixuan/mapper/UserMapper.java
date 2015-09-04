@@ -9,7 +9,7 @@ import com.wangzhixuan.utils.PageInfo;
 import com.wangzhixuan.vo.UserVo;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteById(Long id);
 
     int insert(User record);
 
@@ -19,7 +19,7 @@ public interface UserMapper {
 
     int updateByPrimaryKeySelective(User record);
 
-    int updateByPrimaryKey(User record);
+    int updateUser(User record);
 
     User findUserByLoginName(String username);
 

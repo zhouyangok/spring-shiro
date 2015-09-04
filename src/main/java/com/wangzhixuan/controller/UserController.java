@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.wangzhixuan.code.Result;
@@ -98,19 +97,19 @@ public class UserController extends BaseController {
         model.addAttribute("user", userVo);
         return "/admin/userEdit";
     }
-    
+
     @RequestMapping("/edit")
     @ResponseBody
     public Result edit(UserVo userVo) {
         Result result = new Result();
         User u = userService.findUserByLoginName(userVo.getLoginname());
-        if (u != null) {
+        if (u != null && u.getId() != userVo.getId()) {
             result.setMsg("用户名已存在!");
         } else {
             try {
                 userService.updateUser(userVo);
                 result.setSuccess(true);
-                result.setMsg("添加成功！");
+                result.setMsg("修改成功！");
             } catch (Exception e) {
                 result.setMsg(e.getMessage());
             }
@@ -143,21 +142,17 @@ public class UserController extends BaseController {
         return result;
     }
 
-//    @RequestMapping("/delete")
-//    @ResponseBody
-//    public Result delete(Long id) {
-//        Result j = new Result();
-//        try {
-//            userService.delete(id);
-//            j.setMsg("删除成功！");
-//            j.setSuccess(true);
-//        } catch (Exception e) {
-//            j.setMsg(e.getMessage());
-//        }
-//        return j;
-//    }
-
-
-
-
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(Long id) {
+        Result result = new Result();
+        try {
+            userService.deleteUserById(id);
+            result.setMsg("删除成功！");
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
 }
