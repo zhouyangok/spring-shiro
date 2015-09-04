@@ -68,13 +68,14 @@
     <!-- 事务管理 属性 -->
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="find*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="get*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="list*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="edit*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
         </tx:attributes>
     </tx:advice>
 
