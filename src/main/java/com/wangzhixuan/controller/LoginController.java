@@ -96,7 +96,6 @@ public class LoginController {
             return "redirect:/login";
         }
         return "/unauth";
-
     }
 
     /**

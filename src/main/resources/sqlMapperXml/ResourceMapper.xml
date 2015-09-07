@@ -25,14 +25,6 @@
   </select>
 
   <!-- 查询所有父菜单 -->
-  <select id="findResourceAllBytype" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select distinct
-    <include refid="Base_Column_List" />
-    from resource
-    where resourcetype = #{resourcemenu} order by seq
-  </select>
-
-  <!-- 查询所有父菜单 -->
   <select id="findResourceAllBytypeAndPidNull" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select distinct
     <include refid="Base_Column_List" />

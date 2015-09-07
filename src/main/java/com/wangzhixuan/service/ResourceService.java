@@ -14,6 +14,6 @@ public interface ResourceService {
 
     void addResource(Resource resource);
 
-    List<Tree> findAllTree(boolean flag);
+    List<Tree> findAllTree();
 
 }

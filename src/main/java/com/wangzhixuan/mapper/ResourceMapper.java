@@ -19,8 +19,6 @@ public interface ResourceMapper {
 
     int updateByPrimaryKey(Resource record);
 
-    List<Resource> findResourceAllBytype(Integer resourcemenu);
-
     List<Resource> findResourceAllBytypeAndPid(@Param("resourcemenu")Integer resourcemenu, @Param("pid")Long pid);
 
     List<Resource> findResourceAll();

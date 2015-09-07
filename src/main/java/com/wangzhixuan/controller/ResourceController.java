@@ -77,8 +77,8 @@ public class ResourceController extends BaseController {
 
     @RequestMapping("/allTree")
     @ResponseBody
-    public List<Tree> allTree(boolean flag) {// true获取全部资源,false只获取菜单资源
-        return resourceService.findAllTree(flag);
+    public List<Tree> allTree() {
+        return resourceService.findAllTree();
     }
 
 //    @RequestMapping("/treeGrid")
