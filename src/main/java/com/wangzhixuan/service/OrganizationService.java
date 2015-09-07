@@ -15,4 +15,8 @@ public interface OrganizationService {
 
     Organization findOrganizationById(Long id);
 
+    void updateOrganization(Organization organization);
+
+    void deleteOrganizationById(Long id);
+
 }

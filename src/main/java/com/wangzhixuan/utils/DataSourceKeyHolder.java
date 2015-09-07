@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
  * @date：2015年8月19日 下午10:57:41
  */
 public class DataSourceKeyHolder {
+
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<String>();
+
     private static Logger logger = LoggerFactory.getLogger(DataSourceKeyHolder.class);
 
     public static void setDataSourceKey(String dataSourceKey) {

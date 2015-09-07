@@ -16,7 +16,7 @@ import com.wangzhixuan.utils.StringEscapeEditor;
 
 
 public class BaseController {
-    
+
     @Autowired
     private UserService userService;
 

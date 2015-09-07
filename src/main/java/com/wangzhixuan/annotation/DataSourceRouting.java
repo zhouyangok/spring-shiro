@@ -13,7 +13,7 @@ import com.wangzhixuan.datasource.DbKey;
  * @author：Wangzhixuan 
  * @date：2015年8月19日 下午5:14:11
  */
-@Target({ElementType.METHOD, ElementType.TYPE})
+@Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface DataSourceRouting {

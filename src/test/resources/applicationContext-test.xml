@@ -27,7 +27,7 @@
     <!-- 配置连接池 -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <!-- 主库 -->
-    <bean name="master-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+    <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
         init-method="init" destroy-method="close">
         <property name="url" value="${master_driverUrl}" />
         <property name="username" value="${master_username}" />
@@ -48,41 +48,9 @@
         <property name="filters" value="mergeStat" />
     </bean>
 
-    <!-- 从库 -->
-    <bean name="slave-dataSource" class="com.alibaba.druid.pool.DruidDataSource"
-        init-method="init" destroy-method="close">
-        <property name="url" value="${slave_driverUrl}" />
-        <property name="username" value="${slave_username}" />
-        <property name="password" value="${slave_password}" />
-        <property name="initialSize" value="5" />
-        <property name="maxActive" value="100" />
-        <property name="minIdle" value="10" />
-        <property name="maxWait" value="60000" />
-        <property name="validationQuery" value="SELECT 'x'" />
-        <property name="testOnBorrow" value="true" />
-        <property name="testOnReturn" value="true" />
-        <property name="testWhileIdle" value="true" />
-        <property name="timeBetweenEvictionRunsMillis" value="60000" />
-        <property name="minEvictableIdleTimeMillis" value="300000" />
-        <property name="removeAbandoned" value="true" />
-        <property name="removeAbandonedTimeout" value="1800" />
-        <property name="logAbandoned" value="true" />
-        <property name="filters" value="mergeStat" />
-    </bean>
-
-    <bean id="dynamicDataSource" class="com.wangzhixuan.datasource.CustomerDatasource">
-        <property name="targetDataSources">
-            <map key-type="java.lang.String">
-                <entry key="master" value-ref="master-dataSource"></entry>
-                <entry key="slave" value-ref="slave-dataSource"></entry>
-            </map>
-        </property>
-        <property name="defaultTargetDataSource" ref="master-dataSource"/>
-    </bean>
-
     <!-- spring整合mybatis （mybatis-spring项目提供整合类） -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dynamicDataSource"></property>
+        <property name="dataSource" ref="dataSource"></property>
         <property name="configLocation" value="classpath:sqlMapConfig.xml"></property>
     </bean>
 
@@ -94,7 +62,7 @@
 
     <!-- 事务管理 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dynamicDataSource"></property>
+        <property name="dataSource" ref="dataSource"></property>
     </bean>
 
     <!-- 事务管理 属性 -->

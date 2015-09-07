@@ -5,7 +5,7 @@ import java.util.List;
 import com.wangzhixuan.model.Organization;
 
 public interface OrganizationMapper {
-    int deleteByPrimaryKey(Long id);
+    int deleteOrganizationById(Long id);
 
     int insert(Organization record);
 
@@ -13,7 +13,7 @@ public interface OrganizationMapper {
 
     Organization selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Organization record);
+    int updateOrganization(Organization record);
 
     int updateByPrimaryKey(Organization record);
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.wangzhixuan.code.Result;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
@@ -54,62 +55,6 @@ public class ResourceController extends BaseController {
         return treeGrid;
     }
 
-/*    @RequestMapping("/allTree")
-    @ResponseBody
-    public List<Tree> allTree(boolean flag) {// true获取全部资源,false只获取菜单资源
-        return resourceService.listAllTree(flag);
-    }
-
-    @RequestMapping("/treeGrid")
-    @ResponseBody
-    public List<Resource> treeGrid() {
-        List<Resource> treeGrid = resourceService.treeGrid();
-        String jsonString = JSON.toJSONString(treeGrid);
-        System.out.println("------2:"+ jsonString);
-        return resourceService.treeGrid();
-    }
-
-    @RequestMapping("/get")
-    @ResponseBody
-    public Resource get(Long id) {
-        return resourceService.get(id);
-    }
-
-    @RequestMapping("/editPage")
-    public String editPage(HttpServletRequest request, Long id) {
-        Resource r = resourceService.get(id);
-        request.setAttribute("resource", r);
-        return "/admin/resourceEdit";
-    }
-
-    @RequestMapping("/edit")
-    @ResponseBody
-    public Json edit(Resource resource) throws InterruptedException {
-        Json j = new Json();
-        try {
-            resourceService.edit(resource);
-            j.setSuccess(true);
-            j.setMsg("编辑成功！");
-        } catch (Exception e) {
-            j.setMsg(e.getMessage());
-        }
-        return j;
-    }
-
-    @RequestMapping("/delete")
-    @ResponseBody
-    public Json delete(Long id) {
-        Json j = new Json();
-        try {
-            resourceService.delete(id);
-            j.setMsg("删除成功！");
-            j.setSuccess(true);
-        } catch (Exception e) {
-            j.setMsg(e.getMessage());
-        }
-        return j;
-    }
-
     @RequestMapping("/addPage")
     public String addPage() {
         return "/admin/resourceAdd";
@@ -117,16 +62,73 @@ public class ResourceController extends BaseController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public Json add(Resource resource) {
-        Json j = new Json();
+    public Result add(Resource resource) {
+        Result result = new Result();
         try {
-            resourceService.add(resource);
-            j.setSuccess(true);
-            j.setMsg("添加成功！");
+            resourceService.addResource(resource);
+            result.setSuccess(true);
+            result.setMsg("添加成功！");
         } catch (Exception e) {
-            j.setMsg(e.getMessage());
+            result.setMsg(e.getMessage());
         }
-        return j;
-    }*/
+        return result;
+    }
+
+
+    @RequestMapping("/allTree")
+    @ResponseBody
+    public List<Tree> allTree(boolean flag) {// true获取全部资源,false只获取菜单资源
+        return resourceService.findAllTree(flag);
+    }
+
+//    @RequestMapping("/treeGrid")
+//    @ResponseBody
+//    public List<Resource> treeGrid() {
+//        List<Resource> treeGrid = resourceService.treeGrid();
+//        String ResultString = Result.toResultString(treeGrid);
+//        return resourceService.treeGrid();
+//    }
+
+//
+//    @RequestMapping("/get")
+//    @ResponseBody
+//    public Resource get(Long id) {
+//        return resourceService.get(id);
+//    }
+//
+//    @RequestMapping("/editPage")
+//    public String editPage(HttpServletRequest request, Long id) {
+//        Resource r = resourceService.get(id);
+//        request.setAttribute("resource", r);
+//        return "/admin/resourceEdit";
+//    }
+//
+//    @RequestMapping("/edit")
+//    @ResponseBody
+//    public Result edit(Resource resource) throws InterruptedException {
+//        Result j = new Result();
+//        try {
+//            resourceService.edit(resource);
+//            j.setSuccess(true);
+//            j.setMsg("编辑成功！");
+//        } catch (Exception e) {
+//            j.setMsg(e.getMessage());
+//        }
+//        return j;
+//    }
+//
+//    @RequestMapping("/delete")
+//    @ResponseBody
+//    public Result delete(Long id) {
+//        Result j = new Result();
+//        try {
+//            resourceService.delete(id);
+//            j.setMsg("删除成功！");
+//            j.setSuccess(true);
+//        } catch (Exception e) {
+//            j.setMsg(e.getMessage());
+//        }
+//        return j;
+//    }
 
 }

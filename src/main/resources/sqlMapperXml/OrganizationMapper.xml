@@ -39,10 +39,17 @@
     from organization order by seq
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <select id="findOrganizationById" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from organization where id = #{id}
+  </select>
+
+  <delete id="deleteOrganizationById" parameterType="java.lang.Long" >
     delete from organization
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.wangzhixuan.model.Organization" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -51,7 +58,7 @@
       icon, pid, seq, createdate
       )
     values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{seq,jdbcType=TINYINT}, #{createdate,jdbcType=TIMESTAMP}
+      #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{seq,jdbcType=TINYINT}, now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.Organization" >
@@ -102,11 +109,12 @@
         #{seq,jdbcType=TINYINT},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wangzhixuan.model.Organization" >
+
+  <update id="updateOrganization" parameterType="com.wangzhixuan.model.Organization" >
     update organization
     <set >
       <if test="name != null" >
@@ -128,11 +136,12 @@
         seq = #{seq,jdbcType=TINYINT},
       </if>
       <if test="createdate != null" >
-        createdate = #{createdate,jdbcType=TIMESTAMP},
+        createdate = now(),
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.wangzhixuan.model.Organization" >
     update organization
     set name = #{name,jdbcType=VARCHAR},
@@ -141,7 +150,7 @@
       icon = #{icon,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=BIGINT},
       seq = #{seq,jdbcType=TINYINT},
-      createdate = #{createdate,jdbcType=TIMESTAMP}
+      createdate = now()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

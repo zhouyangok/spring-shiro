@@ -13,6 +13,7 @@
     <result column="resourcetype" property="resourcetype" jdbcType="TINYINT" />
     <result column="createdate" property="createdate" jdbcType="TIMESTAMP" />
   </resultMap>
+
   <sql id="Base_Column_List" >
     id, name, url, description, icon, pid, seq, status, resourcetype, createdate
   </sql>
@@ -69,7 +70,7 @@
       resourcetype, createdate)
     values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{seq,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
-      #{resourcetype,jdbcType=TINYINT}, #{createdate,jdbcType=TIMESTAMP})
+      #{resourcetype,jdbcType=TINYINT}, now())
   </insert>
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.Resource" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -131,7 +132,7 @@
         #{resourcetype,jdbcType=TINYINT},
       </if>
       <if test="createdate != null" >
-        #{createdate,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>
@@ -163,7 +164,7 @@
         resourcetype = #{resourcetype,jdbcType=TINYINT},
       </if>
       <if test="createdate != null" >
-        createdate = #{createdate,jdbcType=TIMESTAMP},
+        createdate = now(),
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -178,7 +179,7 @@
       seq = #{seq,jdbcType=TINYINT},
       status = #{status,jdbcType=TINYINT},
       resourcetype = #{resourcetype,jdbcType=TINYINT},
-      createdate = #{createdate,jdbcType=TIMESTAMP}
+      createdate = now()
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

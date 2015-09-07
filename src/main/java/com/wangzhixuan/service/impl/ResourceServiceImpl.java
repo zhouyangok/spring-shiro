@@ -69,4 +69,20 @@ public class ResourceServiceImpl implements ResourceService {
         return resourceMapper.findResourceAll();
     }
 
+    @Override
+    public void addResource(Resource resource) {
+        resourceMapper.insert(resource);
+    }
+
+    @Override
+    public List<Tree> findAllTree(boolean flag) {
+        List<Resource> resourceFather = null;
+        if(flag) {
+            
+        }else {
+            resourceFather = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
+        }
+        return null;
+    }
+
 }

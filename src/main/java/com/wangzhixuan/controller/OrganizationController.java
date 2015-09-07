@@ -23,80 +23,82 @@ public class OrganizationController extends BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
-	@Autowired
-	private OrganizationService organizationService;
+    @Autowired
+    private OrganizationService organizationService;
 
-	@RequestMapping("/manager")
-	public String manager() {
-		return "/admin/organization";
-	}
+    @RequestMapping("/manager")
+    public String manager() {
+        return "/admin/organization";
+    }
 
-	@RequestMapping(value = "/tree", method = RequestMethod.POST)
-	@ResponseBody
-	public List<Tree> tree() {
-	    List<Tree> trees = organizationService.findTree();
-		return trees;
-	}
-	
-	@RequestMapping("/treeGrid")
+    @RequestMapping(value = "/tree", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Tree> tree() {
+        List<Tree> trees = organizationService.findTree();
+        return trees;
+    }
+    
+    @RequestMapping("/treeGrid")
     @ResponseBody
     public List<Organization> treeGrid() {
-	    List<Organization> treeGrid =organizationService.findTreeGrid();
+        List<Organization> treeGrid =organizationService.findTreeGrid();
         return treeGrid;
     }
 
 
-	@RequestMapping("/addPage")
-	public String addPage() {
-		return "/admin/organizationAdd";
-	}
+    @RequestMapping("/addPage")
+    public String addPage() {
+        return "/admin/organizationAdd";
+    }
 
-	@RequestMapping("/add")
-	@ResponseBody
-	public Result add(Organization organization) {
-		Result result = new Result();
-		try {
-			organizationService.addOrganization(organization);
-			result.setSuccess(true);
-			result.setMsg("添加成功！");
-		} catch (Exception e) {
-		    result.setMsg(e.getMessage());
-		}
-		return result;
-	}
+    @RequestMapping("/add")
+    @ResponseBody
+    public Result add(Organization organization) {
+        Result result = new Result();
+        try {
+            organizationService.addOrganization(organization);
+            result.setSuccess(true);
+            result.setMsg("添加成功！");
+        } catch (Exception e) {
+            logger.info("添加失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
 
-	@RequestMapping("/editPage")
-	public String editPage(HttpServletRequest request, Long id) {
-		Organization o = organizationService.findOrganizationById(id);
-		request.setAttribute("organization", o);
-		return "/admin/organizationEdit";
-	}
-//
-//	@RequestMapping("/edit")
-//	@ResponseBody
-//	public Result edit(Organization org) throws InterruptedException {
-//		Result j = new Result();
-//		try {
-//			organizationService.edit(org);
-//			j.setSuccess(true);
-//			j.setMsg("编辑成功！");
-//		} catch (Exception e) {
-//			j.setMsg(e.getMessage());
-//		}
-//		return j;
-//	}
-//
-//	@RequestMapping("/delete")
-//	@ResponseBody
-//	public Result delete(Long id) {
-//		Result j = new Result();
-//		try {
-//			organizationService.delete(id);
-//			j.setMsg("删除成功！");
-//			j.setSuccess(true);
-//		} catch (ServiceException e) {
-//			j.setMsg(e.getMessage());
-//		}
-//		return j;
-//	}
+    @RequestMapping("/editPage")
+    public String editPage(HttpServletRequest request, Long id) {
+        Organization o = organizationService.findOrganizationById(id);
+        request.setAttribute("organization", o);
+        return "/admin/organizationEdit";
+    }
+
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Result edit(Organization organization) {
+        Result result = new Result();
+        try {
+            organizationService.updateOrganization(organization);
+            result.setSuccess(true);
+            result.setMsg("编辑成功！");
+        } catch (Exception e) {
+            logger.info("编辑失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(Long id) {
+        Result result = new Result();
+        try {
+            organizationService.deleteOrganizationById(id);
+            result.setMsg("删除成功！");
+            result.setSuccess(true);
+        } catch (Exception e) {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
 }

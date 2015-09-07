@@ -65,4 +65,14 @@ public class OrganizationServiceImpl implements OrganizationService {
         return organizationMapper.findOrganizationById(id);
     }
 
+    @Override
+    public void updateOrganization(Organization organization) {
+        organizationMapper.updateOrganization(organization);
+    }
+
+    @Override
+    public void deleteOrganizationById(Long id) {
+        organizationMapper.deleteOrganizationById(id);
+    }
+
 }
