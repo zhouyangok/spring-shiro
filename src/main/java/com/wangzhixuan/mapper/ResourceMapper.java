@@ -9,19 +9,23 @@ import com.wangzhixuan.model.Resource;
 public interface ResourceMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Resource record);
+    int insert(Resource resource);
 
-    int insertSelective(Resource record);
+    int insertSelective(Resource resource);
 
     Resource selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Resource record);
+    int updateResource(Resource resource);
 
-    int updateByPrimaryKey(Resource record);
+    int updateByPrimaryKey(Resource resource);
 
     List<Resource> findResourceAllBytypeAndPid(@Param("resourcemenu")Integer resourcemenu, @Param("pid")Long pid);
 
     List<Resource> findResourceAll();
 
     List<Resource> findResourceAllBytypeAndPidNull(Integer resourceMenu);
+
+    Resource findResourceById(Long id);
+
+    int deleteResourceById(Long id);
 }

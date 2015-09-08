@@ -2,6 +2,8 @@ package com.wangzhixuan.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,11 +71,11 @@ public class ResourceController extends BaseController {
             result.setSuccess(true);
             result.setMsg("添加成功！");
         } catch (Exception e) {
+            logger.error("添加资源失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
         return result;
     }
-
 
     @RequestMapping("/allTree")
     @ResponseBody
@@ -81,54 +83,41 @@ public class ResourceController extends BaseController {
         return resourceService.findAllTree();
     }
 
-//    @RequestMapping("/treeGrid")
-//    @ResponseBody
-//    public List<Resource> treeGrid() {
-//        List<Resource> treeGrid = resourceService.treeGrid();
-//        String ResultString = Result.toResultString(treeGrid);
-//        return resourceService.treeGrid();
-//    }
+    @RequestMapping("/editPage")
+    public String editPage(HttpServletRequest request, Long id) {
+        Resource resource = resourceService.findResourceById(id);
+        request.setAttribute("resource", resource);
+        return "/admin/resourceEdit";
+    }
 
-//
-//    @RequestMapping("/get")
-//    @ResponseBody
-//    public Resource get(Long id) {
-//        return resourceService.get(id);
-//    }
-//
-//    @RequestMapping("/editPage")
-//    public String editPage(HttpServletRequest request, Long id) {
-//        Resource r = resourceService.get(id);
-//        request.setAttribute("resource", r);
-//        return "/admin/resourceEdit";
-//    }
-//
-//    @RequestMapping("/edit")
-//    @ResponseBody
-//    public Result edit(Resource resource) throws InterruptedException {
-//        Result j = new Result();
-//        try {
-//            resourceService.edit(resource);
-//            j.setSuccess(true);
-//            j.setMsg("编辑成功！");
-//        } catch (Exception e) {
-//            j.setMsg(e.getMessage());
-//        }
-//        return j;
-//    }
-//
-//    @RequestMapping("/delete")
-//    @ResponseBody
-//    public Result delete(Long id) {
-//        Result j = new Result();
-//        try {
-//            resourceService.delete(id);
-//            j.setMsg("删除成功！");
-//            j.setSuccess(true);
-//        } catch (Exception e) {
-//            j.setMsg(e.getMessage());
-//        }
-//        return j;
-//    }
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Result edit(Resource resource) throws InterruptedException {
+        Result result = new Result();
+        try {
+            resourceService.updateResource(resource);
+            result.setSuccess(true);
+            result.setMsg("编辑成功！");
+        } catch (Exception e) {
+            logger.error("编辑资源失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result delete(Long id) {
+        Result result = new Result();
+        try {
+            resourceService.deleteResourceById(id);
+            result.setMsg("删除成功！");
+            result.setSuccess(true);
+        } catch (Exception e) {
+            logger.error("删除资源失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
 
 }

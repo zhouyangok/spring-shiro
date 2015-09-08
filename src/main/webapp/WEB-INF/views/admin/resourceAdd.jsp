@@ -55,7 +55,7 @@
                 <td>菜单图标</td>
                 <td ><input  name="icon" /></td>
                 <td>状态</td>
-                <td ><select name="cstate" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                <td ><select name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">正常</option>
                             <option value="1">停用</option>
                 </select></td>

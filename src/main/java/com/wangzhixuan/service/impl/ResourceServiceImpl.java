@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.wangzhixuan.code.BaseResponseEnum;
+import com.wangzhixuan.exception.BusinessException;
 import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
@@ -106,6 +108,27 @@ public class ResourceServiceImpl implements ResourceService {
             }
         }
         return trees;
+    }
+
+    @Override
+    public void updateResource(Resource resource) {
+        int update = resourceMapper.updateResource(resource);
+        if(update != 1){
+            throw new BusinessException(BaseResponseEnum.INNER_ERROR);
+        }
+    }
+
+    @Override
+    public Resource findResourceById(Long id) {
+        return resourceMapper.findResourceById(id);
+    }
+
+    @Override
+    public void deleteResourceById(Long id) {
+        int delete = resourceMapper.deleteResourceById(id);
+        if(delete != 1){
+            throw new BusinessException(BaseResponseEnum.INNER_ERROR);
+        }
     }
 
 }

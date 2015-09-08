@@ -16,4 +16,10 @@ public interface ResourceService {
 
     List<Tree> findAllTree();
 
+    void updateResource(Resource resource);
+
+    Resource findResourceById(Long id);
+
+    void deleteResourceById(Long id);
+
 }

@@ -8,15 +8,15 @@ import com.wangzhixuan.utils.PageInfo;
 public interface RoleMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(Role record);
+    int insert(Role role);
 
-    int insertSelective(Role record);
+    int insertSelective(Role role);
 
     Role selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(Role record);
+    int updateByPrimaryKeySelective(Role role);
 
-    int updateByPrimaryKey(Role record);
+    int updateByPrimaryKey(Role role);
 
     List findRolePageCondition(PageInfo pageInfo);
 

@@ -17,7 +17,8 @@
   <sql id="Base_Column_List" >
     id, name, url, description, icon, pid, seq, status, resourcetype, createdate
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+  <select id="findResourceById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from resource
@@ -49,10 +50,11 @@
     from resource order by seq
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteResourceById" parameterType="java.lang.Long" >
     delete from resource
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.wangzhixuan.model.Resource" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -64,6 +66,7 @@
       #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{seq,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
       #{resourcetype,jdbcType=TINYINT}, now())
   </insert>
+
   <insert id="insertSelective" parameterType="com.wangzhixuan.model.Resource" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -128,7 +131,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.wangzhixuan.model.Resource" >
+
+  <update id="updateResource" parameterType="com.wangzhixuan.model.Resource" >
     update resource
     <set >
       <if test="name != null" >

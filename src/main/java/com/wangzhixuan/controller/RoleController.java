@@ -71,6 +71,7 @@ public class RoleController extends BaseController {
             result.setSuccess(true);
             result.setMsg("添加成功！");
         } catch (Exception e) {
+            logger.error("添加角色失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
         return result;
@@ -85,6 +86,7 @@ public class RoleController extends BaseController {
             result.setMsg("删除成功！");
             result.setSuccess(true);
         } catch (Exception e) {
+            logger.error("删除角色失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
         return result;
@@ -106,34 +108,12 @@ public class RoleController extends BaseController {
           result.setSuccess(true);
           result.setMsg("编辑成功！");
       } catch (Exception e) {
+          logger.error("编辑角色失败：{}", e.getMessage());
           result.setMsg(e.getMessage());
       }
       return result;
   }
 
-//
-//    @RequestMapping("/get")
-//    @ResponseBody
-//    public Role get(Long id)  {
-//        return roleService.get(id);
-//    }
-//    
-
-//
-//    @RequestMapping("/edit")
-//    @ResponseBody
-//    public Result edit(Role role) {
-//        Result result = new Result();
-//        try {
-//            roleService.edit(role);
-//            result.setSuccess(true);
-//            result.setMsg("编辑成功！");
-//        } catch (Exception e) {
-//            result.setMsg(e.getMessage());
-//        }
-//        return result;
-//    }
-//    
 //    @RequestMapping("/grantPage")
 //    public String grantPage(HttpServletRequest request, Long id) {
 //        Role r = roleService.get(id);

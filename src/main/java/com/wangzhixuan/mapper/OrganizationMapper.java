@@ -7,15 +7,15 @@ import com.wangzhixuan.model.Organization;
 public interface OrganizationMapper {
     int deleteOrganizationById(Long id);
 
-    int insert(Organization record);
+    int insert(Organization organization);
 
-    int insertSelective(Organization record);
+    int insertSelective(Organization organization);
 
     Organization selectByPrimaryKey(Long id);
 
-    int updateOrganization(Organization record);
+    int updateOrganization(Organization organization);
 
-    int updateByPrimaryKey(Organization record);
+    int updateByPrimaryKey(Organization organization);
 
     List<Organization> findOrganizationAllByPidNull();
 

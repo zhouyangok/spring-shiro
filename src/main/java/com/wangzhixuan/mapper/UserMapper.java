@@ -11,15 +11,15 @@ import com.wangzhixuan.vo.UserVo;
 public interface UserMapper {
     int deleteById(Long id);
 
-    int insert(User record);
+    int insert(User user);
 
-    int insertSelective(User record);
+    int insertSelective(User user);
 
     User selectByPrimaryKey(Long id);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(User user);
 
-    int updateUser(User record);
+    int updateUser(User user);
 
     User findUserByLoginName(String username);
 

@@ -60,7 +60,7 @@ public class OrganizationController extends BaseController {
             result.setSuccess(true);
             result.setMsg("添加成功！");
         } catch (Exception e) {
-            logger.info("添加失败：{}", e.getMessage());
+            logger.info("添加部门失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
         return result;
@@ -68,8 +68,8 @@ public class OrganizationController extends BaseController {
 
     @RequestMapping("/editPage")
     public String editPage(HttpServletRequest request, Long id) {
-        Organization o = organizationService.findOrganizationById(id);
-        request.setAttribute("organization", o);
+        Organization organization = organizationService.findOrganizationById(id);
+        request.setAttribute("organization", organization);
         return "/admin/organizationEdit";
     }
 
@@ -82,7 +82,7 @@ public class OrganizationController extends BaseController {
             result.setSuccess(true);
             result.setMsg("编辑成功！");
         } catch (Exception e) {
-            logger.info("编辑失败：{}", e.getMessage());
+            logger.info("编辑部门失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
         return result;
@@ -98,6 +98,7 @@ public class OrganizationController extends BaseController {
             result.setSuccess(true);
         } catch (Exception e) {
             result.setMsg(e.getMessage());
+            logger.info("删除部门失败：{}", e.getMessage());
         }
         return result;
     }

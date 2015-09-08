@@ -390,7 +390,6 @@ $.cookie = function(key, value, options) {
  * @returns object
  */
 $.serializeObject = function(form) {
-    console('----###');
     var o = {};
     $.each(form.serializeArray(), function(index) {
         if (o[this['name']]) {
