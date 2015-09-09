@@ -114,12 +114,13 @@ public class RoleController extends BaseController {
       return result;
   }
 
-//    @RequestMapping("/grantPage")
-//    public String grantPage(HttpServletRequest request, Long id) {
-//        Role r = roleService.get(id);
-//        request.setAttribute("role", r);
-//        return "/admin/roleGrant";
-//    }
+    @RequestMapping("/grantPage")
+    public String grantPage(HttpServletRequest request, Long id) {
+        Role r = roleService.get(id);
+        request.setAttribute("role", r);
+        return "/admin/roleGrant";
+    }
+
 //
 //    @RequestMapping("/grant")
 //    @ResponseBody
