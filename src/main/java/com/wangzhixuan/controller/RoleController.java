@@ -116,7 +116,7 @@ public class RoleController extends BaseController {
 
     @RequestMapping("/grantPage")
     public String grantPage(HttpServletRequest request, Long id) {
-        Role r = roleService.get(id);
+        Role r = roleService.findResourceByRoleId(id);
         request.setAttribute("role", r);
         return "/admin/roleGrant";
     }

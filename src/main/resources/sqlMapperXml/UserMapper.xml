@@ -114,16 +114,7 @@
         <if test=" condition.name != null and condition.name != '' ">
             t.name = #{condition.name}
         </if>
-        <if test="condition.startTime != null">
-           <![CDATA[
-            and t.createdate >= #{condition.startTime}
-           ]]>
-        </if>
-        <if test="condition.endTime != null">
-            <![CDATA[
-            and t.createdate <= #{condition.endTime}
-            ]]>
-        </if>
+ 
     </where>
     LIMIT #{from}, #{size}
   </select>
