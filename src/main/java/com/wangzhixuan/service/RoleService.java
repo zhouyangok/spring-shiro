@@ -20,4 +20,6 @@ public interface RoleService {
 
     void updateRole(Role role);
 
+    List<Long> findResourceByRoleId(Long id);
+
 }

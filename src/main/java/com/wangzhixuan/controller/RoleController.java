@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,7 +71,7 @@ public class RoleController extends BaseController {
             roleService.addRole(role);
             result.setSuccess(true);
             result.setMsg("添加成功！");
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             logger.error("添加角色失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
@@ -85,7 +86,7 @@ public class RoleController extends BaseController {
             roleService.deleteRole(id);
             result.setMsg("删除成功！");
             result.setSuccess(true);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             logger.error("删除角色失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
@@ -99,41 +100,55 @@ public class RoleController extends BaseController {
         return "/admin/roleEdit";
     }
     
-  @RequestMapping("/edit")
-  @ResponseBody
-  public Result edit(Role role) {
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Result edit(Role role) {
       Result result = new Result();
       try {
           roleService.updateRole(role);
           result.setSuccess(true);
           result.setMsg("编辑成功！");
-      } catch (Exception e) {
+      } catch (RuntimeException e) {
           logger.error("编辑角色失败：{}", e.getMessage());
           result.setMsg(e.getMessage());
       }
       return result;
-  }
+    }
 
     @RequestMapping("/grantPage")
-    public String grantPage(HttpServletRequest request, Long id) {
-        Role r = roleService.findResourceByRoleId(id);
-        request.setAttribute("role", r);
+    public String grantPage(HttpServletRequest request, Long id, Model model) {
+        model.addAttribute("id", id);
         return "/admin/roleGrant";
     }
 
-//
-//    @RequestMapping("/grant")
-//    @ResponseBody
-//    public Result grant(Role role) {
-//        Result result = new Result();
-//        try {
-//            roleService.grant(role);
-//            result.setMsg("授权成功！");
-//            result.setSuccess(true);
-//        } catch (Exception e) {
-//            result.setMsg(e.getMessage());
-//        }
-//        return result;
-//    }
+    @RequestMapping("/findResourceByRoleId")
+    @ResponseBody
+    public Result findResourceByRoleId(HttpServletRequest request, Long id, Model model) {
+        Result result = new Result();
+        try {
+            List<Long> resources = roleService.findResourceByRoleId(id);
+            result.setSuccess(true);
+            result.setObj(resources);
+        } catch (RuntimeException e) {
+            logger.error("角色查询资源失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
+
+
+    @RequestMapping("/grant")
+    @ResponseBody
+    public Result grant(Role role) {
+        Result result = new Result();
+        try {
+            roleService.grant(role);
+            result.setMsg("授权成功！");
+            result.setSuccess(true);
+        } catch (RuntimeException e) {
+            result.setMsg(e.getMessage());
+        }
+        return result;
+    }
 
 }

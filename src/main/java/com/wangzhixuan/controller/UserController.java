@@ -120,7 +120,6 @@ public class UserController extends BaseController {
         return result;
     }
 
-
     @RequestMapping(value = "/editPwdPage", method = RequestMethod.GET)
     public String editPwdPage() {
         return "/admin/userEditPwd";

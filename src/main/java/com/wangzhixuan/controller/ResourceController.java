@@ -82,6 +82,17 @@ public class ResourceController extends BaseController {
     public List<Tree> allTree() {
         return resourceService.findAllTree();
     }
+    
+    /**
+     * @Description：资源树
+     * @return
+     * @author：Wangzhixuan
+     */
+    @RequestMapping(value = "/allTrees", method = RequestMethod.POST)
+    @ResponseBody
+    public List<Tree> allTrees() {
+        return resourceService.findAllTrees();
+    }
 
     @RequestMapping("/editPage")
     public String editPage(HttpServletRequest request, Long id) {

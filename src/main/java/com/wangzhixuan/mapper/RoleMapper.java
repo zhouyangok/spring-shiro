@@ -2,6 +2,7 @@ package com.wangzhixuan.mapper;
 
 import java.util.List;
 
+import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.utils.PageInfo;
 
@@ -29,4 +30,6 @@ public interface RoleMapper {
     int updateRole(Role role);
 
     int deleteRoleById(Long id);
+
+    List<Long> findResourceByRoleId(Long id);
 }

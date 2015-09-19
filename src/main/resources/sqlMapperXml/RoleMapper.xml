@@ -39,6 +39,17 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="findResourceByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    SELECT
+        e.resource_id AS id
+    FROM
+        role r
+    LEFT JOIN role_resource e ON r.id = e.role_id
+    WHERE
+        r.id = #{id}
+
+  </select>
+
   <insert id="insert" parameterType="com.wangzhixuan.model.Role" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
