@@ -26,7 +26,7 @@
         r.id = #{id}
   </select>
   
-  <delete id="deleteByid" parameterType="java.lang.Long" >
+  <delete id="deleteById" parameterType="java.lang.Long" >
     delete from role_resource
     where id = #{id,jdbcType=BIGINT}
   </delete>

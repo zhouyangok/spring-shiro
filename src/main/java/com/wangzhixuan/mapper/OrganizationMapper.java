@@ -9,13 +9,7 @@ public interface OrganizationMapper {
 
     int insert(Organization organization);
 
-    int insertSelective(Organization organization);
-
-    Organization selectByPrimaryKey(Long id);
-
     int updateOrganization(Organization organization);
-
-    int updateByPrimaryKey(Organization organization);
 
     List<Organization> findOrganizationAllByPidNull();
 

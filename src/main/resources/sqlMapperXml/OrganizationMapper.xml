@@ -14,12 +14,6 @@
   <sql id="Base_Column_List" >
     id, name, address, code, icon, pid, seq, createDate
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from organization
-    where id = #{id,jdbcType=BIGINT}
-  </select>
 
   <select id="findOrganizationAllByPidNull" resultMap="BaseResultMap" >
     select distinct
@@ -61,58 +55,6 @@
       #{icon,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{seq,jdbcType=TINYINT}, now()
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.wangzhixuan.model.Organization" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into organization
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="code != null" >
-        code,
-      </if>
-      <if test="icon != null" >
-        icon,
-      </if>
-      <if test="pid != null" >
-        pid,
-      </if>
-      <if test="seq != null" >
-        seq,
-      </if>
-      <if test="createdate != null" >
-        createdate,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="code != null" >
-        #{code,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null" >
-        #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="pid != null" >
-        #{pid,jdbcType=BIGINT},
-      </if>
-      <if test="seq != null" >
-        #{seq,jdbcType=TINYINT},
-      </if>
-      <if test="createdate != null" >
-        now(),
-      </if>
-    </trim>
-  </insert>
 
   <update id="updateOrganization" parameterType="com.wangzhixuan.model.Organization" >
     update organization
@@ -142,15 +84,4 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <update id="updateByPrimaryKey" parameterType="com.wangzhixuan.model.Organization" >
-    update organization
-    set name = #{name,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      code = #{code,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      pid = #{pid,jdbcType=BIGINT},
-      seq = #{seq,jdbcType=TINYINT},
-      createdate = now()
-    where id = #{id,jdbcType=BIGINT}
-  </update>
 </mapper>

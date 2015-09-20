@@ -13,10 +13,6 @@ public interface UserMapper {
 
     int insert(User user);
 
-    int insertSelective(User user);
-
-    User selectByPrimaryKey(Long id);
-
     int updateByPrimaryKeySelective(User user);
 
     int updateUser(User user);

@@ -23,7 +23,6 @@ PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
         <mapper resource="sqlMapperXml/SlaveMapper.xml" />
 
         <mapper resource="sqlMapperXml/OrganizationMapper.xml" />
-
         <mapper resource="sqlMapperXml/UserMapper.xml" />
         <mapper resource="sqlMapperXml/ResourceMapper.xml" />
         <mapper resource="sqlMapperXml/RoleMapper.xml" />

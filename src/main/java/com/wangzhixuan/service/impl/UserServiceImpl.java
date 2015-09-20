@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
         userMapper.updateUser(user);
         Long id = userVo.getId();
         List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
-        if (userRoles != null && !userRoles.isEmpty()) {
+        if (userRoles != null && (!userRoles.isEmpty())) {
             for (UserRole userRole : userRoles) {
                 userRoleMapper.deleteById(userRole.getId());
             }
@@ -102,9 +102,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserById(Long id) {
         userMapper.deleteById(id);
-        List<UserRole> UserRoles = userRoleMapper.findUserRoleByUserId(id);
-        for (UserRole userRole : UserRoles) {
-            userRoleMapper.deleteById(userRole.getId());
+        List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
+        if (userRoles != null && (!userRoles.isEmpty())) {
+            for (UserRole userRole : userRoles) {
+                userRoleMapper.deleteById(userRole.getId());
+            }
         }
     }
 
