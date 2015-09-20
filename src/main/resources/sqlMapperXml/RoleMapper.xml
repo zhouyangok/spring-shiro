@@ -59,6 +59,18 @@
         r.id = #{id}
   </select>
 
+  <select id="findRoleResourceListByRoleId" resultType="java.util.HashMap" parameterType="java.lang.Long" >
+    SELECT
+        e.id AS id,
+        s.url AS url
+    FROM
+        role r
+    LEFT JOIN role_resource e ON r.id = e.role_id LEFT JOIN resource s on e.resource_id = s.id
+    WHERE
+        r.id = {id}
+  </select>
+  
+
   <insert id="insert" parameterType="com.wangzhixuan.model.Role" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()

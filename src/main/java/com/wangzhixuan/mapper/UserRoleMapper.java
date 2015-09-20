@@ -9,15 +9,11 @@ public interface UserRoleMapper {
 
     int insert(UserRole userRole);
 
-    int insertSelective(UserRole userRole);
-
-    UserRole selectByPrimaryKey(Long id);
-
     int updateByPrimaryKeySelective(UserRole userRole);
-
-    int updateByPrimaryKey(UserRole userRole);
 
     List<UserRole> findUserRoleByUserId(Long userId);
 
     int deleteById(Long id);
+
+    List<Long> findRoleIdListByUserId(Long userId);
 }

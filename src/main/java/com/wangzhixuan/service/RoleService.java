@@ -1,6 +1,7 @@
 package com.wangzhixuan.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.utils.PageInfo;
@@ -23,5 +24,9 @@ public interface RoleService {
     List<Long> findResourceIdListByRoleId(Long id);
 
     void updateRoleResource(Long id, String resourceIds);
+
+    List<Long> findRoleIdListByUserId(Long userId);
+    
+    List<Map<Long, String>> findRoleResourceListByRoleId(Long roleId);
 
 }

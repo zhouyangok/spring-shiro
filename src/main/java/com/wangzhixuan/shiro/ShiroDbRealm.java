@@ -1,5 +1,10 @@
 package com.wangzhixuan.shiro;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.RoleService;
 import com.wangzhixuan.service.UserService;
 
 public class ShiroDbRealm extends AuthorizingRealm{
@@ -22,6 +28,8 @@ public class ShiroDbRealm extends AuthorizingRealm{
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     /**
      * Shiro登录认证(原理：用户提交 用户名和密码  --- shiro 封装令牌 ---- realm 通过用户名将密码查询返回 ---- shiro 自动去比较查询出密码和用户输入密码是否一致---- 进行登陆控制 )
@@ -31,8 +39,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
             AuthenticationToken authcToken) throws AuthenticationException {
         logger.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        String username = token.getUsername();
-        User user = userService.findUserByLoginName(username);
+        User user = userService.findUserByLoginName(token.getUsername());
         // 账号不存在
         if(user == null){
             return null;
@@ -41,7 +48,8 @@ public class ShiroDbRealm extends AuthorizingRealm{
         if (user.getStatus() == 1) {
             return null;
         }
-        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginname(), user.getName());
+        List<Long> roleList = roleService.findRoleIdListByUserId(user.getId());
+        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginname(), user.getName(), roleList);
         // 认证缓存信息
         return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
         
@@ -53,11 +61,21 @@ public class ShiroDbRealm extends AuthorizingRealm{
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(
             PrincipalCollection principals) {
+
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-        if(shiroUser == null){
-            return null;
+        List<Long> roleList = shiroUser.roleList;
+
+        Set <String> urlSet = new HashSet<String>();
+        for (Long roleId : roleList) {
+            List<Map<Long, String>> roleResourceList = roleService.findRoleResourceListByRoleId(roleId);
+            if (roleResourceList != null) {
+                for (Map<Long, String> map : roleResourceList) {
+                    urlSet.add(map.get("url"));
+                }
+            }
         }
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.addStringPermissions(urlSet);
         return info;
     }
 }

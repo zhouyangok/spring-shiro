@@ -1,6 +1,7 @@
 package com.wangzhixuan.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import com.wangzhixuan.code.BaseResponseEnum;
 import com.wangzhixuan.exception.BusinessException;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.RoleResourceMapper;
+import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.RoleResource;
 import com.wangzhixuan.service.RoleService;
@@ -26,6 +28,8 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
     @Autowired
     private RoleResourceMapper roleResourceMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public void findDataGrid(PageInfo pageInfo) {
@@ -98,6 +102,16 @@ public class RoleServiceImpl implements RoleService {
             roleResource.setResourceId(Long.parseLong(string));
             roleResourceMapper.insert(roleResource);
         }
+    }
+
+    @Override
+    public List<Long> findRoleIdListByUserId(Long userId) {
+        return userRoleMapper.findRoleIdListByUserId(userId);
+    }
+
+    @Override
+    public List<Map<Long, String>> findRoleResourceListByRoleId(Long roleId) {
+        return roleMapper.findRoleResourceListByRoleId(roleId);
     }
 
 }

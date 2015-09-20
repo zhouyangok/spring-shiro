@@ -39,13 +39,6 @@ public class RoleController extends BaseController {
     public PageInfo dataGrid(Role role, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = Maps.newHashMap();
-
-/*        if(StringUtils.isNoneBlank(username)){
-            condition.put("username", username);
-        }
-        if(StringUtils.isNoneBlank(nickname)){
-            condition.put("nickname", nickname);
-        }*/
         pageInfo.setCondition(condition);
 
         roleService.findDataGrid(pageInfo);

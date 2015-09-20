@@ -9,13 +9,7 @@
   <sql id="Base_Column_List" >
     id, user_id, role_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from user_role
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  
+
   <select id="findUserRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
@@ -23,10 +17,13 @@
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from user_role
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+  <select id="findRoleIdListByUserId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    select 
+    role_id AS roleId
+    from user_role
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+
 
   <delete id="deleteById" parameterType="java.lang.Long" >
     delete from user_role
@@ -41,28 +38,6 @@
     values (#{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT})
   </insert>
 
-  <insert id="insertSelective" parameterType="com.wangzhixuan.model.UserRole" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into user_role
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.wangzhixuan.model.UserRole" >
     update user_role
     <set >
@@ -75,10 +50,5 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wangzhixuan.model.UserRole" >
-    update user_role
-    set user_id = #{userId,jdbcType=BIGINT},
-      role_id = #{roleId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
 </mapper>

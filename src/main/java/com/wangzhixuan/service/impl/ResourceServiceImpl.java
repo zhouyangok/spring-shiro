@@ -14,6 +14,8 @@ import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
+import com.wangzhixuan.service.RoleService;
+import com.wangzhixuan.service.UserService;
 import com.wangzhixuan.utils.Config;
 import com.wangzhixuan.vo.Tree;
 @Service
@@ -23,6 +25,8 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Autowired
     private ResourceMapper resourceMapper;
+    @Autowired
+    private RoleService roleService;
 
     @Override
     public List<Tree> findTree(User currentUser) {
@@ -33,7 +37,7 @@ public class ResourceServiceImpl implements ResourceService {
         if(currentUser.getLoginname().equals("admin")) {
             resourceFather = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
         }else{
-            
+
         }
 
         if(resourceFather != null) {

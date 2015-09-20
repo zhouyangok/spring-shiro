@@ -1,6 +1,7 @@
 package com.wangzhixuan.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.utils.PageInfo;
@@ -24,4 +25,7 @@ public interface RoleMapper {
     List<Long> findResourceIdListByRoleId(Long id);
 
     List<Long> findRoleResourceIdListByRoleId(Long id);
+
+    List<Map<Long, String>> findRoleResourceListByRoleId(Long id);
+
 }
