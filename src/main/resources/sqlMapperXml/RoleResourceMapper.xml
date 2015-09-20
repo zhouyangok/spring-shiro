@@ -15,10 +15,22 @@
     from role_resource
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+  <select id="findRoleResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    SELECT
+        e.id AS id
+    FROM
+        role r
+    LEFT JOIN role_resource e ON r.id = e.role_id
+    WHERE
+        r.id = #{id}
+  </select>
+  
+  <delete id="deleteByid" parameterType="java.lang.Long" >
     delete from role_resource
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  
   <insert id="insert" parameterType="com.wangzhixuan.model.RoleResource" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -26,28 +38,8 @@
     insert into role_resource (role_id, resource_id)
     values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.wangzhixuan.model.RoleResource" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into role_resource
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roleId != null" >
-        role_id,
-      </if>
-      <if test="resourceId != null" >
-        resource_id,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roleId != null" >
-        #{roleId,jdbcType=BIGINT},
-      </if>
-      <if test="resourceId != null" >
-        #{resourceId,jdbcType=BIGINT},
-      </if>
-    </trim>
-  </insert>
+
+
   <update id="updateByPrimaryKeySelective" parameterType="com.wangzhixuan.model.RoleResource" >
     update role_resource
     <set >
@@ -60,10 +52,6 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.wangzhixuan.model.RoleResource" >
-    update role_resource
-    set role_id = #{roleId,jdbcType=BIGINT},
-      resource_id = #{resourceId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+
+
 </mapper>

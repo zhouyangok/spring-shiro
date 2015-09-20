@@ -1,5 +1,7 @@
 package com.wangzhixuan.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -7,11 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.wangzhixuan.code.BaseResponseEnum;
 import com.wangzhixuan.exception.BusinessException;
 import com.wangzhixuan.mapper.RoleMapper;
+import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.model.Role;
+import com.wangzhixuan.model.RoleResource;
+import com.wangzhixuan.model.UserRole;
 import com.wangzhixuan.service.RoleService;
 import com.wangzhixuan.utils.PageInfo;
 import com.wangzhixuan.vo.Tree;
@@ -22,6 +28,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private RoleResourceMapper roleResourceMapper;
 
     @Override
     public void findDataGrid(PageInfo pageInfo) {
@@ -74,8 +82,29 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Long> findResourceByRoleId(Long id) {
-        return roleMapper.findResourceByRoleId(id);
+    public List<Long> findResourceIdListByRoleId(Long id) {
+        return roleMapper.findResourceIdListByRoleId(id);
     }
 
+    @Override
+    public void updateRoleResource(Long id, String resourceIds) {
+        // 先删除后添加,有点爆力
+        List<Long> roleResourceIdList = roleMapper.findRoleResourceIdListByRoleId(id);
+        if (roleResourceIdList != null && (!roleResourceIdList.isEmpty())) {
+            for (Long roleResourceId : roleResourceIdList) {
+                roleResourceMapper.deleteById(roleResourceId);
+            }
+        }
+        String[] resources= resourceIds.split(",");
+        RoleResource roleResource = new RoleResource();
+        for (String string : resources) {
+            roleResource.setRoleId(id);
+            roleResource.setRoleId(Long.parseLong(string));
+            roleResourceMapper.insert(roleResource);
+        }
+    }
+    public static void main(String[] args) {
+        List<Long> list = new ArrayList<Long>();
+        System.out.println(list.isEmpty());
+    }
 }

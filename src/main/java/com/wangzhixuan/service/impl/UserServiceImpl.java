@@ -81,11 +81,12 @@ public class UserServiceImpl implements UserService {
             logger.error("类转换异常：{}",e.getMessage());
         }
         userMapper.updateUser(user);
-
         Long id = userVo.getId();
-        List<UserRole> UserRoles = userRoleMapper.findUserRoleByUserId(id);
-        for (UserRole userRole : UserRoles) {
-            userRoleMapper.deleteById(userRole.getId());
+        List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
+        if (userRoles != null && !userRoles.isEmpty()) {
+            for (UserRole userRole : userRoles) {
+                userRoleMapper.deleteById(userRole.getId());
+            }
         }
 
         String[] roles = userVo.getRoleIds().split(",");

@@ -121,12 +121,12 @@ public class RoleController extends BaseController {
         return "/admin/roleGrant";
     }
 
-    @RequestMapping("/findResourceByRoleId")
+    @RequestMapping("/findResourceIdListByRoleId")
     @ResponseBody
     public Result findResourceByRoleId(HttpServletRequest request, Long id, Model model) {
         Result result = new Result();
         try {
-            List<Long> resources = roleService.findResourceByRoleId(id);
+            List<Long> resources = roleService.findResourceIdListByRoleId(id);
             result.setSuccess(true);
             result.setObj(resources);
         } catch (RuntimeException e) {
@@ -139,13 +139,14 @@ public class RoleController extends BaseController {
 
     @RequestMapping("/grant")
     @ResponseBody
-    public Result grant(Role role) {
+    public Result grant(Long id, String resourceIds) {
         Result result = new Result();
         try {
-            roleService.grant(role);
+            roleService.updateRoleResource(id, resourceIds);
             result.setMsg("授权成功！");
             result.setSuccess(true);
         } catch (RuntimeException e) {
+            logger.error("授权成功失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
         }
         return result;

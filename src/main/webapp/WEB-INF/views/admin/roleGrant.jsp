@@ -12,7 +12,7 @@
             },
             onLoadSuccess : function(node, data) {
                 progressLoad();
-                $.post( '${path }/role/findResourceByRoleId', {
+                $.post( '${path }/role/findResourceIdListByRoleId', {
                     id : '${id}'
                 }, function(result) {
                     var ids;
@@ -98,7 +98,7 @@
     <div data-options="region:'west'" title="系统资源" style="width: 300px; padding: 1px;">
         <div class="well well-small">
             <form id="roleGrantForm" method="post">
-                <input name="id" type="hidden"  value="${role.id}" readonly="readonly">
+                <input name="id" type="hidden"  value="${id}" readonly="readonly">
                 <ul id="resourceTree"></ul>
                 <input id="resourceIds" name="resourceIds" type="hidden" />
             </form>

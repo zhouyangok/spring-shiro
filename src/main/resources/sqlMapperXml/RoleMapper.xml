@@ -39,7 +39,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="findResourceByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+  <select id="findResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long" >
     SELECT
         e.resource_id AS id
     FROM
@@ -47,7 +47,16 @@
     LEFT JOIN role_resource e ON r.id = e.role_id
     WHERE
         r.id = #{id}
+  </select>
 
+  <select id="findRoleResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    SELECT
+        e.id AS id
+    FROM
+        role r
+    LEFT JOIN role_resource e ON r.id = e.role_id
+    WHERE
+        r.id = #{id}
   </select>
 
   <insert id="insert" parameterType="com.wangzhixuan.model.Role" >
