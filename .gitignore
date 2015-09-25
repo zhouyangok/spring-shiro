@@ -9,6 +9,12 @@ logs
 .classpath
 .log
 
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+
 # windows #
 Thumbs.db
 

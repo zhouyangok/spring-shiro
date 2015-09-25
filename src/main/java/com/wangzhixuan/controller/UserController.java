@@ -1,11 +1,13 @@
 package com.wangzhixuan.controller;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.wangzhixuan.code.Result;
+import com.wangzhixuan.model.Role;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.UserService;
+import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.vo.UserVo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -17,14 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.wangzhixuan.code.Result;
-import com.wangzhixuan.model.Role;
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.UserService;
-import com.wangzhixuan.utils.PageInfo;
-import com.wangzhixuan.vo.UserVo;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -72,18 +70,18 @@ public class UserController extends BaseController {
         User u = userService.findUserByLoginName(userVo.getLoginname());
         if (u != null) {
             result.setMsg("用户名已存在!");
-        } else {
-            try {
-                userService.addUser(userVo);
-                result.setSuccess(true);
-                result.setMsg("添加成功！");
-            } catch (Exception e) {
-                logger.error("添加用户失败：{}", e.getMessage());
-                result.setMsg(e.getMessage());
-            }
-
+            return result;
         }
-        return result;
+        try {
+            userService.addUser(userVo);
+            result.setSuccess(true);
+            result.setMsg("添加成功");
+            return result;
+        } catch (Exception e) {
+            logger.error("添加用户失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+            return result;
+        }
     }
 
     @RequestMapping("/editPage")
@@ -106,18 +104,18 @@ public class UserController extends BaseController {
         User u = userService.findUserByLoginName(userVo.getLoginname());
         if (u != null && u.getId() != userVo.getId()) {
             result.setMsg("用户名已存在!");
-        } else {
-            try {
-                userService.updateUser(userVo);
-                result.setSuccess(true);
-                result.setMsg("修改成功！");
-            } catch (Exception e) {
-                logger.error("修改用户失败：{}", e.getMessage());
-                result.setMsg(e.getMessage());
-            }
-
+            return  result;
         }
-        return result;
+        try {
+            userService.updateUser(userVo);
+            result.setSuccess(true);
+            result.setMsg("修改成功！");
+            return result;
+        } catch (Exception e) {
+            logger.error("修改用户失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+            return result;
+        }
     }
 
     @RequestMapping(value = "/editPwdPage", method = RequestMethod.GET)
@@ -129,19 +127,21 @@ public class UserController extends BaseController {
     @ResponseBody
     public Result editUserPwd(HttpServletRequest request, String oldPwd, String pwd) {
         Result result = new Result();
-        if(getCurrentUser().getPassword().equals(DigestUtils.md5Hex(oldPwd))){
-            try {
-                userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
-                result.setSuccess(true);
-                result.setMsg("密码修改成功！");
-            } catch (Exception e) {
-                logger.error("修改密码失败：{}", e.getMessage());
-                result.setMsg(e.getMessage());
-            }
-        }else{
+        if(! getCurrentUser().getPassword().equals(DigestUtils.md5Hex(oldPwd))){
             result.setMsg("老密码不正确!");
+            return result;
         }
-        return result;
+
+        try {
+            userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
+            result.setSuccess(true);
+            result.setMsg("密码修改成功！");
+            return result;
+        } catch (Exception e) {
+            logger.error("修改密码失败：{}", e.getMessage());
+            result.setMsg(e.getMessage());
+            return result;
+        }
     }
 
     @RequestMapping("/delete")
@@ -152,10 +152,11 @@ public class UserController extends BaseController {
             userService.deleteUserById(id);
             result.setMsg("删除成功！");
             result.setSuccess(true);
+            return result;
         } catch (Exception e) {
             logger.error("删除用户失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
+            return result;
         }
-        return result;
     }
 }

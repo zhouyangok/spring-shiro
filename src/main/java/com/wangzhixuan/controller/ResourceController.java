@@ -1,9 +1,10 @@
 package com.wangzhixuan.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.wangzhixuan.code.Result;
+import com.wangzhixuan.model.Resource;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.ResourceService;
+import com.wangzhixuan.vo.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangzhixuan.code.Result;
-import com.wangzhixuan.model.Resource;
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.ResourceService;
-import com.wangzhixuan.vo.Tree;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/resource")
@@ -70,11 +68,12 @@ public class ResourceController extends BaseController {
             resourceService.addResource(resource);
             result.setSuccess(true);
             result.setMsg("添加成功！");
-        } catch (Exception e) {
+            return result;
+        } catch (RuntimeException e) {
             logger.error("添加资源失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
+            return result;
         }
-        return result;
     }
 
     @RequestMapping("/allTree")
@@ -103,17 +102,18 @@ public class ResourceController extends BaseController {
 
     @RequestMapping("/edit")
     @ResponseBody
-    public Result edit(Resource resource) throws InterruptedException {
+    public Result edit(Resource resource) {
         Result result = new Result();
         try {
             resourceService.updateResource(resource);
             result.setSuccess(true);
             result.setMsg("编辑成功！");
-        } catch (Exception e) {
+            return result;
+        } catch (RuntimeException e) {
             logger.error("编辑资源失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
+            return result;
         }
-        return result;
     }
 
     @RequestMapping("/delete")
@@ -124,11 +124,12 @@ public class ResourceController extends BaseController {
             resourceService.deleteResourceById(id);
             result.setMsg("删除成功！");
             result.setSuccess(true);
-        } catch (Exception e) {
+            return result;
+        } catch (RuntimeException e) {
             logger.error("删除资源失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
+            return result;
         }
-        return result;
     }
 
 }

@@ -1,16 +1,6 @@
 package com.wangzhixuan.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Lists;
-import com.wangzhixuan.code.BaseResponseEnum;
-import com.wangzhixuan.exception.BusinessException;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
@@ -19,6 +9,13 @@ import com.wangzhixuan.model.RoleResource;
 import com.wangzhixuan.service.RoleService;
 import com.wangzhixuan.utils.PageInfo;
 import com.wangzhixuan.vo.Tree;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 @Service
 public class RoleServiceImpl implements RoleService {
     
@@ -56,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
         int insert = roleMapper.insert(role);
         if(insert != 1){
             logger.error("insert role error : {}", role.toString());
-            throw new BusinessException(BaseResponseEnum.INNER_ERROR);
+            throw new RuntimeException("插入失败");
         }
     }
 
@@ -64,7 +61,7 @@ public class RoleServiceImpl implements RoleService {
     public void deleteRole(Long id) {
         int update = roleMapper.deleteRoleById(id);
         if(update != 1){
-            throw new BusinessException(BaseResponseEnum.INNER_ERROR);
+            throw new RuntimeException("更新失败");
         }
     }
 
@@ -77,7 +74,7 @@ public class RoleServiceImpl implements RoleService {
     public void updateRole(Role role) {
         int update = roleMapper.updateRole(role);
         if(update != 1){
-            throw new BusinessException(BaseResponseEnum.INNER_ERROR);
+            throw new RuntimeException("更新失败");
         }
     }
 

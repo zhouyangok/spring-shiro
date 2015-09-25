@@ -1,9 +1,9 @@
 package com.wangzhixuan.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.wangzhixuan.code.Result;
+import com.wangzhixuan.model.Organization;
+import com.wangzhixuan.service.OrganizationService;
+import com.wangzhixuan.vo.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangzhixuan.code.Result;
-import com.wangzhixuan.model.Organization;
-import com.wangzhixuan.service.OrganizationService;
-import com.wangzhixuan.vo.Tree;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/organization")
@@ -37,11 +35,11 @@ public class OrganizationController extends BaseController {
         List<Tree> trees = organizationService.findTree();
         return trees;
     }
-    
+
     @RequestMapping("/treeGrid")
     @ResponseBody
     public List<Organization> treeGrid() {
-        List<Organization> treeGrid =organizationService.findTreeGrid();
+        List<Organization> treeGrid = organizationService.findTreeGrid();
         return treeGrid;
     }
 
@@ -59,11 +57,12 @@ public class OrganizationController extends BaseController {
             organizationService.addOrganization(organization);
             result.setSuccess(true);
             result.setMsg("添加成功！");
-        } catch (Exception e) {
+            return result;
+        } catch (RuntimeException e) {
             logger.info("添加部门失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
+            return result;
         }
-        return result;
     }
 
     @RequestMapping("/editPage")
@@ -81,11 +80,12 @@ public class OrganizationController extends BaseController {
             organizationService.updateOrganization(organization);
             result.setSuccess(true);
             result.setMsg("编辑成功！");
-        } catch (Exception e) {
+            return result;
+        } catch (RuntimeException e) {
             logger.info("编辑部门失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
+            return result;
         }
-        return result;
     }
 
     @RequestMapping("/delete")
@@ -96,10 +96,11 @@ public class OrganizationController extends BaseController {
             organizationService.deleteOrganizationById(id);
             result.setMsg("删除成功！");
             result.setSuccess(true);
-        } catch (Exception e) {
+            return result;
+        } catch (RuntimeException e) {
             result.setMsg(e.getMessage());
             logger.info("删除部门失败：{}", e.getMessage());
+            return result;
         }
-        return result;
     }
 }

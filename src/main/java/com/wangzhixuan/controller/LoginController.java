@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wangzhixuan.code.Result;
 
 /**
- * @Description：后台登录
- * @author：Wangzhixuan 
+ * @Description：
+ * @author：Wangzhixuan
  * @date：2015年6月30日 下午4:14:41
  */
 @Controller
@@ -33,7 +33,7 @@ public class LoginController {
     public String index(){
         return "redirect:/index";
     }
-        
+
     @RequestMapping(value = "/index")
     public String index(Model model) {
         return "/index";
@@ -76,7 +76,7 @@ public class LoginController {
             logger.error("密码错误：{}", e.getMessage());
             result.setMsg("密码错误");
             return result;
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             logger.error("未知错误,请联系管理员：{}", e.getMessage());
             result.setMsg("未知错误,请联系管理员");
             return result;
@@ -99,7 +99,7 @@ public class LoginController {
     }
 
     /**
-     * @description：退出
+     * @description：
      * @author：Wangzhixuan
      * @param：
      */

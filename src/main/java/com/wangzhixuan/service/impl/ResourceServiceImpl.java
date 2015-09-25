@@ -1,23 +1,19 @@
 package com.wangzhixuan.service.impl;
 
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Lists;
-import com.wangzhixuan.code.BaseResponseEnum;
-import com.wangzhixuan.exception.BusinessException;
 import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
 import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.service.UserService;
 import com.wangzhixuan.utils.Config;
 import com.wangzhixuan.vo.Tree;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
@@ -185,8 +181,8 @@ public class ResourceServiceImpl implements ResourceService {
     public void updateResource(Resource resource) {
         int update = resourceMapper.updateResource(resource);
         if(update != 1){
-            throw new BusinessException(BaseResponseEnum.INNER_ERROR);
-        }
+            throw new RuntimeException("更新失败");
+    }
     }
 
     @Override
@@ -198,7 +194,7 @@ public class ResourceServiceImpl implements ResourceService {
     public void deleteResourceById(Long id) {
         int delete = resourceMapper.deleteResourceById(id);
         if(delete != 1){
-            throw new BusinessException(BaseResponseEnum.INNER_ERROR);
+            throw new RuntimeException("删除失败");
         }
     }
 
