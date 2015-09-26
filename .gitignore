@@ -1,13 +1,17 @@
-# maven #
-target
+/target/
+# maven ignore
+target/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.tar.gz
 
-logs
-
-# eclipse #
-.settings
+# eclipse ignore
+.settings/
 .project
 .classpath
-.log
 
 # idea ignore
 .idea/
@@ -15,13 +19,21 @@ logs
 *.iml
 *.iws
 
-# windows #
-Thumbs.db
+# logs #
+logs
 
-# Mac #
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+*.java~
+*.properties~
+*.xml~
+
+# system ignore
 .DS_Store
-
-# Package Files #
-*.war
-*.ear
-
+Thumbs.db
+Servers
+.metadata
