@@ -1,7 +1,6 @@
 package com.wangzhixuan.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.wangzhixuan.code.Result;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangzhixuan.code.Result;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @Description：
@@ -27,10 +26,10 @@ import com.wangzhixuan.code.Result;
 @Controller
 public class LoginController {
 
-    private static Logger logger = LoggerFactory.getLogger(LoginController.class);
+    protected static Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping(value = "/")
-    public String index(){
+    public String index() {
         return "redirect:/index";
     }
 
@@ -39,10 +38,10 @@ public class LoginController {
         return "/index";
     }
 
-    @RequestMapping(value = "/login",method=RequestMethod.GET)
-    public String login(Model model,HttpServletRequest request) {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model, HttpServletRequest request) {
         logger.info("GET请求登录");
-        if(SecurityUtils.getSubject().isAuthenticated()) {
+        if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
         return "/login";
@@ -53,7 +52,7 @@ public class LoginController {
      * @author：Wangzhixuan
      * @param：
      */
-    @RequestMapping(value = "/login",method=RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
         logger.info("POST请求登录");
@@ -68,11 +67,11 @@ public class LoginController {
             logger.error("账号不存在：{}", e.getMessage());
             result.setMsg("账号不存在");
             return result;
-        }  catch (DisabledAccountException e) {
+        } catch (DisabledAccountException e) {
             logger.error("账号未启用：{}", e.getMessage());
             result.setMsg("账号未启用");
             return result;
-        }catch (IncorrectCredentialsException e) {
+        } catch (IncorrectCredentialsException e) {
             logger.error("密码错误：{}", e.getMessage());
             result.setMsg("密码错误");
             return result;
@@ -92,7 +91,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/unauth")
     public String unauth(Model model) {
-        if(SecurityUtils.getSubject().isAuthenticated() == false) {
+        if (SecurityUtils.getSubject().isAuthenticated() == false) {
             return "redirect:/login";
         }
         return "/unauth";
@@ -103,7 +102,7 @@ public class LoginController {
      * @author：Wangzhixuan
      * @param：
      */
-    @RequestMapping(value="/logout")
+    @RequestMapping(value = "/logout")
     public void logout(HttpServletRequest request) {
         logger.info("登出");
         Subject subject = SecurityUtils.getSubject();

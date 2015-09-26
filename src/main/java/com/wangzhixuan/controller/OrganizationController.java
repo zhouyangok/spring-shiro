@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/organization")
 public class OrganizationController extends BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(OrganizationController.class);
+    protected static Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
     @Autowired
     private OrganizationService organizationService;
