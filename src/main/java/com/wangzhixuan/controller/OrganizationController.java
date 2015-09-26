@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/organization")
 public class OrganizationController extends BaseController {
 
-    protected static Logger logger = LoggerFactory.getLogger(OrganizationController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
 
     @Autowired
     private OrganizationService organizationService;
@@ -59,7 +59,7 @@ public class OrganizationController extends BaseController {
             result.setMsg("添加成功！");
             return result;
         } catch (RuntimeException e) {
-            logger.info("添加部门失败：{}", e.getMessage());
+            LOGGER.info("添加部门失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
             return result;
         }
@@ -82,7 +82,7 @@ public class OrganizationController extends BaseController {
             result.setMsg("编辑成功！");
             return result;
         } catch (RuntimeException e) {
-            logger.info("编辑部门失败：{}", e.getMessage());
+            LOGGER.info("编辑部门失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
             return result;
         }
@@ -99,7 +99,7 @@ public class OrganizationController extends BaseController {
             return result;
         } catch (RuntimeException e) {
             result.setMsg(e.getMessage());
-            logger.info("删除部门失败：{}", e.getMessage());
+            LOGGER.info("删除部门失败：{}", e.getMessage());
             return result;
         }
     }

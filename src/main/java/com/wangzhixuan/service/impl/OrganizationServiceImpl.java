@@ -1,15 +1,15 @@
 package com.wangzhixuan.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Lists;
 import com.wangzhixuan.mapper.OrganizationMapper;
 import com.wangzhixuan.model.Organization;
 import com.wangzhixuan.service.OrganizationService;
 import com.wangzhixuan.vo.Tree;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
     @Autowired
@@ -21,7 +21,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
         List<Organization> organizationFather = organizationMapper.findOrganizationAllByPidNull();
 
-        if(organizationFather != null) {
+        if (organizationFather != null) {
             for (Organization organizationOne : organizationFather) {
                 Tree treeOne = new Tree();
 
@@ -31,7 +31,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
                 List<Organization> organizationSon = organizationMapper.findOrganizationAllByPid(organizationOne.getId());
 
-                if(organizationSon != null) {
+                if (organizationSon != null) {
                     List<Tree> tree = Lists.newArrayList();
                     for (Organization organizationTwo : organizationSon) {
                         Tree treeTwo = new Tree();
@@ -41,7 +41,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                         tree.add(treeTwo);
                     }
                     treeOne.setChildren(tree);
-                }else{
+                } else {
                     treeOne.setState("closed");
                 }
                 trees.add(treeOne);

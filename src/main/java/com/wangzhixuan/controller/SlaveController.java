@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/slave")
 public class SlaveController extends BaseController {
 
-    protected static Logger logger = LoggerFactory.getLogger(SlaveController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(SlaveController.class);
 
     @Autowired
     private SlaveService slaveService;

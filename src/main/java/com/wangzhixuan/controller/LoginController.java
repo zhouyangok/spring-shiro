@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
 
-    protected static Logger logger = LoggerFactory.getLogger(LoginController.class);
+    protected static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     @RequestMapping(value = "/")
     public String index() {
@@ -40,7 +40,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, HttpServletRequest request) {
-        logger.info("GET请求登录");
+        LOGGER.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
@@ -55,7 +55,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
-        logger.info("POST请求登录");
+        LOGGER.info("POST请求登录");
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
         token.setRememberMe(true);
@@ -64,19 +64,19 @@ public class LoginController {
             //调用 com.wangzhixuan.shiro.ShiroDbRealm
             user.login(token);
         } catch (UnknownAccountException e) {
-            logger.error("账号不存在：{}", e.getMessage());
+            LOGGER.error("账号不存在：{}", e.getMessage());
             result.setMsg("账号不存在");
             return result;
         } catch (DisabledAccountException e) {
-            logger.error("账号未启用：{}", e.getMessage());
+            LOGGER.error("账号未启用：{}", e.getMessage());
             result.setMsg("账号未启用");
             return result;
         } catch (IncorrectCredentialsException e) {
-            logger.error("密码错误：{}", e.getMessage());
+            LOGGER.error("密码错误：{}", e.getMessage());
             result.setMsg("密码错误");
             return result;
         } catch (RuntimeException e) {
-            logger.error("未知错误,请联系管理员：{}", e.getMessage());
+            LOGGER.error("未知错误,请联系管理员：{}", e.getMessage());
             result.setMsg("未知错误,请联系管理员");
             return result;
         }
@@ -104,7 +104,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/logout")
     public void logout(HttpServletRequest request) {
-        logger.info("登出");
+        LOGGER.info("登出");
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
     }

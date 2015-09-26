@@ -24,7 +24,7 @@ import com.wangzhixuan.service.UserService;
 
 public class ShiroDbRealm extends AuthorizingRealm{
 
-    private static Logger logger = LoggerFactory.getLogger(ShiroDbRealm.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(ShiroDbRealm.class);
 
     @Autowired
     private UserService userService;
@@ -37,7 +37,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken authcToken) throws AuthenticationException {
-        logger.info("Shiro开始登录认证");
+        LOGGER.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = userService.findUserByLoginName(token.getUsername());
         // 账号不存在

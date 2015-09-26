@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/resource")
 public class ResourceController extends BaseController {
     
-    protected static Logger logger = LoggerFactory.getLogger(ResourceController.class);
+    private static Logger logger = LoggerFactory.getLogger(ResourceController.class);
 
     @Autowired
     private ResourceService resourceService;

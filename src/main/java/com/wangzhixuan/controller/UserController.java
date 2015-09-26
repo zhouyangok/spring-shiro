@@ -28,7 +28,7 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
-    protected static Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -77,8 +77,8 @@ public class UserController extends BaseController {
             result.setSuccess(true);
             result.setMsg("添加成功");
             return result;
-        } catch (Exception e) {
-            logger.error("添加用户失败：{}", e.getMessage());
+        } catch (RuntimeException e) {
+            LOGGER.error("添加用户失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
             return result;
         }
@@ -111,8 +111,8 @@ public class UserController extends BaseController {
             result.setSuccess(true);
             result.setMsg("修改成功！");
             return result;
-        } catch (Exception e) {
-            logger.error("修改用户失败：{}", e.getMessage());
+        } catch (RuntimeException e) {
+            LOGGER.error("修改用户失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
             return result;
         }
@@ -138,7 +138,7 @@ public class UserController extends BaseController {
             result.setMsg("密码修改成功！");
             return result;
         } catch (Exception e) {
-            logger.error("修改密码失败：{}", e.getMessage());
+            LOGGER.error("修改密码失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
             return result;
         }
@@ -153,8 +153,8 @@ public class UserController extends BaseController {
             result.setMsg("删除成功！");
             result.setSuccess(true);
             return result;
-        } catch (Exception e) {
-            logger.error("删除用户失败：{}", e.getMessage());
+        } catch (RuntimeException e) {
+            LOGGER.error("删除用户失败：{}", e.getMessage());
             result.setMsg(e.getMessage());
             return result;
         }

@@ -15,13 +15,13 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 /**
  * 继承{@link org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource}
  * 配置主从数据源后，根据选择，返回对应的数据源。多个从库的情况下，会平均的分配从库，用于负载均衡。
- * 
+ *
  * @author tanghd
  *
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
-    private static final Logger LOG = LoggerFactory.getLogger(DynamicDataSource.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicDataSource.class);
 
     private DataSource master; // 主库，只允许有一个
     private List<DataSource> slaves; // 从库，允许有多个
@@ -66,8 +66,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
      * 选择使用主库，并把选择放到当前ThreadLocal的栈顶
      */
     public static void useMaster() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("use datasource :" + datasourceHolder.get());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("use datasource :" + datasourceHolder.get());
         }
         LinkedList<String> m = datasourceHolder.get();
         m.offerFirst(DEFAULT);
@@ -77,8 +77,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
      * 选择使用从库，并把选择放到当前ThreadLocal的栈顶
      */
     public static void useSlave() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("use datasource :" + datasourceHolder.get());
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("use datasource :" + datasourceHolder.get());
         }
         LinkedList<String> m = datasourceHolder.get();
         m.offerFirst(SLAVE);
@@ -89,8 +89,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
      */
     public static void reset() {
         LinkedList<String> m = datasourceHolder.get();
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("reset datasource {}", m);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("reset datasource {}", m);
         }
         if (m.size() > 0) {
             m.poll();
@@ -105,8 +105,8 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     protected Object determineCurrentLookupKey() {
         LinkedList<String> m = datasourceHolder.get();
         String key = m.peekFirst() == null ? "" : m.peekFirst();
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("currenty datasource :" + key);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("currenty datasource :" + key);
         }
         if (null != key) {
             if (DEFAULT.equals(key)) {
