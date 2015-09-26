@@ -1,6 +1,7 @@
 package com.wangzhixuan.service.impl;
 
 import com.google.common.collect.Lists;
+import com.wangzhixuan.exception.ServiceException;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
@@ -16,10 +17,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+
 @Service
 public class RoleServiceImpl implements RoleService {
-    
-    private static Logger logger = LoggerFactory.getLogger(RoleServiceImpl.class);
+
+    private static Logger LOGGER = LoggerFactory.getLogger(RoleServiceImpl.class);
 
     @Autowired
     private RoleMapper roleMapper;
@@ -51,17 +53,18 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void addRole(Role role) {
         int insert = roleMapper.insert(role);
-        if(insert != 1){
-            logger.error("insert role error : {}", role.toString());
-            throw new RuntimeException("插入失败");
+        if (insert != 1) {
+            LOGGER.warn("插入失败，参数：{}", role.toString());
+            throw new ServiceException("插入失败");
         }
     }
 
     @Override
     public void deleteRole(Long id) {
         int update = roleMapper.deleteRoleById(id);
-        if(update != 1){
-            throw new RuntimeException("更新失败");
+        if (update != 1) {
+            LOGGER.warn("删除失败，id：{}", id);
+            throw new ServiceException("删除失败");
         }
     }
 
@@ -73,8 +76,9 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public void updateRole(Role role) {
         int update = roleMapper.updateRole(role);
-        if(update != 1){
-            throw new RuntimeException("更新失败");
+        if (update != 1) {
+            LOGGER.warn("更新失败，参数：{}", role.toString());
+            throw new ServiceException("更新失败");
         }
     }
 
@@ -92,7 +96,7 @@ public class RoleServiceImpl implements RoleService {
                 roleResourceMapper.deleteById(roleResourceId);
             }
         }
-        String[] resources= resourceIds.split(",");
+        String[] resources = resourceIds.split(",");
         RoleResource roleResource = new RoleResource();
         for (String string : resources) {
             roleResource.setRoleId(id);

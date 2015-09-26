@@ -1,13 +1,5 @@
 package com.wangzhixuan.service.impl;
 
-import java.util.List;
-
-import org.apache.commons.beanutils.PropertyUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.wangzhixuan.mapper.UserMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.User;
@@ -15,10 +7,18 @@ import com.wangzhixuan.model.UserRole;
 import com.wangzhixuan.service.UserService;
 import com.wangzhixuan.utils.PageInfo;
 import com.wangzhixuan.vo.UserVo;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
-    private static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -47,7 +47,8 @@ public class UserServiceImpl implements UserService {
         try {
             PropertyUtils.copyProperties(user, userVo);
         } catch (Exception e) {
-            logger.error("类转换异常：{}",e.getMessage());
+            LOGGER.error("类转换异常：{}", e);
+            throw new RuntimeException("类型转换异常：{}", e);
         }
         userMapper.insert(user);
 
@@ -78,7 +79,8 @@ public class UserServiceImpl implements UserService {
         try {
             PropertyUtils.copyProperties(user, userVo);
         } catch (Exception e) {
-            logger.error("类转换异常：{}",e.getMessage());
+            LOGGER.error("类转换异常：{}", e.getMessage());
+            throw new RuntimeException("类型转换异常：{}", e);
         }
         userMapper.updateUser(user);
         Long id = userVo.getId();
