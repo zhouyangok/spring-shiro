@@ -1,5 +1,6 @@
 package com.wangzhixuan.shiro;
 
+import com.google.common.collect.Sets;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.RoleService;
 import com.wangzhixuan.service.UserService;
@@ -65,7 +66,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
         List<Long> roleList = shiroUser.roleList;
 
-        Set<String> urlSet = new HashSet<String>();
+        Set<String> urlSet = Sets.newHashSet();
         for (Long roleId : roleList) {
             List<Map<Long, String>> roleResourceList = roleService.findRoleResourceListByRoleId(roleId);
             if (roleResourceList != null) {

@@ -5,7 +5,7 @@ import java.util.List;
 public class Tree implements java.io.Serializable {
 
     private static final long serialVersionUID = 980682543891282923L;
-    private String id;
+    private Long id;
 	private String text;
 	private String state = "open";// open,closed
 	private boolean checked = false;
@@ -14,11 +14,11 @@ public class Tree implements java.io.Serializable {
 	private String iconCls;
 	private String pid;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

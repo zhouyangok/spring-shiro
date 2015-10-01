@@ -25,7 +25,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             for (Organization organizationOne : organizationFather) {
                 Tree treeOne = new Tree();
 
-                treeOne.setId(organizationOne.getId().toString());
+                treeOne.setId(organizationOne.getId());
                 treeOne.setText(organizationOne.getName());
                 treeOne.setIconCls(organizationOne.getIcon());
 
@@ -35,7 +35,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                     List<Tree> tree = Lists.newArrayList();
                     for (Organization organizationTwo : organizationSon) {
                         Tree treeTwo = new Tree();
-                        treeTwo.setId(organizationTwo.getId().toString());
+                        treeTwo.setId(organizationTwo.getId());
                         treeTwo.setText(organizationTwo.getName());
                         treeTwo.setIconCls(organizationTwo.getIcon());
                         tree.add(treeTwo);

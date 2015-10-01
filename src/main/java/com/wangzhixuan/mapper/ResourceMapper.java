@@ -1,10 +1,9 @@
 package com.wangzhixuan.mapper;
 
-import java.util.List;
-
+import com.wangzhixuan.model.Resource;
 import org.apache.ibatis.annotations.Param;
 
-import com.wangzhixuan.model.Resource;
+import java.util.List;
 
 public interface ResourceMapper {
 
@@ -12,11 +11,11 @@ public interface ResourceMapper {
 
     int updateResource(Resource resource);
 
-    List<Resource> findResourceAllBytypeAndPid(@Param("resourcemenu")Integer resourcemenu, @Param("pid")Long pid);
+    List<Resource> findResourceAllByTypeAndPid(@Param("resourceType") Integer resourceType, @Param("pid") Long pid);
 
     List<Resource> findResourceAll();
 
-    List<Resource> findResourceAllBytypeAndPidNull(Integer resourceMenu);
+    List<Resource> findResourceAllByTypeAndPidNull(Integer resourceMenu);
 
     Resource findResourceById(Long id);
 

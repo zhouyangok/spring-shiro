@@ -31,19 +31,19 @@
             <form id="editUserPwdForm" method="post">
                 <table>
                     <tr>
-                        <th>登录名</th>
-                        <td>${sessionInfo.name}</td>
+                        <th>登录名：</th>
+                        <td><shiro:principal></shiro:principal></td>
                     </tr>
                     <tr>
-                        <th>原密码</th>
+                        <th>原密码：</th>
                         <td><input name="oldPwd" type="password" placeholder="请输入原密码" class="easyui-validatebox" data-options="required:true"></td>
                     </tr>
                     <tr>
-                        <th>新密码</th>
+                        <th>新密码：</th>
                         <td><input name="pwd" type="password" placeholder="请输入新密码" class="easyui-validatebox" data-options="required:true"></td>
                     </tr>
                     <tr>
-                        <th>重复密码</th>
+                        <th>重复密码：</th>
                         <td><input name="rePwd" type="password" placeholder="请再次输入新密码" class="easyui-validatebox" data-options="required:true,validType:'eqPwd[\'#editUserPwdForm input[name=pwd]\']'"></td>
                     </tr>
                 </table>

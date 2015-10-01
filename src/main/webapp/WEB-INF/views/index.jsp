@@ -10,11 +10,8 @@
     var index_layout;
     var index_tabs;
     var index_tabsMenu;
-
     var layout_west_tree;
-
     var layout_west_tree_url = '';
-
     layout_west_tree_url = '${path }/resource/tree';
 
     $(function() {
@@ -104,7 +101,7 @@
             height : 250,
             href : '${path }/user/editPwdPage',
             buttons : [ {
-                text : '修改',
+                text : '确定',
                 handler : function() {
                     var f = parent.$.modalDialog.handler.find('#editUserPwdForm');
                     f.submit();
@@ -122,7 +119,7 @@
     <div id="index_layout">
         <div data-options="region:'north',border:false" style=" overflow: hidden; ">
             <div id="header">
-                <span style="float: right; padding-right: 20px; color: #333">欢迎 <b>${sessionInfo.name}</b>&nbsp;&nbsp; <a href="javascript:void(0)" onclick="editUserPwd()" >修改密码</a>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="logout()">安全退出</a></span>
+                <span style="float: right; padding-right: 20px; color: #333">欢迎 <b><shiro:principal></shiro:principal></b>&nbsp;&nbsp; <a href="javascript:void(0)" onclick="editUserPwd()" >修改密码</a>&nbsp;&nbsp;<a href="javascript:void(0)" onclick="logout()">安全退出</a></span>
                 <span class="header"></span>
             </div>
         </div>
@@ -134,13 +131,6 @@
         <div data-options="region:'center'" style="overflow: hidden;">
             <div id="index_tabs" style="overflow: hidden;">
                 <div title="首页" data-options="border:false" style="overflow: hidden;">
-                    <%--<div style="padding:10px 0 10px 10px">--%>
-                        <%--<h2>系统介绍</h2>--%>
-                        <%--<div class="light-info">--%>
-                            <%--<div class="light-tip icon-tip"></div>--%>
-                            <%--<div>JAVA快速开发平台。</div>--%>
-                        <%--</div>--%>
-                    <%--</div> --%>
                 </div>
             </div>
         </div>

@@ -1,58 +1,67 @@
 package com.wangzhixuan.service.impl;
 
-import com.google.common.collect.Lists;
-import com.wangzhixuan.mapper.ResourceMapper;
-import com.wangzhixuan.model.Resource;
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.ResourceService;
-import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.utils.Config;
-import com.wangzhixuan.vo.Tree;
+import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
+import com.wangzhixuan.mapper.ResourceMapper;
+import com.wangzhixuan.mapper.RoleMapper;
+import com.wangzhixuan.mapper.UserRoleMapper;
+import com.wangzhixuan.model.Resource;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.ResourceService;
+import com.wangzhixuan.utils.Config;
+import com.wangzhixuan.vo.Tree;
 
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
-    private static Logger logger = LoggerFactory.getLogger(ResourceServiceImpl.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(ResourceServiceImpl.class);
 
+    @Autowired
+    private UserRoleMapper userRoleMapper;
     @Autowired
     private ResourceMapper resourceMapper;
     @Autowired
-    private RoleService roleService;
+    private RoleMapper roleMapper;
 
     @Override
-    public List<Tree> findTree(User currentUser) {
+    public List<Tree> findTree(User user) {
         List<Tree> trees = Lists.newArrayList();
-
-        List<Resource> resourceFather = null;
-
-        if (currentUser.getLoginname().equals("admin")) {
-            resourceFather = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
-        } else {
-
+        Set<Long> list = Sets.newHashSet();
+        List<Long> roleIdList = userRoleMapper.findRoleIdListByUserId(user.getId());
+        for (Long i : roleIdList) {
+            List<Long> resourceIdList = roleMapper.findResourceIdListByRoleId(i);
+            for (Long x : resourceIdList) {
+                list.add(x);
+            }
         }
+
+        List<Resource> resourceFather = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
         if (resourceFather == null) {
             return null;
         }
+
         for (Resource resourceOne : resourceFather) {
             Tree treeOne = new Tree();
 
-            treeOne.setId(resourceOne.getId().toString());
+            treeOne.setId(resourceOne.getId());
             treeOne.setText(resourceOne.getName());
             treeOne.setIconCls(resourceOne.getIcon());
             treeOne.setAttributes(resourceOne.getUrl());
-            List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
+            List<Resource> resourceSon = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
             if (resourceSon != null) {
                 List<Tree> tree = Lists.newArrayList();
                 for (Resource resourceTwo : resourceSon) {
                     Tree treeTwo = new Tree();
-                    treeTwo.setId(resourceTwo.getId().toString());
+                    treeTwo.setId(resourceTwo.getId());
                     treeTwo.setText(resourceTwo.getName());
                     treeTwo.setIconCls(resourceTwo.getIcon());
                     treeTwo.setAttributes(resourceTwo.getUrl());
@@ -64,7 +73,21 @@ public class ResourceServiceImpl implements ResourceService {
             }
             trees.add(treeOne);
         }
-        return trees;
+
+        if (user.getLoginname().equals("admin")) {
+            return trees;
+        }
+
+        List<Tree> treeList = Lists.newArrayList();
+
+        for (Long y : list) {
+            for (Tree tree : trees) {
+                if (y == tree.getId()) {
+                    treeList.add(tree);
+                }
+            }
+        }
+        return treeList;
     }
 
     @Override
@@ -81,25 +104,25 @@ public class ResourceServiceImpl implements ResourceService {
     public List<Tree> findAllTree() {
         List<Tree> trees = Lists.newArrayList();
         // 查询所有的一级树
-        List<Resource> resources = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
+        List<Resource> resources = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
         if (resources == null) {
             return null;
         }
         for (Resource resourceOne : resources) {
             Tree treeOne = new Tree();
 
-            treeOne.setId(resourceOne.getId().toString());
+            treeOne.setId(resourceOne.getId());
             treeOne.setText(resourceOne.getName());
             treeOne.setIconCls(resourceOne.getIcon());
             treeOne.setAttributes(resourceOne.getUrl());
             // 查询所有一级树下的菜单
-            List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
+            List<Resource> resourceSon = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
             if (resourceSon != null) {
                 List<Tree> tree = Lists.newArrayList();
                 for (Resource resourceTwo : resourceSon) {
                     Tree treeTwo = new Tree();
-                    treeTwo.setId(resourceTwo.getId().toString());
+                    treeTwo.setId(resourceTwo.getId());
                     treeTwo.setText(resourceTwo.getName());
                     treeTwo.setIconCls(resourceTwo.getIcon());
                     treeTwo.setAttributes(resourceTwo.getUrl());
@@ -119,7 +142,7 @@ public class ResourceServiceImpl implements ResourceService {
         List<Tree> treeOneList = Lists.newArrayList();
 
         // 查询所有的一级树
-        List<Resource> resources = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
+        List<Resource> resources = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
         if (resources == null) {
             return null;
         }
@@ -127,12 +150,12 @@ public class ResourceServiceImpl implements ResourceService {
         for (Resource resourceOne : resources) {
             Tree treeOne = new Tree();
 
-            treeOne.setId(resourceOne.getId().toString());
+            treeOne.setId(resourceOne.getId());
             treeOne.setText(resourceOne.getName());
             treeOne.setIconCls(resourceOne.getIcon());
             treeOne.setAttributes(resourceOne.getUrl());
 
-            List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
+            List<Resource> resourceSon = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
             if (resourceSon == null) {
                 treeOne.setState("closed");
@@ -142,13 +165,13 @@ public class ResourceServiceImpl implements ResourceService {
                 for (Resource resourceTwo : resourceSon) {
                     Tree treeTwo = new Tree();
 
-                    treeTwo.setId(resourceTwo.getId().toString());
+                    treeTwo.setId(resourceTwo.getId());
                     treeTwo.setText(resourceTwo.getName());
                     treeTwo.setIconCls(resourceTwo.getIcon());
                     treeTwo.setAttributes(resourceTwo.getUrl());
 
                     /***************************************************/
-                    List<Resource> resourceSons = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_BUTTON, resourceTwo.getId());
+                    List<Resource> resourceSons = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_BUTTON, resourceTwo.getId());
 
                     if (resourceSons == null) {
                         treeTwo.setState("closed");
@@ -158,7 +181,7 @@ public class ResourceServiceImpl implements ResourceService {
                         for (Resource resourceThree : resourceSons) {
                             Tree treeThree = new Tree();
 
-                            treeThree.setId(resourceThree.getId().toString());
+                            treeThree.setId(resourceThree.getId());
                             treeThree.setText(resourceThree.getName());
                             treeThree.setIconCls(resourceThree.getIcon());
                             treeThree.setAttributes(resourceThree.getUrl());

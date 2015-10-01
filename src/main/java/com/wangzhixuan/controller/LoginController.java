@@ -1,7 +1,9 @@
 package com.wangzhixuan.controller;
 
 import com.wangzhixuan.code.Result;
+
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -51,12 +53,19 @@ public class LoginController {
     @ResponseBody
     public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
         LOGGER.info("POST请求登录");
+        Result result = new Result();
+        if (StringUtils.isBlank(username)) {
+            result.setMsg("用户名不能为空");
+            return result;
+        }
+        if (StringUtils.isBlank(password)) {
+            result.setMsg("密码不能为空");
+            return result;
+        }
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
         token.setRememberMe(true);
-        Result result = new Result();
         try {
-            // 调用 com.wangzhixuan.shiro.shirodbrealm
             user.login(token);
         } catch (UnknownAccountException e) {
             LOGGER.error("账号不存在：{}", e.getMessage());

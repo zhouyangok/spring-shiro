@@ -3,94 +3,226 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="/commons/basejs.jsp" %>
-<meta charset="utf-8">
-<title>用户登录</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width">
-<link href="${staticPath }/static/style/css/base.css" rel="stylesheet" type="text/css">
-<link href="${staticPath }/static/style/css/login.css" rel="stylesheet" type="text/css">
+    <title>用户登录</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <%@ include file="/commons/basejs.jsp" %>    
+    <style>
+        body {
+            background: #ebebeb;
+            font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "\9ED1\4F53", Arial, sans-serif;
+            color: #222;
+            font-size: 12px;
+        }
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+        .top_div {
+            background: #008ead;
+            width: 100%;
+            height: 400px;
+        }
+        .ipt {
+            border: 1px solid #d3d3d3;
+            padding: 10px 10px;
+            width: 290px;
+            border-radius: 4px;
+            padding-left: 35px;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+            -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+            -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+            transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+        }
+        .ipt:focus {
+            border-color: #66afe9;
+            outline: 0;
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6)
+        }
+        .u_logo {
+            background: url("${staticPath }/static/style/images/username.png") no-repeat;
+            padding: 10px 10px;
+            position: absolute;
+            top: 43px;
+            left: 40px;
 
-<script>
-
-/*     var sessionInfo_userId = '${sessionInfo.id}';
-    if (sessionInfo_userId) {//如果登录,直接跳转到index页面
-        window.location.href='${path }/index';
-    } */
-
-    $(function() {
-        $('#loginform').form({
-            url:'${path }/login',
-            onSubmit : function() {
-                progressLoad();
-                var isValid = $(this).form('validate');
-                if(!isValid){
+        }
+        .p_logo {
+            background: url("${staticPath }/static/style/images/password.png") no-repeat;
+            padding: 10px 10px;
+            position: absolute;
+            top: 12px;
+            left: 40px;
+        }
+        a {
+            text-decoration: none;
+        }
+        .tou {
+            background: url("${staticPath }/static/style/images/tou.png") no-repeat;
+            width: 97px;
+            height: 92px;
+            position: absolute;
+            top: -87px;
+            left: 140px;
+        }
+        .left_hand {
+            background: url("${staticPath }/static/style/images/left_hand.png") no-repeat;
+            width: 32px;
+            height: 37px;
+            position: absolute;
+            top: -38px;
+            left: 150px;
+        }
+        .right_hand {
+            background: url("${staticPath }/static/style/images/right_hand.png") no-repeat;
+            width: 32px;
+            height: 37px;
+            position: absolute;
+            top: -38px;
+            right: -64px;
+        }
+        .initial_left_hand {
+            background: url("${staticPath }/static/style/images/hand.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -12px;
+            left: 100px;
+        }
+        .initial_right_hand {
+            background: url("${staticPath }/static/style/images/hand.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -12px;
+            right: -112px;
+        }
+        .left_handing {
+            background: url("${staticPath }/static/style/images/left-handing.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -24px;
+            left: 139px;
+        }
+        .right_handinging {
+            background: url("${staticPath }/static/style/images/right_handing.png") no-repeat;
+            width: 30px;
+            height: 20px;
+            position: absolute;
+            top: -21px;
+            left: 210px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            // 得到焦点
+            $("#password").focus(function () {
+                $("#left_hand").animate({
+                    left: "150",
+                    top: " -38"
+                }, {
+                    step: function () {
+                        if (parseInt($("#left_hand").css("left")) > 140) {
+                            $("#left_hand").attr("class", "left_hand");
+                        }
+                    }
+                }, 2000);
+                $("#right_hand").animate({
+                    right: "-64",
+                    top: "-38px"
+                }, {
+                    step: function () {
+                        if (parseInt($("#right_hand").css("right")) > -70) {
+                            $("#right_hand").attr("class", "right_hand");
+                        }
+                    }
+                }, 2000);
+            });
+            // 失去焦点
+            $("#password").blur(function () {
+                $("#left_hand").attr("class", "initial_left_hand");
+                $("#left_hand").attr("style", "left:100px;top:-12px;");
+                $("#right_hand").attr("class", "initial_right_hand");
+                $("#right_hand").attr("style", "right:-112px;top:-12px");
+            });
+            // 登录
+            $('#loginform').form({
+                url:'${path }/login',
+                onSubmit : function() {
+                    progressLoad();
+                    var isValid = $(this).form('validate');
+                    if(!isValid){
+                        progressClose();
+                    }
+                    return isValid;
+                },
+                success:function(result){
                     progressClose();
-                } 
-                return isValid;
-            },
-            success:function(result){
-                progressClose();
-                result = $.parseJSON(result);
-                if (result.success) {
-                    window.location.href='${path }/index';
-                }else{
-                     $.messager.show({
-                        title:'提示',
-                        msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>'+result.msg+'</div></div>',
-                        showType:'show'
-                    });
+                    result = $.parseJSON(result);
+                    if (result.success) {
+                        window.location.href='${path }/index';
+                    }else{
+                         $.messager.show({
+                            title:'提示',
+                            msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>'+result.msg+'</div></div>',
+                            showType:'show'
+                        });
+                    }
                 }
-            }
+            });
         });
-    });
-
-    function submitForm(){
-        $('#loginform').submit();
-    }
-    
-    function clearForm(){
-        $('#loginform').form('clear');
-    }
-
-    //回车登录
-    function enterlogin(){
-        if (event.keyCode == 13){
-            event.returnValue=false;
-            event.cancel = true;
+        function submitForm(){
             $('#loginform').submit();
         }
-    }
-
-</script>
+        function clearForm(){
+            $('#loginform').form('clear');
+        }
+        //回车登录
+        function enterlogin(){
+            if (event.keyCode == 13){
+                event.returnValue=false;
+                event.cancel = true;
+                $('#loginform').submit();
+            }
+        }
+    </script>
 </head>
 <body onkeydown="enterlogin();">
-    <div class="login">
-        <form  method="post" id="loginform">
-        <div class="logo"></div>
-        <div class="login_form">
-            <div class="user">
-                <input class="text_value" type="text" name="username" data-options="required:true" value="admin" ></input>
-                <input class="text_value" type="password" name="password" value="" ></input>
-            </div>
-            <button class="button"  type="button" onclick="submitForm()">登录</button>
+<div class="top_div"></div>
+<div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
+    <form method="post" id="loginform">
+        <div style="width: 165px; height: 96px; position: absolute;">
+            <div class="tou"></div>
+            <div class="initial_left_hand" id="left_hand"></div>
+            <div class="initial_right_hand" id="right_hand"></div>
         </div>
-
-        <div id="tip"></div>
-
-        </form>
-    </div>
-
-    <!--[if lte IE 7]>
-    <div id="ie6-warning"><p>您正在使用 低版本浏览器，在本页面可能会导致部分功能无法使用。建议您升级到 <a href="http://www.microsoft.com/china/windows/internet-explorer/" target="_blank">Internet Explorer 8</a> 或以下浏览器：
-    <a href="http://www.mozillaonline.com/" target="_blank">Firefox</a> / <a href="http://www.google.com/chrome/?hl=zh-CN" target="_blank">Chrome</a> / <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> / <a href="http://www.operachina.com/" target="_blank">Opera</a></p></div>
-    <![endif]-->
-    
-    <style>
-        /*ie6提示*/
-        #ie6-warning{width:100%;position:absolute;top:0;left:0;background:#fae692;padding:5px 0;font-size:12px}
-        #ie6-warning p{width:960px;margin:0 auto;}
-    </style>
-    </body>
+        <P style="padding: 30px 0px 10px; position: relative;">
+            <span class="u_logo"></span>
+            <input class="ipt" type="text" name="username" placeholder="请输入用户名或邮箱" value="admin" />
+        </P>
+        <P style="position: relative;">
+            <span class="p_logo"></span>
+            <input class="ipt" type="password" name="password" placeholder="请输入密码" value="" />
+        </P>
+        <div style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
+            <P style="margin: 0px 35px 20px 45px;">
+                <span style="float: left;">
+                    <a style="color: rgb(204, 204, 204);" href="javascript:;">忘记密码?</a>
+                </span>
+                <span style="float: right;">
+                    <a style="color: rgb(204, 204, 204); margin-right: 10px;" href="javascript:;">注册</a>
+                    <a style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" href="javascript:;" onclick="submitForm()">登录</a>
+                </span>
+            </P>
+        </div>
+    </form>
+</div>
+<div style="text-align:center;">
+    <p><a href="http://www.dreamlu.net/" target="_blank">如梦技术</a></p>
+</div>
+</body>
 </html>
