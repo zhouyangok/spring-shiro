@@ -16,18 +16,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * @description：资源管理
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 @Controller
 @RequestMapping("/resource")
 public class ResourceController extends BaseController {
-    
+
     private static Logger logger = LoggerFactory.getLogger(ResourceController.class);
 
     @Autowired
     private ResourceService resourceService;
 
     /**
-     * @Description：菜单树
      * @return
+     * @Description：菜单树
      * @author：Wangzhixuan
      */
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
@@ -38,11 +43,6 @@ public class ResourceController extends BaseController {
         return tree;
     }
 
-    /**
-     * @Description：资源管理
-     * @return
-     * @author：Wangzhixuan
-     */
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String manager() {
         return "admin/resource";
@@ -51,7 +51,7 @@ public class ResourceController extends BaseController {
     @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
     @ResponseBody
     public List<Resource> treeGrid() {
-        List<Resource> treeGrid = resourceService.findTreeGrid();
+        List<Resource> treeGrid = resourceService.findResourceAll();
         return treeGrid;
     }
 
@@ -81,10 +81,10 @@ public class ResourceController extends BaseController {
     public List<Tree> allTree() {
         return resourceService.findAllTree();
     }
-    
+
     /**
-     * @Description：资源树
      * @return
+     * @Description：资源树
      * @author：Wangzhixuan
      */
     @RequestMapping(value = "/allTrees", method = RequestMethod.POST)

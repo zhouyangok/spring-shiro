@@ -67,7 +67,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<Resource> findTreeGrid() {
+    public List<Resource> findResourceAll() {
         return resourceMapper.findResourceAll();
     }
 

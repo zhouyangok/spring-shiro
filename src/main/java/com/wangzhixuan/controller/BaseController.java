@@ -1,20 +1,23 @@
 package com.wangzhixuan.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.UserService;
+import com.wangzhixuan.shiro.ShiroUser;
+import com.wangzhixuan.utils.StringEscapeEditor;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.UserService;
-import com.wangzhixuan.shiro.ShiroUser;
-import com.wangzhixuan.utils.StringEscapeEditor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-
+/**
+ * @description：基础 controller
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 public class BaseController {
 
     @Autowired

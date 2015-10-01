@@ -20,10 +20,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @description：用户管理
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
@@ -40,17 +44,17 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
-    public PageInfo dataGrid(UserVo userVo, Date createdatetimeStart, Date createdatetimeEnd, Integer page, Integer rows, String sort, String order) {
+    public PageInfo dataGrid(UserVo userVo, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows);
         Map<String, Object> condition = Maps.newHashMap();
 
-        if(StringUtils.isNoneBlank(userVo.getName())){
+        if (StringUtils.isNoneBlank(userVo.getName())) {
             condition.put("name", userVo.getName());
         }
-        if(userVo.getCreatedateStart() != null){
+        if (userVo.getCreatedateStart() != null) {
             condition.put("startTime", userVo.getCreatedateStart());
         }
-        if(userVo.getCreatedateEnd() != null){
+        if (userVo.getCreatedateEnd() != null) {
             condition.put("endTime", userVo.getCreatedateEnd());
         }
         pageInfo.setCondition(condition);
@@ -104,7 +108,7 @@ public class UserController extends BaseController {
         User u = userService.findUserByLoginName(userVo.getLoginname());
         if (u != null && u.getId() != userVo.getId()) {
             result.setMsg("用户名已存在!");
-            return  result;
+            return result;
         }
         try {
             userService.updateUser(userVo);
@@ -127,7 +131,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public Result editUserPwd(HttpServletRequest request, String oldPwd, String pwd) {
         Result result = new Result();
-        if(! getCurrentUser().getPassword().equals(DigestUtils.md5Hex(oldPwd))){
+        if (!getCurrentUser().getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
             result.setMsg("老密码不正确!");
             return result;
         }

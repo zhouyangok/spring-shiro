@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Description：
- * @author：Wangzhixuan
- * @date：2015年6月30日 下午4:14:41
+ * @description：登录退出
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
  */
 @Controller
 public class LoginController {
@@ -47,11 +47,6 @@ public class LoginController {
         return "/login";
     }
 
-    /**
-     * @description：登录页面
-     * @author：Wangzhixuan
-     * @param：
-     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result loginPost(String username, String password, HttpServletRequest request, Model model) {

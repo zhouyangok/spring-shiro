@@ -1,5 +1,6 @@
-/**@Description：
- * @author：Wangzhixuan 
- * @date：2015年8月22日 上午9:53:41 
+/**
+ * @description：
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
  */
 package com.wangzhixuan.exception;

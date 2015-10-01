@@ -1,15 +1,9 @@
 package com.wangzhixuan.shiro;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.RoleService;
+import com.wangzhixuan.service.UserService;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -18,11 +12,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.service.UserService;
-
-public class ShiroDbRealm extends AuthorizingRealm{
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+/**
+ * @description：shiro权限认证
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
+public class ShiroDbRealm extends AuthorizingRealm {
 
     private static Logger LOGGER = LoggerFactory.getLogger(ShiroDbRealm.class);
 
@@ -41,7 +40,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
         User user = userService.findUserByLoginName(token.getUsername());
         // 账号不存在
-        if(user == null){
+        if (user == null) {
             return null;
         }
         // 账号未启用
@@ -52,7 +51,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
         ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginname(), user.getName(), roleList);
         // 认证缓存信息
         return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
-        
+
     }
 
     /**
@@ -65,7 +64,7 @@ public class ShiroDbRealm extends AuthorizingRealm{
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
         List<Long> roleList = shiroUser.roleList;
 
-        Set <String> urlSet = new HashSet<String>();
+        Set<String> urlSet = new HashSet<String>();
         for (Long roleId : roleList) {
             List<Map<Long, String>> roleResourceList = roleService.findRoleResourceListByRoleId(roleId);
             if (roleResourceList != null) {

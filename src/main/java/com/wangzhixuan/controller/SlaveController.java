@@ -8,7 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+/**
+ * @description：主重库测试
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 @Controller
 @RequestMapping("/slave")
 public class SlaveController extends BaseController {

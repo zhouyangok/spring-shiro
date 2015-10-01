@@ -1,23 +1,21 @@
 package com.wangzhixuan.datasource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.sql.DataSource;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
-
 /**
  * 继承{@link org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource}
  * 配置主从数据源后，根据选择，返回对应的数据源。多个从库的情况下，会平均的分配从库，用于负载均衡。
  *
  * @author tanghd
- *
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 

@@ -60,7 +60,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void deleteRole(Long id) {
+    public void deleteRoleById(Long id) {
         int update = roleMapper.deleteRoleById(id);
         if (update != 1) {
             LOGGER.warn("删除失败，id：{}", id);

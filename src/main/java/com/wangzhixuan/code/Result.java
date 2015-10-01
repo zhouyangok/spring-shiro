@@ -2,9 +2,9 @@ package com.wangzhixuan.code;
 
 import java.io.Serializable;
 /**
- * @Description：操作结果集
- * @author：Wangzhixuan 
- * @date：2015年8月11日 上午10:51:24
+ * @description：操作结果集
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
  */
 public class Result implements Serializable {
 

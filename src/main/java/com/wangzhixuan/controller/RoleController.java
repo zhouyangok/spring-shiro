@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-
+/**
+ * @description：权限管理
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 @Controller
 @RequestMapping("/role")
 public class RoleController extends BaseController {
@@ -76,7 +80,7 @@ public class RoleController extends BaseController {
     public Result delete(Long id) {
         Result result = new Result();
         try {
-            roleService.deleteRole(id);
+            roleService.deleteRoleById(id);
             result.setMsg("删除成功！");
             result.setSuccess(true);
             return result;
