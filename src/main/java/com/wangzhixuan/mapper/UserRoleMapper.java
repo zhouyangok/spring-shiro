@@ -5,7 +5,6 @@ import java.util.List;
 import com.wangzhixuan.model.UserRole;
 
 public interface UserRoleMapper {
-    int deleteByUserId(Long id);
 
     int insert(UserRole userRole);
 
