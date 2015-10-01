@@ -90,10 +90,10 @@
         $.messager.confirm('提示','确定要退出?',function(r){
             if (r){
                 progressLoad();
-                $.post('${path }/admin/logout', function(result) {
+                $.post('${path }/logout', function(result) {
                     if(result.success){
                         progressClose();
-                        window.location.href='${path }/admin/index';
+                        window.location.href='${path }';
                     }
                 }, 'json');
             }

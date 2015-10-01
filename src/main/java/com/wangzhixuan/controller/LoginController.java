@@ -103,9 +103,13 @@ public class LoginController {
      * @param：
      */
     @RequestMapping(value = "/logout")
-    public void logout(HttpServletRequest request) {
+    @ResponseBody
+    public Result logout(HttpServletRequest request) {
         LOGGER.info("登出");
         Subject subject = SecurityUtils.getSubject();
+        Result result = new Result();
         subject.logout();
+        result.setSuccess(true);
+        return result;
     }
 }

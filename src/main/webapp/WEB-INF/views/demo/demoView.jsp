@@ -4,16 +4,16 @@
 <script type="text/javascript">
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
-	<div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
-		<table class="grid">
-			<tr>
-				<td>名称</td>
-				<td>${demo.name}</td>
-			</tr>
-			<tr>
-				<td>备注</td>
-				<td colspan="3">${demo.description}</td>
-			</tr>
-		</table>
-	</div>
+    <div data-options="region:'center',border:false" title="" style="overflow: hidden;padding: 3px;">
+        <table class="grid">
+            <tr>
+                <td>名称</td>
+                <td>${demo.name}</td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td colspan="3">${demo.description}</td>
+            </tr>
+        </table>
+    </div>
 </div>
