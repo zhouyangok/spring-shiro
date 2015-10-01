@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class ResourceServiceImpl implements ResourceService {
 
@@ -30,38 +31,38 @@ public class ResourceServiceImpl implements ResourceService {
 
         List<Resource> resourceFather = null;
 
-        if(currentUser.getLoginname().equals("admin")) {
+        if (currentUser.getLoginname().equals("admin")) {
             resourceFather = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
-        }else{
+        } else {
 
         }
+        if (resourceFather == null) {
+            return null;
+        }
+        for (Resource resourceOne : resourceFather) {
+            Tree treeOne = new Tree();
 
-        if(resourceFather != null) {
-            for (Resource resourceOne : resourceFather) {
-                Tree treeOne = new Tree();
+            treeOne.setId(resourceOne.getId().toString());
+            treeOne.setText(resourceOne.getName());
+            treeOne.setIconCls(resourceOne.getIcon());
+            treeOne.setAttributes(resourceOne.getUrl());
+            List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
-                treeOne.setId(resourceOne.getId().toString());
-                treeOne.setText(resourceOne.getName());
-                treeOne.setIconCls(resourceOne.getIcon());
-                treeOne.setAttributes(resourceOne.getUrl());
-                List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
-
-                if(resourceSon != null) {
-                    List<Tree> tree = Lists.newArrayList();
-                    for (Resource resourceTwo : resourceSon) {
-                        Tree treeTwo = new Tree();
-                        treeTwo.setId(resourceTwo.getId().toString());
-                        treeTwo.setText(resourceTwo.getName());
-                        treeTwo.setIconCls(resourceTwo.getIcon());
-                        treeTwo.setAttributes(resourceTwo.getUrl());
-                        tree.add(treeTwo);
-                    }
-                    treeOne.setChildren(tree);
-                }else{
-                    treeOne.setState("closed");
+            if (resourceSon != null) {
+                List<Tree> tree = Lists.newArrayList();
+                for (Resource resourceTwo : resourceSon) {
+                    Tree treeTwo = new Tree();
+                    treeTwo.setId(resourceTwo.getId().toString());
+                    treeTwo.setText(resourceTwo.getName());
+                    treeTwo.setIconCls(resourceTwo.getIcon());
+                    treeTwo.setAttributes(resourceTwo.getUrl());
+                    tree.add(treeTwo);
                 }
-                trees.add(treeOne);
+                treeOne.setChildren(tree);
+            } else {
+                treeOne.setState("closed");
             }
+            trees.add(treeOne);
         }
         return trees;
     }
@@ -81,37 +82,38 @@ public class ResourceServiceImpl implements ResourceService {
         List<Tree> trees = Lists.newArrayList();
         // 查询所有的一级树
         List<Resource> resources = resourceMapper.findResourceAllBytypeAndPidNull(Config.RESOURCE_MENU);
-        if(resources != null) {
-            for (Resource resourceOne : resources) {
-                Tree treeOne = new Tree();
+        if (resources == null) {
+            return null;
+        }
+        for (Resource resourceOne : resources) {
+            Tree treeOne = new Tree();
 
-                treeOne.setId(resourceOne.getId().toString());
-                treeOne.setText(resourceOne.getName());
-                treeOne.setIconCls(resourceOne.getIcon());
-                treeOne.setAttributes(resourceOne.getUrl());
-                // 查询所有一级树下的菜单
-                List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
+            treeOne.setId(resourceOne.getId().toString());
+            treeOne.setText(resourceOne.getName());
+            treeOne.setIconCls(resourceOne.getIcon());
+            treeOne.setAttributes(resourceOne.getUrl());
+            // 查询所有一级树下的菜单
+            List<Resource> resourceSon = resourceMapper.findResourceAllBytypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
-                if(resourceSon != null) {
-                    List<Tree> tree = Lists.newArrayList();
-                    for (Resource resourceTwo : resourceSon) {
-                        Tree treeTwo = new Tree();
-                        treeTwo.setId(resourceTwo.getId().toString());
-                        treeTwo.setText(resourceTwo.getName());
-                        treeTwo.setIconCls(resourceTwo.getIcon());
-                        treeTwo.setAttributes(resourceTwo.getUrl());
-                        tree.add(treeTwo);
-                    }
-                    treeOne.setChildren(tree);
-                }else{
-                    treeOne.setState("closed");
+            if (resourceSon != null) {
+                List<Tree> tree = Lists.newArrayList();
+                for (Resource resourceTwo : resourceSon) {
+                    Tree treeTwo = new Tree();
+                    treeTwo.setId(resourceTwo.getId().toString());
+                    treeTwo.setText(resourceTwo.getName());
+                    treeTwo.setIconCls(resourceTwo.getIcon());
+                    treeTwo.setAttributes(resourceTwo.getUrl());
+                    tree.add(treeTwo);
                 }
-                trees.add(treeOne);
+                treeOne.setChildren(tree);
+            } else {
+                treeOne.setState("closed");
             }
+            trees.add(treeOne);
         }
         return trees;
     }
-    
+
     @Override
     public List<Tree> findAllTrees() {
         List<Tree> treeOneList = Lists.newArrayList();
@@ -162,7 +164,7 @@ public class ResourceServiceImpl implements ResourceService {
                             treeThree.setAttributes(resourceThree.getUrl());
 
                             treeThreeList.add(treeThree);
-                      }
+                        }
                         treeTwo.setChildren(treeThreeList);
                     }
                     /***************************************************/
@@ -180,9 +182,9 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public void updateResource(Resource resource) {
         int update = resourceMapper.updateResource(resource);
-        if(update != 1){
+        if (update != 1) {
             throw new RuntimeException("更新失败");
-    }
+        }
     }
 
     @Override
@@ -193,7 +195,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public void deleteResourceById(Long id) {
         int delete = resourceMapper.deleteResourceById(id);
-        if(delete != 1){
+        if (delete != 1) {
             throw new RuntimeException("删除失败");
         }
     }

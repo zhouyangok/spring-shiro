@@ -56,7 +56,7 @@ public class LoginController {
         token.setRememberMe(true);
         Result result = new Result();
         try {
-            //调用 com.wangzhixuan.shiro.ShiroDbRealm
+            // 调用 com.wangzhixuan.shiro.shirodbrealm
             user.login(token);
         } catch (UnknownAccountException e) {
             LOGGER.error("账号不存在：{}", e.getMessage());

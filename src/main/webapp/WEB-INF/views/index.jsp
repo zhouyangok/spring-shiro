@@ -10,14 +10,11 @@
     var index_layout;
     var index_tabs;
     var index_tabsMenu;
+
     var layout_west_tree;
+
     var layout_west_tree_url = '';
-/*     var sessionInfo_userId = '${sessionInfo.id}';
-    if (sessionInfo_userId) {//如果没有登录,直接跳转到登录页面
-        layout_west_tree_url = '${path }/resource/tree';
-    }else{
-        window.location.href='${path }/admin/index';
-    } */
+
     layout_west_tree_url = '${path }/resource/tree';
 
     $(function() {
@@ -113,7 +110,7 @@
                     f.submit();
                 }
             } ]
-        });admin
+        });
     }
 
 </script>
@@ -137,13 +134,13 @@
         <div data-options="region:'center'" style="overflow: hidden;">
             <div id="index_tabs" style="overflow: hidden;">
                 <div title="首页" data-options="border:false" style="overflow: hidden;">
-<!--                     <div style="padding:10px 0 10px 10px">
-                        <h2>系统介绍</h2>
-                        <div class="light-info">
-                            <div class="light-tip icon-tip"></div>
-                            <div>JAVA快速开发平台。</div>
-                        </div>
-                    </div> -->
+                    <%--<div style="padding:10px 0 10px 10px">--%>
+                        <%--<h2>系统介绍</h2>--%>
+                        <%--<div class="light-info">--%>
+                            <%--<div class="light-tip icon-tip"></div>--%>
+                            <%--<div>JAVA快速开发平台。</div>--%>
+                        <%--</div>--%>
+                    <%--</div> --%>
                 </div>
             </div>
         </div>
