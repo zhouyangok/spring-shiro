@@ -105,12 +105,13 @@ public class UserController extends BaseController {
     @ResponseBody
     public Result edit(UserVo userVo) {
         Result result = new Result();
-        User u = userService.findUserByLoginName(userVo.getLoginname());
-        if (u != null && u.getId() != userVo.getId()) {
+        User user = userService.findUserByLoginName(userVo.getLoginname());
+        if (user != null && user.getId() != userVo.getId()) {
             result.setMsg("用户名已存在!");
             return result;
         }
         try {
+            userVo.setPassword( DigestUtils.md5Hex(userVo.getPassword()));
             userService.updateUser(userVo);
             result.setSuccess(true);
             result.setMsg("修改成功！");

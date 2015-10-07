@@ -34,60 +34,73 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public List<Tree> findTree(User user) {
         List<Tree> trees = Lists.newArrayList();
-        Set<Long> list = Sets.newHashSet();
-        List<Long> roleIdList = userRoleMapper.findRoleIdListByUserId(user.getId());
-        for (Long i : roleIdList) {
-            List<Long> resourceIdList = roleMapper.findResourceIdListByRoleId(i);
-            for (Long x : resourceIdList) {
-                list.add(x);
-            }
-        }
-
-        List<Resource> resourceFather = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
-        if (resourceFather == null) {
-            return null;
-        }
-
-        for (Resource resourceOne : resourceFather) {
-            Tree treeOne = new Tree();
-
-            treeOne.setId(resourceOne.getId());
-            treeOne.setText(resourceOne.getName());
-            treeOne.setIconCls(resourceOne.getIcon());
-            treeOne.setAttributes(resourceOne.getUrl());
-            List<Resource> resourceSon = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
-
-            if (resourceSon != null) {
-                List<Tree> tree = Lists.newArrayList();
-                for (Resource resourceTwo : resourceSon) {
-                    Tree treeTwo = new Tree();
-                    treeTwo.setId(resourceTwo.getId());
-                    treeTwo.setText(resourceTwo.getName());
-                    treeTwo.setIconCls(resourceTwo.getIcon());
-                    treeTwo.setAttributes(resourceTwo.getUrl());
-                    tree.add(treeTwo);
-                }
-                treeOne.setChildren(tree);
-            } else {
-                treeOne.setState("closed");
-            }
-            trees.add(treeOne);
-        }
-
+        // 超级管理
         if (user.getLoginname().equals("admin")) {
+            List<Resource> resourceFather = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
+            if (resourceFather == null) {
+                return null;
+            }
+
+            for (Resource resourceOne : resourceFather) {
+                Tree treeOne = new Tree();
+
+                treeOne.setId(resourceOne.getId());
+                treeOne.setText(resourceOne.getName());
+                treeOne.setIconCls(resourceOne.getIcon());
+                treeOne.setAttributes(resourceOne.getUrl());
+                List<Resource> resourceSon = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
+
+                if (resourceSon != null) {
+                    List<Tree> tree = Lists.newArrayList();
+                    for (Resource resourceTwo : resourceSon) {
+                        Tree treeTwo = new Tree();
+                        treeTwo.setId(resourceTwo.getId());
+                        treeTwo.setText(resourceTwo.getName());
+                        treeTwo.setIconCls(resourceTwo.getIcon());
+                        treeTwo.setAttributes(resourceTwo.getUrl());
+                        tree.add(treeTwo);
+                    }
+                    treeOne.setChildren(tree);
+                } else {
+                    treeOne.setState("closed");
+                }
+                trees.add(treeOne);
+            }
             return trees;
         }
 
-        List<Tree> treeList = Lists.newArrayList();
-
-        for (Long y : list) {
-            for (Tree tree : trees) {
-                if (y == tree.getId()) {
-                    treeList.add(tree);
-                }
+        // 普通用户
+        Set<Resource> resourceIdList = Sets.newHashSet();
+        List<Long> roleIdList = userRoleMapper.findRoleIdListByUserId(user.getId());
+        for (Long i : roleIdList) {
+            List<Resource> resourceIdLists = roleMapper.findResourceIdListByRoleIdAndType(i);
+            for (Resource resource: resourceIdLists) {
+                resourceIdList.add(resource);
             }
         }
-        return treeList;
+        for (Resource resource : resourceIdList) {
+                if (resource != null && resource.getPid() == null) {
+                    Tree treeOne = new Tree();
+                    treeOne.setId(resource.getId());
+                    treeOne.setText(resource.getName());
+                    treeOne.setIconCls(resource.getIcon());
+                    treeOne.setAttributes(resource.getUrl());
+                    List<Tree> tree = Lists.newArrayList();
+                    for (Resource resourceTwo : resourceIdList) {
+                        if (resourceTwo.getPid() != null && resource.getId().longValue() == resourceTwo.getPid().longValue()) {
+                            Tree treeTwo = new Tree();
+                            treeTwo.setId(resourceTwo.getId());
+                            treeTwo.setText(resourceTwo.getName());
+                            treeTwo.setIconCls(resourceTwo.getIcon());
+                            treeTwo.setAttributes(resourceTwo.getUrl());
+                            tree.add(treeTwo);
+                        }
+                    }
+                    treeOne.setChildren(tree);
+                    trees.add(treeOne);
+                }
+        }
+        return trees;
     }
 
     @Override
@@ -221,6 +234,12 @@ public class ResourceServiceImpl implements ResourceService {
         if (delete != 1) {
             throw new RuntimeException("删除失败");
         }
+    }
+
+    public static void main(String[] args) {
+        Long abc = 126L;
+        Long def = 126L;
+        System.out.println(abc == def);
     }
 
 }
