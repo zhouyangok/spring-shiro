@@ -11,7 +11,6 @@
     var index_tabs;
     var index_tabsMenu;
     var layout_west_tree;
-    var layout_west_tree_url = '${path }/resource/tree';
 
     $(function() {
         index_layout = $('#index_layout').layout({
@@ -45,7 +44,7 @@
         });
 
         layout_west_tree = $('#layout_west_tree').tree({
-            url : layout_west_tree_url,
+            url : '${path }/resource/tree',
             parentField : 'pid',
             lines : true,
             onClick : function(node) {
