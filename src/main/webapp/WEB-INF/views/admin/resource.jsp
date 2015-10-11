@@ -70,15 +70,19 @@
             }, {
                 field : 'action',
                 title : '操作',
-                width : 80,
+                width : 130,
                 formatter : function(value, row, index) {
-                    var str = '&nbsp;';
-                    str += $.formatString('<a href="javascript:void(0)" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
+                    var str = '';
+                    str += $.formatString('<a href="javascript:void(0)" class="resource-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
                     str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                    str += $.formatString('<a href="javascript:void(0)" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
+                    str += $.formatString('<a href="javascript:void(0)" class="resource-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
                     return str;
                 }
             } ] ],
+            onLoadSuccess:function(data){
+                $('.resource-easyui-linkbutton-edit').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
+                $('.resource-easyui-linkbutton-del').linkbutton({text:'删除',plain:true,iconCls:'icon-del'});
+            },
             toolbar : '#toolbar'
         });
     });
@@ -95,7 +99,7 @@
                 height : 350,
                 href : '${path }/resource/editPage?id=' + node.id,
                 buttons : [ {
-                    text : '编辑',
+                    text : '确定',
                     handler : function() {
                         parent.$.modalDialog.openner_treeGrid = treeGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
                         var f = parent.$.modalDialog.handler.find('#resourceEditForm');
