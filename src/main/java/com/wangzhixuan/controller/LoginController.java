@@ -1,7 +1,6 @@
 package com.wangzhixuan.controller;
 
 import com.wangzhixuan.code.Result;
-
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
