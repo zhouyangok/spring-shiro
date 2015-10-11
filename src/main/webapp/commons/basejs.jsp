@@ -6,12 +6,12 @@
     <!-- [my97日期时间控件] -->
     <script type="text/javascript" src="${staticPath }/static/My97DatePicker/WdatePicker.js" charset="utf-8"></script>
     <!-- [jQuery] -->
-    <script type="text/javascript" src="${staticPath }/static/easyui1.4.2/jquery.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="${staticPath }/static/easyui/jquery.min.js" charset="utf-8"></script>
     <!-- [EasyUI] -->
-    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui1.4.2/themes/gray/easyui.css" />
-    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui1.4.2/themes/icon.css" />
-    <script type="text/javascript" src="${staticPath }/static/easyui1.4.2/jquery.easyui.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="${staticPath }/static/easyui1.4.2/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
+    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui/themes/gray/easyui.css" />
+    <link id="easyuiTheme" rel="stylesheet" type="text/css" href="${staticPath }/static/easyui/themes/icon.css" />
+    <script type="text/javascript" src="${staticPath }/static/easyui/jquery.easyui.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="${staticPath }/static/easyui/locale/easyui-lang-zh_CN.js" charset="utf-8"></script>
     <!-- [扩展JS] -->
     <script type="text/javascript" src="${staticPath }/static/extJs.js" charset="utf-8"></script>
     <!-- [扩展样式] -->

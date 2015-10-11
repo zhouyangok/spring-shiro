@@ -19,13 +19,18 @@ public class SlaveController extends BaseController {
 
     private static Logger LOGGER = LoggerFactory.getLogger(SlaveController.class);
 
-    @Autowired
-    private SlaveService slaveService;
+//    @Autowired
+//    private SlaveService slaveService;
+//
+//    @RequestMapping(value = "/test", method = RequestMethod.GET)
+//    public String test(Model model) {
+//        Integer count = slaveService.count();
+//        model.addAttribute("count", count);
+//        return "admin/test";
+//    }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test(Model model) {
-        Integer count = slaveService.count();
-        model.addAttribute("count", count);
         return "admin/test";
     }
 

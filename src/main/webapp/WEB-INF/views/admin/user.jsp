@@ -9,6 +9,7 @@
 <title>用户管理</title>
     <script type="text/javascript">
     /* easyui1.4.2 formatter处理json内嵌数据undefined */
+/*
     (function($){
         var renderEmptyRow = $.fn.datagrid.defaults.view.renderEmptyRow;
         $.extend($.fn.datagrid.defaults.view, {
@@ -30,6 +31,7 @@
             }
         })
     })(jQuery);
+*/
 
     var dataGrid;
     var organizationTree;
