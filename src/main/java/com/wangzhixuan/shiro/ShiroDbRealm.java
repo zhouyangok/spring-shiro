@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.RoleService;
 import com.wangzhixuan.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -71,7 +72,10 @@ public class ShiroDbRealm extends AuthorizingRealm {
             List<Map<Long, String>> roleResourceList = roleService.findRoleResourceListByRoleId(roleId);
             if (roleResourceList != null) {
                 for (Map<Long, String> map : roleResourceList) {
-                    urlSet.add(map.get("url"));
+                    if (StringUtils.isNoneBlank(map.get("url"))) {
+                        urlSet.add(map.get("url"));
+                    }
+
                 }
             }
         }

@@ -123,7 +123,7 @@
                 <span class="header"></span>
             </div>
         </div>
-        <div data-options="region:'west',split:true" title="主导航" style="width: 160px; overflow: hidden;overflow-y:auto; padding:0px">
+        <div data-options="region:'west',split:true" title="菜单" style="width: 160px; overflow: hidden;overflow-y:auto; padding:0px">
             <div class="well well-small" style="padding: 5px 5px 5px 5px;">
                 <ul id="layout_west_tree"></ul>
             </div>
@@ -134,7 +134,7 @@
                 </div>
             </div>
         </div>
-        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2013 power by <a href="http://www.iqianjin.com">爱钱进</a></div>
+        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2013 power by <a href="http://www.dreamlu.net/">如梦技术</a></div>
     </div>
 
     <!--[if lte IE 7]>

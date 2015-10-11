@@ -89,7 +89,7 @@
     LEFT JOIN role_resource e ON r.id = e.role_id
     LEFT JOIN resource s ON e.resource_id = s.id
     WHERE
-        r.id = { id }
+        r.id = #{id}
   </select>
   
 

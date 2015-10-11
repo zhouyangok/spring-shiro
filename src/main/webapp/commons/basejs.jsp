@@ -15,4 +15,4 @@
     <!-- [扩展JS] -->
     <script type="text/javascript" src="${staticPath }/static/extJs.js" charset="utf-8"></script>
     <!-- [扩展样式] -->
-    <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/wangzhixuan.css" />
+    <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/dreamlu.css" />
