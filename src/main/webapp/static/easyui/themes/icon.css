@@ -14,6 +14,10 @@
 	background:url('icons/home.png') no-repeat center center;
 }
 
+.icon-list{
+	background:url('icons/list.png') no-repeat center center;
+}
+
 .icon-company{
 	background:url('icons/company.png') no-repeat center center;
 }

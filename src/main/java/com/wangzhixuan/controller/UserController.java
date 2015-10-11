@@ -51,6 +51,9 @@ public class UserController extends BaseController {
         if (StringUtils.isNoneBlank(userVo.getName())) {
             condition.put("name", userVo.getName());
         }
+        if (userVo.getOrganizationId() != null) {
+            condition.put("organizationId", userVo.getOrganizationId());
+        }
         if (userVo.getCreatedateStart() != null) {
             condition.put("startTime", userVo.getCreatedateStart());
         }
