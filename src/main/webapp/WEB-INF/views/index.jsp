@@ -11,8 +11,7 @@
     var index_tabs;
     var index_tabsMenu;
     var layout_west_tree;
-    var layout_west_tree_url = '';
-    layout_west_tree_url = '${path }/resource/tree';
+    var layout_west_tree_url = '${path }/resource/tree';
 
     $(function() {
         index_layout = $('#index_layout').layout({
@@ -134,7 +133,7 @@
                 </div>
             </div>
         </div>
-        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2013 power by <a href="http://www.dreamlu.net/">如梦技术</a></div>
+        <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2015 power by <a href="http://www.dreamlu.net/" target="_blank">如梦技术</a></div>
     </div>
 
     <!--[if lte IE 7]>
