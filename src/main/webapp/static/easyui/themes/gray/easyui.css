@@ -1316,7 +1316,7 @@
   word-wrap: normal;
   overflow: hidden;
   height: 26px;
-  line-height: 26px;
+  line-height: 28px;
   font-size: 12px;
 }
 .datagrid-header .datagrid-cell {
