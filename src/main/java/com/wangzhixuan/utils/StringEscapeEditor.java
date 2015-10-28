@@ -1,9 +1,9 @@
 package com.wangzhixuan.utils;
 
-import java.beans.PropertyEditorSupport;
-
 import org.springframework.web.util.HtmlUtils;
 import org.springframework.web.util.JavaScriptUtils;
+
+import java.beans.PropertyEditorSupport;
 
 public class StringEscapeEditor extends PropertyEditorSupport {
 
@@ -11,11 +11,9 @@ public class StringEscapeEditor extends PropertyEditorSupport {
     private boolean escapeJavaScript;// 编码javascript
 
     public StringEscapeEditor() {
-        super();
     }
 
     public StringEscapeEditor(boolean escapeHTML, boolean escapeJavaScript) {
-        super();
         this.escapeHTML = escapeHTML;
         this.escapeJavaScript = escapeJavaScript;
     }

@@ -29,16 +29,34 @@ public class LoginController {
 
     protected static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
+    /**
+     * 首页
+     *
+     * @return
+     */
     @RequestMapping(value = "/")
     public String index() {
         return "redirect:/index";
     }
 
+    /**
+     * 首页
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/index")
     public String index(Model model) {
         return "/index";
     }
 
+    /**
+     * GET 登录
+     *
+     * @param model
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, HttpServletRequest request) {
         LOGGER.info("GET请求登录");
@@ -48,6 +66,15 @@ public class LoginController {
         return "/login";
     }
 
+    /**
+     * POST 登录 shiro 写法
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @param request
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
@@ -67,19 +94,19 @@ public class LoginController {
         try {
             user.login(token);
         } catch (UnknownAccountException e) {
-            LOGGER.error("账号不存在：{}", e.getMessage());
+            LOGGER.error("账号不存在：{}", e);
             result.setMsg("账号不存在");
             return result;
         } catch (DisabledAccountException e) {
-            LOGGER.error("账号未启用：{}", e.getMessage());
+            LOGGER.error("账号未启用：{}", e);
             result.setMsg("账号未启用");
             return result;
         } catch (IncorrectCredentialsException e) {
-            LOGGER.error("密码错误：{}", e.getMessage());
+            LOGGER.error("密码错误：{}", e);
             result.setMsg("密码错误");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("未知错误,请联系管理员：{}", e.getMessage());
+            LOGGER.error("未知错误,请联系管理员：{}", e);
             result.setMsg("未知错误,请联系管理员");
             return result;
         }
@@ -88,9 +115,10 @@ public class LoginController {
     }
 
     /**
-     * @description：未授权
-     * @author：Wangzhixuan
-     * @param：
+     * 未授权
+     *
+     * @param model
+     * @return
      */
     @RequestMapping(value = "/unauth")
     public String unauth(Model model) {
@@ -101,9 +129,10 @@ public class LoginController {
     }
 
     /**
-     * @description：
-     * @author：Wangzhixuan
-     * @param：
+     * 退出
+     *
+     * @param request
+     * @return
      */
     @RequestMapping(value = "/logout")
     @ResponseBody

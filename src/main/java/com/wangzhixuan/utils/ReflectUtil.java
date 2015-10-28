@@ -2,7 +2,7 @@
  * Copyright  2013-6-17 第七大道-技术支持部-网站开发组
  * 自主运营平台WEB 下午5:58:33
  * 版本号： v1.0
-*/
+ */
 
 package com.wangzhixuan.utils;
 
@@ -20,10 +20,10 @@ import java.lang.reflect.Method;
 public class ReflectUtil {
 
     /**
-     * 
      * <li>创建时间： 2013-6-17 下午6:01:41</li>
      * <li>创建人：amos.zhou </li>
      * <li>方法描述 : 寻找方法名唯 一的方法</li>
+     *
      * @param clazz
      * @param name
      * @return

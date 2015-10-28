@@ -1,11 +1,11 @@
 package com.wangzhixuan.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wangzhixuan.model.Role;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.wangzhixuan.model.Role;
 
 public class UserVo implements Serializable {
     private Long id;
@@ -129,7 +129,7 @@ public class UserVo implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
     }
-    
+
     public List<Role> getRolesList() {
         return rolesList;
     }

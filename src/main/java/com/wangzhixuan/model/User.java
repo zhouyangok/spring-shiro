@@ -121,23 +121,18 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", loginname=").append(loginname);
-        sb.append(", name=").append(name);
-        sb.append(", password=").append(password);
-        sb.append(", sex=").append(sex);
-        sb.append(", age=").append(age);
-        sb.append(", usertype=").append(usertype);
-        sb.append(", status=").append(status);
-        sb.append(", organizationId=").append(organizationId);
-        sb.append(", createdate=").append(createdate);
-        sb.append(", phone=").append(phone);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "User{" +
+                "id=" + id +
+                ", loginname='" + loginname + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", sex=" + sex +
+                ", age=" + age +
+                ", usertype=" + usertype +
+                ", status=" + status +
+                ", organizationId=" + organizationId +
+                ", createdate=" + createdate +
+                ", phone='" + phone + '\'' +
+                '}';
     }
 }

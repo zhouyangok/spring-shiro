@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wangzhixuan.mapper.RoleResourceMapper" >
-  <resultMap id="BaseResultMap" type="com.wangzhixuan.model.RoleResource" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="role_id" property="roleId" jdbcType="BIGINT" />
-    <result column="resource_id" property="resourceId" jdbcType="BIGINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.wangzhixuan.mapper.RoleResourceMapper">
+    <resultMap id="BaseResultMap" type="com.wangzhixuan.model.RoleResource">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="role_id" property="roleId" jdbcType="BIGINT"/>
+        <result column="resource_id" property="resourceId" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, role_id, resource_id
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from role_resource
-    where id = #{id,jdbcType=BIGINT}
-  </select>
 
-  <select id="findRoleResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long" >
+    <select id="findRoleResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long">
     SELECT
         e.id AS id
     FROM
@@ -25,33 +19,19 @@
     WHERE
         r.id = #{id}
   </select>
-  
-  <delete id="deleteById" parameterType="java.lang.Long" >
+
+    <delete id="deleteById" parameterType="java.lang.Long">
     delete from role_resource
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  
-  <insert id="insert" parameterType="com.wangzhixuan.model.RoleResource" >
-    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into role_resource (role_id, resource_id)
-    values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
-  </insert>
 
-
-  <update id="updateByPrimaryKeySelective" parameterType="com.wangzhixuan.model.RoleResource" >
-    update role_resource
-    <set >
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=BIGINT},
-      </if>
-      <if test="resourceId != null" >
-        resource_id = #{resourceId,jdbcType=BIGINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+    <insert id="insert" parameterType="com.wangzhixuan.model.RoleResource">
+        <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into role_resource (role_id, resource_id)
+        values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
+    </insert>
 
 
 </mapper>

@@ -31,9 +31,9 @@ public class ResourceController extends BaseController {
     private ResourceService resourceService;
 
     /**
+     * 菜单树
+     *
      * @return
-     * @Description：菜单树
-     * @author：Wangzhixuan
      */
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
@@ -43,11 +43,21 @@ public class ResourceController extends BaseController {
         return tree;
     }
 
+    /**
+     * 资源管理页
+     *
+     * @return
+     */
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String manager() {
         return "admin/resource";
     }
 
+    /**
+     * 资源管理列表
+     *
+     * @return
+     */
     @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
     @ResponseBody
     public List<Resource> treeGrid() {
@@ -55,11 +65,22 @@ public class ResourceController extends BaseController {
         return treeGrid;
     }
 
+    /**
+     * 添加资源页
+     *
+     * @return
+     */
     @RequestMapping("/addPage")
     public String addPage() {
         return "/admin/resourceAdd";
     }
 
+    /**
+     * 添加资源
+     *
+     * @param resource
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public Result add(Resource resource) {
@@ -70,12 +91,17 @@ public class ResourceController extends BaseController {
             result.setMsg("添加成功！");
             return result;
         } catch (RuntimeException e) {
-            logger.error("添加资源失败：{}", e.getMessage());
+            logger.error("添加资源失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
     }
 
+    /**
+     * 二级资源树
+     *
+     * @return
+     */
     @RequestMapping("/allTree")
     @ResponseBody
     public List<Tree> allTree() {
@@ -83,9 +109,9 @@ public class ResourceController extends BaseController {
     }
 
     /**
+     * 三级资源树
+     *
      * @return
-     * @Description：资源树
-     * @author：Wangzhixuan
      */
     @RequestMapping(value = "/allTrees", method = RequestMethod.POST)
     @ResponseBody
@@ -93,6 +119,13 @@ public class ResourceController extends BaseController {
         return resourceService.findAllTrees();
     }
 
+    /**
+     * 编辑资源页
+     *
+     * @param request
+     * @param id
+     * @return
+     */
     @RequestMapping("/editPage")
     public String editPage(HttpServletRequest request, Long id) {
         Resource resource = resourceService.findResourceById(id);
@@ -100,6 +133,12 @@ public class ResourceController extends BaseController {
         return "/admin/resourceEdit";
     }
 
+    /**
+     * 编辑资源
+     *
+     * @param resource
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public Result edit(Resource resource) {
@@ -110,12 +149,18 @@ public class ResourceController extends BaseController {
             result.setMsg("编辑成功！");
             return result;
         } catch (RuntimeException e) {
-            logger.error("编辑资源失败：{}", e.getMessage());
+            logger.error("编辑资源失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
     }
 
+    /**
+     * 删除资源
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping("/delete")
     @ResponseBody
     public Result delete(Long id) {
@@ -126,7 +171,7 @@ public class ResourceController extends BaseController {
             result.setSuccess(true);
             return result;
         } catch (RuntimeException e) {
-            logger.error("删除资源失败：{}", e.getMessage());
+            logger.error("删除资源失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }

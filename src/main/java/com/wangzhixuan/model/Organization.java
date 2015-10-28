@@ -1,10 +1,10 @@
 package com.wangzhixuan.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
+import java.util.Date;
 
 public class Organization implements Serializable {
     private Long id;
@@ -93,20 +93,15 @@ public class Organization implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", address=").append(address);
-        sb.append(", code=").append(code);
-        sb.append(", icon=").append(icon);
-        sb.append(", pid=").append(pid);
-        sb.append(", seq=").append(seq);
-        sb.append(", createdate=").append(createdate);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Organization{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", code='" + code + '\'' +
+                ", icon='" + icon + '\'' +
+                ", pid=" + pid +
+                ", seq=" + seq +
+                ", createdate=" + createdate +
+                '}';
     }
 }

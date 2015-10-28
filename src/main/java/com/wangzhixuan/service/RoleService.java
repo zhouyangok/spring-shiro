@@ -1,11 +1,12 @@
 package com.wangzhixuan.service;
 
-import java.util.List;
-import java.util.Map;
-
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.utils.PageInfo;
 import com.wangzhixuan.vo.Tree;
+
+import java.util.List;
+import java.util.Map;
+
 /**
  * @description：权限管理
  * @author：zhixuan.wang
@@ -14,30 +15,35 @@ import com.wangzhixuan.vo.Tree;
 public interface RoleService {
     /**
      * 查询权限列表
+     *
      * @param pageInfo
      */
     void findDataGrid(PageInfo pageInfo);
 
     /**
      * 查询权限树
+     *
      * @return
      */
     List<Tree> findTree();
 
     /**
      * 添加权限
+     *
      * @param role
      */
     void addRole(Role role);
 
     /**
      * 根据id删除权限
+     *
      * @param id
      */
     void deleteRoleById(Long id);
 
     /**
      * 根据id查询权限
+     *
      * @param id
      * @return
      */
@@ -45,12 +51,14 @@ public interface RoleService {
 
     /**
      * 更新权限
+     *
      * @param role
      */
     void updateRole(Role role);
 
     /**
      * 根据权限id查询资源集合
+     *
      * @param id
      * @return
      */
@@ -58,6 +66,7 @@ public interface RoleService {
 
     /**
      * 更新权限和资源的关联关系
+     *
      * @param id
      * @param resourceIds
      */
@@ -65,6 +74,7 @@ public interface RoleService {
 
     /**
      * 根据用户查询id查询权限集合
+     *
      * @param userId
      * @return
      */
@@ -72,6 +82,7 @@ public interface RoleService {
 
     /**
      * 根据权限查询id查询资源路径集合
+     *
      * @param roleId
      * @return
      */

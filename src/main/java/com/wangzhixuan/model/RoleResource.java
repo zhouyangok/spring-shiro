@@ -37,15 +37,10 @@ public class RoleResource implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", roleId=").append(roleId);
-        sb.append(", resourceId=").append(resourceId);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "RoleResource{" +
+                "id=" + id +
+                ", roleId=" + roleId +
+                ", resourceId=" + resourceId +
+                '}';
     }
 }

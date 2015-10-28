@@ -1,9 +1,9 @@
 package com.wangzhixuan.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 import java.util.Map;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @description：分页实体类 (结合jqery easyui)
@@ -36,40 +36,40 @@ public class PageInfo {
     //构造方法
     public PageInfo(int nowpage, int pagesize) {
         //计算当前页  
-        if(nowpage < 0){  
-            this.nowpage = 1;  
-        }else{  
-        //当前页  
-        this.nowpage = nowpage;  
-        }  
+        if (nowpage < 0) {
+            this.nowpage = 1;
+        } else {
+            //当前页
+            this.nowpage = nowpage;
+        }
         //记录每页显示的记录数  
-        if(pagesize < 0){  
-            this.pagesize = PAGESIZE;  
-        }else{  
-            this.pagesize = pagesize;  
-        }  
+        if (pagesize < 0) {
+            this.pagesize = PAGESIZE;
+        } else {
+            this.pagesize = pagesize;
+        }
         //计算开始的记录和结束的记录  
-        this.from = (this.nowpage - 1) * this.pagesize;  
-        this.size = this.pagesize;  
+        this.from = (this.nowpage - 1) * this.pagesize;
+        this.size = this.pagesize;
     }
-    
+
     // 构造方法
     public PageInfo(int nowpage, int pagesize, String sort, String order) {
         // 计算当前页  
-        if(nowpage < 0){  
+        if (nowpage < 0) {
             this.nowpage = 1;
-        }else{  
-        // 当前页  
-        this.nowpage = nowpage;
-        }  
+        } else {
+            // 当前页
+            this.nowpage = nowpage;
+        }
         // 记录每页显示的记录数  
-        if(pagesize < 0){  
+        if (pagesize < 0) {
             this.pagesize = PAGESIZE;
-        }else{  
+        } else {
             this.pagesize = pagesize;
-        }  
+        }
         // 计算开始的记录和结束的记录  
-        this.from = (this.nowpage - 1) * this.pagesize;  
+        this.from = (this.nowpage - 1) * this.pagesize;
         this.size = this.pagesize;
         // 排序字段，正序还是反序
         this.sort = sort;

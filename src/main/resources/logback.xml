@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <jmxConfigurator />
+    <jmxConfigurator/>
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder charset="UTF-8">
@@ -19,12 +19,12 @@
     </appender>
 
     <!-- project default level -->
-    <logger name="com.wangzhixuan" level="DEBUG" />
+    <logger name="com.wangzhixuan" level="DEBUG"/>
 
     <!-- root -->
     <root level="DEBUG">
-        <appender-ref ref="console" />
-        <appender-ref ref="rollingFile" />
+        <appender-ref ref="console"/>
+        <appender-ref ref="rollingFile"/>
     </root>
 
     <!-- 下面配置一些第三方包的日志过滤级别，用于避免刷屏 -->

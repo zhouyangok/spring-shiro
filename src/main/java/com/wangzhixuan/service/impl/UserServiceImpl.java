@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
         try {
             PropertyUtils.copyProperties(user, userVo);
         } catch (Exception e) {
-            LOGGER.error("类转换异常：{}", e.getMessage());
+            LOGGER.error("类转换异常：{}", e);
             throw new RuntimeException("类型转换异常：{}", e);
         }
         userMapper.updateUser(user);

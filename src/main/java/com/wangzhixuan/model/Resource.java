@@ -111,22 +111,17 @@ public class Resource implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", url=").append(url);
-        sb.append(", description=").append(description);
-        sb.append(", icon=").append(icon);
-        sb.append(", pid=").append(pid);
-        sb.append(", seq=").append(seq);
-        sb.append(", status=").append(status);
-        sb.append(", resourcetype=").append(resourcetype);
-        sb.append(", createdate=").append(createdate);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Resource{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", icon='" + icon + '\'' +
+                ", pid=" + pid +
+                ", seq=" + seq +
+                ", status=" + status +
+                ", resourcetype=" + resourcetype +
+                ", createdate=" + createdate +
+                '}';
     }
 }

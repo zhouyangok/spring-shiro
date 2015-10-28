@@ -37,11 +37,26 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户管理页
+     *
+     * @return
+     */
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String manager() {
         return "/admin/user";
     }
 
+    /**
+     * 用户管理列表
+     *
+     * @param userVo
+     * @param page
+     * @param rows
+     * @param sort
+     * @param order
+     * @return
+     */
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
     public PageInfo dataGrid(UserVo userVo, Integer page, Integer rows, String sort, String order) {
@@ -65,11 +80,22 @@ public class UserController extends BaseController {
         return pageInfo;
     }
 
+    /**
+     * 添加用户页
+     *
+     * @return
+     */
     @RequestMapping(value = "/addPage", method = RequestMethod.GET)
     public String addPage() {
         return "/admin/userAdd";
     }
 
+    /**
+     * 添加用户
+     *
+     * @param userVo
+     * @return
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Result add(UserVo userVo) {
@@ -85,12 +111,19 @@ public class UserController extends BaseController {
             result.setMsg("添加成功");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("添加用户失败：{}", e.getMessage());
+            LOGGER.error("添加用户失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
     }
 
+    /**
+     * 编辑用户页
+     *
+     * @param id
+     * @param model
+     * @return
+     */
     @RequestMapping("/editPage")
     public String editPage(Long id, Model model) {
         UserVo userVo = userService.findUserVoById(id);
@@ -104,6 +137,12 @@ public class UserController extends BaseController {
         return "/admin/userEdit";
     }
 
+    /**
+     * 编辑用户
+     *
+     * @param userVo
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public Result edit(UserVo userVo) {
@@ -114,23 +153,36 @@ public class UserController extends BaseController {
             return result;
         }
         try {
-            userVo.setPassword( DigestUtils.md5Hex(userVo.getPassword()));
+            userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
             userService.updateUser(userVo);
             result.setSuccess(true);
             result.setMsg("修改成功！");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("修改用户失败：{}", e.getMessage());
+            LOGGER.error("修改用户失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
     }
 
+    /**
+     * 修改密码页
+     *
+     * @return
+     */
     @RequestMapping(value = "/editPwdPage", method = RequestMethod.GET)
     public String editPwdPage() {
         return "/admin/userEditPwd";
     }
 
+    /**
+     * 修改密码
+     *
+     * @param request
+     * @param oldPwd
+     * @param pwd
+     * @return
+     */
     @RequestMapping("/editUserPwd")
     @ResponseBody
     public Result editUserPwd(HttpServletRequest request, String oldPwd, String pwd) {
@@ -146,12 +198,18 @@ public class UserController extends BaseController {
             result.setMsg("密码修改成功！");
             return result;
         } catch (Exception e) {
-            LOGGER.error("修改密码失败：{}", e.getMessage());
+            LOGGER.error("修改密码失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
     }
 
+    /**
+     * 删除用户
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping("/delete")
     @ResponseBody
     public Result delete(Long id) {
@@ -162,7 +220,7 @@ public class UserController extends BaseController {
             result.setSuccess(true);
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("删除用户失败：{}", e.getMessage());
+            LOGGER.error("删除用户失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }

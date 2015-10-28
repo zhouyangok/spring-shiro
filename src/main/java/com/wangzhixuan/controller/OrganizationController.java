@@ -29,11 +29,21 @@ public class OrganizationController extends BaseController {
     @Autowired
     private OrganizationService organizationService;
 
+    /**
+     * 部门管理主页
+     *
+     * @return
+     */
     @RequestMapping("/manager")
     public String manager() {
         return "/admin/organization";
     }
 
+    /**
+     * 部门资源树
+     *
+     * @return
+     */
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
     public List<Tree> tree() {
@@ -41,6 +51,11 @@ public class OrganizationController extends BaseController {
         return trees;
     }
 
+    /**
+     * 部门列表
+     *
+     * @return
+     */
     @RequestMapping("/treeGrid")
     @ResponseBody
     public List<Organization> treeGrid() {
@@ -48,12 +63,22 @@ public class OrganizationController extends BaseController {
         return treeGrid;
     }
 
-
+    /**
+     * 添加部门页
+     *
+     * @return
+     */
     @RequestMapping("/addPage")
     public String addPage() {
         return "/admin/organizationAdd";
     }
 
+    /**
+     * 添加部门
+     *
+     * @param organization
+     * @return
+     */
     @RequestMapping("/add")
     @ResponseBody
     public Result add(Organization organization) {
@@ -64,12 +89,19 @@ public class OrganizationController extends BaseController {
             result.setMsg("添加成功！");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.info("添加部门失败：{}", e.getMessage());
+            LOGGER.info("添加部门失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
     }
 
+    /**
+     * 编辑部门页
+     *
+     * @param request
+     * @param id
+     * @return
+     */
     @RequestMapping("/editPage")
     public String editPage(HttpServletRequest request, Long id) {
         Organization organization = organizationService.findOrganizationById(id);
@@ -77,6 +109,12 @@ public class OrganizationController extends BaseController {
         return "/admin/organizationEdit";
     }
 
+    /**
+     * 编辑部门
+     *
+     * @param organization
+     * @return
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public Result edit(Organization organization) {
@@ -87,12 +125,18 @@ public class OrganizationController extends BaseController {
             result.setMsg("编辑成功！");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.info("编辑部门失败：{}", e.getMessage());
+            LOGGER.info("编辑部门失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
     }
 
+    /**
+     * 删除部门
+     *
+     * @param id
+     * @return
+     */
     @RequestMapping("/delete")
     @ResponseBody
     public Result delete(Long id) {
@@ -103,8 +147,8 @@ public class OrganizationController extends BaseController {
             result.setSuccess(true);
             return result;
         } catch (RuntimeException e) {
+            LOGGER.info("删除部门失败：{}", e);
             result.setMsg(e.getMessage());
-            LOGGER.info("删除部门失败：{}", e.getMessage());
             return result;
         }
     }

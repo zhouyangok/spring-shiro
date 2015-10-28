@@ -1,4 +1,5 @@
 package com.wangzhixuan.utils;
+
 /**
  * @description：系统参数
  * @author：Wangzhixuan
@@ -8,8 +9,4 @@ public interface Config {
 
     Integer RESOURCE_MENU = 0; // 菜单
     Integer RESOURCE_BUTTON = 1; // 按钮
-
-    Integer STATUS_OFF = 0;
-    Integer STATUS_NO = 1;
-
 }

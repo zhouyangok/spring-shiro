@@ -57,17 +57,12 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", name=").append(name);
-        sb.append(", seq=").append(seq);
-        sb.append(", description=").append(description);
-        sb.append(", status=").append(status);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", seq=" + seq +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
