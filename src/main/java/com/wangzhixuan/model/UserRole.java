@@ -2,14 +2,20 @@ package com.wangzhixuan.model;
 
 import java.io.Serializable;
 
+/**
+ * @description：用户角色关联
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 public class UserRole implements Serializable {
+
+    private static final long serialVersionUID = -8332992884983317378L;
+
     private Long id;
 
     private Long userId;
 
     private Long roleId;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

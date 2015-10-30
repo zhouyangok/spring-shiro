@@ -6,7 +6,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @description：部门
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 public class Organization implements Serializable {
+
+    private static final long serialVersionUID = 1282186495210887307L;
+
     private Long id;
 
     private String name;
@@ -24,8 +32,6 @@ public class Organization implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH-mm-ss")
     private Date createdate;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

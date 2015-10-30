@@ -1,11 +1,19 @@
 package com.wangzhixuan.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+/**
+ * @description：用户
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 public class User implements Serializable {
+
+    private static final long serialVersionUID = 6700813629656881143L;
+
     private Long id;
 
     private String loginname;
@@ -28,8 +36,6 @@ public class User implements Serializable {
     private Date createdate;
 
     private String phone;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;

@@ -42,9 +42,18 @@
         </javaClientGenerator>
 
         <!-- oracle 使用 schema 对应 用户名称空间 mysql 使用 catalog 对应 数据库 -->
-        <table schema="shiro" tableName="%" enableCountByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false" enableSelectByExample="false">
+        <!--<table schema="shiro" tableName="%" enableCountByExample="false"-->
+        <!--enableDeleteByExample="false" enableUpdateByExample="false"-->
+        <!--selectByExampleQueryId="false" enableSelectByExample="false">-->
+        <!--<generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+        <!--</table>-->
+
+        <table schema="shiro" tableName="SysLog" domainObjectName="SysLog"
+               enableCountByExample="false"
+               enableDeleteByExample="false"
+               enableUpdateByExample="false"
+               selectByExampleQueryId="false"
+               enableSelectByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

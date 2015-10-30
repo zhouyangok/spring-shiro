@@ -2,7 +2,15 @@ package com.wangzhixuan.model;
 
 import java.io.Serializable;
 
+/**
+ * @description：角色
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 public class Role implements Serializable {
+
+    private static final long serialVersionUID = -1756241579303707517L;
+
     private Long id;
 
     private String name;
@@ -10,10 +18,8 @@ public class Role implements Serializable {
     private Integer seq;
 
     private String description;
-    
-    private Integer status;
 
-    private static final long serialVersionUID = 1L;
+    private Integer status;
 
     public Long getId() {
         return id;
@@ -46,7 +52,7 @@ public class Role implements Serializable {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
-    
+
     public Integer getStatus() {
         return status;
     }

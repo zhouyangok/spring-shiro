@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
 
-    protected static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
     /**
      * 首页

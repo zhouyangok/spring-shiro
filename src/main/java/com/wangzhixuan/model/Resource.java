@@ -5,7 +5,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @description：资源
+ * @author：zhixuan.wang
+ * @date：2015/10/1 14:51
+ */
 public class Resource implements Serializable {
+
+    private static final long serialVersionUID = -5321613594382537470L;
+
     private Long id;
 
     private String name;
@@ -26,8 +34,6 @@ public class Resource implements Serializable {
     private Integer resourcetype;
 
     private Date createdate;
-
-    private static final long serialVersionUID = 1L;
 
     public Long getId() {
         return id;
