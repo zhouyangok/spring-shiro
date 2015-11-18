@@ -33,6 +33,9 @@ public class PageInfo {
     @JsonIgnore
     private String order = "asc";// asc，desc mybatis Order 关键字
 
+    public PageInfo() {
+    }
+
     //构造方法
     public PageInfo(int nowpage, int pagesize) {
         //计算当前页  

@@ -1,6 +1,7 @@
 package com.wangzhixuan.service;
 
 import com.wangzhixuan.model.SysLog;
+import com.wangzhixuan.utils.PageInfo;
 
 /**
  * @description：操作日志
@@ -11,4 +12,5 @@ public interface LogService {
 
     void insertLog(SysLog sysLog);
 
+    void findDataGrid(PageInfo pageInfo);
 }
