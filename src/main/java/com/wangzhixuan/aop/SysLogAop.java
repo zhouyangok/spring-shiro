@@ -77,6 +77,7 @@ public class SysLogAop {
                     if (request != null) {
                         sysLog.setClientIp(request.getRemoteAddr());
                     }
+                    System.out.println("[-----------]");
                     LOGGER.info(sysLog.toString());
                     logService.insertLog(sysLog);
                 }
