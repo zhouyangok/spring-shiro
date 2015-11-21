@@ -12,7 +12,7 @@ import com.wangzhixuan.annotation.DataSourceChange;
 import com.wangzhixuan.datasource.DynamicDataSource;
 
 /**
- * 有{@link com.tanghd.spring.dbutil.aop.DataSourceChange}注解的方法，调用时会切换到指定的数据源
+ * 有{@link com.wangzhixuan.annotation.DataSourceChange}注解的方法，调用时会切换到指定的数据源
  * 
  * @author tanghd
  *

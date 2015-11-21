@@ -106,6 +106,7 @@ public class UserController extends BaseController {
             return result;
         }
         try {
+            userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
             userService.addUser(userVo);
             result.setSuccess(true);
             result.setMsg("添加成功");

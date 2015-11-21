@@ -63,9 +63,11 @@
         <property name="logAbandoned" value="true"/>
         <property name="filters" value="mergeStat"/>
     </bean>
+    <!--数据源切面注入spring-->
 
     <bean id="dsChangeAspect" class="com.wangzhixuan.aop.DataSourceAspect"/>
 
+    <!--主从库选择-->
     <bean id="dynamicDataSource" class="com.wangzhixuan.datasource.DynamicDataSource">
         <property name="master" ref="master-dataSource"/>
         <property name="slaves">

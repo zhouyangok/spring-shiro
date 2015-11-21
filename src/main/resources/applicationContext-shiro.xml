@@ -5,8 +5,11 @@
 
     <description>Shiro安全配置</description>
 
+    <!--安全管理器-->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <!--设置自定义Realm-->
         <property name="realm" ref="shiroDbRealm"/>
+        <!--将缓存管理器，交给安全管理器-->
         <property name="cacheManager" ref="shiroEhcacheManager"/>
     </bean>
 
