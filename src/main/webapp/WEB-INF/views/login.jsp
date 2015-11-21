@@ -206,7 +206,7 @@
         </P>
         <P style="position: relative;">
             <span class="p_logo"></span>
-            <input class="ipt" type="password" name="password" placeholder="请输入密码" value="" />
+            <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码" value="" />
         </P>
         <div style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
             <P style="margin: 0px 35px 20px 45px;">
