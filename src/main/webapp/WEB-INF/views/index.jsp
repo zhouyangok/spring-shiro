@@ -48,7 +48,14 @@
             parentField : 'pid',
             lines : true,
             onClick : function(node) {
-                if (node.attributes) {
+                if (node.attributes.indexOf("http") >= 0) {
+                    var url = node.attributes;
+                    addTab({
+                        url : url,
+                        title : node.text,
+                        iconCls : node.iconCls
+                    });
+                } else if (node.attributes) {
                     var url = '${path }' + node.attributes;
                     addTab({
                         url : url,
