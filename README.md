@@ -17,6 +17,9 @@
 <img src="http://static.oschina.net/uploads/img/201512/06161621_63ZV.jpg" alt="" />
 </p>
 <p>
+<img src="http://static.oschina.net/uploads/img/201512/06164718_18nx.jpg" alt="" />
+</p>
+<p>
 <img src="http://static.oschina.net/uploads/img/201512/06161621_NiiM.jpg" alt="" />
 </p>
 <p>
@@ -27,6 +30,12 @@
 </p>
 <p>
 技术咨询、全权限账号获取(不法分子喜欢删数据) &nbsp; QQ群：237587118
+</p>
+<p>
+git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.git" target="_blank">https://git.oschina.net/wangzhixuan/spring-shiro-training.git</a>&nbsp;
+</p>
+<p>
+欢迎star、fork，不好的地方，接受狂喷，本着共同学习的心态。
 </p>
 <p>
 <span></span>
