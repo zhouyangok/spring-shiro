@@ -39,8 +39,12 @@
                     width : '800',
                     title : '内容',
                     field : 'optContent'
-                } ] ],
-                toolbar : '#toolbar'
+                }, {
+                    width : '150',
+                    title : '日期',
+                    field : 'createTime'
+                    }
+                ] ]
             });
         });
     </script>
@@ -48,8 +52,6 @@
 <body class="easyui-layout" data-options="fit:true,border:false">
 <div data-options="region:'center',fit:true,border:false">
     <table id="dataGrid" data-options="fit:true,border:false"></table>
-</div>
-<div id="toolbar" style="display: none;">
 </div>
 </body>
 </html>
