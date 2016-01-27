@@ -26,7 +26,7 @@
 鸣谢<a href="http://my.oschina.net/qq596392912" target="_blank">@Dreamlu</a> <a href="http://my.oschina.net/u/993551" target="_blank">@刘晓枫</a> &nbsp;
 </p>
 <p>
-演示效果：<a href="http://shiro.carp.mopaasapp.com/" target="_blank">http://shiro.carp.mopaasapp.com/</a> 账号：test 密码：test
+演示效果：<a href="http://shiro.dreamlu.net" target="_blank">http://shiro.dreamlu.net</a> 账号：test 密码：test
 </p>
 <p>
 技术咨询、全权限账号获取(不法分子喜欢删数据) &nbsp; QQ群：523720304
