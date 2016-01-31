@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/resource")
 public class ResourceController extends BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(ResourceController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ResourceController.class);
 
     @Autowired
     private ResourceService resourceService;

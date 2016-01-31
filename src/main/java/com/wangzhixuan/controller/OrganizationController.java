@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/organization")
 public class OrganizationController extends BaseController {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
 
     @Autowired
     private OrganizationService organizationService;

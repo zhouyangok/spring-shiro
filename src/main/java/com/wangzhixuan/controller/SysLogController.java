@@ -22,7 +22,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/sysLog")
 public class SysLogController {
-    private static Logger logger = LoggerFactory.getLogger(SysLogController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SysLogController.class);
 
     @Autowired
     private LogService logService;

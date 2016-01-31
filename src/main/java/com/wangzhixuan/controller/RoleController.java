@@ -28,7 +28,7 @@ import java.util.Map;
 @RequestMapping("/role")
 public class RoleController extends BaseController {
 
-    private static Logger logger = LoggerFactory.getLogger(RoleController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
     private RoleService roleService;

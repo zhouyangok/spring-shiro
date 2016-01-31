@@ -1,31 +1,34 @@
 package com.wangzhixuan.aop;
 
-import java.lang.reflect.Method;
-
+import com.wangzhixuan.annotation.DataSourceChange;
+import com.wangzhixuan.datasource.DynamicDataSource;
+import com.wangzhixuan.exception.DataSourceAspectException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.wangzhixuan.annotation.DataSourceChange;
-import com.wangzhixuan.datasource.DynamicDataSource;
+import java.lang.reflect.Method;
 
 /**
  * 有{@link com.wangzhixuan.annotation.DataSourceChange}注解的方法，调用时会切换到指定的数据源
- * 
- * @author tanghd
  *
+ * @author tanghd
  */
 @Aspect
 public class DataSourceAspect {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceAspect.class);
 
     @Pointcut(value = "@annotation(com.wangzhixuan.annotation.DataSourceChange)")
     private void changeDS() {
+        throw new UnsupportedOperationException("数据源注解错误");
     }
 
     @Around(value = "changeDS() ", argNames = "pjp")
-    public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+    public Object doAround(ProceedingJoinPoint pjp) {
         Object retVal = null;
         MethodSignature ms = (MethodSignature) pjp.getSignature();
         Method method = ms.getMethod();
@@ -42,7 +45,8 @@ public class DataSourceAspect {
             }
             retVal = pjp.proceed();
         } catch (Throwable e) {
-            throw e;
+            LOGGER.warn("数据源切换错误", e);
+            throw new DataSourceAspectException("数据源切换错误", e);
         } finally {
             if (selectedDataSource) {
                 DynamicDataSource.reset();
