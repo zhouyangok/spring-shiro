@@ -29,7 +29,7 @@
 演示效果：<a href="http://shiro.carp.mopaasapp.com/" target="_blank">http://shiro.carp.mopaasapp.com/</a> 账号：test 密码：test
 </p>
 <p>
-技术咨询 &nbsp; QQ群：237587118 &nbsp 不提供全权限账号，人多手杂，维护时间有限，谢谢。
+技术咨询 &nbsp; QQ群：237587118 &nbsp; 不提供全权限账号，人多手杂，维护时间有限，谢谢。
 </p>
 <p>
 git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.git" target="_blank">https://git.oschina.net/wangzhixuan/spring-shiro-training.git</a>&nbsp;
