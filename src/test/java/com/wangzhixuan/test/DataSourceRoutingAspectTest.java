@@ -14,7 +14,10 @@ import com.wangzhixuan.service.SlaveService;
  * @date：2015年8月19日 下午5:23:24
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:applicationContext.xml")
+@ContextConfiguration({
+        "classpath:springmvc-servlet.xml",
+        "classpath:applicationContext.xml"
+})
 public class DataSourceRoutingAspectTest {
 
     @Autowired
