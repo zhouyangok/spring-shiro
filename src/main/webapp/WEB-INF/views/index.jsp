@@ -9,14 +9,12 @@
 <script type="text/javascript">
     var index_layout;
     var index_tabs;
-    var index_tabsMenu;
     var layout_west_tree;
 
     $(function() {
         index_layout = $('#index_layout').layout({
             fit : true
         });
-
         index_tabs = $('#index_tabs').tabs({
             fit : true,
             border : false,
@@ -42,46 +40,29 @@
                 }
             } ]
         });
-
-        layout_west_tree = $('#layout_west_tree').tree({
-            url : '${path }/resource/tree',
-            parentField : 'pid',
-            lines : true,
-            onClick : function(node) {
-                if (node.attributes.indexOf("http") >= 0) {
-                    var url = node.attributes;
-                    addTab({
-                        url : url,
-                        title : node.text,
-                        iconCls : node.iconCls
-                    });
-                } else if (node.attributes) {
-                    var url = '${path }' + node.attributes;
-                    addTab({
-                        url : url,
-                        title : node.text,
-                        iconCls : node.iconCls
-                    });
-                }
-            }
-        });
     });
 
-    function addTab(params) {
-        var iframe = '<iframe src="' + params.url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
-        var t = $('#index_tabs');
-        var opts = {
-            title : params.title,
-            closable : true,
-            iconCls : params.iconCls,
-            content : iframe,
-            border : false,
-            fit : true
-        };
-        if (t.tabs('exists', opts.title)) {
-            t.tabs('select', opts.title);
+
+
+    function addTab(title, href, icon) {
+        var tt = $('#index_tabs');
+        icon = icon || 'menu_icon_service';
+        if (tt.tabs('exists', title)) {
+            tt.tabs('select', title);
+            var currTab = tt.tabs('getTab', title);
+            tt.tabs('update', {tab: currTab, options: {content: content, closable: true}});
         } else {
-            t.tabs('add', opts);
+            if (href) {
+                var content = '<iframe frameborder="0" src="' + href + '" style="border:0;width:100%;height:99.5%;"></iframe>';
+            } else {
+                var content = '未实现';
+            }
+            tt.tabs('add', {
+                title : title,
+                content : content,
+                closable : true,
+                iconCls: icon
+            });
         }
     }
 
@@ -129,13 +110,73 @@
             </div>
         </div>
         <div data-options="region:'west',split:true" title="菜单" style="width: 160px; overflow: hidden;overflow-y:auto; padding:0px">
-            <div class="well well-small" style="padding: 5px 5px 5px 5px;">
-                <ul id="layout_west_tree"></ul>
+            <div class="easyui-accordion  i_accordion_menu" fit="true" border="false">
+
+                <div title="系统管理" selected="true" style="overflow: auto;">
+                    <div class="nav-item">
+                        <a href="javascript:addTab('用户管理','${path}/user/manager','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>用户管理</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="javascript:addTab('部门管理','${path}/organization/manager','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>部门管理</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="javascript:addTab('角色管理','${path}/role/manager','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>角色管理</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="javascript:addTab('资源管理','${path}/resource/manager','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>资源管理</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div title="视频教程" style="overflow: auto;">
+                    <div class="nav-item">
+                        <a href="javascript:addTab('官方网站','http://www.dreamlu.net','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>官方网站</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="javascript:addTab('jfinal视频','http://blog.dreamlu.net/blog/79','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>Jfinal视频</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div title="日志管理" style="overflow: auto;">
+                    <div class="nav-item">
+                        <a href="javascript:addTab('登录日志','${path}/sysLog/manager','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>登录日志</span>
+                        </a>
+                    </div>
+                </div>
             </div>
+
         </div>
         <div data-options="region:'center'" style="overflow: hidden;">
             <div id="index_tabs" style="overflow: hidden;">
                 <div title="首页" data-options="border:false" style="overflow: hidden;">
+                    <script src='https://git.oschina.net/wangzhixuan/spring-shiro-training/widget_preview'></script>
+                    <style>
+                        .pro_name a{color: #4183c4;}
+                        .osc_git_title{background-color: #d8e5f1;}
+                        .osc_git_box{background-color: #fafafa;}
+                        .osc_git_box{border-color: #ddd;}
+                        .osc_git_info{color: #666;}
+                        .osc_git_main a{color: #4183c4;}
+                    </style>
                 </div>
             </div>
         </div>
