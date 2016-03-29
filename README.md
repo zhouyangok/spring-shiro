@@ -29,7 +29,7 @@
 演示效果：<a href="http://shiro.dreamlu.net" target="_blank">http://shiro.dreamlu.net</a> 账号：test 密码：test
 </p>
 <p>
-技术咨询、全权限账号获取(不法分子喜欢删数据) &nbsp; QQ群：523720304
+技术咨询 &nbsp; QQ群：237587118 &nbsp; 不提供全权限账号，人多手杂，维护时间有限，可本地导入项目运行，admin密码和test一样，谢谢。
 </p>
 <p>
 git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.git" target="_blank">https://git.oschina.net/wangzhixuan/spring-shiro-training.git</a>&nbsp;
