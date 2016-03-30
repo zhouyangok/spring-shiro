@@ -23,9 +23,7 @@ public class DataSourceAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceAspect.class);
 
     @Pointcut(value = "@annotation(com.wangzhixuan.annotation.DataSourceChange)")
-    private void changeDS() {
-        throw new UnsupportedOperationException("数据源注解错误");
-    }
+    private void changeDS() {}
 
     @Around(value = "changeDS() ", argNames = "pjp")
     public Object doAround(ProceedingJoinPoint pjp) {
