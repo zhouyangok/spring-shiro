@@ -25,7 +25,7 @@ public class DataSourceAspect {
     @Pointcut(value = "@annotation(com.wangzhixuan.annotation.DataSourceChange)")
     private void changeDS() {}
 
-    @Around(value = "changeDS() ", argNames = "pjp")
+    @Around(value = "changeDS()", argNames = "pjp")
     public Object doAround(ProceedingJoinPoint pjp) {
         Object retVal = null;
         MethodSignature ms = (MethodSignature) pjp.getSignature();
