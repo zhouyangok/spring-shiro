@@ -102,7 +102,7 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
     @Override
     protected Object determineCurrentLookupKey() {
         LinkedList<String> m = datasourceHolder.get();
-        String key = m.peekFirst() == null ? "" : m.peekFirst();
+        String key = m.peekFirst() == null ? DEFAULT : m.peekFirst();
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("currenty datasource :" + key);
         }
