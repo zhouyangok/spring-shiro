@@ -118,6 +118,16 @@
         }
     </style>
     <script type="text/javascript">
+        // 判断时候在Iframe框架内,在则刷新父页面
+        if (self != top) {
+            parent.location.reload(true);
+            if (!!(window.attachEvent && !window.opera)) {
+                document.execCommand("stop");
+            } else {
+                window.stop();
+            }
+        }
+
         $(function () {
             // 得到焦点
             $("#password").focus(function () {
