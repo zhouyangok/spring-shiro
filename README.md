@@ -39,8 +39,6 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 </p>
 <p>捐赠</p>
 <p>
-<img src="http://ww2.sinaimg.cn/mw690/907f4c96jw1f3sjdhn1dcj208w0aiq3d.jpg" alt="微信" />
-</p>
-<p>
-<img src="http://ww3.sinaimg.cn/mw690/907f4c96jw1f3sjdhkn0rj20by0byq33.jpg" alt="支付宝" />
+<img src="http://ww2.sinaimg.cn/small/907f4c96jw1f3sjdhn1dcj208w0aiq3d.jpg" alt="微信" />
+<img src="http://ww3.sinaimg.cn/small/907f4c96jw1f3sjdhkn0rj20by0byq33.jpg" alt="支付宝" />
 </p>
