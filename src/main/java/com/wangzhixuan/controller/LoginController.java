@@ -1,6 +1,6 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.code.Result;
+import com.wangzhixuan.commons.result.Result;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -9,8 +9,6 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  * @date：2015/10/1 14:51
  */
 @Controller
-public class LoginController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
-
+public class LoginController extends BaseController {
     /**
      * 首页
      *
@@ -47,7 +42,7 @@ public class LoginController {
      */
     @RequestMapping(value = "/index")
     public String index(Model model) {
-        return "/index";
+        return "index";
     }
 
     /**
@@ -59,11 +54,11 @@ public class LoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, HttpServletRequest request) {
-        LOGGER.info("GET请求登录");
+        logger.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
-        return "/login";
+        return "login";
     }
 
     /**
@@ -78,7 +73,7 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
-        LOGGER.info("POST请求登录");
+        logger.info("POST请求登录");
         Result result = new Result();
         if (StringUtils.isBlank(username)) {
             result.setMsg("用户名不能为空");
@@ -94,19 +89,19 @@ public class LoginController {
         try {
             user.login(token);
         } catch (UnknownAccountException e) {
-            LOGGER.error("账号不存在：{}", e);
+            logger.error("账号不存在：{}", e);
             result.setMsg("账号不存在");
             return result;
         } catch (DisabledAccountException e) {
-            LOGGER.error("账号未启用：{}", e);
+            logger.error("账号未启用：{}", e);
             result.setMsg("账号未启用");
             return result;
         } catch (IncorrectCredentialsException e) {
-            LOGGER.error("密码错误：{}", e);
+            logger.error("密码错误：{}", e);
             result.setMsg("密码错误");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("未知错误,请联系管理员：{}", e);
+            logger.error("未知错误,请联系管理员：{}", e);
             result.setMsg("未知错误,请联系管理员");
             return result;
         }
@@ -125,7 +120,7 @@ public class LoginController {
         if (SecurityUtils.getSubject().isAuthenticated() == false) {
             return "redirect:/login";
         }
-        return "/unauth";
+        return "unauth";
     }
 
     /**
@@ -137,7 +132,7 @@ public class LoginController {
     @RequestMapping(value = "/logout")
     @ResponseBody
     public Result logout(HttpServletRequest request) {
-        LOGGER.info("登出");
+        logger.info("登出");
         Subject subject = SecurityUtils.getSubject();
         Result result = new Result();
         subject.logout();

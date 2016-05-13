@@ -1,20 +1,20 @@
 package com.wangzhixuan.service.impl;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
-import com.wangzhixuan.utils.Config;
-import com.wangzhixuan.vo.Tree;
+import com.wangzhixuan.commons.utils.Config;
+import com.wangzhixuan.commons.result.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<Tree> findTree(User user) {
-        List<Tree> trees = Lists.newArrayList();
+        List<Tree> trees = new ArrayList<Tree>();
         // 超级管理
         if (user.getLoginname().equals("admin")) {
             List<Resource> resourceFather = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
@@ -50,7 +50,7 @@ public class ResourceServiceImpl implements ResourceService {
                 List<Resource> resourceSon = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
                 if (resourceSon != null) {
-                    List<Tree> tree = Lists.newArrayList();
+                    List<Tree> tree = new ArrayList<Tree>();
                     for (Resource resourceTwo : resourceSon) {
                         Tree treeTwo = new Tree();
                         treeTwo.setId(resourceTwo.getId());
@@ -69,7 +69,7 @@ public class ResourceServiceImpl implements ResourceService {
         }
 
         // 普通用户
-        Set<Resource> resourceIdList = Sets.newHashSet();
+        Set<Resource> resourceIdList = new HashSet<Resource>();
         List<Long> roleIdList = userRoleMapper.findRoleIdListByUserId(user.getId());
         for (Long i : roleIdList) {
             List<Resource> resourceIdLists = roleMapper.findResourceIdListByRoleIdAndType(i);
@@ -84,7 +84,7 @@ public class ResourceServiceImpl implements ResourceService {
                     treeOne.setText(resource.getName());
                     treeOne.setIconCls(resource.getIcon());
                     treeOne.setAttributes(resource.getUrl());
-                    List<Tree> tree = Lists.newArrayList();
+                    List<Tree> tree = new ArrayList<Tree>();
                     for (Resource resourceTwo : resourceIdList) {
                         if (resourceTwo.getPid() != null && resource.getId().longValue() == resourceTwo.getPid().longValue()) {
                             Tree treeTwo = new Tree();
@@ -114,7 +114,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<Tree> findAllTree() {
-        List<Tree> trees = Lists.newArrayList();
+        List<Tree> trees = new ArrayList<Tree>();
         // 查询所有的一级树
         List<Resource> resources = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
         if (resources == null) {
@@ -131,7 +131,7 @@ public class ResourceServiceImpl implements ResourceService {
             List<Resource> resourceSon = resourceMapper.findResourceAllByTypeAndPid(Config.RESOURCE_MENU, resourceOne.getId());
 
             if (resourceSon != null) {
-                List<Tree> tree = Lists.newArrayList();
+                List<Tree> tree = new ArrayList<Tree>();
                 for (Resource resourceTwo : resourceSon) {
                     Tree treeTwo = new Tree();
                     treeTwo.setId(resourceTwo.getId());
@@ -151,7 +151,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public List<Tree> findAllTrees() {
-        List<Tree> treeOneList = Lists.newArrayList();
+        List<Tree> treeOneList = new ArrayList<Tree>();
 
         // 查询所有的一级树
         List<Resource> resources = resourceMapper.findResourceAllByTypeAndPidNull(Config.RESOURCE_MENU);
@@ -172,7 +172,7 @@ public class ResourceServiceImpl implements ResourceService {
             if (resourceSon == null) {
                 treeOne.setState("closed");
             } else {
-                List<Tree> treeTwoList = Lists.newArrayList();
+                List<Tree> treeTwoList = new ArrayList<Tree>();
 
                 for (Resource resourceTwo : resourceSon) {
                     Tree treeTwo = new Tree();
@@ -188,7 +188,7 @@ public class ResourceServiceImpl implements ResourceService {
                     if (resourceSons == null) {
                         treeTwo.setState("closed");
                     } else {
-                        List<Tree> treeThreeList = Lists.newArrayList();
+                        List<Tree> treeThreeList = new ArrayList<Tree>();
 
                         for (Resource resourceThree : resourceSons) {
                             Tree treeThree = new Tree();

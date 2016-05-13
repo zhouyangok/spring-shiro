@@ -5,7 +5,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 public class Main {
     public static void main(String[] args) {
-        String path = "classpath:applicationContext-aop.xml"; 
+        String path = "classpath:applicationContext-aspect.xml";
         ApplicationContext ctx = new FileSystemXmlApplicationContext(path);  
         Monkey monkey = (Monkey) ctx.getBean("monkey");   
         Elephant elephant = (Elephant) ctx.getBean("elephant");

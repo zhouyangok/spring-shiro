@@ -1,8 +1,8 @@
 package com.wangzhixuan.mapper;
 
 import com.wangzhixuan.model.User;
-import com.wangzhixuan.utils.PageInfo;
-import com.wangzhixuan.vo.UserVo;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.UserVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

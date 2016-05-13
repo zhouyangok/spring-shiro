@@ -16,7 +16,7 @@ import com.wangzhixuan.service.SlaveService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({
         "classpath:springmvc-servlet.xml",
-        "classpath:applicationContext.xml"
+        "classpath:spring-config.xml"
 })
 public class DataSourceRoutingAspectTest {
 

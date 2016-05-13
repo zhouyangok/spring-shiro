@@ -1,7 +1,7 @@
 package com.wangzhixuan.mapper;
 
 import com.wangzhixuan.model.SysLog;
-import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.commons.utils.PageInfo;
 
 import java.util.List;
 

@@ -1,11 +1,10 @@
 package com.wangzhixuan.controller;
 
-import com.google.common.collect.Maps;
-import com.wangzhixuan.code.Result;
+import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.utils.PageInfo;
-import com.wangzhixuan.vo.Tree;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +27,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/role")
 public class RoleController extends BaseController {
-
-    private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
     private RoleService roleService;
@@ -57,7 +55,7 @@ public class RoleController extends BaseController {
     @ResponseBody
     public PageInfo dataGrid(Role role, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
-        Map<String, Object> condition = Maps.newHashMap();
+        Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);
 
         roleService.findDataGrid(pageInfo);

@@ -1,6 +1,5 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.annotation.DataSourceChange;
 import com.wangzhixuan.service.SlaveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/test")
 public class TestController extends BaseController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TestController.class);
 
     @Autowired
     private SlaveService slaveService;

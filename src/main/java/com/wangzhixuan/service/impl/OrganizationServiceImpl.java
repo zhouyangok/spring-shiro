@@ -1,13 +1,13 @@
 package com.wangzhixuan.service.impl;
 
-import com.google.common.collect.Lists;
+import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.mapper.OrganizationMapper;
 import com.wangzhixuan.model.Organization;
 import com.wangzhixuan.service.OrganizationService;
-import com.wangzhixuan.vo.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,7 +17,7 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public List<Tree> findTree() {
-        List<Tree> trees = Lists.newArrayList();
+        List<Tree> trees = new ArrayList<Tree>();
 
         List<Organization> organizationFather = organizationMapper.findOrganizationAllByPidNull();
 
@@ -32,7 +32,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                 List<Organization> organizationSon = organizationMapper.findOrganizationAllByPid(organizationOne.getId());
 
                 if (organizationSon != null) {
-                    List<Tree> tree = Lists.newArrayList();
+                    List<Tree> tree = new ArrayList<Tree>();
                     for (Organization organizationTwo : organizationSon) {
                         Tree treeTwo = new Tree();
                         treeTwo.setId(organizationTwo.getId());

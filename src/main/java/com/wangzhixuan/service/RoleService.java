@@ -1,8 +1,8 @@
 package com.wangzhixuan.service;
 
 import com.wangzhixuan.model.Role;
-import com.wangzhixuan.utils.PageInfo;
-import com.wangzhixuan.vo.Tree;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.Tree;
 
 import java.util.List;
 import java.util.Map;

@@ -1,10 +1,10 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.code.Result;
+import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
-import com.wangzhixuan.vo.Tree;
+import com.wangzhixuan.commons.result.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/resource")
 public class ResourceController extends BaseController {
-
-    private static final Logger logger = LoggerFactory.getLogger(ResourceController.class);
 
     @Autowired
     private ResourceService resourceService;

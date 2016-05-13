@@ -2,7 +2,7 @@ package com.wangzhixuan.mapper;
 
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.Role;
-import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.commons.utils.PageInfo;
 
 import java.util.List;
 import java.util.Map;

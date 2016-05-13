@@ -1,9 +1,8 @@
 package com.wangzhixuan.controller;
 
-import com.google.common.collect.Maps;
 import com.wangzhixuan.model.SysLog;
 import com.wangzhixuan.service.LogService;
-import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.commons.utils.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +22,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/sysLog")
 public class SysLogController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SysLogController.class);
 
     @Autowired
     private LogService logService;
@@ -38,7 +37,7 @@ public class SysLogController {
     @ResponseBody
     public PageInfo dataGrid(SysLog sysLog, Integer page, Integer rows) {
         PageInfo pageInfo = new PageInfo(page, rows);
-        Map<String, Object> condition = Maps.newHashMap();
+        Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);
         logService.findDataGrid(pageInfo);
         return pageInfo;

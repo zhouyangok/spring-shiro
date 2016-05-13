@@ -1,7 +1,7 @@
 package com.wangzhixuan.service;
 
 import com.wangzhixuan.model.SysLog;
-import com.wangzhixuan.utils.PageInfo;
+import com.wangzhixuan.commons.utils.PageInfo;
 
 /**
  * @description：操作日志

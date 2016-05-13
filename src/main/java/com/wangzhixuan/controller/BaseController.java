@@ -2,9 +2,11 @@ package com.wangzhixuan.controller;
 
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.UserService;
-import com.wangzhixuan.shiro.ShiroUser;
-import com.wangzhixuan.utils.StringEscapeEditor;
+import com.wangzhixuan.commons.shiro.ShiroUser;
+import com.wangzhixuan.commons.utils.StringEscapeEditor;
 import org.apache.shiro.SecurityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -19,6 +21,7 @@ import java.util.Date;
  * @date：2015/10/1 14:51
  */
 public class BaseController {
+    protected final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private UserService userService;

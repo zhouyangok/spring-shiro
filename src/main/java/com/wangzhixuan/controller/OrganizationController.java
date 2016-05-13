@@ -1,11 +1,9 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.code.Result;
+import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.model.Organization;
 import com.wangzhixuan.service.OrganizationService;
-import com.wangzhixuan.vo.Tree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.wangzhixuan.commons.result.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +22,6 @@ import java.util.List;
 @RequestMapping("/organization")
 public class OrganizationController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrganizationController.class);
-
     @Autowired
     private OrganizationService organizationService;
 
@@ -36,7 +32,7 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/manager")
     public String manager() {
-        return "/admin/organization";
+        return "admin/organization";
     }
 
     /**
@@ -70,7 +66,7 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/addPage")
     public String addPage() {
-        return "/admin/organizationAdd";
+        return "admin/organizationAdd";
     }
 
     /**
@@ -89,7 +85,7 @@ public class OrganizationController extends BaseController {
             result.setMsg("添加成功！");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.info("添加部门失败：{}", e);
+            logger.info("添加部门失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
@@ -106,7 +102,7 @@ public class OrganizationController extends BaseController {
     public String editPage(HttpServletRequest request, Long id) {
         Organization organization = organizationService.findOrganizationById(id);
         request.setAttribute("organization", organization);
-        return "/admin/organizationEdit";
+        return "admin/organizationEdit";
     }
 
     /**
@@ -125,7 +121,7 @@ public class OrganizationController extends BaseController {
             result.setMsg("编辑成功！");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.info("编辑部门失败：{}", e);
+            logger.info("编辑部门失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
@@ -147,7 +143,7 @@ public class OrganizationController extends BaseController {
             result.setSuccess(true);
             return result;
         } catch (RuntimeException e) {
-            LOGGER.info("删除部门失败：{}", e);
+            logger.info("删除部门失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }

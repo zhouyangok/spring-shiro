@@ -1,20 +1,20 @@
 package com.wangzhixuan.service.impl;
 
-import com.google.common.collect.Lists;
-import com.wangzhixuan.exception.ServiceException;
+import com.wangzhixuan.commons.exception.ServiceException;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.RoleResource;
 import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.utils.PageInfo;
-import com.wangzhixuan.vo.Tree;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.Tree;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +38,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Tree> findTree() {
-        List<Tree> trees = Lists.newArrayList();
+        List<Tree> trees = new ArrayList<Tree>();
         List<Role> roles = roleMapper.findRoleAll();
         for (Role role : roles) {
             Tree tree = new Tree();

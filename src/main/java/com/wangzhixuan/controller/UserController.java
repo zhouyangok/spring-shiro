@@ -1,13 +1,11 @@
 package com.wangzhixuan.controller;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.wangzhixuan.code.Result;
+import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.UserService;
-import com.wangzhixuan.utils.PageInfo;
-import com.wangzhixuan.vo.UserVo;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.UserVo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -20,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,8 +32,6 @@ import java.util.Map;
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-
     @Autowired
     private UserService userService;
 
@@ -44,7 +42,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String manager() {
-        return "/admin/user";
+        return "admin/user";
     }
 
     /**
@@ -61,7 +59,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public PageInfo dataGrid(UserVo userVo, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows);
-        Map<String, Object> condition = Maps.newHashMap();
+        Map<String, Object> condition = new HashMap<String, Object>();
 
         if (StringUtils.isNoneBlank(userVo.getName())) {
             condition.put("name", userVo.getName());
@@ -87,7 +85,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/addPage", method = RequestMethod.GET)
     public String addPage() {
-        return "/admin/userAdd";
+        return "admin/userAdd";
     }
 
     /**
@@ -112,7 +110,7 @@ public class UserController extends BaseController {
             result.setMsg("添加成功");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("添加用户失败：{}", e);
+            logger.error("添加用户失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
@@ -129,13 +127,13 @@ public class UserController extends BaseController {
     public String editPage(Long id, Model model) {
         UserVo userVo = userService.findUserVoById(id);
         List<Role> rolesList = userVo.getRolesList();
-        List<Long> ids = Lists.newArrayList();
+        List<Long> ids = new ArrayList<Long>();
         for (Role role : rolesList) {
             ids.add(role.getId());
         }
         model.addAttribute("roleIds", ids);
         model.addAttribute("user", userVo);
-        return "/admin/userEdit";
+        return "admin/userEdit";
     }
 
     /**
@@ -160,7 +158,7 @@ public class UserController extends BaseController {
             result.setMsg("修改成功！");
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("修改用户失败：{}", e);
+            logger.error("修改用户失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
@@ -173,7 +171,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/editPwdPage", method = RequestMethod.GET)
     public String editPwdPage() {
-        return "/admin/userEditPwd";
+        return "admin/userEditPwd";
     }
 
     /**
@@ -199,7 +197,7 @@ public class UserController extends BaseController {
             result.setMsg("密码修改成功！");
             return result;
         } catch (Exception e) {
-            LOGGER.error("修改密码失败：{}", e);
+            logger.error("修改密码失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
@@ -221,7 +219,7 @@ public class UserController extends BaseController {
             result.setSuccess(true);
             return result;
         } catch (RuntimeException e) {
-            LOGGER.error("删除用户失败：{}", e);
+            logger.error("删除用户失败：{}", e);
             result.setMsg(e.getMessage());
             return result;
         }
