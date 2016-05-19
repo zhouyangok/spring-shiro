@@ -1,12 +1,9 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.result.Result;
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.commons.result.Tree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +50,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
-    public PageInfo dataGrid(Role role, Integer page, Integer rows, String sort, String order) {
+    public Object dataGrid(Role role, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);
@@ -69,7 +66,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
-    public List<Tree> tree() {
+    public Object tree() {
         return roleService.findTree();
     }
 
@@ -91,17 +88,13 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public Result add(Role role) {
-        Result result = new Result();
+    public Object add(Role role) {
         try {
             roleService.addRole(role);
-            result.setSuccess(true);
-            result.setMsg("添加成功！");
-            return result;
+            return renderSuccess("添加成功！");
         } catch (RuntimeException e) {
             logger.error("添加角色失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -113,17 +106,13 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Result delete(Long id) {
-        Result result = new Result();
+    public Object delete(Long id) {
         try {
             roleService.deleteRoleById(id);
-            result.setMsg("删除成功！");
-            result.setSuccess(true);
-            return result;
+            return renderSuccess("删除成功！");
         } catch (RuntimeException e) {
             logger.error("删除角色失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -149,17 +138,13 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Result edit(Role role) {
-        Result result = new Result();
+    public Object edit(Role role) {
         try {
             roleService.updateRole(role);
-            result.setSuccess(true);
-            result.setMsg("编辑成功！");
-            return result;
+            return renderSuccess("编辑成功！");
         } catch (RuntimeException e) {
             logger.error("编辑角色失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -187,17 +172,13 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/findResourceIdListByRoleId")
     @ResponseBody
-    public Result findResourceByRoleId(HttpServletRequest request, Long id, Model model) {
-        Result result = new Result();
+    public Object findResourceByRoleId(HttpServletRequest request, Long id, Model model) {
         try {
             List<Long> resources = roleService.findResourceIdListByRoleId(id);
-            result.setSuccess(true);
-            result.setObj(resources);
-            return result;
+            return renderSuccess(resources);
         } catch (RuntimeException e) {
             logger.error("角色查询资源失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -210,17 +191,13 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/grant")
     @ResponseBody
-    public Result grant(Long id, String resourceIds) {
-        Result result = new Result();
+    public Object grant(Long id, String resourceIds) {
         try {
             roleService.updateRoleResource(id, resourceIds);
-            result.setMsg("授权成功！");
-            result.setSuccess(true);
-            return result;
+            return renderSuccess("授权成功！");
         } catch (RuntimeException e) {
             logger.error("授权成功失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 

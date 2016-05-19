@@ -1,12 +1,9 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.result.Result;
+import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
-import com.wangzhixuan.commons.result.Tree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @description：资源管理
@@ -35,10 +31,9 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
-    public List<Tree> tree() {
+    public Object tree() {
         User currentUser = getCurrentUser();
-        List<Tree> tree = resourceService.findTree(currentUser);
-        return tree;
+        return resourceService.findTree(currentUser);
     }
 
     /**
@@ -58,9 +53,8 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
     @ResponseBody
-    public List<Resource> treeGrid() {
-        List<Resource> treeGrid = resourceService.findResourceAll();
-        return treeGrid;
+    public Object treeGrid() {
+        return resourceService.findResourceAll();
     }
 
     /**
@@ -81,17 +75,13 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public Result add(Resource resource) {
-        Result result = new Result();
+    public Object add(Resource resource) {
         try {
             resourceService.addResource(resource);
-            result.setSuccess(true);
-            result.setMsg("添加成功！");
-            return result;
+            return renderSuccess("添加成功！");
         } catch (RuntimeException e) {
             logger.error("添加资源失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -102,7 +92,7 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/allTree")
     @ResponseBody
-    public List<Tree> allTree() {
+    public Object allTree() {
         return resourceService.findAllTree();
     }
 
@@ -113,7 +103,7 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping(value = "/allTrees", method = RequestMethod.POST)
     @ResponseBody
-    public List<Tree> allTrees() {
+    public Object allTrees() {
         return resourceService.findAllTrees();
     }
 
@@ -139,17 +129,13 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Result edit(Resource resource) {
-        Result result = new Result();
+    public Object edit(Resource resource) {
         try {
             resourceService.updateResource(resource);
-            result.setSuccess(true);
-            result.setMsg("编辑成功！");
-            return result;
+            return renderSuccess("编辑成功！");
         } catch (RuntimeException e) {
             logger.error("编辑资源失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -161,17 +147,13 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Result delete(Long id) {
-        Result result = new Result();
+    public Object delete(Long id) {
         try {
             resourceService.deleteResourceById(id);
-            result.setMsg("删除成功！");
-            result.setSuccess(true);
-            return result;
+            return renderSuccess("删除成功！");
         } catch (RuntimeException e) {
             logger.error("删除资源失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 

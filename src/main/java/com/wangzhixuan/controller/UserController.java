@@ -1,15 +1,13 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.result.Result;
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.result.UserVo;
+import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.UserService;
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.commons.result.UserVo;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +54,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
-    public PageInfo dataGrid(UserVo userVo, Integer page, Integer rows, String sort, String order) {
+    public Object dataGrid(UserVo userVo, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows);
         Map<String, Object> condition = new HashMap<String, Object>();
 
@@ -96,23 +93,18 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public Result add(UserVo userVo) {
-        Result result = new Result();
+    public Object add(UserVo userVo) {
         User u = userService.findUserByLoginName(userVo.getLoginname());
         if (u != null) {
-            result.setMsg("用户名已存在!");
-            return result;
+            return renderError("用户名已存在!");
         }
         try {
             userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
             userService.addUser(userVo);
-            result.setSuccess(true);
-            result.setMsg("添加成功");
-            return result;
+            return renderSuccess("添加成功");
         } catch (RuntimeException e) {
             logger.error("添加用户失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -144,23 +136,18 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Result edit(UserVo userVo) {
-        Result result = new Result();
+    public Object edit(UserVo userVo) {
         User user = userService.findUserByLoginName(userVo.getLoginname());
         if (user != null && user.getId() != userVo.getId()) {
-            result.setMsg("用户名已存在!");
-            return result;
+            return renderError("用户名已存在!");
         }
         try {
             userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
             userService.updateUser(userVo);
-            result.setSuccess(true);
-            result.setMsg("修改成功！");
-            return result;
+            return renderSuccess("修改成功！");
         } catch (RuntimeException e) {
             logger.error("修改用户失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -177,29 +164,23 @@ public class UserController extends BaseController {
     /**
      * 修改密码
      *
-     * @param request
      * @param oldPwd
      * @param pwd
      * @return
      */
     @RequestMapping("/editUserPwd")
     @ResponseBody
-    public Result editUserPwd(HttpServletRequest request, String oldPwd, String pwd) {
-        Result result = new Result();
+    public Object editUserPwd(String oldPwd, String pwd) {
         if (!getCurrentUser().getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
-            result.setMsg("老密码不正确!");
-            return result;
+            return renderError("老密码不正确!");
         }
 
         try {
             userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
-            result.setSuccess(true);
-            result.setMsg("密码修改成功！");
-            return result;
+            return renderSuccess("密码修改成功！");
         } catch (Exception e) {
             logger.error("修改密码失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -211,17 +192,13 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Result delete(Long id) {
-        Result result = new Result();
+    public Object delete(Long id) {
         try {
             userService.deleteUserById(id);
-            result.setMsg("删除成功！");
-            result.setSuccess(true);
-            return result;
+            return renderSuccess("删除成功！");
         } catch (RuntimeException e) {
             logger.error("删除用户失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 }

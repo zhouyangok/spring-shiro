@@ -1,17 +1,16 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.result.Result;
+import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.model.Organization;
 import com.wangzhixuan.service.OrganizationService;
-import com.wangzhixuan.commons.result.Tree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @description：部门管理
@@ -23,6 +22,7 @@ import java.util.List;
 public class OrganizationController extends BaseController {
 
     @Autowired
+    @Resource
     private OrganizationService organizationService;
 
     /**
@@ -42,9 +42,8 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
-    public List<Tree> tree() {
-        List<Tree> trees = organizationService.findTree();
-        return trees;
+    public Object tree() {
+        return organizationService.findTree();
     }
 
     /**
@@ -54,9 +53,8 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/treeGrid")
     @ResponseBody
-    public List<Organization> treeGrid() {
-        List<Organization> treeGrid = organizationService.findTreeGrid();
-        return treeGrid;
+    public Object treeGrid() {
+        return organizationService.findTreeGrid();
     }
 
     /**
@@ -77,17 +75,13 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public Result add(Organization organization) {
-        Result result = new Result();
+    public Object add(Organization organization) {
         try {
             organizationService.addOrganization(organization);
-            result.setSuccess(true);
-            result.setMsg("添加成功！");
-            return result;
+            return renderSuccess("添加成功！");
         } catch (RuntimeException e) {
             logger.info("添加部门失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -113,17 +107,13 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Result edit(Organization organization) {
-        Result result = new Result();
+    public Object edit(Organization organization) {
         try {
             organizationService.updateOrganization(organization);
-            result.setSuccess(true);
-            result.setMsg("编辑成功！");
-            return result;
+            return renderSuccess("编辑成功！");
         } catch (RuntimeException e) {
             logger.info("编辑部门失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 
@@ -135,17 +125,13 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/delete")
     @ResponseBody
-    public Result delete(Long id) {
-        Result result = new Result();
+    public Object delete(Long id) {
         try {
             organizationService.deleteOrganizationById(id);
-            result.setMsg("删除成功！");
-            result.setSuccess(true);
-            return result;
+            return renderSuccess("删除成功！");
         } catch (RuntimeException e) {
             logger.info("删除部门失败：{}", e);
-            result.setMsg(e.getMessage());
-            return result;
+            return renderError(e.getMessage());
         }
     }
 }

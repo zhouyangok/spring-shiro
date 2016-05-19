@@ -1,6 +1,6 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.result.Result;
+import com.wangzhixuan.commons.base.BaseController;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -14,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description：登录退出
@@ -47,13 +45,10 @@ public class LoginController extends BaseController {
 
     /**
      * GET 登录
-     *
-     * @param model
-     * @param request
-     * @return
+     * @return {String}
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model, HttpServletRequest request) {
+    public String login() {
         logger.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
@@ -66,22 +61,18 @@ public class LoginController extends BaseController {
      *
      * @param username 用户名
      * @param password 密码
-     * @param request
-     * @param model
      * @return
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public Result loginPost(String username, String password, HttpServletRequest request, Model model) {
+    public Object loginPost(String username, String password) {
         logger.info("POST请求登录");
-        Result result = new Result();
+
         if (StringUtils.isBlank(username)) {
-            result.setMsg("用户名不能为空");
-            return result;
+            return renderError("用户名不能为空");
         }
         if (StringUtils.isBlank(password)) {
-            result.setMsg("密码不能为空");
-            return result;
+            return renderError("密码不能为空");
         }
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
@@ -90,33 +81,26 @@ public class LoginController extends BaseController {
             user.login(token);
         } catch (UnknownAccountException e) {
             logger.error("账号不存在：{}", e);
-            result.setMsg("账号不存在");
-            return result;
+            return renderError("账号不存在");
         } catch (DisabledAccountException e) {
             logger.error("账号未启用：{}", e);
-            result.setMsg("账号未启用");
-            return result;
+            return renderError("账号未启用");
         } catch (IncorrectCredentialsException e) {
             logger.error("密码错误：{}", e);
-            result.setMsg("密码错误");
-            return result;
+            return renderError("密码错误");
         } catch (RuntimeException e) {
             logger.error("未知错误,请联系管理员：{}", e);
-            result.setMsg("未知错误,请联系管理员");
-            return result;
+            return renderError("未知错误,请联系管理员");
         }
-        result.setSuccess(true);
-        return result;
+        return renderSuccess();
     }
 
     /**
      * 未授权
-     *
-     * @param model
-     * @return
+     * @return {String}
      */
     @RequestMapping(value = "/unauth")
-    public String unauth(Model model) {
+    public String unauth() {
         if (SecurityUtils.getSubject().isAuthenticated() == false) {
             return "redirect:/login";
         }
@@ -125,18 +109,14 @@ public class LoginController extends BaseController {
 
     /**
      * 退出
-     *
-     * @param request
-     * @return
+     * @return {Result}
      */
     @RequestMapping(value = "/logout")
     @ResponseBody
-    public Result logout(HttpServletRequest request) {
+    public Object logout() {
         logger.info("登出");
         Subject subject = SecurityUtils.getSubject();
-        Result result = new Result();
         subject.logout();
-        result.setSuccess(true);
-        return result;
+        return renderSuccess();
     }
 }
