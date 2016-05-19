@@ -76,13 +76,8 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Organization organization) {
-        try {
-            organizationService.addOrganization(organization);
-            return renderSuccess("添加成功！");
-        } catch (RuntimeException e) {
-            logger.info("添加部门失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        organizationService.addOrganization(organization);
+        return renderSuccess("添加成功！");
     }
 
     /**
@@ -108,13 +103,8 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Organization organization) {
-        try {
-            organizationService.updateOrganization(organization);
-            return renderSuccess("编辑成功！");
-        } catch (RuntimeException e) {
-            logger.info("编辑部门失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        organizationService.updateOrganization(organization);
+        return renderSuccess("编辑成功！");
     }
 
     /**
@@ -126,12 +116,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        try {
-            organizationService.deleteOrganizationById(id);
-            return renderSuccess("删除成功！");
-        } catch (RuntimeException e) {
-            logger.info("删除部门失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        organizationService.deleteOrganizationById(id);
+        return renderSuccess("删除成功！");
     }
 }

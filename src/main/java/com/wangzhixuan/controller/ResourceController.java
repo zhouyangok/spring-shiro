@@ -6,11 +6,10 @@ import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @description：资源管理
@@ -76,13 +75,8 @@ public class ResourceController extends BaseController {
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Resource resource) {
-        try {
-            resourceService.addResource(resource);
-            return renderSuccess("添加成功！");
-        } catch (RuntimeException e) {
-            logger.error("添加资源失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        resourceService.addResource(resource);
+        return renderSuccess("添加成功！");
     }
 
     /**
@@ -110,14 +104,14 @@ public class ResourceController extends BaseController {
     /**
      * 编辑资源页
      *
-     * @param request
+     * @param model
      * @param id
      * @return
      */
     @RequestMapping("/editPage")
-    public String editPage(HttpServletRequest request, Long id) {
+    public String editPage(Model model, Long id) {
         Resource resource = resourceService.findResourceById(id);
-        request.setAttribute("resource", resource);
+        model.addAttribute("resource", resource);
         return "/admin/resourceEdit";
     }
 
@@ -130,13 +124,8 @@ public class ResourceController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Resource resource) {
-        try {
-            resourceService.updateResource(resource);
-            return renderSuccess("编辑成功！");
-        } catch (RuntimeException e) {
-            logger.error("编辑资源失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        resourceService.updateResource(resource);
+        return renderSuccess("编辑成功！");
     }
 
     /**
@@ -148,13 +137,8 @@ public class ResourceController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        try {
-            resourceService.deleteResourceById(id);
-            return renderSuccess("删除成功！");
-        } catch (RuntimeException e) {
-            logger.error("删除资源失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        resourceService.deleteResourceById(id);
+        return renderSuccess("删除成功！");
     }
 
 }

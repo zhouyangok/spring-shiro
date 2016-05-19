@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +40,6 @@ public class RoleController extends BaseController {
     /**
      * 权限列表
      *
-     * @param role
      * @param page
      * @param rows
      * @param sort
@@ -50,7 +48,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
-    public Object dataGrid(Role role, Integer page, Integer rows, String sort, String order) {
+    public Object dataGrid(Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);
@@ -89,13 +87,8 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Object add(Role role) {
-        try {
-            roleService.addRole(role);
-            return renderSuccess("添加成功！");
-        } catch (RuntimeException e) {
-            logger.error("添加角色失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        roleService.addRole(role);
+        return renderSuccess("添加成功！");
     }
 
     /**
@@ -107,26 +100,21 @@ public class RoleController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        try {
-            roleService.deleteRoleById(id);
-            return renderSuccess("删除成功！");
-        } catch (RuntimeException e) {
-            logger.error("删除角色失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        roleService.deleteRoleById(id);
+        return renderSuccess("删除成功！");
     }
 
     /**
      * 编辑权限页
      *
-     * @param request
+     * @param model
      * @param id
      * @return
      */
     @RequestMapping("/editPage")
-    public String editPage(HttpServletRequest request, Long id) {
+    public String editPage(Model model, Long id) {
         Role role = roleService.findRoleById(id);
-        request.setAttribute("role", role);
+        model.addAttribute("role", role);
         return "/admin/roleEdit";
     }
 
@@ -139,25 +127,19 @@ public class RoleController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Role role) {
-        try {
-            roleService.updateRole(role);
-            return renderSuccess("编辑成功！");
-        } catch (RuntimeException e) {
-            logger.error("编辑角色失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        roleService.updateRole(role);
+        return renderSuccess("编辑成功！");
     }
 
     /**
      * 授权页面
      *
-     * @param request
      * @param id
      * @param model
      * @return
      */
     @RequestMapping("/grantPage")
-    public String grantPage(HttpServletRequest request, Long id, Model model) {
+    public String grantPage(Long id, Model model) {
         model.addAttribute("id", id);
         return "/admin/roleGrant";
     }
@@ -165,21 +147,14 @@ public class RoleController extends BaseController {
     /**
      * 授权页面页面根据角色查询资源
      *
-     * @param request
      * @param id
-     * @param model
      * @return
      */
     @RequestMapping("/findResourceIdListByRoleId")
     @ResponseBody
-    public Object findResourceByRoleId(HttpServletRequest request, Long id, Model model) {
-        try {
-            List<Long> resources = roleService.findResourceIdListByRoleId(id);
-            return renderSuccess(resources);
-        } catch (RuntimeException e) {
-            logger.error("角色查询资源失败：{}", e);
-            return renderError(e.getMessage());
-        }
+    public Object findResourceByRoleId(Long id) {
+        List<Long> resources = roleService.findResourceIdListByRoleId(id);
+        return renderSuccess(resources);
     }
 
     /**
@@ -192,13 +167,8 @@ public class RoleController extends BaseController {
     @RequestMapping("/grant")
     @ResponseBody
     public Object grant(Long id, String resourceIds) {
-        try {
-            roleService.updateRoleResource(id, resourceIds);
-            return renderSuccess("授权成功！");
-        } catch (RuntimeException e) {
-            logger.error("授权成功失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        roleService.updateRoleResource(id, resourceIds);
+        return renderSuccess("授权成功！");
     }
 
 }

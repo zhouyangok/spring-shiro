@@ -1,10 +1,7 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.model.SysLog;
-import com.wangzhixuan.service.LogService;
 import com.wangzhixuan.commons.utils.PageInfo;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.wangzhixuan.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +32,7 @@ public class SysLogController {
 
     @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
     @ResponseBody
-    public PageInfo dataGrid(SysLog sysLog, Integer page, Integer rows) {
+    public PageInfo dataGrid(Integer page, Integer rows) {
         PageInfo pageInfo = new PageInfo(page, rows);
         Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);

@@ -34,11 +34,10 @@ public class TestController extends BaseController {
 
     /**
      * 图标测试
-     * @param model
      * @return
      */
     @RequestMapping(value = "/dataGrid", method = RequestMethod.GET)
-    public String dataGrid(Model model) {
+    public String dataGrid() {
         return "admin/test";
     }
 

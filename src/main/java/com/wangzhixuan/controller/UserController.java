@@ -98,14 +98,9 @@ public class UserController extends BaseController {
         if (u != null) {
             return renderError("用户名已存在!");
         }
-        try {
-            userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-            userService.addUser(userVo);
-            return renderSuccess("添加成功");
-        } catch (RuntimeException e) {
-            logger.error("添加用户失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+        userService.addUser(userVo);
+        return renderSuccess("添加成功");
     }
 
     /**
@@ -141,14 +136,9 @@ public class UserController extends BaseController {
         if (user != null && user.getId() != userVo.getId()) {
             return renderError("用户名已存在!");
         }
-        try {
-            userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-            userService.updateUser(userVo);
-            return renderSuccess("修改成功！");
-        } catch (RuntimeException e) {
-            logger.error("修改用户失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+        userService.updateUser(userVo);
+        return renderSuccess("修改成功！");
     }
 
     /**
@@ -175,13 +165,8 @@ public class UserController extends BaseController {
             return renderError("老密码不正确!");
         }
 
-        try {
-            userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
-            return renderSuccess("密码修改成功！");
-        } catch (Exception e) {
-            logger.error("修改密码失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
+        return renderSuccess("密码修改成功！");
     }
 
     /**
@@ -193,12 +178,7 @@ public class UserController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        try {
-            userService.deleteUserById(id);
-            return renderSuccess("删除成功！");
-        } catch (RuntimeException e) {
-            logger.error("删除用户失败：{}", e);
-            return renderError(e.getMessage());
-        }
+        userService.deleteUserById(id);
+        return renderSuccess("删除成功！");
     }
 }
