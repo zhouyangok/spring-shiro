@@ -1,7 +1,6 @@
-package com.wangzhixuan.commons.aspect;
+package com.wangzhixuan.commons.datasource;
 
 import com.wangzhixuan.commons.annotation.DataSourceChange;
-import com.wangzhixuan.commons.datasource.DynamicDataSource;
 import com.wangzhixuan.commons.exception.DataSourceAspectException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
