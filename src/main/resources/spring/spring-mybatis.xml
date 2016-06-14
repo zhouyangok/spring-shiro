@@ -15,6 +15,8 @@
 
     <!-- 扫描service -->
     <context:component-scan base-package="com.wangzhixuan.service"/>
+    <!-- aop Aspect -->
+    <context:component-scan base-package="com.wangzhixuan.commons.aspect"/>
 
     <!-- base dataSource -->
     <bean name="baseDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
@@ -47,9 +49,6 @@
         <property name="username" value="${slave_username}" />
         <property name="password" value="${slave_password}" />
     </bean>
-
-    <!--数据源切面注入spring-->
-    <bean id="dsChangeAspect" class="com.wangzhixuan.commons.aspect.DataSourceAspect"/>
 
     <!--主从库选择-->
     <bean id="dynamicDataSource" class="com.wangzhixuan.commons.datasource.DynamicDataSource">

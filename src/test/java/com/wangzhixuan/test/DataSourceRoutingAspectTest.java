@@ -1,27 +1,24 @@
 package com.wangzhixuan.test;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import com.wangzhixuan.service.SlaveService;
+import com.wangzhixuan.test.base.BaseTest;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @Description：DataSourceRoutingAspectTest
  * @author：Wangzhixuan 
  * @date：2015年8月19日 下午5:23:24
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({
-        "classpath:springmvc-servlet.xml",
-        "classpath:spring-config.xml"
-})
-public class DataSourceRoutingAspectTest {
+public class DataSourceRoutingAspectTest extends BaseTest {
 
     @Autowired
     private SlaveService slaveService;
+
+    /**
+     * 参考链接：Spring MVC测试框架详解——服务端测试
+     * <URL>http://jinnianshilongnian.iteye.com/blog/2004660</URL>
+     */
 
     @Test
     public void testFindAllShop() {

@@ -27,8 +27,8 @@ import java.util.Enumeration;
  */
 @Aspect
 @Component
-public class SysLogAop {
-    private static Logger LOGGER = LoggerFactory.getLogger(SysLogAop.class);
+public class SysLogAspect {
+    private static Logger LOGGER = LoggerFactory.getLogger(SysLogAspect.class);
 
     @Autowired
     private LogService logService;

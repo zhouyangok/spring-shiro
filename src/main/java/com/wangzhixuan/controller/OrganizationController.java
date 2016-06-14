@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -22,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 public class OrganizationController extends BaseController {
 
     @Autowired
-    @Resource
     private OrganizationService organizationService;
 
     /**
@@ -30,7 +28,7 @@ public class OrganizationController extends BaseController {
      *
      * @return
      */
-    @RequestMapping("/manager")
+    @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String manager() {
         return "admin/organization";
     }

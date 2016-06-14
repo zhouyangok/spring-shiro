@@ -6,12 +6,9 @@ import com.wangzhixuan.commons.exception.DataSourceAspectException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.lang.reflect.Method;
+import org.springframework.stereotype.Component;
 
 /**
  * 有{@link com.wangzhixuan.commons.annotation.DataSourceChange}注解的方法，调用时会切换到指定的数据源
@@ -19,23 +16,18 @@ import java.lang.reflect.Method;
  * @author tanghd
  */
 @Aspect
+@Component
 public class DataSourceAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceAspect.class);
 
-    @Pointcut(value = "@annotation(com.wangzhixuan.commons.annotation.DataSourceChange)")
-    private void changeDS() {}
-
-    @Around(value = "changeDS()", argNames = "pjp")
-    public Object doAround(ProceedingJoinPoint pjp) {
+    @Around("@annotation(dataSourceChange)")
+    public Object doAround(ProceedingJoinPoint pjp, DataSourceChange dataSourceChange) {
         Object retVal = null;
-        MethodSignature ms = (MethodSignature) pjp.getSignature();
-        Method method = ms.getMethod();
-        DataSourceChange annotation = method.getAnnotation(DataSourceChange.class);
         boolean selectedDataSource = false;
         try {
-            if (null != annotation) {
+            if (null != dataSourceChange) {
                 selectedDataSource = true;
-                if (annotation.slave()) {
+                if (dataSourceChange.slave()) {
                     DynamicDataSource.useSlave();
                 } else {
                     DynamicDataSource.useMaster();
