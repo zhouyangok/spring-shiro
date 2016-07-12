@@ -161,6 +161,12 @@
                             <span>登录日志</span>
                         </a>
                     </div>
+                    <div class="nav-item">
+                        <a href="javascript:addTab('Druid监控','${path}/druid','menu_icon_datadeal')">
+                            <span class="menu_icon_datadeal"></span>
+                            <span>Druid监控</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
