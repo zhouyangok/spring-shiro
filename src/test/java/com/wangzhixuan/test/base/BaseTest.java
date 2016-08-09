@@ -24,9 +24,10 @@ import java.io.IOException;
 		"classpath:spring-config.xml"
 })
 @WebAppConfiguration
-public class BaseTest {
-
+public abstract class BaseTest {
 	protected ApplicationContext applicationContext;
+
+	public BaseTest() {}
 
 	public ApplicationContext getApplicationContext() {
 		return applicationContext;
@@ -35,9 +36,8 @@ public class BaseTest {
 	public void setApplicationContext(ApplicationContext applicationContext) {
 		this.applicationContext = applicationContext;
 	}
-	
-	protected MockMvc mockMvc;
 
+	protected MockMvc mockMvc;
 	protected MockHttpServletRequest request;
 	protected MockHttpServletResponse response;
 
