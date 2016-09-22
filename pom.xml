@@ -245,16 +245,25 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <!-- 添加jetty插件以便启动 -->
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.3.10.v20160621</version>
                 <configuration>
-                    <charset>${project.build.sourceEncoding}</charset>
-                    <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
-                    <server>tomcat.server</server>
-                    <path>/</path>
-                    <port>8080</port>
+                    <stopPort>9966</stopPort>
+                    <stopKey>stop</stopKey>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                    <!-- 适应测试阶段的jetty，日志写入目录，tomcat写入tomcat/logs下 -->
+                    <systemProperties>
+                        <systemProperty>
+                            <name>catalina.base</name>
+                            <value>.</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
             <!-- mybatis 代码生成器插件 -->
@@ -298,4 +307,13 @@
             </properties>
         </profile>
     </profiles>
+    
+    <!-- 使用aliyun镜像 -->
+    <repositories>
+         <repository>
+             <id>aliyun</id>
+             <name>aliyun</name>
+             <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+         </repository>
+     </repositories>
 </project>
