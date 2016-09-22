@@ -1,7 +1,9 @@
 package com.wangzhixuan.commons.scan;
 
-import com.wangzhixuan.model.SysLog;
-import com.wangzhixuan.service.LogService;
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -9,6 +11,7 @@ import org.apache.shiro.subject.Subject;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +19,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
+import com.wangzhixuan.model.SysLog;
+import com.wangzhixuan.service.LogService;
 
 /**
  * @description：AOP 日志
@@ -32,9 +35,11 @@ public class SysLogAspect {
     @Autowired
     private LogService logService;
 
-    @Around("within(@org.springframework.stereotype.Controller *)")
-    public Object recordSysLog(ProceedingJoinPoint point) throws Throwable {
+    @Pointcut("within(@org.springframework.stereotype.Controller *)")
+    public void cutController() {}
 
+    @Around("cutController()")
+    public Object recordSysLog(ProceedingJoinPoint point) throws Throwable {
         String strMethodName = point.getSignature().getName();
         String strClassName = point.getTarget().getClass().getName();
         Object[] params = point.getArgs();

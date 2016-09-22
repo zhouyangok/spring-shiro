@@ -2,6 +2,8 @@ package com.wangzhixuan.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * @description：角色资源关联
  * @author：zhixuan.wang
@@ -43,10 +45,6 @@ public class RoleResource implements Serializable {
 
     @Override
     public String toString() {
-        return "RoleResource{" +
-                "id=" + id +
-                ", roleId=" + roleId +
-                ", resourceId=" + resourceId +
-                '}';
+        return ToStringBuilder.reflectionToString(this);
     }
 }

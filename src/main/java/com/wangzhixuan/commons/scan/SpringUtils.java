@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by chunmeng.lu
+ * Created by L.cm
  * Date: 2015-12-14 15:17
  */
 @Component

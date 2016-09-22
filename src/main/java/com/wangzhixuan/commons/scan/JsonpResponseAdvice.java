@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 
 /**
+ * 自动jsonp
  * created on 2016/1/13
  * @author dennisit.pu
  * @version 1.0

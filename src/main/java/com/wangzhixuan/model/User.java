@@ -1,9 +1,9 @@
 package com.wangzhixuan.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * @description：用户
@@ -32,7 +32,7 @@ public class User implements Serializable {
 
     private Integer organizationId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdate;
 
     private String phone;

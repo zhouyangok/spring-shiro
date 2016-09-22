@@ -17,16 +17,17 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 异常处理，对ajax类型的异常返回ajax错误，避免页面问题
- * Created by chunmeng.lu
+ * Created by L.cm
  * Date: 2016-24-03 16:18
  */
 @Component
+@SuppressWarnings("unchecked")
 public class ExceptionResolver implements HandlerExceptionResolver {
 	private final static Logger logger = LoggerFactory.getLogger(ExceptionResolver.class);
 
-	@Override
+    @Override
 	public ModelAndView resolveException(HttpServletRequest request,
-										 HttpServletResponse response, Object handler, Exception e) {
+		 HttpServletResponse response, Object handler, Exception e) {
 		// log记录异常
 		logger.error(e.getMessage(), e);
 		// 非控制器请求照成的异常
