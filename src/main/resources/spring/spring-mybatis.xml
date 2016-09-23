@@ -20,6 +20,9 @@
 
     <!-- base dataSource -->
     <bean name="baseDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="mergeStat,wall,log4j2" />
+        
         <property name="initialSize" value="5" />
         <property name="maxActive" value="100" />
         <property name="minIdle" value="10" />
@@ -33,7 +36,6 @@
         <property name="removeAbandoned" value="true" />
         <property name="removeAbandonedTimeout" value="1800" />
         <property name="logAbandoned" value="true" />
-        <property name="filters" value="mergeStat" />
     </bean>
 
     <!-- 主库 -->
