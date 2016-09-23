@@ -1,9 +1,10 @@
 package com.wangzhixuan.commons.scan;
 
-import java.util.Enumeration;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.wangzhixuan.commons.utils.StringUtils;
+import com.wangzhixuan.model.SysLog;
+import com.wangzhixuan.service.LogService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -11,16 +12,13 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.wangzhixuan.commons.utils.StringUtils;
-import com.wangzhixuan.model.SysLog;
-import com.wangzhixuan.service.LogService;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 
 /**
  * @description：AOP 日志
@@ -30,7 +28,7 @@ import com.wangzhixuan.service.LogService;
 @Aspect
 @Component
 public class SysLogAspect {
-    private static Logger LOGGER = LoggerFactory.getLogger(SysLogAspect.class);
+    private static final Logger LOGGER = LogManager.getLogger(SysLogAspect.class);
 
     @Autowired
     private LogService logService;

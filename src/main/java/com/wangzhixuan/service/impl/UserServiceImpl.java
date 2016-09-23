@@ -8,8 +8,8 @@ import com.wangzhixuan.service.UserService;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.result.UserVo;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,7 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    private static Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;

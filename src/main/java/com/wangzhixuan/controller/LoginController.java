@@ -1,5 +1,10 @@
 package com.wangzhixuan.controller;
 
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.utils.DigestUtils;
+import com.wangzhixuan.commons.utils.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -12,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.commons.utils.DigestUtils;
-import com.wangzhixuan.commons.utils.StringUtils;
-
 /**
  * @description：登录退出
  * @author：zhixuan.wang
@@ -23,6 +24,7 @@ import com.wangzhixuan.commons.utils.StringUtils;
  */
 @Controller
 public class LoginController extends BaseController {
+    private static final Logger LOGGER = LogManager.getLogger(LoginController.class);
     /**
      * 首页
      *
@@ -50,7 +52,7 @@ public class LoginController extends BaseController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
-        logger.info("GET请求登录");
+        LOGGER.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
@@ -67,7 +69,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Object loginPost(String username, String password) {
-        logger.info("POST请求登录");
+        LOGGER.info("POST请求登录");
 
         if (StringUtils.isBlank(username)) {
             return renderError("用户名不能为空");
@@ -81,16 +83,16 @@ public class LoginController extends BaseController {
         try {
             user.login(token);
         } catch (UnknownAccountException e) {
-            logger.error("账号不存在：{}", e);
+            LOGGER.error("账号不存在：{}", e);
             return renderError("账号不存在");
         } catch (DisabledAccountException e) {
-            logger.error("账号未启用：{}", e);
+            LOGGER.error("账号未启用：{}", e);
             return renderError("账号未启用");
         } catch (IncorrectCredentialsException e) {
-            logger.error("密码错误：{}", e);
+            LOGGER.error("密码错误：{}", e);
             return renderError("密码错误");
         } catch (RuntimeException e) {
-            logger.error("未知错误,请联系管理员：{}", e);
+            LOGGER.error("未知错误,请联系管理员：{}", e);
             return renderError("未知错误,请联系管理员");
         }
         return renderSuccess();
@@ -115,7 +117,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/logout")
     @ResponseBody
     public Object logout() {
-        logger.info("登出");
+        LOGGER.info("登出");
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return renderSuccess();

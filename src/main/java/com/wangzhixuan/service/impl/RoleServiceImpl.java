@@ -1,6 +1,7 @@
 package com.wangzhixuan.service.impl;
 
 import com.wangzhixuan.commons.exception.ServiceException;
+import com.wangzhixuan.commons.shiro.ShiroDbRealm;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
@@ -9,8 +10,8 @@ import com.wangzhixuan.model.RoleResource;
 import com.wangzhixuan.service.RoleService;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.result.Tree;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,7 @@ import java.util.Map;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-
-    private static Logger LOGGER = LoggerFactory.getLogger(RoleServiceImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(RoleServiceImpl.class);
 
     @Autowired
     private RoleMapper roleMapper;

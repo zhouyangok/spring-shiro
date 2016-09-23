@@ -1,7 +1,7 @@
 package com.wangzhixuan.commons.datasource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 import javax.sql.DataSource;
@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class DynamicDataSource extends AbstractRoutingDataSource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicDataSource.class);
+    private static final Logger LOGGER = LogManager.getLogger(DynamicDataSource.class);
 
     private DataSource master; // 主库，只允许有一个
     private List<DataSource> slaves; // 从库，允许有多个

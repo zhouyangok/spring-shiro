@@ -2,8 +2,8 @@ package com.wangzhixuan.commons.scan;
 
 import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.commons.utils.BeanUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,13 +23,13 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 @SuppressWarnings("unchecked")
 public class ExceptionResolver implements HandlerExceptionResolver {
-	private final static Logger logger = LoggerFactory.getLogger(ExceptionResolver.class);
+	private static final Logger LOGGER = LogManager.getLogger(ExceptionResolver.class);
 
-    @Override
+	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 		 HttpServletResponse response, Object handler, Exception e) {
 		// log记录异常
-		logger.error(e.getMessage(), e);
+		LOGGER.error(e.getMessage(), e);
 		// 非控制器请求照成的异常
 		if (!(handler instanceof HandlerMethod)) {
 			return new ModelAndView("error/500");
