@@ -1,13 +1,10 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.commons.result.UserVo;
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.model.Role;
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.UserService;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.result.UserVo;
+import com.wangzhixuan.commons.utils.DigestUtils;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.utils.StringUtils;
+import com.wangzhixuan.model.Role;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.UserService;
 
 /**
  * @description：用户管理
@@ -58,7 +59,7 @@ public class UserController extends BaseController {
         PageInfo pageInfo = new PageInfo(page, rows);
         Map<String, Object> condition = new HashMap<String, Object>();
 
-        if (StringUtils.isNoneBlank(userVo.getName())) {
+        if (StringUtils.isNotBlank(userVo.getName())) {
             condition.put("name", userVo.getName());
         }
         if (userVo.getOrganizationId() != null) {

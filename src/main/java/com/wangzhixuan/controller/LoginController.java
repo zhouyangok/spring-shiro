@@ -1,8 +1,5 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.base.BaseController;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -14,6 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.utils.DigestUtils;
+import com.wangzhixuan.commons.utils.StringUtils;
 
 /**
  * @description：登录退出
