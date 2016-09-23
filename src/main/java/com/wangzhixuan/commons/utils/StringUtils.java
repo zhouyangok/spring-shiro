@@ -24,7 +24,7 @@ public class StringUtils extends org.springframework.util.StringUtils {
      * @see Character#isWhitespace
      */
     public static boolean isBlank(final CharSequence cs) {
-        return StringUtils.hasText(cs);
+        return !StringUtils.isNotBlank(cs);
     }
     
     /**
@@ -44,6 +44,6 @@ public class StringUtils extends org.springframework.util.StringUtils {
      * @see Character#isWhitespace
      */
     public static boolean isNotBlank(final CharSequence cs) {
-        return !StringUtils.isBlank(cs);
+        return StringUtils.hasText(cs);
     }
 }
