@@ -39,6 +39,6 @@ public class JsonpResponseAdvice extends AbstractJsonpResponseBodyAdvice {
 
     @Override
     protected MediaType getContentType(MediaType contentType, ServerHttpRequest request, ServerHttpResponse response) {
-        return new MediaType("application", "javascript", contentType.getCharSet());
+        return new MediaType("application", "javascript", contentType.getCharset());
     }
 }
