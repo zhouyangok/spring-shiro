@@ -17,7 +17,7 @@ public class RuntimeUtils {
     public static void runShell(String script) {
         Process process = null;
         try {
-            String[] cmd = { "/bin/sh", "-c", script };
+            String[] cmd = { "sh", script };
             //执行liunx命令
             process = Runtime.getRuntime().exec(cmd);
             process.waitFor();
