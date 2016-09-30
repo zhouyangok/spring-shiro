@@ -63,7 +63,7 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/addPage")
     public String addPage() {
-        return "/admin/resourceAdd";
+        return "admin/resourceAdd";
     }
 
     /**
@@ -112,7 +112,7 @@ public class ResourceController extends BaseController {
     public String editPage(Model model, Long id) {
         Resource resource = resourceService.findResourceById(id);
         model.addAttribute("resource", resource);
-        return "/admin/resourceEdit";
+        return "admin/resourceEdit";
     }
 
     /**

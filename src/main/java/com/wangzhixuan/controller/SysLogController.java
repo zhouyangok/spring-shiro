@@ -26,7 +26,7 @@ public class SysLogController {
 
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String manager() {
-        return "/admin/syslog";
+        return "admin/syslog";
     }
 
 

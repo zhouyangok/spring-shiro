@@ -2,21 +2,21 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50527
-Source Host           : 127.0.0.1:3306
+Source Server Version : 50712
+Source Host           : localhost:3306
 Source Database       : shiro
 
 Target Server Type    : MYSQL
-Target Server Version : 50527
+Target Server Version : 50712
 File Encoding         : 65001
 
-Date: 2015-12-07 20:44:38
+Date: 2016-09-30 22:20:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for organization
+-- Table structure for `organization`
 -- ----------------------------
 DROP TABLE IF EXISTS `organization`;
 CREATE TABLE `organization` (
@@ -40,7 +40,7 @@ INSERT INTO `organization` VALUES ('5', '产品部', '', '03', 'icon-company', n
 INSERT INTO `organization` VALUES ('6', '测试组', '', '04', 'icon-folder', '3', '0', '2015-12-06 13:12:18');
 
 -- ----------------------------
--- Table structure for resource
+-- Table structure for `resource`
 -- ----------------------------
 DROP TABLE IF EXISTS `resource`;
 CREATE TABLE `resource` (
@@ -55,16 +55,16 @@ CREATE TABLE `resource` (
   `resourcetype` tinyint(2) NOT NULL DEFAULT '0',
   `createdate` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=227 DEFAULT CHARSET=utf8 COMMENT='资源';
+) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=utf8 COMMENT='资源';
 
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('1', '系统管理', '', '系统管理', 'icon-company', null, '0', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('11', '资源管理', '/resource/manager', '资源管理', 'icon-folder', '1', '1', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('12', '角色管理', '/role/manager', '角色管理', 'icon-folder', '1', '2', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('13', '用户管理', '/user/manager', '用户管理', 'icon-folder', '1', '3', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('14', '部门管理', '/organization/manager', '部门管理', 'icon-folder', '1', '4', '0', '0', '2014-02-19 01:00:00');
+INSERT INTO `resource` VALUES ('1', '权限管理', '', '系统管理', 'icon-company', null, '0', '0', '0', '2014-02-19 01:00:00');
+INSERT INTO `resource` VALUES ('11', '资源管理', '/resource/manager', '资源管理', 'menu_icon_datadeal', '1', '1', '0', '0', '2014-02-19 01:00:00');
+INSERT INTO `resource` VALUES ('12', '角色管理', '/role/manager', '角色管理', 'menu_icon_datadeal', '1', '2', '0', '0', '2014-02-19 01:00:00');
+INSERT INTO `resource` VALUES ('13', '用户管理', '/user/manager', '用户管理', 'menu_icon_datadeal', '1', '3', '0', '0', '2014-02-19 01:00:00');
+INSERT INTO `resource` VALUES ('14', '部门管理', '/organization/manager', '部门管理', 'menu_icon_datadeal', '1', '4', '0', '0', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('111', '列表', '/resource/treeGrid', '资源列表', 'icon-list', '11', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('112', '添加', '/resource/add', '资源添加', 'icon-add', '11', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('113', '编辑', '/resource/edit', '资源编辑', 'icon-edit', '11', '0', '0', '1', '2014-02-19 01:00:00');
@@ -82,14 +82,16 @@ INSERT INTO `resource` VALUES ('141', '列表', '/organization/treeGrid', '用�
 INSERT INTO `resource` VALUES ('142', '添加', '/organization/add', '部门添加', 'icon-add', '14', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('143', '编辑', '/organization/edit', '部门编辑', 'icon-edit', '14', '0', '0', '1', '2014-02-19 01:00:00');
 INSERT INTO `resource` VALUES ('144', '删除', '/organization/delete', '部门删除', 'icon-del', '14', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('221', '日志管理', '/sysLog/manager', null, 'icon-company', null, '2', '0', '0', '2015-12-01 11:44:20');
+INSERT INTO `resource` VALUES ('221', '日志监控', '', null, 'icon-company', null, '2', '0', '0', '2015-12-01 11:44:20');
 INSERT INTO `resource` VALUES ('222', '视频教程', '', null, 'icon-company', null, '1', '0', '0', '2015-12-06 12:40:42');
-INSERT INTO `resource` VALUES ('223', '官方网站', 'http://www.dreamlu.net/', null, 'icon-folder', '222', '0', '0', '0', '2015-12-06 12:42:42');
-INSERT INTO `resource` VALUES ('224', 'jfinal视频', 'http://blog.dreamlu.net/blog/79', null, 'icon-folder', '222', '1', '0', '0', '2015-12-06 12:45:28');
+INSERT INTO `resource` VALUES ('223', '官方网站', 'http://www.dreamlu.net/', null, 'menu_icon_datadeal', '222', '0', '0', '0', '2015-12-06 12:42:42');
+INSERT INTO `resource` VALUES ('224', 'jfinal视频', 'http://blog.dreamlu.net/blog/79', null, 'menu_icon_datadeal', '222', '1', '0', '0', '2015-12-06 12:45:28');
 INSERT INTO `resource` VALUES ('226', '修改密码', '/user/editPwdPage', null, 'icon-edit', null, '3', '0', '1', '2015-12-07 20:23:06');
+INSERT INTO `resource` VALUES ('227', '登录日志', '/sysLog/manager', null, 'menu_icon_datadeal', '221', '0', '0', '0', '2016-09-30 22:10:53');
+INSERT INTO `resource` VALUES ('228', 'Druid监控', '/druid', null, 'menu_icon_datadeal', '221', '0', '0', '0', '2016-09-30 22:12:50');
 
 -- ----------------------------
--- Table structure for role
+-- Table structure for `role`
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role` (
@@ -110,7 +112,7 @@ INSERT INTO `role` VALUES ('7', '产品部经理', '0', '产品部经理', '0');
 INSERT INTO `role` VALUES ('8', '测试账户', '0', '测试账户', '0');
 
 -- ----------------------------
--- Table structure for role_resource
+-- Table structure for `role_resource`
 -- ----------------------------
 DROP TABLE IF EXISTS `role_resource`;
 CREATE TABLE `role_resource` (
@@ -118,7 +120,7 @@ CREATE TABLE `role_resource` (
   `role_id` bigint(19) NOT NULL,
   `resource_id` bigint(19) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=409 DEFAULT CHARSET=utf8 COMMENT='角色资源';
+) ENGINE=InnoDB AUTO_INCREMENT=463 DEFAULT CHARSET=utf8 COMMENT='角色资源';
 
 -- ----------------------------
 -- Records of role_resource
@@ -145,16 +147,6 @@ INSERT INTO `role_resource` VALUES ('176', '3', '141');
 INSERT INTO `role_resource` VALUES ('177', '3', '142');
 INSERT INTO `role_resource` VALUES ('178', '3', '143');
 INSERT INTO `role_resource` VALUES ('179', '3', '144');
-INSERT INTO `role_resource` VALUES ('349', '2', '1');
-INSERT INTO `role_resource` VALUES ('350', '2', '13');
-INSERT INTO `role_resource` VALUES ('351', '2', '131');
-INSERT INTO `role_resource` VALUES ('352', '2', '132');
-INSERT INTO `role_resource` VALUES ('353', '2', '133');
-INSERT INTO `role_resource` VALUES ('354', '2', '222');
-INSERT INTO `role_resource` VALUES ('355', '2', '223');
-INSERT INTO `role_resource` VALUES ('356', '2', '224');
-INSERT INTO `role_resource` VALUES ('357', '2', '221');
-INSERT INTO `role_resource` VALUES ('358', '2', '226');
 INSERT INTO `role_resource` VALUES ('359', '7', '1');
 INSERT INTO `role_resource` VALUES ('360', '7', '14');
 INSERT INTO `role_resource` VALUES ('361', '7', '141');
@@ -165,49 +157,63 @@ INSERT INTO `role_resource` VALUES ('365', '7', '223');
 INSERT INTO `role_resource` VALUES ('366', '7', '224');
 INSERT INTO `role_resource` VALUES ('367', '7', '221');
 INSERT INTO `role_resource` VALUES ('368', '7', '226');
-INSERT INTO `role_resource` VALUES ('369', '1', '1');
-INSERT INTO `role_resource` VALUES ('370', '1', '11');
-INSERT INTO `role_resource` VALUES ('371', '1', '111');
-INSERT INTO `role_resource` VALUES ('372', '1', '112');
-INSERT INTO `role_resource` VALUES ('373', '1', '113');
-INSERT INTO `role_resource` VALUES ('374', '1', '114');
-INSERT INTO `role_resource` VALUES ('375', '1', '12');
-INSERT INTO `role_resource` VALUES ('376', '1', '121');
-INSERT INTO `role_resource` VALUES ('377', '1', '122');
-INSERT INTO `role_resource` VALUES ('378', '1', '123');
-INSERT INTO `role_resource` VALUES ('379', '1', '124');
-INSERT INTO `role_resource` VALUES ('380', '1', '125');
-INSERT INTO `role_resource` VALUES ('381', '1', '13');
-INSERT INTO `role_resource` VALUES ('382', '1', '131');
-INSERT INTO `role_resource` VALUES ('383', '1', '132');
-INSERT INTO `role_resource` VALUES ('384', '1', '133');
-INSERT INTO `role_resource` VALUES ('385', '1', '134');
-INSERT INTO `role_resource` VALUES ('386', '1', '14');
-INSERT INTO `role_resource` VALUES ('387', '1', '141');
-INSERT INTO `role_resource` VALUES ('388', '1', '142');
-INSERT INTO `role_resource` VALUES ('389', '1', '143');
-INSERT INTO `role_resource` VALUES ('390', '1', '144');
-INSERT INTO `role_resource` VALUES ('391', '1', '222');
-INSERT INTO `role_resource` VALUES ('392', '1', '223');
-INSERT INTO `role_resource` VALUES ('393', '1', '224');
-INSERT INTO `role_resource` VALUES ('394', '1', '221');
-INSERT INTO `role_resource` VALUES ('395', '1', '226');
-INSERT INTO `role_resource` VALUES ('396', '8', '1');
-INSERT INTO `role_resource` VALUES ('397', '8', '11');
-INSERT INTO `role_resource` VALUES ('398', '8', '111');
-INSERT INTO `role_resource` VALUES ('399', '8', '12');
-INSERT INTO `role_resource` VALUES ('400', '8', '121');
-INSERT INTO `role_resource` VALUES ('401', '8', '13');
-INSERT INTO `role_resource` VALUES ('402', '8', '131');
-INSERT INTO `role_resource` VALUES ('403', '8', '14');
-INSERT INTO `role_resource` VALUES ('404', '8', '141');
-INSERT INTO `role_resource` VALUES ('405', '8', '222');
-INSERT INTO `role_resource` VALUES ('406', '8', '223');
-INSERT INTO `role_resource` VALUES ('407', '8', '224');
-INSERT INTO `role_resource` VALUES ('408', '8', '221');
+INSERT INTO `role_resource` VALUES ('409', '1', '1');
+INSERT INTO `role_resource` VALUES ('410', '1', '11');
+INSERT INTO `role_resource` VALUES ('411', '1', '111');
+INSERT INTO `role_resource` VALUES ('412', '1', '112');
+INSERT INTO `role_resource` VALUES ('413', '1', '113');
+INSERT INTO `role_resource` VALUES ('414', '1', '114');
+INSERT INTO `role_resource` VALUES ('415', '1', '12');
+INSERT INTO `role_resource` VALUES ('416', '1', '121');
+INSERT INTO `role_resource` VALUES ('417', '1', '122');
+INSERT INTO `role_resource` VALUES ('418', '1', '123');
+INSERT INTO `role_resource` VALUES ('419', '1', '124');
+INSERT INTO `role_resource` VALUES ('420', '1', '125');
+INSERT INTO `role_resource` VALUES ('421', '1', '13');
+INSERT INTO `role_resource` VALUES ('422', '1', '131');
+INSERT INTO `role_resource` VALUES ('423', '1', '132');
+INSERT INTO `role_resource` VALUES ('424', '1', '133');
+INSERT INTO `role_resource` VALUES ('425', '1', '134');
+INSERT INTO `role_resource` VALUES ('426', '1', '14');
+INSERT INTO `role_resource` VALUES ('427', '1', '141');
+INSERT INTO `role_resource` VALUES ('428', '1', '142');
+INSERT INTO `role_resource` VALUES ('429', '1', '143');
+INSERT INTO `role_resource` VALUES ('430', '1', '144');
+INSERT INTO `role_resource` VALUES ('431', '1', '222');
+INSERT INTO `role_resource` VALUES ('432', '1', '223');
+INSERT INTO `role_resource` VALUES ('433', '1', '224');
+INSERT INTO `role_resource` VALUES ('434', '1', '221');
+INSERT INTO `role_resource` VALUES ('435', '1', '227');
+INSERT INTO `role_resource` VALUES ('436', '1', '228');
+INSERT INTO `role_resource` VALUES ('437', '2', '1');
+INSERT INTO `role_resource` VALUES ('438', '2', '13');
+INSERT INTO `role_resource` VALUES ('439', '2', '131');
+INSERT INTO `role_resource` VALUES ('440', '2', '132');
+INSERT INTO `role_resource` VALUES ('441', '2', '133');
+INSERT INTO `role_resource` VALUES ('442', '2', '222');
+INSERT INTO `role_resource` VALUES ('443', '2', '223');
+INSERT INTO `role_resource` VALUES ('444', '2', '224');
+INSERT INTO `role_resource` VALUES ('445', '2', '221');
+INSERT INTO `role_resource` VALUES ('446', '2', '227');
+INSERT INTO `role_resource` VALUES ('447', '2', '228');
+INSERT INTO `role_resource` VALUES ('448', '8', '1');
+INSERT INTO `role_resource` VALUES ('449', '8', '11');
+INSERT INTO `role_resource` VALUES ('450', '8', '111');
+INSERT INTO `role_resource` VALUES ('451', '8', '12');
+INSERT INTO `role_resource` VALUES ('452', '8', '121');
+INSERT INTO `role_resource` VALUES ('453', '8', '13');
+INSERT INTO `role_resource` VALUES ('454', '8', '131');
+INSERT INTO `role_resource` VALUES ('455', '8', '14');
+INSERT INTO `role_resource` VALUES ('456', '8', '141');
+INSERT INTO `role_resource` VALUES ('457', '8', '222');
+INSERT INTO `role_resource` VALUES ('458', '8', '223');
+INSERT INTO `role_resource` VALUES ('459', '8', '224');
+INSERT INTO `role_resource` VALUES ('460', '8', '221');
+INSERT INTO `role_resource` VALUES ('461', '8', '227');
+INSERT INTO `role_resource` VALUES ('462', '8', '228');
 
 -- ----------------------------
--- Table structure for syslog
+-- Table structure for `syslog`
 -- ----------------------------
 DROP TABLE IF EXISTS `syslog`;
 CREATE TABLE `syslog` (
@@ -218,7 +224,7 @@ CREATE TABLE `syslog` (
   `client_ip` varchar(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=304 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=382 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of syslog
@@ -524,9 +530,87 @@ INSERT INTO `syslog` VALUES ('300', 'admin', 'admin', '[类名]:com.wangzhixuan.
 INSERT INTO `syslog` VALUES ('301', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:logout,[参数]:null', '127.0.0.1', '2015-12-07 20:42:39');
 INSERT INTO `syslog` VALUES ('302', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:logout,[参数]:null', '127.0.0.1', '2015-12-07 20:42:59');
 INSERT INTO `syslog` VALUES ('303', 'test', 'admin', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:logout,[参数]:null', '127.0.0.1', '2015-12-07 20:43:16');
+INSERT INTO `syslog` VALUES ('304', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:null', '0:0:0:0:0:0:0:1', '2016-05-13 23:25:20');
+INSERT INTO `syslog` VALUES ('305', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-05-13 23:25:23');
+INSERT INTO `syslog` VALUES ('306', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:null', '0:0:0:0:0:0:0:1', '2016-05-13 23:33:25');
+INSERT INTO `syslog` VALUES ('307', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-05-13 23:33:27');
+INSERT INTO `syslog` VALUES ('308', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:null', '0:0:0:0:0:0:0:1', '2016-05-13 23:52:02');
+INSERT INTO `syslog` VALUES ('309', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-05-13 23:52:08');
+INSERT INTO `syslog` VALUES ('310', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 17:04:38');
+INSERT INTO `syslog` VALUES ('311', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-06-14 17:05:02');
+INSERT INTO `syslog` VALUES ('312', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 17:10:50');
+INSERT INTO `syslog` VALUES ('313', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 17:10:50');
+INSERT INTO `syslog` VALUES ('314', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-06-14 17:10:54');
+INSERT INTO `syslog` VALUES ('315', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 17:10:57');
+INSERT INTO `syslog` VALUES ('316', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 17:12:36');
+INSERT INTO `syslog` VALUES ('317', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-06-14 17:12:38');
+INSERT INTO `syslog` VALUES ('318', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 17:17:20');
+INSERT INTO `syslog` VALUES ('319', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 17:17:27');
+INSERT INTO `syslog` VALUES ('320', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-06-14 17:17:29');
+INSERT INTO `syslog` VALUES ('321', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-06-14 18:16:23');
+INSERT INTO `syslog` VALUES ('322', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-06-14 18:16:30');
+INSERT INTO `syslog` VALUES ('323', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-07-12 19:16:35');
+INSERT INTO `syslog` VALUES ('324', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=admin&password=admin&', '0:0:0:0:0:0:0:1', '2016-07-12 19:16:37');
+INSERT INTO `syslog` VALUES ('325', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:loginPost,[参数]:username=test&password=test&', '0:0:0:0:0:0:0:1', '2016-07-12 19:16:43');
+INSERT INTO `syslog` VALUES ('326', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-07-18 18:20:11');
+INSERT INTO `syslog` VALUES ('327', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-07-25 13:09:44');
+INSERT INTO `syslog` VALUES ('328', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-07-25 13:10:54');
+INSERT INTO `syslog` VALUES ('329', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-07-25 13:16:07');
+INSERT INTO `syslog` VALUES ('330', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:logout,[参数]:', null, '2016-09-23 15:57:39');
+INSERT INTO `syslog` VALUES ('331', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:logout,[参数]:', null, '2016-09-30 09:54:30');
+INSERT INTO `syslog` VALUES ('332', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:login,[参数]:', null, '2016-09-30 10:11:02');
+INSERT INTO `syslog` VALUES ('333', 'test', 'test', '[类名]:com.wangzhixuan.controller.LoginController,[方法]:logout,[参数]:', null, '2016-09-30 21:32:53');
+INSERT INTO `syslog` VALUES ('334', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=1&_=1475243708573&', '0:0:0:0:0:0:0:1', '2016-09-30 21:58:10');
+INSERT INTO `syslog` VALUES ('335', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=1&_=1475243708574&', '0:0:0:0:0:0:0:1', '2016-09-30 21:59:56');
+INSERT INTO `syslog` VALUES ('336', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:editPage,[参数]:id=1&_=1475244003906&', '0:0:0:0:0:0:0:1', '2016-09-30 22:00:19');
+INSERT INTO `syslog` VALUES ('337', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=131&_=1475244003907&', '0:0:0:0:0:0:0:1', '2016-09-30 22:00:37');
+INSERT INTO `syslog` VALUES ('338', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=1&_=1475244003908&', '0:0:0:0:0:0:0:1', '2016-09-30 22:01:40');
+INSERT INTO `syslog` VALUES ('339', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=系统管理&icon=menu_icon_datadeal&pid=&id=1&resourcetype=0&url=&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:01:45');
+INSERT INTO `syslog` VALUES ('340', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=1&_=1475244003909&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:08');
+INSERT INTO `syslog` VALUES ('341', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=系统管理&icon=icon-company&pid=&id=1&resourcetype=0&url=&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:12');
+INSERT INTO `syslog` VALUES ('342', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=11&_=1475244003910&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:28');
+INSERT INTO `syslog` VALUES ('343', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=资源管理&icon=menu_icon_datadeal&pid=1&id=11&resourcetype=0&url=/resource/manager&seq=1&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:33');
+INSERT INTO `syslog` VALUES ('344', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=12&_=1475244003911&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:38');
+INSERT INTO `syslog` VALUES ('345', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=角色管理&icon=menu_icon_datadeal&pid=1&id=12&resourcetype=0&url=/role/manager&seq=2&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:41');
+INSERT INTO `syslog` VALUES ('346', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=13&_=1475244003912&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:44');
+INSERT INTO `syslog` VALUES ('347', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=用户管理&icon=menu_icon_datadeal&pid=1&id=13&resourcetype=0&url=/user/manager&seq=3&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:47');
+INSERT INTO `syslog` VALUES ('348', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=14&_=1475244003913&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:50');
+INSERT INTO `syslog` VALUES ('349', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=部门管理&icon=menu_icon_datadeal&pid=1&id=14&resourcetype=0&url=/organization/manager&seq=4&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:53');
+INSERT INTO `syslog` VALUES ('350', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=223&_=1475244003914&', '0:0:0:0:0:0:0:1', '2016-09-30 22:03:57');
+INSERT INTO `syslog` VALUES ('351', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=官方网站&icon=menu_icon_datadeal&pid=222&id=223&resourcetype=0&url=http://www.dreamlu.net/&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:04:00');
+INSERT INTO `syslog` VALUES ('352', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=224&_=1475244003915&', '0:0:0:0:0:0:0:1', '2016-09-30 22:04:03');
+INSERT INTO `syslog` VALUES ('353', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=jfinal视频&icon=menu_icon_datadeal&pid=222&id=224&resourcetype=0&url=http://blog.dreamlu.net/blog/79&seq=1&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:04:07');
+INSERT INTO `syslog` VALUES ('354', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:addPage,[参数]:', null, '2016-09-30 22:04:23');
+INSERT INTO `syslog` VALUES ('355', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=1&_=1475244003917&', '0:0:0:0:0:0:0:1', '2016-09-30 22:09:39');
+INSERT INTO `syslog` VALUES ('356', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=权限管理&icon=icon-company&pid=&id=1&resourcetype=0&url=&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:09:54');
+INSERT INTO `syslog` VALUES ('357', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:addPage,[参数]:', null, '2016-09-30 22:10:07');
+INSERT INTO `syslog` VALUES ('358', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=221&_=1475244003919&', '0:0:0:0:0:0:0:1', '2016-09-30 22:10:20');
+INSERT INTO `syslog` VALUES ('359', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=日志监控&icon=icon-company&pid=&id=221&resourcetype=0&url=/sysLog/manager&seq=2&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:10:27');
+INSERT INTO `syslog` VALUES ('360', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:addPage,[参数]:', null, '2016-09-30 22:10:30');
+INSERT INTO `syslog` VALUES ('361', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:add,[参数]:name=日志管理&icon=&pid=221&resourcetype=0&url=&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:10:53');
+INSERT INTO `syslog` VALUES ('362', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=221&_=1475244003921&', '0:0:0:0:0:0:0:1', '2016-09-30 22:11:16');
+INSERT INTO `syslog` VALUES ('363', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=日志监控&icon=icon-company&pid=&id=221&resourcetype=0&url=&seq=2&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:11:23');
+INSERT INTO `syslog` VALUES ('364', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=227&_=1475244003922&', '0:0:0:0:0:0:0:1', '2016-09-30 22:11:27');
+INSERT INTO `syslog` VALUES ('365', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=日志管理&icon=&pid=221&id=227&resourcetype=0&url=/sysLog/manager&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:11:30');
+INSERT INTO `syslog` VALUES ('366', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=227&_=1475244003923&', '0:0:0:0:0:0:0:1', '2016-09-30 22:12:07');
+INSERT INTO `syslog` VALUES ('367', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=日志管理&icon=menu_icon_datadeal&pid=221&id=227&resourcetype=0&url=/sysLog/manager&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:12:10');
+INSERT INTO `syslog` VALUES ('368', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:addPage,[参数]:', null, '2016-09-30 22:12:14');
+INSERT INTO `syslog` VALUES ('369', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:add,[参数]:name=Druid监控&icon=menu_icon_datadeal&pid=221&resourcetype=0&url=/druid&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:12:50');
+INSERT INTO `syslog` VALUES ('370', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:editPage,[参数]:id=227&_=1475244781032&', '0:0:0:0:0:0:0:1', '2016-09-30 22:13:22');
+INSERT INTO `syslog` VALUES ('371', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.ResourceController,[方法]:edit,[参数]:name=登录日志&icon=menu_icon_datadeal&pid=221&id=227&resourcetype=0&url=/sysLog/manager&seq=0&status=0&', '0:0:0:0:0:0:0:1', '2016-09-30 22:13:25');
+INSERT INTO `syslog` VALUES ('372', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.UserController,[方法]:editPage,[参数]:id=14&_=1475244998505&', '0:0:0:0:0:0:0:1', '2016-09-30 22:17:22');
+INSERT INTO `syslog` VALUES ('373', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grantPage,[参数]:id=1&_=1475244998506&', '0:0:0:0:0:0:0:1', '2016-09-30 22:17:43');
+INSERT INTO `syslog` VALUES ('374', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grant,[参数]:id=1&resourceIds=1,11,111,112,113,114,12,121,122,123,124,125,13,131,132,133,134,14,141,142,143,144,222,223,224,221,227,228&', '0:0:0:0:0:0:0:1', '2016-09-30 22:17:48');
+INSERT INTO `syslog` VALUES ('375', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grantPage,[参数]:id=2&_=1475244998507&', '0:0:0:0:0:0:0:1', '2016-09-30 22:17:55');
+INSERT INTO `syslog` VALUES ('376', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grant,[参数]:id=2&resourceIds=1,13,131,132,133,222,223,224,221,227,228&', '0:0:0:0:0:0:0:1', '2016-09-30 22:18:03');
+INSERT INTO `syslog` VALUES ('377', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grantPage,[参数]:id=7&_=1475244998508&', '0:0:0:0:0:0:0:1', '2016-09-30 22:18:07');
+INSERT INTO `syslog` VALUES ('378', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grantPage,[参数]:id=8&_=1475244998509&', '0:0:0:0:0:0:0:1', '2016-09-30 22:18:15');
+INSERT INTO `syslog` VALUES ('379', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grant,[参数]:id=8&resourceIds=1,11,111,12,121,13,131,14,141,222,223,224,221,227,228&', '0:0:0:0:0:0:0:1', '2016-09-30 22:18:32');
+INSERT INTO `syslog` VALUES ('380', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grantPage,[参数]:id=7&_=1475244998510&', '0:0:0:0:0:0:0:1', '2016-09-30 22:18:38');
+INSERT INTO `syslog` VALUES ('381', 'admin', 'admin', '[类名]:com.wangzhixuan.controller.RoleController,[方法]:grantPage,[参数]:id=1&_=1475244998511&', '0:0:0:0:0:0:0:1', '2016-09-30 22:18:44');
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -553,7 +637,7 @@ INSERT INTO `user` VALUES ('14', 'dreamlu', 'dreamlu', '098f6bcd4621d373cade4e83
 INSERT INTO `user` VALUES ('15', 'test', 'test', '098f6bcd4621d373cade4e832627b4f6', '0', '25', '1', '0', '6', '2015-12-06 13:13:03', '18707173376');
 
 -- ----------------------------
--- Table structure for user_role
+-- Table structure for `user_role`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
