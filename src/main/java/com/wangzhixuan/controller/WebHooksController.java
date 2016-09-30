@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
@@ -17,7 +16,6 @@ import com.wangzhixuan.commons.scan.SpringUtils;
 import com.wangzhixuan.commons.utils.JsonUtils;
 import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.event.WebHooksEvent;
-import com.wangzhixuan.event.WebHooksListener;
 
 /**
  * WebHooks 自动更新部署
@@ -34,8 +32,7 @@ public class WebHooksController extends BaseController {
      * @param hook json字符串
      * @return jsonBean
      */
-//    @RequestMapping(value = "webhooks", method = RequestMethod.POST)
-    @RequestMapping(value = "webhooks")
+    @RequestMapping(value = "webhooks", method = RequestMethod.POST)
     @ResponseBody
     public Object hooks(HttpServletRequest request) {
         String hook = request.getParameter("hook");
