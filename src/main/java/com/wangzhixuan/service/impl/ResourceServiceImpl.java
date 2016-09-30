@@ -1,9 +1,7 @@
 package com.wangzhixuan.service.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +64,7 @@ public class ResourceServiceImpl implements ResourceService {
         }
 
         // 普通用户
-        Set<Resource> resourceIdList = new HashSet<Resource>();
+        List<Resource> resourceIdList = new ArrayList<Resource>();
         List<Long> roleIdList = userRoleMapper.findRoleIdListByUserId(user.getId());
         for (Long i : roleIdList) {
             List<Resource> resourceIdLists = roleMapper.findResourceIdListByRoleIdAndType(i);
@@ -75,26 +73,26 @@ public class ResourceServiceImpl implements ResourceService {
             }
         }
         for (Resource resource : resourceIdList) {
-                if (resource != null && resource.getPid() == null) {
-                    Tree treeOne = new Tree();
-                    treeOne.setId(resource.getId());
-                    treeOne.setText(resource.getName());
-                    treeOne.setIconCls(resource.getIcon());
-                    treeOne.setAttributes(resource.getUrl());
-                    List<Tree> tree = new ArrayList<Tree>();
-                    for (Resource resourceTwo : resourceIdList) {
-                        if (resourceTwo.getPid() != null && resource.getId().longValue() == resourceTwo.getPid().longValue()) {
-                            Tree treeTwo = new Tree();
-                            treeTwo.setId(resourceTwo.getId());
-                            treeTwo.setText(resourceTwo.getName());
-                            treeTwo.setIconCls(resourceTwo.getIcon());
-                            treeTwo.setAttributes(resourceTwo.getUrl());
-                            tree.add(treeTwo);
-                        }
+            if (resource != null && resource.getPid() == null) {
+                Tree treeOne = new Tree();
+                treeOne.setId(resource.getId());
+                treeOne.setText(resource.getName());
+                treeOne.setIconCls(resource.getIcon());
+                treeOne.setAttributes(resource.getUrl());
+                List<Tree> tree = new ArrayList<Tree>();
+                for (Resource resourceTwo : resourceIdList) {
+                    if (resourceTwo.getPid() != null && resource.getId().longValue() == resourceTwo.getPid().longValue()) {
+                        Tree treeTwo = new Tree();
+                        treeTwo.setId(resourceTwo.getId());
+                        treeTwo.setText(resourceTwo.getName());
+                        treeTwo.setIconCls(resourceTwo.getIcon());
+                        treeTwo.setAttributes(resourceTwo.getUrl());
+                        tree.add(treeTwo);
                     }
-                    treeOne.setChildren(tree);
-                    trees.add(treeOne);
                 }
+                treeOne.setChildren(tree);
+                trees.add(treeOne);
+            }
         }
         return trees;
     }

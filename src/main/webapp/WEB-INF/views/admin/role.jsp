@@ -10,7 +10,7 @@
     var dataGrid;
     $(function() {
         dataGrid = $('#dataGrid').datagrid({
-            url : '${path }' + '/role/dataGrid',
+            url : '${path }/role/dataGrid',
             striped : true,
             rownumbers : true,
             pagination : true,

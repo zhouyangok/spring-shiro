@@ -1,8 +1,5 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.commons.utils.DigestUtils;
-import com.wangzhixuan.commons.utils.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -16,6 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.utils.DigestUtils;
+import com.wangzhixuan.commons.utils.StringUtils;
 
 /**
  * @description：登录退出
@@ -79,6 +80,7 @@ public class LoginController extends BaseController {
         }
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
+        // 默认设置为记住密码，你可以自己在表单中加一个参数来控制
         token.setRememberMe(true);
         try {
             user.login(token);
@@ -122,4 +124,5 @@ public class LoginController extends BaseController {
         subject.logout();
         return renderSuccess();
     }
+
 }

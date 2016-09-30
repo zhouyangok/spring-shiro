@@ -8,7 +8,6 @@ $(window).load(function(){
     $("#loading").fadeOut();
 });
 
-
 /**
  * 使panel和datagrid在加载时提示
  * 

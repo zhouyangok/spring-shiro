@@ -1,23 +1,23 @@
 package com.wangzhixuan.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.wangzhixuan.commons.exception.ServiceException;
-import com.wangzhixuan.commons.shiro.ShiroDbRealm;
+import com.wangzhixuan.commons.result.Tree;
+import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.RoleResource;
 import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.commons.result.Tree;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Service
 public class RoleServiceImpl implements RoleService {
