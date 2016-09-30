@@ -2,6 +2,8 @@ package com.wangzhixuan.controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.commons.scan.SpringUtils;
 import com.wangzhixuan.commons.utils.JsonUtils;
+import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.event.WebHooksEvent;
 import com.wangzhixuan.event.WebHooksListener;
 
@@ -34,7 +37,11 @@ public class WebHooksController extends BaseController {
 //    @RequestMapping(value = "webhooks", method = RequestMethod.POST)
     @RequestMapping(value = "webhooks")
     @ResponseBody
-    public Object hooks(@RequestParam String hook) {
+    public Object hooks(HttpServletRequest request) {
+        String hook = request.getParameter("hook");
+        if (StringUtils.isBlank(hook)) {
+            return renderError("json hook isBlank!");
+        }
         logger.info("webhooks json: {}", hook);
         Map<String, Object> hookMap = JsonUtils.parse(hook, Map.class);
         // 发送事件 ThreadPoolTaskExecutor

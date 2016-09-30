@@ -12,11 +12,11 @@ public class StringUtils extends org.springframework.util.StringUtils {
      * {@code CharSequence} is not {@code null}, its length is greater than
      * 0, and it contains at least one non-whitespace character.
      * <p><pre class="code">
-     * StringUtils.hasText(null) = false
-     * StringUtils.hasText("") = false
-     * StringUtils.hasText(" ") = false
-     * StringUtils.hasText("12345") = true
-     * StringUtils.hasText(" 12345 ") = true
+     * StringUtils.isBlank(null) = true
+     * StringUtils.isBlank("") = true
+     * StringUtils.isBlank(" ") = true
+     * StringUtils.isBlank("12345") = false
+     * StringUtils.isBlank(" 12345 ") = false
      * </pre>
      * @param str the {@code CharSequence} to check (may be {@code null})
      * @return {@code true} if the {@code CharSequence} is not {@code null},
