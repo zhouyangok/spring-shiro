@@ -85,16 +85,16 @@ public class LoginController extends BaseController {
         try {
             user.login(token);
         } catch (UnknownAccountException e) {
-            LOGGER.error("账号不存在：{}", e);
+            LOGGER.error("账号不存在！", e);
             return renderError("账号不存在");
         } catch (DisabledAccountException e) {
-            LOGGER.error("账号未启用：{}", e);
+            LOGGER.error("账号未启用！", e);
             return renderError("账号未启用");
         } catch (IncorrectCredentialsException e) {
-            LOGGER.error("密码错误：{}", e);
+            LOGGER.error("密码错误！", e);
             return renderError("密码错误");
         } catch (RuntimeException e) {
-            LOGGER.error("未知错误,请联系管理员：{}", e);
+            LOGGER.error("未知错误,请联系管理员！", e);
             return renderError("未知错误,请联系管理员");
         }
         return renderSuccess();

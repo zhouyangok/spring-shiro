@@ -45,10 +45,15 @@
         <property name="unauthorizedUrl" value="/unauth"/>
         <property name="filterChainDefinitions">
             <value>
-                /commons/** = anon <!-- 不需要认证 -->
+				<!-- 
+					anon  不需要认证
+					authc 需要认证
+					user  验证通过或RememberMe登录的都可以
+				-->
+                /commons/** = anon
                 /static/** = anon
                 /login = anon
-                /** = authc <!-- 需要认证 -->
+                /** = user
             </value>
         </property>
     </bean>
