@@ -40,16 +40,16 @@
 
     <!-- 主库 -->
     <bean name="master-dataSource" parent="baseDataSource" init-method="init">
-        <property name="url" value="${master_driverUrl}" />
-        <property name="username" value="${master_username}" />
-        <property name="password" value="${master_password}" />
+        <property name="url" value="${db.master.url}" />
+        <property name="username" value="${db.master.user}" />
+        <property name="password" value="${db.master.password}" />
     </bean>
 
     <!-- 从库 -->
     <bean name="slave-dataSource" parent="baseDataSource" init-method="init">
-        <property name="url" value="${slave_driverUrl}" />
-        <property name="username" value="${slave_username}" />
-        <property name="password" value="${slave_password}" />
+        <property name="url" value="${db.slave.url}" />
+        <property name="username" value="${db.slave.user}" />
+        <property name="password" value="${db.slave.password}" />
     </bean>
 
     <!--主从库选择-->

@@ -40,7 +40,7 @@ public class SpringUtils implements ApplicationContextAware {
 		return context;
 	}
 
-	public void publishEvent(ApplicationEvent event) {
+	public static void publishEvent(ApplicationEvent event) {
 		if (context == null) return;
 		context.publishEvent(event);
 	}

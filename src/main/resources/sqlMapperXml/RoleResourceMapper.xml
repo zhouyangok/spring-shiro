@@ -7,23 +7,23 @@
         <result column="resource_id" property="resourceId" jdbcType="BIGINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, role_id, resource_id
-  </sql>
+        id, role_id, resource_id
+    </sql>
 
     <select id="findRoleResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long">
-    SELECT
-        e.id AS id
-    FROM
-        role r
-    LEFT JOIN role_resource e ON r.id = e.role_id
-    WHERE
-        r.id = #{id}
-  </select>
+        SELECT
+            e.id AS id
+        FROM
+            role r
+        LEFT JOIN role_resource e ON r.id = e.role_id
+        WHERE
+            r.id = #{id}
+    </select>
 
     <delete id="deleteById" parameterType="java.lang.Long">
-    delete from role_resource
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from role_resource
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 
     <insert id="insert" parameterType="com.wangzhixuan.model.RoleResource">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
@@ -32,6 +32,5 @@
         insert into role_resource (role_id, resource_id)
         values (#{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT})
     </insert>
-
 
 </mapper>

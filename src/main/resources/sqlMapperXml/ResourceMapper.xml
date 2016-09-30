@@ -15,8 +15,8 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, name, url, description, icon, pid, seq, status, resourcetype, createdate
-  </sql>
+        id, name, url, description, icon, pid, seq, status, resourcetype, createdate
+    </sql>
 
     <select id="findResourceById" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -49,9 +49,9 @@
     </select>
 
     <delete id="deleteResourceById" parameterType="java.lang.Long">
-    delete from resource
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from resource
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
 
     <insert id="insert" parameterType="com.wangzhixuan.model.Resource">
         <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER">
