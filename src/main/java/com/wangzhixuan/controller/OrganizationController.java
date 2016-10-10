@@ -1,15 +1,16 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.model.Organization;
-import com.wangzhixuan.service.OrganizationService;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.model.Organization;
+import com.wangzhixuan.service.IOrganizationService;
 
 /**
  * @description：部门管理
@@ -21,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 public class OrganizationController extends BaseController {
 
     @Autowired
-    private OrganizationService organizationService;
+    private IOrganizationService organizationService;
 
     /**
      * 部门管理主页
@@ -41,7 +42,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
     public Object tree() {
-        return organizationService.findTree();
+        return organizationService.selectTree();
     }
 
     /**
@@ -52,7 +53,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/treeGrid")
     @ResponseBody
     public Object treeGrid() {
-        return organizationService.findTreeGrid();
+        return organizationService.selectTreeGrid();
     }
 
     /**
@@ -74,7 +75,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Organization organization) {
-        organizationService.addOrganization(organization);
+        organizationService.insert(organization);
         return renderSuccess("添加成功！");
     }
 
@@ -87,7 +88,7 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(HttpServletRequest request, Long id) {
-        Organization organization = organizationService.findOrganizationById(id);
+        Organization organization = organizationService.selectById(id);
         request.setAttribute("organization", organization);
         return "admin/organizationEdit";
     }
@@ -101,7 +102,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Organization organization) {
-        organizationService.updateOrganization(organization);
+        organizationService.updateById(organization);
         return renderSuccess("编辑成功！");
     }
 
@@ -114,7 +115,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        organizationService.deleteOrganizationById(id);
+        organizationService.selectById(id);
         return renderSuccess("删除成功！");
     }
 }

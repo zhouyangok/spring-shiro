@@ -3,111 +3,110 @@ package com.wangzhixuan.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.baomidou.mybatisplus.annotations.IdType;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 
 /**
- * @description：部门
- * @author：zhixuan.wang
- * @date：2015/10/1 14:51
+ *
+ * 组织机构
+ *
  */
 public class Organization implements Serializable {
 
-    private static final long serialVersionUID = 1282186495210887307L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-    private Long id;
+	/** 主键id */
+	@TableId(type = IdType.AUTO)
+	private Long id;
 
-    private String name;
+	/** 组织名 */
+	private String name;
 
-    private String address;
+	/** 地址 */
+	private String address;
 
-    private String code;
+	/** 编号 */
+	private String code;
 
-    @JsonProperty("iconCls")
-    private String icon;
+	/** 图标 */
+	private String icon;
 
-    private Long pid;
+	/** 父级主键 */
+	private Long pid;
 
-    private Integer seq;
+	/** 排序 */
+	private Integer seq;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createdate;
+	/** 创建时间 */
+	@TableField(value = "create_time")
+	private Date createTime;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
+	public String getAddress() {
+		return this.address;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
-    }
+	public String getCode() {
+		return this.code;
+	}
 
-    public String getIcon() {
-        return icon;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public void setIcon(String icon) {
-        this.icon = icon == null ? null : icon.trim();
-    }
+	public String getIcon() {
+		return this.icon;
+	}
 
-    public Long getPid() {
-        return pid;
-    }
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
 
-    public void setPid(Long pid) {
-        this.pid = pid;
-    }
+	public Long getPid() {
+		return this.pid;
+	}
 
-    public Integer getSeq() {
-        return seq;
-    }
+	public void setPid(Long pid) {
+		this.pid = pid;
+	}
 
-    public void setSeq(Integer seq) {
-        this.seq = seq;
-    }
+	public Integer getSeq() {
+		return this.seq;
+	}
 
-    public Date getCreatedate() {
-        return createdate;
-    }
+	public void setSeq(Integer seq) {
+		this.seq = seq;
+	}
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
+	public Date getCreateTime() {
+		return this.createTime;
+	}
 
-    @Override
-    public String toString() {
-        return "Organization{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", code='" + code + '\'' +
-                ", icon='" + icon + '\'' +
-                ", pid=" + pid +
-                ", seq=" + seq +
-                ", createdate=" + createdate +
-                '}';
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 }

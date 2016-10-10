@@ -1,8 +1,9 @@
 package com.wangzhixuan.commons.scan;
 
-import com.wangzhixuan.commons.utils.StringUtils;
-import com.wangzhixuan.model.SysLog;
-import com.wangzhixuan.service.LogService;
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -17,8 +18,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
+import com.wangzhixuan.commons.utils.StringUtils;
+import com.wangzhixuan.model.SysLog;
+import com.wangzhixuan.service.ISysLogService;
 
 /**
  * @description：AOP 日志
@@ -31,7 +33,7 @@ public class SysLogAspect {
     private static final Logger LOGGER = LogManager.getLogger(SysLogAspect.class);
 
     @Autowired
-    private LogService logService;
+    private ISysLogService sysLogService;
 
     @Pointcut("within(@org.springframework.stereotype.Controller *)")
     public void cutController() {}
@@ -76,7 +78,7 @@ public class SysLogAspect {
                         sysLog.setClientIp(request.getRemoteAddr());
                     }
                     LOGGER.info(sysLog.toString());
-                    logService.insertLog(sysLog);
+                    sysLogService.insert(sysLog);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -1,98 +1,30 @@
 package com.wangzhixuan.mapper;
 
-import com.wangzhixuan.model.Resource;
-import com.wangzhixuan.model.Role;
-import com.wangzhixuan.commons.utils.PageInfo;
-
 import java.util.List;
 import java.util.Map;
 
-public interface RoleMapper {
-    /**
-     * 添加角色
-     *
-     * @param role
-     * @return
-     */
-    int insert(Role role);
+import org.apache.ibatis.annotations.Param;
 
-    /**
-     * 查询角色列表
-     *
-     * @param pageInfo
-     * @return
-     */
-    List findRolePageCondition(PageInfo pageInfo);
+import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.wangzhixuan.model.Resource;
+import com.wangzhixuan.model.Role;
 
-    /**
-     * 角色统计
-     *
-     * @param pageInfo
-     * @return
-     */
-    int findRolePageCount(PageInfo pageInfo);
+/**
+ *
+ * Role 表数据库控制层接口
+ *
+ */
+public interface RoleMapper extends AutoMapper<Role> {
 
-    /**
-     * 角色列表
-     *
-     * @return
-     */
-    List<Role> findRoleAll();
+    List<Role> selectAll();
 
-    /**
-     * 根据id查询角色
-     *
-     * @param id
-     * @return
-     */
-    Role findRoleById(Long id);
+    List<Long> selectResourceIdListByRoleId(@Param("id") Long id);
 
-    /**
-     * 更新角色
-     *
-     * @param role
-     * @return
-     */
-    int updateRole(Role role);
+    List<Resource> selectResourceIdListByRoleIdAndType(@Param("id") Long id);
 
-    /**
-     * 删除角色
-     *
-     * @param id
-     * @return
-     */
-    int deleteRoleById(Long id);
+    List<Map<Long, String>> selectResourceListByRoleId(@Param("id") Long id);
 
-    /**
-     * 根据角色查询资源id列表
-     *
-     * @param id
-     * @return
-     */
-    List<Long> findResourceIdListByRoleId(Long id);
-
-    /**
-     * 根据角色id查询资源角色关联id列表
-     *
-     * @param
-     * @return
-     */
-    List<Long> findRoleResourceIdListByRoleId(Long id);
-
-    /**
-     * 根据角色id查询资源id、链接列表
-     *
-     * @param id
-     * @return
-     */
-    List<Map<Long, String>> findRoleResourceListByRoleId(Long id);
-
-    /**
-     * 查询角色下的菜单列表
-     *
-     * @param i
-     * @return
-     */
-    List<Resource> findResourceIdListByRoleIdAndType(Long i);
+    List<Role> selectPage(Pagination page, @Param("sort") String sort, @Param("sort") String order);
 
 }

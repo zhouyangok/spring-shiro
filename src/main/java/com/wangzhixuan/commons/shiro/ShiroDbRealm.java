@@ -1,22 +1,27 @@
 package com.wangzhixuan.commons.shiro;
 
-import com.wangzhixuan.commons.utils.StringUtils;
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.RoleService;
-import com.wangzhixuan.service.UserService;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.shiro.authc.*;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import com.wangzhixuan.commons.utils.StringUtils;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.IRoleService;
+import com.wangzhixuan.service.IUserService;
 
 /**
  * @description：shiro权限认证
@@ -27,9 +32,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LogManager.getLogger(ShiroDbRealm.class);
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
     @Autowired
-    private RoleService roleService;
+    private IRoleService roleService;
 
     /**
      * Shiro登录认证(原理：用户提交 用户名和密码  --- shiro 封装令牌 ---- realm 通过用户名将密码查询返回 ---- shiro 自动去比较查询出密码和用户输入密码是否一致---- 进行登陆控制 )
@@ -39,7 +44,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
             AuthenticationToken authcToken) throws AuthenticationException {
         LOGGER.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        User user = userService.findUserByLoginName(token.getUsername());
+        User user = userService.selectByLoginName(token.getUsername());
         // 账号不存在
         if (user == null) {
             return null;
@@ -48,8 +53,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if (user.getStatus() == 1) {
             return null;
         }
-        List<Long> roleList = roleService.findRoleIdListByUserId(user.getId());
-        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginname(), user.getName(), roleList);
+        List<Long> roleList = roleService.selectRoleIdListByUserId(user.getId());
+        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginName(), user.getName(), roleList);
         // 认证缓存信息
         return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
 
@@ -67,7 +72,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
         Set<String> urlSet = new HashSet<String>();
         for (Long roleId : roleList) {
-            List<Map<Long, String>> roleResourceList = roleService.findRoleResourceListByRoleId(roleId);
+            List<Map<Long, String>> roleResourceList = roleService.selectRoleResourceListByRoleId(roleId);
             if (roleResourceList != null) {
                 for (Map<Long, String> map : roleResourceList) {
                     if (StringUtils.isNotBlank(map.get("url"))) {

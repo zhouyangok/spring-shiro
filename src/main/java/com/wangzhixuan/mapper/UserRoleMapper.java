@@ -1,18 +1,22 @@
 package com.wangzhixuan.mapper;
 
-import java.util.List;
-
 import com.wangzhixuan.model.UserRole;
 
-public interface UserRoleMapper {
+import java.util.List;
 
-    int insert(UserRole userRole);
+import org.apache.ibatis.annotations.Param;
 
-    int updateByPrimaryKeySelective(UserRole userRole);
+import com.baomidou.mybatisplus.mapper.AutoMapper;
 
-    List<UserRole> findUserRoleByUserId(Long userId);
+/**
+ *
+ * UserRole 表数据库控制层接口
+ *
+ */
+public interface UserRoleMapper extends AutoMapper<UserRole> {
 
-    int deleteById(Long id);
+    List<UserRole> selectByUserId(@Param("userId") Long userId);
 
-    List<Long> findRoleIdListByUserId(Long userId);
+    List<Long> selectRoleIdListByUserId(@Param("userId") Long userId);
+
 }

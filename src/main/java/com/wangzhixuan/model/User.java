@@ -3,142 +3,146 @@ package com.wangzhixuan.model;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.baomidou.mybatisplus.annotations.IdType;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
 
 /**
- * @description：用户
- * @author：zhixuan.wang
- * @date：2015/10/1 14:51
+ *
+ * 用户
+ *
  */
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 6700813629656881143L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-    private Long id;
+	/** 主键id */
+	@TableId(type = IdType.AUTO)
+	private Long id;
 
-    private String loginname;
+	/** 登陆名 */
+	@TableField(value = "login_name")
+	private String loginName;
 
-    private String name;
+	/** 用户名 */
+	private String name;
 
-    private String password;
+	/** 密码 */
+	private String password;
 
-    private Integer sex;
+	/** 性别 */
+	private Integer sex;
 
-    private Integer age;
+	/** 年龄 */
+	private Integer age;
 
-    private Integer usertype;
+	/** 手机号 */
+	private String phone;
 
-    private Integer status;
+	/** 用户类别 */
+	@TableField(value = "user_type")
+	private Integer userType;
 
-    private Integer organizationId;
+	/** 用户状态 */
+	private Integer status;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createdate;
+	/** 所属机构 */
+	@TableField(value = "organization_id")
+	private Integer organizationId;
 
-    private String phone;
+	/** 创建时间 */
+	@TableField(value = "create_time")
+	private Date createTime;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public String getLoginname() {
-        return loginname;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setLoginname(String loginname) {
-        this.loginname = loginname == null ? null : loginname.trim();
-    }
+	public String getLoginName() {
+		return this.loginName;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
+	public String getPassword() {
+		return this.password;
+	}
 
-    public Integer getSex() {
-        return sex;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
-    }
+	public Integer getSex() {
+		return this.sex;
+	}
 
-    public Integer getAge() {
-        return age;
-    }
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
+	public Integer getAge() {
+		return this.age;
+	}
 
-    public Integer getUsertype() {
-        return usertype;
-    }
+	public void setAge(Integer age) {
+		this.age = age;
+	}
 
-    public void setUsertype(Integer usertype) {
-        this.usertype = usertype;
-    }
+	public String getPhone() {
+		return this.phone;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public Integer getUserType() {
+		return this.userType;
+	}
 
-    public Integer getOrganizationId() {
-        return organizationId;
-    }
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
 
-    public void setOrganizationId(Integer organizationId) {
-        this.organizationId = organizationId;
-    }
+	public Integer getStatus() {
+		return this.status;
+	}
 
-    public Date getCreatedate() {
-        return createdate;
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
-    }
+	public Integer getOrganizationId() {
+		return this.organizationId;
+	}
 
-    public String getPhone() {
-        return phone;
-    }
+	public void setOrganizationId(Integer organizationId) {
+		this.organizationId = organizationId;
+	}
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
+	public Date getCreateTime() {
+		return this.createTime;
+	}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", loginname='" + loginname + '\'' +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", sex=" + sex +
-                ", age=" + age +
-                ", usertype=" + usertype +
-                ", status=" + status +
-                ", organizationId=" + organizationId +
-                ", createdate=" + createdate +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 }

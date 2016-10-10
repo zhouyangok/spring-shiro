@@ -1,18 +1,19 @@
 package com.wangzhixuan.commons.base;
 
-import com.wangzhixuan.commons.result.Result;
-import com.wangzhixuan.commons.shiro.ShiroUser;
-import com.wangzhixuan.commons.utils.StringEscapeEditor;
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.UserService;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.wangzhixuan.commons.result.Result;
+import com.wangzhixuan.commons.shiro.ShiroUser;
+import com.wangzhixuan.commons.utils.StringEscapeEditor;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.IUserService;
 
 /**
  * @description：基础 controller
@@ -21,7 +22,7 @@ import java.util.Date;
  */
 public abstract class BaseController {
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @InitBinder
     public void initBinder(ServletRequestDataBinder binder) {
@@ -42,7 +43,7 @@ public abstract class BaseController {
      */
     public User getCurrentUser() {
         ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        User currentUser = userService.findUserById(user.id);
+        User currentUser = userService.selectById(user.id);
         return currentUser;
     }
 

@@ -2,51 +2,58 @@ package com.wangzhixuan.model;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotations.IdType;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
 /**
- * @description：用户角色关联
- * @author：zhixuan.wang
- * @date：2015/10/1 14:51
+ *
+ * 用户角色
+ *
  */
+@TableName("user_role")
 public class UserRole implements Serializable {
 
-    private static final long serialVersionUID = -8332992884983317378L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-    private Long id;
+	/** 主键id */
+	@TableId(type = IdType.AUTO)
+	private Long id;
 
-    private Long userId;
+	/** 用户id */
+	@TableField(value = "user_id")
+	private Long userId;
 
-    private Long roleId;
+	/** 角色id */
+	@TableField(value = "role_id")
+	private Long roleId;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public Long getUserId() {
-        return userId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+	public Long getUserId() {
+		return this.userId;
+	}
 
-    public Long getRoleId() {
-        return roleId;
-    }
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
+	public Long getRoleId() {
+		return this.roleId;
+	}
 
-    @Override
-    public String toString() {
-        return "UserRole{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", roleId=" + roleId +
-                '}';
-    }
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
+	}
+
 }

@@ -1,82 +1,24 @@
 package com.wangzhixuan.mapper;
 
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.commons.result.UserVo;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.baomidou.mybatisplus.plugins.pagination.Pagination;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.model.vo.UserVo;
 
-public interface UserMapper {
-    /**
-     * 删除用户
-     *
-     * @param id
-     * @return
-     */
-    int deleteById(Long id);
+/**
+ *
+ * User 表数据库控制层接口
+ *
+ */
+public interface UserMapper extends AutoMapper<User> {
 
-    /**
-     * 添加用户
-     *
-     * @param user
-     * @return
-     */
-    int insert(User user);
+    UserVo selectUserVoById(@Param("id") Long id);
 
-    /**
-     * 修改用户
-     *
-     * @param user
-     * @return
-     */
-    int updateUser(User user);
+    List<UserVo> selectUserVoPage(Pagination page, Map<String, Object> params);
 
-    /**
-     * 根据用户名查询用户
-     *
-     * @param username
-     * @return
-     */
-    User findUserByLoginName(String username);
-
-    /**
-     * 根据用户id查询用户
-     *
-     * @param id
-     * @return
-     */
-    User findUserById(Long id);
-
-    /**
-     * 用户列表
-     *
-     * @param pageInfo
-     * @return
-     */
-    List findUserPageCondition(PageInfo pageInfo);
-
-    /**
-     * 统计用户
-     *
-     * @param pageInfo
-     * @return
-     */
-    int findUserPageCount(PageInfo pageInfo);
-
-    /**
-     * 修改用户密码
-     *
-     * @param userId
-     * @param pwd
-     */
-    void updateUserPwdById(@Param("userId") Long userId, @Param("pwd") String pwd);
-
-    /**
-     * 根据用户id查询用户带部门
-     *
-     * @param id
-     * @return
-     */
-    UserVo findUserVoById(Long id);
 }

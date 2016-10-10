@@ -33,8 +33,7 @@ public class PageInfo {
     @JsonIgnore
     private String order = "asc";// asc，desc mybatis Order 关键字
 
-    public PageInfo() {
-    }
+    public PageInfo() {}
 
     //构造方法
     public PageInfo(int nowpage, int pagesize) {

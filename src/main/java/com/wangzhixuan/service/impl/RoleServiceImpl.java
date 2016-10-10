@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wangzhixuan.commons.exception.ServiceException;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.mapper.RoleMapper;
@@ -17,29 +14,44 @@ import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.RoleResource;
-import com.wangzhixuan.service.RoleService;
+import com.wangzhixuan.service.IRoleService;
+import com.baomidou.framework.service.impl.SuperServiceImpl;
 
+/**
+ *
+ * Role 表数据服务层接口实现类
+ *
+ */
 @Service
-public class RoleServiceImpl implements RoleService {
-    private static final Logger LOGGER = LogManager.getLogger(RoleServiceImpl.class);
+public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implements IRoleService {
 
     @Autowired
     private RoleMapper roleMapper;
     @Autowired
-    private RoleResourceMapper roleResourceMapper;
-    @Autowired
     private UserRoleMapper userRoleMapper;
-
+    @Autowired
+    private RoleResourceMapper roleResourceMapper;
+    
     @Override
-    public void findDataGrid(PageInfo pageInfo) {
-        pageInfo.setRows(roleMapper.findRolePageCondition(pageInfo));
-        pageInfo.setTotal(roleMapper.findRolePageCount(pageInfo));
+    public List<Long> selectRoleIdListByUserId(Long userId) {
+        return userRoleMapper.selectRoleIdListByUserId(userId);
     }
 
     @Override
-    public List<Tree> findTree() {
+    public List<Map<Long, String>> selectRoleResourceListByRoleId(Long roleId) {
+        return roleMapper.selectResourceListByRoleId(roleId);
+    }
+
+    @Override
+    public void selectDataGrid(PageInfo pageInfo) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public Object selectTree() {
         List<Tree> trees = new ArrayList<Tree>();
-        List<Role> roles = roleMapper.findRoleAll();
+        List<Role> roles = roleMapper.selectAll();
         for (Role role : roles) {
             Tree tree = new Tree();
             tree.setId(role.getId());
@@ -51,46 +63,14 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void addRole(Role role) {
-        int insert = roleMapper.insert(role);
-        if (insert != 1) {
-            LOGGER.warn("插入失败，参数：{}", role.toString());
-            throw new ServiceException("插入失败");
-        }
-    }
-
-    @Override
-    public void deleteRoleById(Long id) {
-        int update = roleMapper.deleteRoleById(id);
-        if (update != 1) {
-            LOGGER.warn("删除失败，id：{}", id);
-            throw new ServiceException("删除失败");
-        }
-    }
-
-    @Override
-    public Role findRoleById(Long id) {
-        return roleMapper.findRoleById(id);
-    }
-
-    @Override
-    public void updateRole(Role role) {
-        int update = roleMapper.updateRole(role);
-        if (update != 1) {
-            LOGGER.warn("更新失败，参数：{}", role.toString());
-            throw new ServiceException("更新失败");
-        }
-    }
-
-    @Override
-    public List<Long> findResourceIdListByRoleId(Long id) {
-        return roleMapper.findResourceIdListByRoleId(id);
+    public List<Long> selectResourceIdListByRoleId(Long id) {
+        return roleMapper.selectResourceIdListByRoleId(id);
     }
 
     @Override
     public void updateRoleResource(Long id, String resourceIds) {
         // 先删除后添加,有点爆力
-        List<Long> roleResourceIdList = roleMapper.findRoleResourceIdListByRoleId(id);
+        List<Long> roleResourceIdList = roleMapper.selectResourceIdListByRoleId(id);
         if (roleResourceIdList != null && (!roleResourceIdList.isEmpty())) {
             for (Long roleResourceId : roleResourceIdList) {
                 roleResourceMapper.deleteById(roleResourceId);
@@ -103,16 +83,6 @@ public class RoleServiceImpl implements RoleService {
             roleResource.setResourceId(Long.parseLong(string));
             roleResourceMapper.insert(roleResource);
         }
-    }
-
-    @Override
-    public List<Long> findRoleIdListByUserId(Long userId) {
-        return userRoleMapper.findRoleIdListByUserId(userId);
-    }
-
-    @Override
-    public List<Map<Long, String>> findRoleResourceListByRoleId(Long roleId) {
-        return roleMapper.findRoleResourceListByRoleId(roleId);
     }
 
 }

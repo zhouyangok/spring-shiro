@@ -1,15 +1,16 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.model.Resource;
-import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.model.Resource;
+import com.wangzhixuan.model.User;
+import com.wangzhixuan.service.IResourceService;
 
 /**
  * @description：资源管理
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ResourceController extends BaseController {
 
     @Autowired
-    private ResourceService resourceService;
+    private IResourceService resourceService;
 
     /**
      * 菜单树
@@ -32,7 +33,7 @@ public class ResourceController extends BaseController {
     @ResponseBody
     public Object tree() {
         User currentUser = getCurrentUser();
-        return resourceService.findTree(currentUser);
+        return resourceService.selectTree(currentUser);
     }
 
     /**
@@ -53,7 +54,7 @@ public class ResourceController extends BaseController {
     @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
     @ResponseBody
     public Object treeGrid() {
-        return resourceService.findResourceAll();
+        return resourceService.selectAll();
     }
 
     /**
@@ -75,7 +76,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Resource resource) {
-        resourceService.addResource(resource);
+        resourceService.insert(resource);
         return renderSuccess("添加成功！");
     }
 
@@ -87,7 +88,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/allTree")
     @ResponseBody
     public Object allTree() {
-        return resourceService.findAllTree();
+        return resourceService.selectAllTree();
     }
 
     /**
@@ -98,7 +99,7 @@ public class ResourceController extends BaseController {
     @RequestMapping(value = "/allTrees", method = RequestMethod.POST)
     @ResponseBody
     public Object allTrees() {
-        return resourceService.findAllTrees();
+        return resourceService.selectAllTrees();
     }
 
     /**
@@ -110,7 +111,7 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(Model model, Long id) {
-        Resource resource = resourceService.findResourceById(id);
+        Resource resource = resourceService.selectById(id);
         model.addAttribute("resource", resource);
         return "admin/resourceEdit";
     }
@@ -124,7 +125,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Resource resource) {
-        resourceService.updateResource(resource);
+        resourceService.updateById(resource);
         return renderSuccess("编辑成功！");
     }
 
@@ -137,7 +138,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        resourceService.deleteResourceById(id);
+        resourceService.deleteById(id);
         return renderSuccess("删除成功！");
     }
 

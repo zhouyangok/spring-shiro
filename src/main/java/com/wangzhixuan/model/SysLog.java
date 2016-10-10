@@ -1,84 +1,96 @@
 package com.wangzhixuan.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
+import com.baomidou.mybatisplus.annotations.IdType;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+
+/**
+ *
+ * 系统日志
+ *
+ */
+@TableName("sys_log")
 public class SysLog implements Serializable {
 
-    private static final long serialVersionUID = -8690056878905494181L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-    private Long id;
+	/** 主键id */
+	@TableId(type = IdType.AUTO)
+	private Long id;
 
-    private String loginName;
+	/** 登陆名 */
+	@TableField(value = "login_name")
+	private String loginName;
 
-    private String roleName;
+	/** 角色名 */
+	@TableField(value = "role_name")
+	private String roleName;
 
-    private String optContent;
+	/** 内容 */
+	@TableField(value = "opt_content")
+	private String optContent;
 
-    private String clientIp;
+	/** 客户端ip */
+	@TableField(value = "client_ip")
+	private String clientIp;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createTime;
+	/** 创建时间 */
+	@TableField(value = "create_time")
+	private Date createTime;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public String getLoginName() {
-        return loginName;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setLoginName(String loginName) {
-        this.loginName = loginName == null ? null : loginName.trim();
-    }
+	public String getLoginName() {
+		return this.loginName;
+	}
 
-    public String getRoleName() {
-        return roleName;
-    }
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
-    }
+	public String getRoleName() {
+		return this.roleName;
+	}
 
-    public String getOptContent() {
-        return optContent;
-    }
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
 
-    public void setOptContent(String optContent) {
-        this.optContent = optContent == null ? null : optContent.trim();
-    }
+	public String getOptContent() {
+		return this.optContent;
+	}
 
-    public String getClientIp() {
-        return clientIp;
-    }
+	public void setOptContent(String optContent) {
+		this.optContent = optContent;
+	}
 
-    public void setClientIp(String clientIp) {
-        this.clientIp = clientIp == null ? null : clientIp.trim();
-    }
+	public String getClientIp() {
+		return this.clientIp;
+	}
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+	public void setClientIp(String clientIp) {
+		this.clientIp = clientIp;
+	}
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+	public Date getCreateTime() {
+		return this.createTime;
+	}
 
-    @Override
-    public String toString() {
-        return "SysLog{" +
-                "id=" + id +
-                ", loginName='" + loginName + '\'' +
-                ", roleName='" + roleName + '\'' +
-                ", optContent='" + optContent + '\'' +
-                ", clientIp='" + clientIp + '\'' +
-                ", createTime=" + createTime +
-                '}';
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
 }

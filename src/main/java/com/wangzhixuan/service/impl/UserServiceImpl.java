@@ -1,56 +1,48 @@
 package com.wangzhixuan.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.wangzhixuan.commons.utils.BeanUtils;
+import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.mapper.UserMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.model.UserRole;
-import com.wangzhixuan.service.UserService;
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.commons.result.UserVo;
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.wangzhixuan.model.vo.UserVo;
+import com.wangzhixuan.service.IUserService;
 
-import java.util.List;
-
+/**
+ *
+ * User 表数据服务层接口实现类
+ *
+ */
 @Service
-public class UserServiceImpl implements UserService {
-    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
+public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
     @Autowired
     private UserRoleMapper userRoleMapper;
-
+    
     @Override
-    public User findUserByLoginName(String username) {
-        return userMapper.findUserByLoginName(username);
-    }
-
-    @Override
-    public User findUserById(Long id) {
-        return userMapper.findUserById(id);
-    }
-
-    @Override
-    public void findDataGrid(PageInfo pageInfo) {
-        pageInfo.setRows(userMapper.findUserPageCondition(pageInfo));
-        pageInfo.setTotal(userMapper.findUserPageCount(pageInfo));
-    }
-
-    @Override
-    public void addUser(UserVo userVo) {
+    public User selectByLoginName(String loginName) {
         User user = new User();
-        try {
-            PropertyUtils.copyProperties(user, userVo);
-        } catch (Exception e) {
-            LOGGER.error("类转换异常：{}", e);
-            throw new RuntimeException("类型转换异常：{}", e);
-        }
-        userMapper.insert(user);
+        user.setLoginName(loginName);
+        return this.selectOne(user);
+    }
 
+    @Override
+    public void insertByVo(UserVo userVo) {
+        User user = BeanUtils.copy(userVo, User.class);
+        this.insert(user);
+        
         Long id = user.getId();
         String[] roles = userVo.getRoleIds().split(",");
         UserRole userRole = new UserRole();
@@ -63,28 +55,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserPwdById(Long userId, String pwd) {
-        userMapper.updateUserPwdById(userId, pwd);
+    public UserVo selectVoById(Long id) {
+        return userMapper.selectUserVoById(id);
     }
 
     @Override
-    public UserVo findUserVoById(Long id) {
-        return userMapper.findUserVoById(id);
-    }
-
-    @Override
-    public void updateUser(UserVo userVo) {
-        User user = new User();
-        try {
-            PropertyUtils.copyProperties(user, userVo);
-        } catch (Exception e) {
-            LOGGER.error("类转换异常：{}", e);
-            throw new RuntimeException("类型转换异常：{}", e);
-        }
-        userMapper.updateUser(user);
+    public void updateByVo(UserVo userVo) {
+        User user = BeanUtils.copy(userVo, User.class);
+        this.updateById(user);
+        
         Long id = userVo.getId();
-        List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
-        if (userRoles != null && (!userRoles.isEmpty())) {
+        List<UserRole> userRoles = userRoleMapper.selectByUserId(id);
+        if (userRoles != null && !userRoles.isEmpty()) {
             for (UserRole userRole : userRoles) {
                 userRoleMapper.deleteById(userRole.getId());
             }
@@ -97,14 +79,33 @@ public class UserServiceImpl implements UserService {
             userRole.setRoleId(Long.valueOf(string));
             userRoleMapper.insert(userRole);
         }
+    }
 
+    @Override
+    public void updatePwdByUserId(Long userId, String md5Hex) {
+        User user = new User();
+        user.setPassword(md5Hex);
+        this.updateById(user);
+    }
+
+    @Override
+    public void selectDataGrid(PageInfo pageInfo) {
+        Page<UserVo> page = new Page<UserVo>(pageInfo.getNowpage(), pageInfo.getSize());
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("name", "");
+        params.put("organizationId", "");
+        params.put("startTime", "");
+        params.put("endTime", "");
+        
+        List<UserVo> list = userMapper.selectUserVoPage(page, params);
+        page.setRecords(list);
     }
 
     @Override
     public void deleteUserById(Long id) {
-        userMapper.deleteById(id);
-        List<UserRole> userRoles = userRoleMapper.findUserRoleByUserId(id);
-        if (userRoles != null && (!userRoles.isEmpty())) {
+        this.deleteById(id);
+        List<UserRole> userRoles = userRoleMapper.selectByUserId(id);
+        if (userRoles != null && !userRoles.isEmpty()) {
             for (UserRole userRole : userRoles) {
                 userRoleMapper.deleteById(userRole.getId());
             }

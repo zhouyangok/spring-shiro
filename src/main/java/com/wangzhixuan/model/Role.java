@@ -2,73 +2,76 @@ package com.wangzhixuan.model;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotations.IdType;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+
 /**
- * @description：角色
- * @author：zhixuan.wang
- * @date：2015/10/1 14:51
+ *
+ * 角色
+ *
  */
 public class Role implements Serializable {
 
-    private static final long serialVersionUID = -1756241579303707517L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-    private Long id;
+	/** 主键id */
+	@TableId(type = IdType.AUTO)
+	private Long id;
 
-    private String name;
+	/** 角色名 */
+	private String name;
 
-    private Integer seq;
+	/** 排序号 */
+	private Integer seq;
 
-    private String description;
+	/** 简介 */
+	private String description;
 
-    private Integer status;
+	/** 状态 */
+	private Integer status;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return this.id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+	public String getName() {
+		return this.name;
+	}
 
-    public Integer getSeq() {
-        return seq;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setSeq(Integer seq) {
-        this.seq = seq;
-    }
+	public Integer getSeq() {
+		return this.seq;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setSeq(Integer seq) {
+		this.seq = seq;
+	}
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
-    }
+	public String getDescription() {
+		return this.description;
+	}
 
-    public Integer getStatus() {
-        return status;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	public Integer getStatus() {
+		return this.status;
+	}
 
-    @Override
-    public String toString() {
-        return "Role{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", seq=" + seq +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                '}';
-    }
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
 }

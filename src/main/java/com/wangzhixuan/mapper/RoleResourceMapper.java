@@ -2,30 +2,17 @@ package com.wangzhixuan.mapper;
 
 import com.wangzhixuan.model.RoleResource;
 
-import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
-public interface RoleResourceMapper {
-    /**
-     * 添加角色资源关联
-     *
-     * @param roleResource
-     * @return
-     */
-    int insert(RoleResource roleResource);
+import com.baomidou.mybatisplus.mapper.AutoMapper;
 
-    /**
-     * 根据角色id查询角色资源关联列表
-     *
-     * @param id
-     * @return
-     */
-    List<RoleResource> findRoleResourceIdListByRoleId(Long id);
+/**
+ *
+ * RoleResource 表数据库控制层接口
+ *
+ */
+public interface RoleResourceMapper extends AutoMapper<RoleResource> {
 
-    /**
-     * 删除角色资源关联关系
-     *
-     * @param roleResourceId
-     * @return
-     */
-    int deleteById(Long roleResourceId);
+    Long selectIdListByRoleId(@Param("id") Long id);
+
 }

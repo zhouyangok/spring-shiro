@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.commons.result.UserVo;
 import com.wangzhixuan.commons.utils.DigestUtils;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.User;
-import com.wangzhixuan.service.UserService;
+import com.wangzhixuan.model.vo.UserVo;
+import com.wangzhixuan.service.IUserService;
 
 /**
  * @description：用户管理
@@ -31,7 +31,7 @@ import com.wangzhixuan.service.UserService;
 public class UserController extends BaseController {
 
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     /**
      * 用户管理页
@@ -72,7 +72,7 @@ public class UserController extends BaseController {
             condition.put("endTime", userVo.getCreatedateEnd());
         }
         pageInfo.setCondition(condition);
-        userService.findDataGrid(pageInfo);
+        userService.selectDataGrid(pageInfo);
         return pageInfo;
     }
 
@@ -95,12 +95,12 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Object add(UserVo userVo) {
-        User u = userService.findUserByLoginName(userVo.getLoginname());
+        User u = userService.selectByLoginName(userVo.getLoginName());
         if (u != null) {
             return renderError("用户名已存在!");
         }
         userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-        userService.addUser(userVo);
+        userService.insertByVo(userVo);
         return renderSuccess("添加成功");
     }
 
@@ -113,7 +113,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(Long id, Model model) {
-        UserVo userVo = userService.findUserVoById(id);
+        UserVo userVo = userService.selectVoById(id);
         List<Role> rolesList = userVo.getRolesList();
         List<Long> ids = new ArrayList<Long>();
         for (Role role : rolesList) {
@@ -133,12 +133,12 @@ public class UserController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(UserVo userVo) {
-        User user = userService.findUserByLoginName(userVo.getLoginname());
+        User user = userService.selectByLoginName(userVo.getLoginName());
         if (user != null && user.getId() != userVo.getId()) {
             return renderError("用户名已存在!");
         }
         userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
-        userService.updateUser(userVo);
+        userService.updateByVo(userVo);
         return renderSuccess("修改成功！");
     }
 
@@ -166,7 +166,7 @@ public class UserController extends BaseController {
             return renderError("老密码不正确!");
         }
 
-        userService.updateUserPwdById(getUserId(), DigestUtils.md5Hex(pwd));
+        userService.updatePwdByUserId(getUserId(), DigestUtils.md5Hex(pwd));
         return renderSuccess("密码修改成功！");
     }
 

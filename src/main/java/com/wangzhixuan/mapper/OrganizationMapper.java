@@ -4,58 +4,21 @@ import com.wangzhixuan.model.Organization;
 
 import java.util.List;
 
-public interface OrganizationMapper {
-    /**
-     * 删除部门
-     *
-     * @param id
-     * @return
-     */
-    int deleteOrganizationById(Long id);
+import org.apache.ibatis.annotations.Param;
 
-    /**
-     * 添加部门
-     *
-     * @param organization
-     * @return
-     */
-    int insert(Organization organization);
+import com.baomidou.mybatisplus.mapper.AutoMapper;
 
-    /**
-     * 更新部门
-     *
-     * @param organization
-     * @return
-     */
-    int updateOrganization(Organization organization);
+/**
+ *
+ * Organization 表数据库控制层接口
+ *
+ */
+public interface OrganizationMapper extends AutoMapper<Organization> {
 
-    /**
-     * 查询一级部门
-     *
-     * @return
-     */
-    List<Organization> findOrganizationAllByPidNull();
+    List<Organization> selectByPIdNull();
 
-    /**
-     * 查询部门子集
-     *
-     * @param pid
-     * @return
-     */
-    List<Organization> findOrganizationAllByPid(Long pid);
+    List<Organization> selectAllByPId(@Param("pId") Long pid);
 
-    /**
-     * 查询所有部门集合
-     *
-     * @return
-     */
-    List<Organization> findOrganizationAll();
+    List<Organization> selectAll();
 
-    /**
-     * 根据id查询部门
-     *
-     * @param id
-     * @return
-     */
-    Organization findOrganizationById(Long id);
 }

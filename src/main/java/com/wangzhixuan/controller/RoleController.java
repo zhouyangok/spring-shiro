@@ -1,9 +1,9 @@
 package com.wangzhixuan.controller;
 
-import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.model.Role;
-import com.wangzhixuan.service.RoleService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.model.Role;
+import com.wangzhixuan.service.IRoleService;
 
 /**
  * @description：权限管理
@@ -25,7 +26,7 @@ import java.util.Map;
 public class RoleController extends BaseController {
 
     @Autowired
-    private RoleService roleService;
+    private IRoleService roleService;
 
     /**
      * 权限管理页
@@ -53,7 +54,7 @@ public class RoleController extends BaseController {
         Map<String, Object> condition = new HashMap<String, Object>();
         pageInfo.setCondition(condition);
 
-        roleService.findDataGrid(pageInfo);
+        roleService.selectDataGrid(pageInfo);
         return pageInfo;
     }
 
@@ -65,7 +66,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/tree", method = RequestMethod.POST)
     @ResponseBody
     public Object tree() {
-        return roleService.findTree();
+        return roleService.selectTree();
     }
 
     /**
@@ -87,7 +88,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public Object add(Role role) {
-        roleService.addRole(role);
+        roleService.insert(role);
         return renderSuccess("添加成功！");
     }
 
@@ -100,7 +101,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-        roleService.deleteRoleById(id);
+        roleService.deleteById(id);
         return renderSuccess("删除成功！");
     }
 
@@ -113,7 +114,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/editPage")
     public String editPage(Model model, Long id) {
-        Role role = roleService.findRoleById(id);
+        Role role = roleService.selectById(id);
         model.addAttribute("role", role);
         return "admin/roleEdit";
     }
@@ -127,7 +128,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Role role) {
-        roleService.updateRole(role);
+        roleService.updateSelectiveById(role);
         return renderSuccess("编辑成功！");
     }
 
@@ -153,7 +154,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/findResourceIdListByRoleId")
     @ResponseBody
     public Object findResourceByRoleId(Long id) {
-        List<Long> resources = roleService.findResourceIdListByRoleId(id);
+        List<Long> resources = roleService.selectResourceIdListByRoleId(id);
         return renderSuccess(resources);
     }
 

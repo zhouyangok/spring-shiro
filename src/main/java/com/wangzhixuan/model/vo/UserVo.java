@@ -1,11 +1,11 @@
-package com.wangzhixuan.commons.result;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.wangzhixuan.model.Role;
+package com.wangzhixuan.model.vo;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.wangzhixuan.model.Role;
 
 /**
  * @description：UserVo
@@ -15,7 +15,7 @@ import java.util.List;
 public class UserVo implements Serializable {
     private Long id;
 
-    private String loginname;
+    private String loginName;
 
     private String name;
 
@@ -25,14 +25,14 @@ public class UserVo implements Serializable {
 
     private Integer age;
 
-    private Integer usertype;
+    private Integer userType;
 
     private Integer status;
 
     private Integer organizationId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createdate;
+    private Date createTime;
 
     private String phone;
 
@@ -55,12 +55,12 @@ public class UserVo implements Serializable {
         this.id = id;
     }
 
-    public String getLoginname() {
-        return loginname;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setLoginname(String loginname) {
-        this.loginname = loginname == null ? null : loginname.trim();
+    public void setLoginName(String loginName) {
+        this.loginName = loginName == null ? null : loginName.trim();
     }
 
     public String getName() {
@@ -95,12 +95,12 @@ public class UserVo implements Serializable {
         this.age = age;
     }
 
-    public Integer getUsertype() {
-        return usertype;
+    public Integer getUserType() {
+        return userType;
     }
 
-    public void setUsertype(Integer usertype) {
-        this.usertype = usertype;
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 
     public Integer getStatus() {
@@ -119,12 +119,12 @@ public class UserVo implements Serializable {
         this.organizationId = organizationId;
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getPhone() {

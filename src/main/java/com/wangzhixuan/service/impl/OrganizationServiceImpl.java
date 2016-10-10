@@ -1,25 +1,33 @@
 package com.wangzhixuan.service.impl;
 
-import com.wangzhixuan.commons.result.Tree;
-import com.wangzhixuan.mapper.OrganizationMapper;
-import com.wangzhixuan.model.Organization;
-import com.wangzhixuan.service.OrganizationService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.wangzhixuan.commons.result.Tree;
+import com.wangzhixuan.mapper.OrganizationMapper;
+import com.wangzhixuan.model.Organization;
+import com.wangzhixuan.service.IOrganizationService;
+import com.baomidou.framework.service.impl.SuperServiceImpl;
+
+/**
+ *
+ * Organization 表数据服务层接口实现类
+ *
+ */
 @Service
-public class OrganizationServiceImpl implements OrganizationService {
+public class OrganizationServiceImpl extends SuperServiceImpl<OrganizationMapper, Organization> implements IOrganizationService {
+
     @Autowired
     private OrganizationMapper organizationMapper;
-
+    
     @Override
-    public List<Tree> findTree() {
+    public List<Tree> selectTree() {
         List<Tree> trees = new ArrayList<Tree>();
 
-        List<Organization> organizationFather = organizationMapper.findOrganizationAllByPidNull();
+        List<Organization> organizationFather = organizationMapper.selectByPIdNull();
 
         if (organizationFather != null) {
             for (Organization organizationOne : organizationFather) {
@@ -29,7 +37,7 @@ public class OrganizationServiceImpl implements OrganizationService {
                 treeOne.setText(organizationOne.getName());
                 treeOne.setIconCls(organizationOne.getIcon());
 
-                List<Organization> organizationSon = organizationMapper.findOrganizationAllByPid(organizationOne.getId());
+                List<Organization> organizationSon = organizationMapper.selectAllByPId(organizationOne.getId());
 
                 if (organizationSon != null) {
                     List<Tree> tree = new ArrayList<Tree>();
@@ -51,28 +59,9 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public List<Organization> findTreeGrid() {
-        return organizationMapper.findOrganizationAll();
+    public List<Organization> selectTreeGrid() {
+        return organizationMapper.selectAll();
     }
 
-    @Override
-    public void addOrganization(Organization organization) {
-        organizationMapper.insert(organization);
-    }
-
-    @Override
-    public Organization findOrganizationById(Long id) {
-        return organizationMapper.findOrganizationById(id);
-    }
-
-    @Override
-    public void updateOrganization(Organization organization) {
-        organizationMapper.updateOrganization(organization);
-    }
-
-    @Override
-    public void deleteOrganizationById(Long id) {
-        organizationMapper.deleteOrganizationById(id);
-    }
 
 }
