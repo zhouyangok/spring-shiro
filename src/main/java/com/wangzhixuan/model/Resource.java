@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.IdType;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Resource implements Serializable {
 	private String description;
 
 	/** 资源图标 */
+	@JsonProperty("iconCls")
 	private String icon;
 
 	/** 父级资源id */
@@ -49,8 +51,8 @@ public class Resource implements Serializable {
 
 	/** 创建时间 */
 	@TableField(value = "create_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
-
 
 	public Long getId() {
 		return this.id;
