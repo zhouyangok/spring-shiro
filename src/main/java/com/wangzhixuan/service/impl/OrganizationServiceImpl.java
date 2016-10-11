@@ -6,11 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.mapper.OrganizationMapper;
 import com.wangzhixuan.model.Organization;
 import com.wangzhixuan.service.IOrganizationService;
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 /**
  *

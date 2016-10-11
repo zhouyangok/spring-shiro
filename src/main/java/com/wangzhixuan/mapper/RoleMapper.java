@@ -25,6 +25,6 @@ public interface RoleMapper extends AutoMapper<Role> {
 
     List<Map<Long, String>> selectResourceListByRoleId(@Param("id") Long id);
 
-    List<Role> selectPage(Pagination page, @Param("sort") String sort, @Param("sort") String order);
+    List<Role> selectPage(Pagination page, @Param("sort") String sort, @Param("order") String order);
 
 }

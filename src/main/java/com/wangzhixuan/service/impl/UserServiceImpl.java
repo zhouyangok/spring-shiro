@@ -1,8 +1,6 @@
 package com.wangzhixuan.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -91,14 +89,8 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<UserVo> page = new Page<UserVo>(pageInfo.getNowpage(), pageInfo.getSize());
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("name", "");
-        params.put("organizationId", "");
-        params.put("startTime", "");
-        params.put("endTime", "");
-        
-        List<UserVo> list = userMapper.selectUserVoPage(page, params);
-        page.setRecords(list);
+        List<UserVo> list = userMapper.selectUserVoPage(page, pageInfo.getCondition());
+        pageInfo.setRows(list);
     }
 
     @Override

@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.mapper.RoleMapper;
@@ -15,7 +17,6 @@ import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.RoleResource;
 import com.wangzhixuan.service.IRoleService;
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 /**
  *
@@ -44,8 +45,9 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
 
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
-        // TODO Auto-generated method stub
-        
+        Page<Role> page = new Page<Role>(pageInfo.getNowpage(), pageInfo.getSize());
+        List<Role> list = roleMapper.selectPage(page, pageInfo.getSort(), pageInfo.getOrder());
+        pageInfo.setRows(list);
     }
 
     @Override

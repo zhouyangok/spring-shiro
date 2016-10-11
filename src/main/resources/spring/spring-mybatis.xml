@@ -18,9 +18,9 @@
 
     <!-- base dataSource -->
     <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="${db.url}" />
-        <property name="username" value="${db.user}" />
-        <property name="password" value="${db.password}" />
+        <property name="url" value="${db.master.url}" />
+        <property name="username" value="${db.master.user}" />
+        <property name="password" value="${db.master.password}" />
         
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="mergeStat,wall,log4j2" />
