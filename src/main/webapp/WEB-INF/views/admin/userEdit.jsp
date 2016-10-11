@@ -58,7 +58,7 @@
                 <tr>
                     <td>登录名</td>
                     <td><input name="id" type="hidden"  value="${user.id}">
-                    <input name="loginname" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value="${user.loginname}"></td>
+                    <input name="loginName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value="${user.loginname}"></td>
                     <td>姓名</td>
                     <td><input name="name" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${user.name}"></td>
                 </tr>
@@ -75,7 +75,7 @@
                     <td>年龄</td>
                     <td><input type="text" name="age" value="${user.age}" class="easyui-numberbox"/></td>
                     <td>用户类型</td>
-                    <td><select id="usertype" name="usertype"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <td><select id="usertype" name="userType"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">管理员</option>
                             <option value="1">用户</option>
                     </select></td>

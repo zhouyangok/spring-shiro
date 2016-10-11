@@ -255,7 +255,7 @@
             </properties>
         </profile>
     </profiles>
-    
+
     <!-- 使用aliyun镜像 -->
     <repositories>
          <repository>
@@ -264,6 +264,7 @@
              <url>http://maven.aliyun.com/nexus/content/groups/public</url>
          </repository>
     </repositories>
+
     <!-- spring-framework-bom -->
     <dependencyManagement>
         <dependencies>

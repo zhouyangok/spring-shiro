@@ -40,10 +40,12 @@
                 <td>资源名称</td>
                 <td><input name="name" type="text" placeholder="请输入资源名称" class="easyui-validatebox span2" data-options="required:true" ></td>
                 <td>资源类型</td>
-                <td><select name="resourcetype" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-                            <option value="0">菜单</option>
-                            <option value="1">按钮</option>
-                </select></td>
+                <td>
+                    <select name="resourceType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option value="0">菜单</option>
+                        <option value="1">按钮</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>资源路径</td>
@@ -55,10 +57,12 @@
                 <td>菜单图标</td>
                 <td ><input  name="icon" /></td>
                 <td>状态</td>
-                <td ><select name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-                            <option value="0">正常</option>
-                            <option value="1">停用</option>
-                </select></td>
+                <td>
+                    <select name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option value="0">正常</option>
+                        <option value="1">停用</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>上级资源</td>

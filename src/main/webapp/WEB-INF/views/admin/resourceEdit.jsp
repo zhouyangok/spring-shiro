@@ -41,13 +41,17 @@
         <table  class="grid">
             <tr>
                 <td>资源名称</td>
-                <td><input name="id" type="hidden"  value="${resource.id}" >
-                <input name="name" type="text" placeholder="请输入资源名称" value="${resource.name}" class="easyui-validatebox span2" data-options="required:true" ></td>
+                <td>
+                    <input name="id" type="hidden"  value="${resource.id}" >
+                    <input name="name" type="text" placeholder="请输入资源名称" value="${resource.name}" class="easyui-validatebox span2" data-options="required:true" >
+                </td>
                 <td>资源类型</td>
-                <td><select id="resourcetype" name="resourcetype" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-                            <option value="0">菜单</option>
-                            <option value="1">按钮</option>
-                </select></td>
+                <td>
+                    <select id="resourcetype" name="resourceType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option value="0">菜单</option>
+                        <option value="1">按钮</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>资源路径</td>
@@ -57,12 +61,14 @@
             </tr>
             <tr>
                 <td>菜单图标</td>
-                <td ><input  name="icon" value="${resource.icon}"/></td>
+                <td><input name="icon" value="${resource.icon}"/></td>
                 <td>状态</td>
-                <td ><select id="status" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-                            <option value="0">正常</option>
-                            <option value="1">停用</option>
-                </select></td>
+                <td>
+                    <select id="status" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option value="0">正常</option>
+                        <option value="1">停用</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>上级资源</td>

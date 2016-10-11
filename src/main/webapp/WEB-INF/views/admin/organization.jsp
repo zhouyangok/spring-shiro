@@ -42,7 +42,7 @@
             },  {
                 width : '130',
                 title : '创建时间',
-                field : 'createdate'
+                field : 'createTime'
             },{
                 field : 'pid',
                 title : '上级资源ID',

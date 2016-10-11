@@ -14,6 +14,6 @@ import com.wangzhixuan.model.SysLog;
  */
 public interface SysLogMapper extends AutoMapper<SysLog> {
 
-    List<Role> selectPage(Pagination page);
+    List<Role> selectSysLogList(Pagination page);
 
 }

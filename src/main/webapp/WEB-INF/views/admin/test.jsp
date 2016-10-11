@@ -16,14 +16,14 @@
             pagination : true,
             singleSelect : true,
             idField : 'id',
-            sortName : 'createdate',
+            sortName : 'createTime',
             sortOrder : 'asc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
                 width : '80',
                 title : '登录名',
-                field : 'loginname',
+                field : 'loginName',
                 sortable : true
             }, {
                 width : '80',
@@ -42,7 +42,7 @@
             },{
                 width : '130s',
                 title : '创建时间',
-                field : 'createdate',
+                field : 'createTime',
                 sortable : true
             },  {
                 width : '40',

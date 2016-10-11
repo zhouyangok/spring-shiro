@@ -39,7 +39,7 @@
                 title : '图标',
                 width : 90
             }, {
-                field : 'resourcetype',
+                field : 'resourceType',
                 title : '资源类型',
                 width : 80,
                 formatter : function(value, row, index) {

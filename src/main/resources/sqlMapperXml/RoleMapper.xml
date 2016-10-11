@@ -57,7 +57,7 @@
             r.id = #{id}
     </select>
 
-    <select id="selectPage" resultType="Role">
+    <select id="selectRoleList" resultType="Role">
         select
         <include refid="Base_Column_List"/>
         from role

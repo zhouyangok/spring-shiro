@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wangzhixuan.model.Role;
 
 /**
@@ -19,6 +20,7 @@ public class UserVo implements Serializable {
 
     private String name;
 
+    @JsonIgnore
     private String password;
 
     private Integer sex;

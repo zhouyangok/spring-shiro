@@ -44,12 +44,12 @@
                 </tr>
                 <tr>
                     <td>状态</td>
-	                <td >
-		                <select id="status" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
-		                            <option value="0">正常</option>
-		                            <option value="1">停用</option>
-		                </select>
-	                </td>
+                    <td >
+                        <select id="status" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                            <option value="0">正常</option>
+                            <option value="1">停用</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <td>备注</td>

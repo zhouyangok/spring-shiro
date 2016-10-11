@@ -27,7 +27,7 @@ public class SysLogServiceImpl extends SuperServiceImpl<SysLogMapper, SysLog> im
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<SysLog> page = new Page<SysLog>(pageInfo.getNowpage(), pageInfo.getSize());
-        List<Role> list = sysLogMapper.selectPage(page);
+        List<Role> list = sysLogMapper.selectSysLogList(page);
         pageInfo.setRows(list);
     }
 

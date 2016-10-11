@@ -47,7 +47,7 @@
             <table class="grid">
                 <tr>
                     <td>登录名</td>
-                    <td><input name="loginname" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value=""></td>
+                    <td><input name="loginName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value=""></td>
                     <td>姓名</td>
                     <td><input name="name" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value=""></td>
                 </tr>
