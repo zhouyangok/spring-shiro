@@ -99,7 +99,7 @@
             }, {
                 width : '60',
                 title : '用户类型',
-                field : 'usertype',
+                field : 'userType',
                 sortable : true,
                 formatter : function(value, row, index) {
                     if(value == 0) {

@@ -44,7 +44,7 @@
             }
         });
         $("#sex").val('${user.sex}');
-        $("#usertype").val('${user.usertype}');
+        $("#userType").val('${user.userType}');
         $("#status").val('${user.status}');
     });
 </script>
@@ -75,7 +75,7 @@
                     <td>年龄</td>
                     <td><input type="text" name="age" value="${user.age}" class="easyui-numberbox"/></td>
                     <td>用户类型</td>
-                    <td><select id="usertype" name="userType"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <td><select id="userType" name="userType"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">管理员</option>
                             <option value="1">用户</option>
                     </select></td>

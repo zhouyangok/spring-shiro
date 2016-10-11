@@ -67,7 +67,7 @@
                     <td><input type="text" name="age" class="easyui-numberbox"/></td>
                     <td>用户类型</td>
                     <td>
-                        <select name="usertype" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <select name="userType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">管理员</option>
                             <option value="1" selected="selected">用户</option>
                         </select>
