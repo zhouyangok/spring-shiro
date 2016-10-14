@@ -72,10 +72,12 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
     @Override
     public void updateRoleResource(Long id, String resourceIds) {
         // 先删除后添加,有点爆力
-        List<Long> roleResourceIdList = roleMapper.selectResourceIdListByRoleId(id);
-        if (roleResourceIdList != null && (!roleResourceIdList.isEmpty())) {
-            for (Long roleResourceId : roleResourceIdList) {
-                roleResourceMapper.deleteById(roleResourceId);
+        List<Long> resourceIdList = roleMapper.selectResourceIdListByRoleId(id);
+        if (resourceIdList != null && !resourceIdList.isEmpty()) {
+            for (Long resourceId : resourceIdList) {
+                RoleResource roleResource = new RoleResource();
+                roleResource.setResourceId(resourceId);
+                roleResourceMapper.deleteSelective(roleResource);
             }
         }
         String[] resources = resourceIds.split(",");

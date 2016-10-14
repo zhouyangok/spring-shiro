@@ -137,7 +137,9 @@ public class UserController extends BaseController {
         if (user != null && user.getId() != userVo.getId()) {
             return renderError("用户名已存在!");
         }
-        userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+        if (StringUtils.isNotBlank(userVo.getPassword())) {
+            userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+        }
         userService.updateByVo(userVo);
         return renderSuccess("修改成功！");
     }

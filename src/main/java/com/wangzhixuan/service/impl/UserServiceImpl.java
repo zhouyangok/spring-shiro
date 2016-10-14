@@ -60,7 +60,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     public void updateByVo(UserVo userVo) {
         User user = BeanUtils.copy(userVo, User.class);
-        this.updateById(user);
+        this.updateSelectiveById(user);
         
         Long id = userVo.getId();
         List<UserRole> userRoles = userRoleMapper.selectByUserId(id);
@@ -83,7 +83,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     public void updatePwdByUserId(Long userId, String md5Hex) {
         User user = new User();
         user.setPassword(md5Hex);
-        this.updateById(user);
+        this.updateSelectiveById(user);
     }
 
     @Override

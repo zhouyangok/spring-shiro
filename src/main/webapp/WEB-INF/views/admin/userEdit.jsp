@@ -58,7 +58,7 @@
                 <tr>
                     <td>登录名</td>
                     <td><input name="id" type="hidden"  value="${user.id}">
-                    <input name="loginName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value="${user.loginname}"></td>
+                    <input name="loginName" type="text" placeholder="请输入登录名称" class="easyui-validatebox" data-options="required:true" value="${user.loginName}"></td>
                     <td>姓名</td>
                     <td><input name="name" type="text" placeholder="请输入姓名" class="easyui-validatebox" data-options="required:true" value="${user.name}"></td>
                 </tr>

@@ -125,7 +125,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Resource resource) {
-        resourceService.updateById(resource);
+        resourceService.updateSelectiveById(resource);
         return renderSuccess("编辑成功！");
     }
 
