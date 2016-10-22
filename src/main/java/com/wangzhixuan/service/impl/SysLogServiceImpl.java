@@ -29,6 +29,7 @@ public class SysLogServiceImpl extends SuperServiceImpl<SysLogMapper, SysLog> im
         Page<SysLog> page = new Page<SysLog>(pageInfo.getNowpage(), pageInfo.getSize());
         List<Role> list = sysLogMapper.selectSysLogList(page);
         pageInfo.setRows(list);
+        pageInfo.setTotal(page.getTotal());
     }
 
 }

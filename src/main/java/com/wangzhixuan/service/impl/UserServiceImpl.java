@@ -91,6 +91,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         Page<UserVo> page = new Page<UserVo>(pageInfo.getNowpage(), pageInfo.getSize());
         List<UserVo> list = userMapper.selectUserVoPage(page, pageInfo.getCondition());
         pageInfo.setRows(list);
+        pageInfo.setTotal(page.getTotal());
     }
 
     @Override

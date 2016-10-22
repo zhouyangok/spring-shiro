@@ -48,6 +48,7 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
         Page<Role> page = new Page<Role>(pageInfo.getNowpage(), pageInfo.getSize());
         List<Role> list = roleMapper.selectRoleList(page, pageInfo.getSort(), pageInfo.getOrder());
         pageInfo.setRows(list);
+        pageInfo.setTotal(page.getTotal());
     }
 
     @Override
