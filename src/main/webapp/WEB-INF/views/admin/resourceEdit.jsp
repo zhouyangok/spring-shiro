@@ -33,7 +33,7 @@
         });
 
         $("#status").val('${resource.status}');
-        $("#resourcetype").val('${resource.resourcetype}');
+        $("#resourcetype").val('${resource.resourceType}');
     });
 </script>
 <div style="padding: 3px;">
