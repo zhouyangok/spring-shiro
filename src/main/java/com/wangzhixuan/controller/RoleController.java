@@ -7,8 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
@@ -33,7 +34,7 @@ public class RoleController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+    @GetMapping("/manager")
     public String manager() {
         return "admin/role";
     }
@@ -47,7 +48,7 @@ public class RoleController extends BaseController {
      * @param order
      * @return
      */
-    @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
+    @PostMapping("/dataGrid")
     @ResponseBody
     public Object dataGrid(Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
@@ -63,7 +64,7 @@ public class RoleController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/tree", method = RequestMethod.POST)
+    @PostMapping("/tree")
     @ResponseBody
     public Object tree() {
         return roleService.selectTree();
@@ -74,7 +75,7 @@ public class RoleController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/addPage", method = RequestMethod.GET)
+    @GetMapping("/addPage")
     public String addPage() {
         return "admin/roleAdd";
     }
@@ -85,7 +86,7 @@ public class RoleController extends BaseController {
      * @param role
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     @ResponseBody
     public Object add(Role role) {
         roleService.insert(role);
@@ -139,7 +140,7 @@ public class RoleController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/grantPage")
+    @GetMapping("/grantPage")
     public String grantPage(Long id, Model model) {
         model.addAttribute("id", id);
         return "admin/roleGrant";

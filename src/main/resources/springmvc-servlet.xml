@@ -30,6 +30,14 @@
     <mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
     <mvc:resources mapping="/favicon.ico" location="/static/style/images/favicon.ico" cache-period="31556926"/>
 
+    <!-- Spring 拦截器 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/login" />
+            <bean class="com.wangzhixuan.commons.scan.CsrfInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="false">
             <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->

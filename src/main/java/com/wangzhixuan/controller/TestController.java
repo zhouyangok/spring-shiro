@@ -1,8 +1,8 @@
 package com.wangzhixuan.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.wangzhixuan.commons.base.BaseController;
 
@@ -19,7 +19,7 @@ public class TestController extends BaseController {
      * 图标测试
      * @return
      */
-    @RequestMapping(value = "/dataGrid", method = RequestMethod.GET)
+    @GetMapping("/dataGrid")
     public String dataGrid() {
         return "admin/test";
     }

@@ -8,8 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
@@ -38,7 +39,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+    @GetMapping("/manager")
     public String manager() {
         return "admin/user";
     }
@@ -53,7 +54,7 @@ public class UserController extends BaseController {
      * @param order
      * @return
      */
-    @RequestMapping(value = "/dataGrid", method = RequestMethod.POST)
+    @PostMapping("/dataGrid")
     @ResponseBody
     public Object dataGrid(UserVo userVo, Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows);
@@ -81,7 +82,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/addPage", method = RequestMethod.GET)
+    @GetMapping("/addPage")
     public String addPage() {
         return "admin/userAdd";
     }
@@ -92,7 +93,7 @@ public class UserController extends BaseController {
      * @param userVo
      * @return
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping("/add")
     @ResponseBody
     public Object add(UserVo userVo) {
         User u = userService.selectByLoginName(userVo.getLoginName());
@@ -111,7 +112,7 @@ public class UserController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping("/editPage")
+    @GetMapping("/editPage")
     public String editPage(Long id, Model model) {
         UserVo userVo = userService.selectVoById(id);
         List<Role> rolesList = userVo.getRolesList();
@@ -149,7 +150,7 @@ public class UserController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/editPwdPage", method = RequestMethod.GET)
+    @GetMapping("/editPwdPage")
     public String editPwdPage() {
         return "admin/userEditPwd";
     }

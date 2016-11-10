@@ -10,11 +10,12 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.csrf.CsrfToken;
 import com.wangzhixuan.commons.utils.DigestUtils;
 import com.wangzhixuan.commons.utils.StringUtils;
 
@@ -31,7 +32,7 @@ public class LoginController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/")
+    @GetMapping("/")
     public String index() {
         return "redirect:/index";
     }
@@ -42,7 +43,7 @@ public class LoginController extends BaseController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/index")
+    @GetMapping("/index")
     public String index(Model model) {
         return "index";
     }
@@ -51,7 +52,8 @@ public class LoginController extends BaseController {
      * GET 登录
      * @return {String}
      */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping("/login")
+    @CsrfToken(create = true)
     public String login() {
         LOGGER.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
@@ -67,7 +69,8 @@ public class LoginController extends BaseController {
      * @param password 密码
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @PostMapping("/login")
+    @CsrfToken(remove = true)
     @ResponseBody
     public Object loginPost(String username, String password) {
         LOGGER.info("POST请求登录");
@@ -104,7 +107,7 @@ public class LoginController extends BaseController {
      * 未授权
      * @return {String}
      */
-    @RequestMapping(value = "/unauth")
+    @GetMapping("/unauth")
     public String unauth() {
         if (SecurityUtils.getSubject().isAuthenticated() == false) {
             return "redirect:/login";
@@ -116,7 +119,7 @@ public class LoginController extends BaseController {
      * 退出
      * @return {Result}
      */
-    @RequestMapping(value = "/logout")
+    @PostMapping("/logout")
     @ResponseBody
     public Object logout() {
         LOGGER.info("登出");

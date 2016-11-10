@@ -1,19 +1,19 @@
 package com.wangzhixuan.commons.scan;
 
-import com.wangzhixuan.commons.result.Result;
-import com.wangzhixuan.commons.utils.BeanUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.wangzhixuan.commons.result.Result;
+import com.wangzhixuan.commons.utils.BeanUtils;
+import com.wangzhixuan.commons.utils.WebUtils;
 
 /**
  * 异常处理，对ajax类型的异常返回ajax错误，避免页面问题
@@ -36,11 +36,7 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 		}
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
 
-		// spring ajax 返回含有 ResponseBody 或者 RestController注解
-		ResponseBody annotation = handlerMethod.getMethodAnnotation(ResponseBody.class);
-		RestController restAnnotation = handlerMethod.getBean().getClass().getAnnotation(RestController.class);
-		// ajax 异常
-		if (null != annotation || null != restAnnotation) {
+		if (WebUtils.isAjax(handlerMethod)) {
 			Result result = new Result();
 			result.setMsg(e.getMessage());
 			return new ModelAndView(new MappingJackson2JsonView(), BeanUtils.toMap(result));

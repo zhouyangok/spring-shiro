@@ -15,6 +15,7 @@
 <div class="top_div"></div>
 <div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
     <form method="post" id="loginform">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div style="width: 165px; height: 96px; position: absolute;">
             <div class="tou"></div>
             <div class="initial_left_hand" id="left_hand"></div>
@@ -42,7 +43,10 @@
     </form>
 </div>
 <div style="text-align:center;">
-    <p><a href="http://www.dreamlu.net/" target="_blank">如梦技术</a><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></p>
+    <p>
+        <a href="http://www.dreamlu.net/" target="_blank">如梦技术</a>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1256912241'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/stat.php%3Fid%3D1256912241%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+    </p>
 </div>
 </body>
 </html>

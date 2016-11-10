@@ -3,8 +3,9 @@ package com.wangzhixuan.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
@@ -29,7 +30,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/tree", method = RequestMethod.POST)
+    @PostMapping("/tree")
     @ResponseBody
     public Object tree() {
         User currentUser = getCurrentUser();
@@ -41,7 +42,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+    @GetMapping("/manager")
     public String manager() {
         return "admin/resource";
     }
@@ -51,7 +52,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/treeGrid", method = RequestMethod.POST)
+    @PostMapping("/treeGrid")
     @ResponseBody
     public Object treeGrid() {
         return resourceService.selectAll();
@@ -62,7 +63,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @RequestMapping("/addPage")
+    @GetMapping("/addPage")
     public String addPage() {
         return "admin/resourceAdd";
     }
@@ -96,7 +97,7 @@ public class ResourceController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/allTrees", method = RequestMethod.POST)
+    @PostMapping("/allTrees")
     @ResponseBody
     public Object allTrees() {
         return resourceService.selectAllTrees();

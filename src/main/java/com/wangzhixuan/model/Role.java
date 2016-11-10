@@ -3,9 +3,9 @@ package com.wangzhixuan.model;
 import java.io.Serializable;
 
 import com.baomidou.mybatisplus.annotations.IdType;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.wangzhixuan.commons.utils.JsonUtils;
 
 /**
  *
@@ -74,4 +74,8 @@ public class Role implements Serializable {
 		this.status = status;
 	}
 
+	@Override
+	public String toString() {
+		return JsonUtils.toJson(this);
+	}
 }

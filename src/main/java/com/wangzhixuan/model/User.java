@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotations.IdType;
-
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
+import com.wangzhixuan.commons.utils.JsonUtils;
 
 /**
  *
@@ -145,4 +145,8 @@ public class User implements Serializable {
 		this.createTime = createTime;
 	}
 
+	@Override
+	public String toString() {
+		return JsonUtils.toJson(this);
+	}
 }

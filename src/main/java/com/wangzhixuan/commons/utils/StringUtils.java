@@ -1,11 +1,12 @@
 package com.wangzhixuan.commons.utils;
 
+import java.util.Collection;
+
 /**
  * 继承自Spring util的工具类，减少jar依赖
  * @author L.cm
  */
 public class StringUtils extends org.springframework.util.StringUtils {
-
     /**
      * Check whether the given {@code CharSequence} contains actual <em>text</em>.
      * <p>More specifically, this method returns {@code true} if the
@@ -45,5 +46,27 @@ public class StringUtils extends org.springframework.util.StringUtils {
      */
     public static boolean isNotBlank(final CharSequence cs) {
         return StringUtils.hasText(cs);
+    }
+    
+    /**
+     * Convert a {@code Collection} into a delimited {@code String} (e.g. CSV).
+     * <p>Useful for {@code toString()} implementations.
+     * @param coll the {@code Collection} to convert
+     * @param delim the delimiter to use (typically a ",")
+     * @return the delimited {@code String}
+     */
+    public static String join(Collection<?> coll, String delim) {
+        return StringUtils.collectionToDelimitedString(coll, delim);
+    }
+    
+    /**
+     * Convert a {@code String} array into a delimited {@code String} (e.g. CSV).
+     * <p>Useful for {@code toString()} implementations.
+     * @param arr the array to display
+     * @param delim the delimiter to use (typically a ",")
+     * @return the delimited {@code String}
+     */
+    public static String join(Object[] arr, String delim) {
+        return StringUtils.arrayToDelimitedString(arr, delim);
     }
 }

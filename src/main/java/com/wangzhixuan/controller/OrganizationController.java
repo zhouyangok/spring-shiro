@@ -4,8 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
@@ -29,7 +30,7 @@ public class OrganizationController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/manager", method = RequestMethod.GET)
+    @GetMapping(value = "/manager")
     public String manager() {
         return "admin/organization";
     }
@@ -39,7 +40,7 @@ public class OrganizationController extends BaseController {
      *
      * @return
      */
-    @RequestMapping(value = "/tree", method = RequestMethod.POST)
+    @PostMapping(value = "/tree")
     @ResponseBody
     public Object tree() {
         return organizationService.selectTree();
@@ -86,7 +87,7 @@ public class OrganizationController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping("/editPage")
+    @GetMapping("/editPage")
     public String editPage(HttpServletRequest request, Long id) {
         Organization organization = organizationService.selectById(id);
         request.setAttribute("organization", organization);
