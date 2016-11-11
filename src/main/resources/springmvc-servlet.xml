@@ -30,11 +30,14 @@
     <mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
     <mvc:resources mapping="/favicon.ico" location="/static/style/images/favicon.ico" cache-period="31556926"/>
 
-    <!-- Spring 拦截器 -->
+    <!-- csrf HttpSessionCsrfTokenRepository -->
+    <bean class="com.wangzhixuan.commons.csrf.HttpSessionCsrfTokenRepository" />
+    
+    <!-- Spring csrf 拦截器 -->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/login" />
-            <bean class="com.wangzhixuan.commons.scan.CsrfInterceptor" />
+            <bean class="com.wangzhixuan.commons.csrf.CsrfInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 

@@ -1,44 +1,31 @@
-package com.wangzhixuan.commons.scan;
+package com.wangzhixuan.commons.csrf;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.wangzhixuan.commons.csrf.CsrfToken;
-import com.wangzhixuan.commons.csrf.CsrfTokenBean;
-import com.wangzhixuan.commons.utils.StringUtils;
+import com.wangzhixuan.commons.scan.ExceptionResolver;
 import com.wangzhixuan.commons.utils.WebUtils;
 
 /**
- * Csrf拦截器，用来生成或去除CsrfToken，目前基于session
+ * Csrf拦截器，用来生成或去除CsrfToken
+ * 
  * @author L.cm
  */
-@Component
 public class CsrfInterceptor extends HandlerInterceptorAdapter {
 	private static final Logger logger = LogManager.getLogger(ExceptionResolver.class);
 	
-	private static final String DEFAULT_CSRF_PARAMETER_NAME = "_csrf";
-
-	private static final String DEFAULT_CSRF_HEADER_NAME = "X-CSRF-TOKEN";
-
-	private static final String DEFAULT_CSRF_TOKEN_ATTR_NAME = CsrfInterceptor.class
-			.getName().concat(".CSRF_TOKEN");
-
-	private String parameterName = DEFAULT_CSRF_PARAMETER_NAME;
-
-	private String headerName = DEFAULT_CSRF_HEADER_NAME;
-
-	private String sessionAttributeName = DEFAULT_CSRF_TOKEN_ATTR_NAME;
-
+	@Autowired 
+	private CsrfTokenRepository csrfTokenRepository;
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HandlerMethod handlerMethod = (HandlerMethod) handler;
@@ -51,25 +38,24 @@ public class CsrfInterceptor extends HandlerInterceptorAdapter {
 		if (null == csrfToken) {
 			return true;
 		}
-		// 判断是否ajax请求
-		boolean isAjax = WebUtils.isAjax(handlerMethod);
 		// create、remove同时为true时异常
 		if (csrfToken.create() && csrfToken.remove()) {
 			logger.error("CsrfToken attr create and remove can Not at the same time to true!");
-			return renderError(request, response, isAjax, "CsrfToken attr create and remove can Not at the same time to true!");
+			return renderError(request, response, Boolean.FALSE, "CsrfToken attr create and remove can Not at the same time to true!");
 		}
+		// 创建
 		if (csrfToken.create()) {
-			HttpSession session = request.getSession();
-			CsrfTokenBean token = new CsrfTokenBean(headerName, parameterName, createNewToken());
-			session.setAttribute(sessionAttributeName, token);
-			request.setAttribute(parameterName, token);
+			CsrfTokenBean token = csrfTokenRepository.generateToken(request);
+			csrfTokenRepository.saveToken(token, request, response);
+			// 缓存一个表单页面地址的url
+			csrfTokenRepository.cacheUrl(request, response);
+			request.setAttribute(token.getParameterName(), token);
 			return true;
 		}
-		HttpSession session = request.getSession(false);
-		if (session == null) {
-			return renderError(request, response, isAjax, "session is null!");
-		}
-		CsrfTokenBean tokenBean = (CsrfTokenBean) session.getAttribute(sessionAttributeName);
+		// 判断是否ajax请求
+		boolean isAjax = WebUtils.isAjax(handlerMethod);
+		// 校验，并且清除
+		CsrfTokenBean tokenBean = csrfTokenRepository.loadToken(request);
 		if (tokenBean == null) {
 			return renderError(request, response, isAjax, "CsrfToken is null!");
 		}
@@ -85,23 +71,36 @@ public class CsrfInterceptor extends HandlerInterceptorAdapter {
 	
 	private boolean renderError(HttpServletRequest request, HttpServletResponse response, 
 			boolean isAjax, String message) throws IOException {
+		// 获取缓存的cacheUrl
+		String cachedUrl = csrfTokenRepository.getRemoveCacheUrl(request, response);
 		// ajax请求直接抛出异常，因为{@link ExceptionResolver}会去处理
 		if (isAjax) {
 			throw new RuntimeException(message);
 		}
-		String queryString = request.getQueryString();
-		// 被拦截前的请求URL
-		String redirectUrl = request.getRequestURI();
-		if (StringUtils.isNotBlank(queryString)) {
-			redirectUrl = redirectUrl.concat("?").concat(queryString);
-		}
-		logger.info("Csrf[redirectUrl]:\t" + redirectUrl);
-		response.sendRedirect(redirectUrl);
+		// 非ajax CsrfToken校验异常，先清理token
+		csrfTokenRepository.saveToken(null, request, response);
+		logger.info("Csrf[redirectUrl]:\t" + cachedUrl);
+		response.sendRedirect(cachedUrl);
 		return false;
 	}
-	
-	private String createNewToken() {
-		return UUID.randomUUID().toString();
+
+	/**
+	 * 用于清理@CsrfToken保证只能请求成功一次
+	 */
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		HandlerMethod handlerMethod = (HandlerMethod) handler;
+		// 非控制器请求直接跳出
+		if (!(handler instanceof HandlerMethod)) {
+			return;
+		}
+		CsrfToken csrfToken = handlerMethod.getMethodAnnotation(CsrfToken.class);
+		if (csrfToken == null || !csrfToken.remove()) {
+			return;
+		}
+		csrfTokenRepository.getRemoveCacheUrl(request, response);
+		csrfTokenRepository.saveToken(null, request, response);
 	}
 
 }
