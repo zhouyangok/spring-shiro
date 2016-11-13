@@ -46,6 +46,7 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<Role> page = new Page<Role>(pageInfo.getNowpage(), pageInfo.getSize());
+        page.setOptimizeCount(false);
         List<Role> list = roleMapper.selectRoleList(page, pageInfo.getSort(), pageInfo.getOrder());
         pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());

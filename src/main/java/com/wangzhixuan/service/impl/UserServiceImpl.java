@@ -89,6 +89,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<UserVo> page = new Page<UserVo>(pageInfo.getNowpage(), pageInfo.getSize());
+        page.setOptimizeCount(false);
         List<UserVo> list = userMapper.selectUserVoPage(page, pageInfo.getCondition());
         pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());

@@ -34,7 +34,7 @@ public abstract class BaseController {
         /**
          * 防止XSS攻击
          */
-        binder.registerCustomEditor(String.class, new StringEscapeEditor(true, false));
+        binder.registerCustomEditor(String.class, new StringEscapeEditor());
     }
 
     /**

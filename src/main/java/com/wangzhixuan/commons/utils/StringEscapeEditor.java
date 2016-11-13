@@ -1,22 +1,11 @@
 package com.wangzhixuan.commons.utils;
 
-import org.springframework.web.util.HtmlUtils;
-import org.springframework.web.util.JavaScriptUtils;
-
 import java.beans.PropertyEditorSupport;
 
+import org.springframework.web.util.HtmlUtils;
+
 public class StringEscapeEditor extends PropertyEditorSupport {
-
-    private boolean escapeHTML;// 编码HTML
-    private boolean escapeJavaScript;// 编码javascript
-
-    public StringEscapeEditor() {
-    }
-
-    public StringEscapeEditor(boolean escapeHTML, boolean escapeJavaScript) {
-        this.escapeHTML = escapeHTML;
-        this.escapeJavaScript = escapeJavaScript;
-    }
+    public StringEscapeEditor() {}
 
     @Override
     public String getAsText() {
@@ -29,14 +18,7 @@ public class StringEscapeEditor extends PropertyEditorSupport {
         if (text == null) {
             setValue(null);
         } else {
-            String value = text;
-            if (escapeHTML) {
-                value = HtmlUtils.htmlEscape(value);
-            }
-            if (escapeJavaScript) {
-                value = JavaScriptUtils.javaScriptEscape(value);
-            }
-            setValue(value);
+            setValue(HtmlUtils.htmlEscape(text));
         }
     }
 
