@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.wangzhixuan.commons.utils.Base64Utils;
 import com.wangzhixuan.commons.utils.StringUtils;
 
 public final class HttpSessionCsrfTokenRepository implements CsrfTokenRepository {
@@ -81,7 +80,6 @@ public final class HttpSessionCsrfTokenRepository implements CsrfTokenRepository
 		if (StringUtils.isNotBlank(queryString)) {
 			redirectUrl = redirectUrl.concat("?").concat(queryString);
 		}
-		redirectUrl = Base64Utils.encodeUrlSafe(redirectUrl);
 		HttpSession session = request.getSession();
 		session.setAttribute(this.cacheUrlAttributeName, redirectUrl);
 	}
@@ -92,11 +90,10 @@ public final class HttpSessionCsrfTokenRepository implements CsrfTokenRepository
 		if (session == null) {
 			return null;
 		}
-		String url = (String) session.getAttribute(this.cacheUrlAttributeName);
-		if (StringUtils.isBlank(url)) {
+		String redirectUrl = (String) session.getAttribute(this.cacheUrlAttributeName);
+		if (StringUtils.isBlank(redirectUrl)) {
 			return null;
 		}
-		String redirectUrl = Base64Utils.decodeUrlSafe(url);
 		session.removeAttribute(this.cacheUrlAttributeName);
 		return redirectUrl;
 	}
