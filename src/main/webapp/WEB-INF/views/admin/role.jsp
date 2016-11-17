@@ -131,7 +131,7 @@
         parent.$.messager.confirm('询问', '您是否要删除当前角色？', function(b) {
             if (b) {
                 progressLoad();
-                $.post('${ctx}/role/delete', {
+                $.post('${path }/role/delete', {
                     id : id
                 }, function(result) {
                     if (result.success) {
