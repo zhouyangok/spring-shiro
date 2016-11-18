@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wangzhixuan.commons.utils.JsonUtils;
 import com.wangzhixuan.model.Role;
+import com.wangzhixuan.model.User;
 
 /**
  * @description：UserVo
@@ -178,6 +179,22 @@ public class UserVo implements Serializable {
 		this.createdateEnd = createdateEnd;
 	}
 	
+	/**
+	 * 比较vo和数据库中的用户是否同一个user，采用id比较
+	 * @param user 用户
+	 * @return 是否同一个人
+	 */
+	public boolean equalsUser(User user) {
+		if (user == null) {
+			return false;
+		}
+		Long userId = user.getId();
+		if (id == null || userId == null) {
+			return false;
+		}
+		return id.equals(userId);
+	}
+
 	@Override
 	public String toString() {
 		return JsonUtils.toJson(this);

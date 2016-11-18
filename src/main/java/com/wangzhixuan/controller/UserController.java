@@ -135,7 +135,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public Object edit(UserVo userVo) {
         User user = userService.selectByLoginName(userVo.getLoginName());
-        if (user != null && user.getId() != userVo.getId()) {
+        if (userVo.equalsUser(user)) {
             return renderError("用户名已存在!");
         }
         if (StringUtils.isNotBlank(userVo.getPassword())) {
