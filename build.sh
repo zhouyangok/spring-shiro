@@ -22,6 +22,6 @@ echo "unzip...war...end..."
 echo "tomcat...reload...begin..."
 sh $tom_bin"/shutdown.sh"
 # kill -9 `ps aux|grep tomcat-shiro |grep -v grep |grep java |awk '{print $2}'`
-sleep 10
+# sleep 1
 sh $tom_bin"/startup.sh"
 echo "tomcat...reload...end....."
