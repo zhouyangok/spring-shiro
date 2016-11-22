@@ -84,20 +84,16 @@ public class LoginController extends BaseController {
         token.setRememberMe(true);
         try {
             user.login(token);
+            return renderSuccess();
         } catch (UnknownAccountException e) {
-            logger.error("账号不存在！", e);
-            return renderError("账号不存在");
+            throw new RuntimeException("账号不存在！", e);
         } catch (DisabledAccountException e) {
-            logger.error("账号未启用！", e);
-            return renderError("账号未启用");
+            throw new RuntimeException("账号未启用！", e);
         } catch (IncorrectCredentialsException e) {
-            logger.error("密码错误！", e);
-            return renderError("密码错误");
-        } catch (RuntimeException e) {
-            logger.error("未知错误,请联系管理员！", e);
-            return renderError("未知错误,请联系管理员");
+            throw new RuntimeException("密码错误！", e);
+        } catch (Throwable e) {
+            throw new RuntimeException("未知错误,请联系管理员！", e);
         }
-        return renderSuccess();
     }
 
     /**

@@ -207,7 +207,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			<!-- 添加jetty插件以便启动 -->
+			<!-- jetty:run 添加jetty插件以便启动 -->
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -226,7 +226,7 @@
 
 	<profiles>
 		<!-- 默认激活 dev 开发环境 -->
-		<!-- production使用 mvn xxx -Pproduction -->
+		<!-- 线上使用 mvn 打包添加 -Pproduction 变量-->
 		<profile>
 			<!-- 本地开发环境 -->
 			<id>development</id>
