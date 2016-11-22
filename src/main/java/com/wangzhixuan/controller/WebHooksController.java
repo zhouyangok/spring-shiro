@@ -4,8 +4,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,8 +21,6 @@ import com.wangzhixuan.event.WebHooksEvent;
 @Controller
 @SuppressWarnings("unchecked")
 public class WebHooksController extends BaseController {
-    private static final Logger logger = LogManager.getLogger(WebHooksController.class);
-    
     /**
      * git@osc WebHooks 设置
      * WIKI: http://git.oschina.net/oschina/git-osc/wikis/WebHook-%E4%BD%BF%E7%94%A8%E7%AE%80%E4%BB%8B

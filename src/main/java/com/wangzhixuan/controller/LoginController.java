@@ -1,7 +1,5 @@
 package com.wangzhixuan.controller;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -26,7 +24,6 @@ import com.wangzhixuan.commons.utils.StringUtils;
  */
 @Controller
 public class LoginController extends BaseController {
-    private static final Logger LOGGER = LogManager.getLogger(LoginController.class);
     /**
      * 首页
      *
@@ -55,7 +52,7 @@ public class LoginController extends BaseController {
     @GetMapping("/login")
     @CsrfToken(create = true)
     public String login() {
-        LOGGER.info("GET请求登录");
+        logger.info("GET请求登录");
         if (SecurityUtils.getSubject().isAuthenticated()) {
             return "redirect:/index";
         }
@@ -73,7 +70,7 @@ public class LoginController extends BaseController {
     @CsrfToken(remove = true)
     @ResponseBody
     public Object loginPost(String username, String password) {
-        LOGGER.info("POST请求登录");
+        logger.info("POST请求登录");
 
         if (StringUtils.isBlank(username)) {
             return renderError("用户名不能为空");
@@ -88,16 +85,16 @@ public class LoginController extends BaseController {
         try {
             user.login(token);
         } catch (UnknownAccountException e) {
-            LOGGER.error("账号不存在！", e);
+            logger.error("账号不存在！", e);
             return renderError("账号不存在");
         } catch (DisabledAccountException e) {
-            LOGGER.error("账号未启用！", e);
+            logger.error("账号未启用！", e);
             return renderError("账号未启用");
         } catch (IncorrectCredentialsException e) {
-            LOGGER.error("密码错误！", e);
+            logger.error("密码错误！", e);
             return renderError("密码错误");
         } catch (RuntimeException e) {
-            LOGGER.error("未知错误,请联系管理员！", e);
+            logger.error("未知错误,请联系管理员！", e);
             return renderError("未知错误,请联系管理员");
         }
         return renderSuccess();
@@ -122,7 +119,7 @@ public class LoginController extends BaseController {
     @PostMapping("/logout")
     @ResponseBody
     public Object logout() {
-        LOGGER.info("登出");
+        logger.info("登出");
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return renderSuccess();

@@ -3,6 +3,8 @@ package com.wangzhixuan.commons.base;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,6 +23,9 @@ import com.wangzhixuan.service.IUserService;
  * @date：2015/10/1 14:51
  */
 public abstract class BaseController {
+    // 控制器本来就是单例，这样似乎更加合理
+    protected Logger logger = LogManager.getLogger(getClass());
+
     @Autowired
     private IUserService userService;
 
@@ -30,7 +35,6 @@ public abstract class BaseController {
          * 自动转换日期类型的字段格式
          */
         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"), true));
-
         /**
          * 防止XSS攻击
          */

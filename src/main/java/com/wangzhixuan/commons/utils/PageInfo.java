@@ -10,6 +10,7 @@ import java.util.Map;
  * @author：Wangzhixuan
  * @date：2015年4月23日 上午1:41:46
  */
+@SuppressWarnings("rawtypes")
 public class PageInfo {
 
     private final static int PAGESIZE = 10; //默认显示的记录数 
