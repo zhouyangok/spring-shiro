@@ -2,22 +2,35 @@
 <p>
 基于springmvc、spring、mybatis-plus、shiro、easyui、Log4j2简单实用的权限系统。
 </p>
+<p>
+项目导入请百度eclipse、myeclipse、idea等IDE导入maven web项目。
+</p>
+<p>
+二次开发可采用`maven jetty`插件启动，`pom.xml`中已经配置。
+</p>
+
+## 运行环境
+`jdk7 + tomcat7`或以上！
+
+线上环境使用`mvn`打包时添加`-Pproduction`变量则会使用`src/main/conf/production`目录下的配置文件。
+
+线上`production`请注意添加一份`cofing/application.properties`配置文件（由于开源，使用`.gitignore`进行了屏蔽）
 
 ## 效果图
 <p>
-<img src="http://static.oschina.net/uploads/img/201512/06161620_HLY6.jpg" alt="" />
+<img src="http://static.oschina.net/uploads/img/201512/06161620_HLY6.jpg"/>
 </p>
 <p>
-<img src="http://static.oschina.net/uploads/img/201512/06161621_NIlr.jpg" alt="" />
+<img src="http://static.oschina.net/uploads/img/201512/06161621_NIlr.jpg"/>
 </p>
 <p>
-<img src="http://static.oschina.net/uploads/img/201512/06161621_63ZV.jpg" alt="" />
+<img src="http://static.oschina.net/uploads/img/201512/06161621_63ZV.jpg"/>
 </p>
 <p>
-<img src="http://static.oschina.net/uploads/img/201512/06164718_18nx.jpg" alt="" />
+<img src="http://static.oschina.net/uploads/img/201512/06164718_18nx.jpg"/>
 </p>
 <p>
-<img src="http://static.oschina.net/uploads/img/201512/06161621_NiiM.jpg" alt="" />
+<img src="http://static.oschina.net/uploads/img/201512/06161621_NiiM.jpg"/>
 </p>
 
 ## 鸣谢

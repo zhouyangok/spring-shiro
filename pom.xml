@@ -4,9 +4,9 @@
 	<groupId>com.wangzhixuan</groupId>
 	<artifactId>spring-shiro-training</artifactId>
 	<packaging>war</packaging>
-	<version>1.0</version>
+	<version>1.1.1</version>
 	<name>spring-shiro-training Maven Webapp</name>
-	<url>http://maven.apache.org</url>
+	<url>http://shiro.dreamlu.net</url>
 
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
