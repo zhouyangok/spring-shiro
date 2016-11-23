@@ -1,13 +1,9 @@
 ## 简介
-<p>
 基于springmvc、spring、mybatis-plus、shiro、easyui、Log4j2简单实用的权限系统。
-</p>
-<p>
-项目导入请百度eclipse、myeclipse、idea等IDE导入maven web项目。
-</p>
-<p>
-二次开发可采用`maven jetty`插件启动，`pom.xml`中已经配置。
-</p>
+
+项目导入请百度`eclipse`、`myeclipse`、`idea`等IDE导入`maven web`项目。
+
+二次开发可采用`jetty maven plugin`启动，`pom.xml`中已经配置。
 
 ## 运行环境
 `jdk7 + tomcat7`或以上！
