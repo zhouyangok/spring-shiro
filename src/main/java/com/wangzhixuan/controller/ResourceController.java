@@ -1,5 +1,7 @@
 package com.wangzhixuan.controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -77,6 +79,7 @@ public class ResourceController extends BaseController {
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Resource resource) {
+        resource.setCreateTime(new Date());
         resourceService.insert(resource);
         return renderSuccess("添加成功！");
     }

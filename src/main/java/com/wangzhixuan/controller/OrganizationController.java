@@ -1,5 +1,7 @@
 package com.wangzhixuan.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +78,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/add")
     @ResponseBody
     public Object add(Organization organization) {
+        organization.setCreateTime(new Date());
         organizationService.insert(organization);
         return renderSuccess("添加成功！");
     }

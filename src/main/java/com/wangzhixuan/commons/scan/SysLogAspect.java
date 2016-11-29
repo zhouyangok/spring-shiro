@@ -1,5 +1,6 @@
 package com.wangzhixuan.commons.scan;
 
+import java.util.Date;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,6 +75,7 @@ public class SysLogAspect {
                     sysLog.setLoginName(loginName);
                     sysLog.setRoleName(loginName);
                     sysLog.setOptContent(strMessage);
+                    sysLog.setCreateTime(new Date());
                     if (request != null) {
                         sysLog.setClientIp(request.getRemoteAddr());
                     }

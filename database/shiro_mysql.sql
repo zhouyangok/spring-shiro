@@ -222,7 +222,7 @@ CREATE TABLE `sys_log` (
   `role_name` varchar(255) DEFAULT NULL COMMENT '角色名',
   `opt_content` varchar(1024) DEFAULT NULL COMMENT '内容',
   `client_ip` varchar(255) DEFAULT NULL COMMENT '客户端ip',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=391 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 

@@ -6,7 +6,6 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wangzhixuan.commons.utils.JsonUtils;
 
@@ -45,7 +44,6 @@ public class Organization implements Serializable {
 
 	/** 创建时间 */
 	@TableField(value = "create_time")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 
 	public Long getId() {

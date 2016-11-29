@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wangzhixuan.commons.utils.JsonUtils;
 
 /**
@@ -43,7 +42,6 @@ public class SysLog implements Serializable {
 
 	/** 创建时间 */
 	@TableField(value = "create_time")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createTime;
 
 

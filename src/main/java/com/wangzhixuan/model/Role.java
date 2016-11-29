@@ -33,7 +33,6 @@ public class Role implements Serializable {
 	/** 状态 */
 	private Integer status;
 
-
 	public Long getId() {
 		return this.id;
 	}

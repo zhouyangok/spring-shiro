@@ -1,5 +1,6 @@
 package com.wangzhixuan.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     public void insertByVo(UserVo userVo) {
         User user = BeanUtils.copy(userVo, User.class);
+        user.setCreateTime(new Date());
         this.insert(user);
         
         Long id = user.getId();
