@@ -5,6 +5,14 @@
 
 二次开发可采用`jetty maven plugin`启动，`pom.xml`中已经配置。
 
+如果觉得数据校验不够，请自行添加hibernate-validator在Bean上做校验！
+
+另外，你需要根据自己的业务添加`shiro注解`，实现请求控制。
+
+更多`shiro`的教程请参考（开涛博客`《跟我学Shiro》`）：http://jinnianshilongnian.iteye.com/category/305053
+
+另外欢迎`Pull Requests`给我们一起完善该项目！
+
 ## 运行环境
 `jdk7 + tomcat7`或以上！
 
