@@ -96,8 +96,8 @@ public class UserController extends BaseController {
     @PostMapping("/add")
     @ResponseBody
     public Object add(UserVo userVo) {
-        User u = userService.selectByLoginName(userVo.getLoginName());
-        if (u != null) {
+        List<User> list = userService.selectByLoginName(userVo);
+        if (list != null && !list.isEmpty()) {
             return renderError("用户名已存在!");
         }
         userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
@@ -134,8 +134,8 @@ public class UserController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(UserVo userVo) {
-        User user = userService.selectByLoginName(userVo.getLoginName());
-        if (userVo.equalsUser(user)) {
+        List<User> list = userService.selectByLoginName(userVo);
+        if (list != null && !list.isEmpty()) {
             return renderError("用户名已存在!");
         }
         if (StringUtils.isNotBlank(userVo.getPassword())) {

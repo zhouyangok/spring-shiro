@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.model.User;
+import com.wangzhixuan.model.vo.UserVo;
 import com.wangzhixuan.service.IRoleService;
 import com.wangzhixuan.service.IUserService;
 
@@ -44,11 +45,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
             AuthenticationToken authcToken) throws AuthenticationException {
         LOGGER.info("Shiro开始登录认证");
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-        User user = userService.selectByLoginName(token.getUsername());
+        UserVo uservo = new UserVo();
+        uservo.setLoginName(token.getUsername());
+        List<User> list = userService.selectByLoginName(uservo);
         // 账号不存在
-        if (user == null) {
+        if (list == null || list.isEmpty()) {
             return null;
         }
+        User user = list.get(0);
         // 账号未启用
         if (user.getStatus() == 1) {
             return null;

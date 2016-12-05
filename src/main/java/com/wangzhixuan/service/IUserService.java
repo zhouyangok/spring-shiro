@@ -1,5 +1,7 @@
 package com.wangzhixuan.service;
 
+import java.util.List;
+
 import com.baomidou.framework.service.ISuperService;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.model.User;
@@ -12,7 +14,7 @@ import com.wangzhixuan.model.vo.UserVo;
  */
 public interface IUserService extends ISuperService<User> {
 
-    User selectByLoginName(String loginName);
+    List<User> selectByLoginName(UserVo userVo);
 
     void insertByVo(UserVo userVo);
 

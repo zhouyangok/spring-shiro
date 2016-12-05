@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.utils.BeanUtils;
 import com.wangzhixuan.commons.utils.PageInfo;
@@ -31,10 +32,14 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     private UserRoleMapper userRoleMapper;
     
     @Override
-    public User selectByLoginName(String loginName) {
+    public List<User> selectByLoginName(UserVo userVo) {
         User user = new User();
-        user.setLoginName(loginName);
-        return this.selectOne(user);
+        user.setLoginName(userVo.getLoginName());
+        EntityWrapper<User> wrapper = new EntityWrapper<User>(user);
+        if (null != userVo.getId()) {
+            wrapper.where("id != {0}", userVo.getId());
+        }
+        return this.selectList(wrapper);
     }
 
     @Override
