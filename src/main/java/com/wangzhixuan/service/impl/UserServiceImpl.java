@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.utils.BeanUtils;
 import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.mapper.UserMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.User;
@@ -67,6 +68,9 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     public void updateByVo(UserVo userVo) {
         User user = BeanUtils.copy(userVo, User.class);
+        if (StringUtils.isBlank(user.getPassword())) {
+            user.setPassword(null);
+        }
         this.updateSelectiveById(user);
         
         Long id = userVo.getId();
