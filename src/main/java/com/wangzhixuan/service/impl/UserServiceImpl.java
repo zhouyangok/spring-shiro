@@ -93,6 +93,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     public void updatePwdByUserId(Long userId, String md5Hex) {
         User user = new User();
+        user.setId(userId);
         user.setPassword(md5Hex);
         this.updateSelectiveById(user);
     }
