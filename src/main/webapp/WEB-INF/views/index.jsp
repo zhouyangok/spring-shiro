@@ -27,7 +27,18 @@
                 iconCls : 'icon-refresh',
                 handler : function() {
                     var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
-                    index_tabs.tabs('getTab', index).panel('open').panel('refresh');
+                    var tab = index_tabs.tabs('getTab', index);
+                    var options = tab.panel('options');
+                    if (options.content) {
+                        index_tabs.tabs('update', {
+                            tab: tab,
+                            options: {
+                                content: options.content
+                            }
+                        });
+                    } else {
+                        tab.panel('refresh', options.href);
+                    }
                 }
             }, {
                 iconCls : 'icon-del',
@@ -139,7 +150,7 @@
         </div>
         <div data-options="region:'center'" style="overflow: hidden;">
             <div id="index_tabs" style="overflow: hidden;">
-                <div title="首页" data-options="border:false" style="overflow: hidden;">
+                <div title="首页" data-options="iconCls:'l-btn-icon icon-home',border:false" style="overflow: hidden;">
                     <script src='https://git.oschina.net/wangzhixuan/spring-shiro-training/widget_preview'></script>
                     <style>
                         .pro_name a{color: #4183c4;}
