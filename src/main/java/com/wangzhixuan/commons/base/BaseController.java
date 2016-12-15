@@ -47,7 +47,7 @@ public abstract class BaseController {
      */
     public User getCurrentUser() {
         ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        User currentUser = userService.selectById(user.id);
+        User currentUser = userService.selectById(user.getId());
         return currentUser;
     }
 

@@ -1,12 +1,11 @@
 package com.wangzhixuan.service;
 
-import com.wangzhixuan.commons.utils.PageInfo;
-import com.wangzhixuan.model.Role;
-
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import com.baomidou.framework.service.ISuperService;
+import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.model.Role;
 
 /**
  *
@@ -15,10 +14,6 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IRoleService extends ISuperService<Role> {
 
-    List<Long> selectRoleIdListByUserId(Long userId);
-
-    List<Map<Long, String>> selectRoleResourceListByRoleId(Long roleId);
-
     void selectDataGrid(PageInfo pageInfo);
 
     Object selectTree();
@@ -26,5 +21,7 @@ public interface IRoleService extends ISuperService<Role> {
     List<Long> selectResourceIdListByRoleId(Long id);
 
     void updateRoleResource(Long id, String resourceIds);
+
+    Set<String> selectResourceUrlListByUserId(Long userId);
 
 }

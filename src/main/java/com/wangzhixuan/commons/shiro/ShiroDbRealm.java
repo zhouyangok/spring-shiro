@@ -1,8 +1,6 @@
 package com.wangzhixuan.commons.shiro;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +16,6 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.model.vo.UserVo;
 import com.wangzhixuan.service.IRoleService;
@@ -57,11 +54,10 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if (user.getStatus() == 1) {
             return null;
         }
-        List<Long> roleList = roleService.selectRoleIdListByUserId(user.getId());
-        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginName(), user.getName(), roleList);
+        Set<String> urlSet = roleService.selectResourceUrlListByUserId(user.getId());
+        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginName(), user.getName(), urlSet);
         // 认证缓存信息
         return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
-
     }
 
     /**
@@ -70,23 +66,11 @@ public class ShiroDbRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(
             PrincipalCollection principals) {
-
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-        List<Long> roleList = shiroUser.roleList;
-
-        Set<String> urlSet = new HashSet<String>();
-        for (Long roleId : roleList) {
-            List<Map<Long, String>> roleResourceList = roleService.selectRoleResourceListByRoleId(roleId);
-            if (roleResourceList != null) {
-                for (Map<Long, String> map : roleResourceList) {
-                    if (StringUtils.isNotBlank(map.get("url"))) {
-                        urlSet.add(map.get("url"));
-                    }
-                }
-            }
-        }
+        
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addStringPermissions(urlSet);
+        info.addStringPermissions(shiroUser.getUrlSet());
+        
         return info;
     }
 }

@@ -4,7 +4,7 @@
 package com.wangzhixuan.commons.shiro;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @description：自定义Authentication对象，使得Subject除了携带用户的登录名外还可以携带更多信息
@@ -12,22 +12,34 @@ import java.util.List;
  * @date：2015/10/1 14:51
  */
 public class ShiroUser implements Serializable {
-
     private static final long serialVersionUID = -1373760761780840081L;
-    public Long id;
-    public String loginName;
-    public String name;
-    public List<Long> roleList;
+    
+    private final Long id;
+    private final String loginName;
+    private final String name;
+    private final Set<String> urlSet;
 
-    public ShiroUser(Long id, String loginName, String name, List<Long> roleList) {
+    public ShiroUser(Long id, String loginName, String name, Set<String> urlSet) {
         this.id = id;
         this.loginName = loginName;
         this.name = name;
-        this.roleList = roleList;
+        this.urlSet = urlSet;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getLoginName() {
+        return loginName;
     }
 
     public String getName() {
         return name;
+    }
+
+    public Set<String> getUrlSet() {
+        return urlSet;
     }
 
     /**

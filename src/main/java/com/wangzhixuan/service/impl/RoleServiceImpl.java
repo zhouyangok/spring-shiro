@@ -1,8 +1,10 @@
 package com.wangzhixuan.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
@@ -32,16 +35,6 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
     private UserRoleMapper userRoleMapper;
     @Autowired
     private RoleResourceMapper roleResourceMapper;
-    
-    @Override
-    public List<Long> selectRoleIdListByUserId(Long userId) {
-        return userRoleMapper.selectRoleIdListByUserId(userId);
-    }
-
-    @Override
-    public List<Map<Long, String>> selectRoleResourceListByRoleId(Long roleId) {
-        return roleMapper.selectResourceListByRoleId(roleId);
-    }
 
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
@@ -66,11 +59,6 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
     }
 
     @Override
-    public List<Long> selectResourceIdListByRoleId(Long id) {
-        return roleMapper.selectResourceIdListByRoleId(id);
-    }
-
-    @Override
     public void updateRoleResource(Long roleId, String resourceIds) {
         // 先删除后添加,有点爆力
         RoleResource roleResource = new RoleResource();
@@ -84,6 +72,28 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
             roleResource.setResourceId(Long.parseLong(resourceId));
             roleResourceMapper.insert(roleResource);
         }
+    }
+
+    @Override
+    public List<Long> selectResourceIdListByRoleId(Long id) {
+        return roleMapper.selectResourceIdListByRoleId(id);
+    }
+    
+    @Override
+    public Set<String> selectResourceUrlListByUserId(Long userId) {
+        List<Long> roleIdList = userRoleMapper.selectRoleIdListByUserId(userId);
+        Set<String> urlSet = new HashSet<String>();
+        for (Long roleId : roleIdList) {
+            List<Map<Long, String>> resourceList = roleMapper.selectResourceListByRoleId(roleId);
+            if (resourceList != null) {
+                for (Map<Long, String> map : resourceList) {
+                    if (StringUtils.isNotBlank(map.get("url"))) {
+                        urlSet.add(map.get("url"));
+                    }
+                }
+            }
+        }
+        return urlSet;
     }
 
 }
