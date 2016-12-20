@@ -83,7 +83,7 @@ public class SysLogAspect {
                     sysLogService.insert(sysLog);
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.error(e.getMessage(), e);
             }
         }
 

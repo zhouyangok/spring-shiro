@@ -1,5 +1,8 @@
 package com.wangzhixuan.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.commons.csrf.CsrfToken;
+import com.wangzhixuan.commons.utils.CaptchaUtils;
 import com.wangzhixuan.commons.utils.StringUtils;
 
 /**
@@ -63,7 +67,7 @@ public class LoginController extends BaseController {
      *
      * @param username 用户名
      * @param password 密码
-     * @return
+     * @return {Object}
      */
     @PostMapping("/login")
     @CsrfToken(remove = true)
@@ -120,4 +124,12 @@ public class LoginController extends BaseController {
         return renderSuccess();
     }
 
+    /**
+     * 图形验证码
+     */
+    @GetMapping("/captcha.jpg")
+    public void captcha(HttpServletRequest request, HttpServletResponse response) {
+        CaptchaUtils.generate(request, response);
+    }
+    
 }

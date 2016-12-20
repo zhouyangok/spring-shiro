@@ -59,6 +59,7 @@
                     authc 需要认证
                     user  验证通过或RememberMe登录的都可以
                 -->
+                /captcha.jpg = anon
                 /commons/** = anon
                 /static/** = anon
                 /webhooks = anon
