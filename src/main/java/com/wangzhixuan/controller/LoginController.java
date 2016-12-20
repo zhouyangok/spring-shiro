@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.commons.csrf.CsrfToken;
-import com.wangzhixuan.commons.utils.DigestUtils;
 import com.wangzhixuan.commons.utils.StringUtils;
 
 /**
@@ -79,7 +78,7 @@ public class LoginController extends BaseController {
             return renderError("密码不能为空");
         }
         Subject user = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtils.md5Hex(password).toCharArray());
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         // 默认设置为记住密码，你可以自己在表单中加一个参数来控制
         token.setRememberMe(true);
         try {
@@ -92,7 +91,7 @@ public class LoginController extends BaseController {
         } catch (IncorrectCredentialsException e) {
             throw new RuntimeException("密码错误！", e);
         } catch (Throwable e) {
-            throw new RuntimeException("未知错误,请联系管理员！", e);
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 

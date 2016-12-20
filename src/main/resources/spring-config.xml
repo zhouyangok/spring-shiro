@@ -20,6 +20,7 @@
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
     <import resource="classpath:spring/spring-mybatis.xml"/>
+    <import resource="classpath:spring/spring-ehcache.xml"/>
     <import resource="classpath:spring/spring-shiro.xml"/>
     <!-- Spring 异步event需要开启task -->
     <import resource="classpath:spring/spring-task.xml"/>

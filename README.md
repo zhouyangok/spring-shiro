@@ -70,6 +70,8 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 
 
 ## 更新记录
+> 2016-12-20 v1.1.1 修改若干`bug`，cache改为spring-cache，shiro添加密码错误次数限制，密码加密改为shiro处理。
+
 > 2016-10-11 v1.1.0 采用`mybatis-plus`简化数据库，去除主从数据库，老版本升级需要执行`database/update_xxxx.sql`。
 
 > 2016-10-01 v1.0.0 升级Spring版本更改log为Log4j2。

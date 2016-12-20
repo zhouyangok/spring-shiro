@@ -16,10 +16,12 @@
         
         <!-- 减少部分debug日志 -->
         <logger name="druid.sql" level="INFO"/>
-        <logger name="net.sf.ehcache" level="INFO"/>
         <logger name="org.apache.shiro" level="INFO"/>
         <logger name="org.mybatis.spring" level="INFO"/>
         <logger name="org.springframework" level="INFO"/>
+        
+        <logger name="net.sf.ehcache" level="DEBUG"/>
+        <logger name="org.springframework.cache" level="DEBUG"/>
         
         <!-- 业务debug日志 -->
         <logger name="com.wangzhixuan" level="DEBUG"/>
