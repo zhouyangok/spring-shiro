@@ -20,8 +20,10 @@
         <logger name="org.mybatis.spring" level="INFO"/>
         <logger name="org.springframework" level="INFO"/>
         
+        <!-- cache debug -->
         <logger name="net.sf.ehcache" level="DEBUG"/>
         <logger name="org.springframework.cache" level="DEBUG"/>
+        <logger name="org.apache.shiro.cache.ehcache" level="DEBUG"/>
         
         <!-- 业务debug日志 -->
         <logger name="com.wangzhixuan" level="DEBUG"/>
