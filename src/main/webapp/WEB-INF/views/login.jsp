@@ -8,7 +8,7 @@
     <meta name="description" content="如梦技术作为中国最权威的java在线教育平台,拥有海量高清java职业课程,涵盖个个组件,根据java在线学习特点,如梦技术推出java学习知识体系图,java职业学习实战路径图,帮助java学习者从零基础起步,结合java实战案例演练,系统学习,助你快速成为java优秀技术人才！">
     <meta name="viewport" content="width=device-width">
     <%@ include file="/commons/basejs.jsp" %>
-    <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/login.css?v=20161220" />
+    <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/login.css?v=201612202107" />
     <script type="text/javascript" src="${staticPath }/static/login.js?v=20161220" charset="utf-8"></script>
 </head>
 <body onkeydown="enterlogin();">
@@ -31,7 +31,7 @@
         </P>
         <P style="padding: 10px 0px 10px; position: relative;">
             <input class="captcha" type="text" name="captcha" placeholder="请输入验证码"/>
-            <img id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;cursor: pointer;">
+            <img id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:94.5px;height:35px;cursor:pointer;">
         </P>
         <P style="position: relative;text-align: left;">
             <input class="rememberMe" type="checkbox" name="rememberMe" value="1" checked style="vertical-align:middle;margin-left:40px;height:20px;"/> 记住密码
