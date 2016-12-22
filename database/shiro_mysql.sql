@@ -106,10 +106,10 @@ CREATE TABLE `role` (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('1', '超级管理员', '0', '超级管理员', '0');
-INSERT INTO `role` VALUES ('2', '技术部经理', '0', '技术部经理', '0');
-INSERT INTO `role` VALUES ('7', '产品部经理', '0', '产品部经理', '0');
-INSERT INTO `role` VALUES ('8', '测试账户', '0', '测试账户', '0');
+INSERT INTO `role` VALUES ('1', 'admin', '0', '超级管理员', '0');
+INSERT INTO `role` VALUES ('2', 'de', '0', '技术部经理', '0');
+INSERT INTO `role` VALUES ('7', 'pm', '0', '产品部经理', '0');
+INSERT INTO `role` VALUES ('8', 'test', '0', '测试账户', '0');
 
 -- ----------------------------
 -- Table structure for `role_resource`
