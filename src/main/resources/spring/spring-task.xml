@@ -8,11 +8,10 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd"
-       default-autowire="byName">
+       http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!-- 扫描 event包 -->
-    <context:component-scan base-package="com.wangzhixuan.event"/>
+    <context:component-scan base-package="com.wangzhixuan.event;com.wangzhixuan.task"/>
 
     <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <!-- 核心线程数 -->
@@ -26,5 +25,5 @@
     </bean>
 
     <!-- 注解式 -->
-    <task:annotation-driven/>
+    <task:annotation-driven executor="taskExecutor" proxy-target-class="true"/>
 </beans>

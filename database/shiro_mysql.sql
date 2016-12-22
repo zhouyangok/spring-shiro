@@ -273,3 +273,4 @@ INSERT INTO `user_role` VALUES ('61', '1', '2');
 INSERT INTO `user_role` VALUES ('62', '1', '7');
 INSERT INTO `user_role` VALUES ('63', '13', '2');
 INSERT INTO `user_role` VALUES ('64', '14', '7');
+INSERT INTO `user_role` VALUES ('65', '1', '8');

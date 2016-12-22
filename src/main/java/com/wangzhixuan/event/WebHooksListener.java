@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.AdviceMode;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ import com.wangzhixuan.commons.utils.RuntimeUtils;
  * @author L.cm
  */
 @Component
-@EnableAsync
+@EnableAsync(mode = AdviceMode.ASPECTJ)
 @SuppressWarnings("unchecked")
 public class WebHooksListener implements ApplicationListener<WebHooksEvent> {
 

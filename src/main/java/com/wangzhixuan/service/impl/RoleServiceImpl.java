@@ -1,6 +1,7 @@
 package com.wangzhixuan.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -80,9 +81,11 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
     }
     
     @Override
-    public Set<String> selectResourceUrlListByUserId(Long userId) {
+    public Map<String, Set<String>> selectResourceMapByUserId(Long userId) {
+        Map<String, Set<String>> resourceMap = new HashMap<String, Set<String>>();
         List<Long> roleIdList = userRoleMapper.selectRoleIdListByUserId(userId);
         Set<String> urlSet = new HashSet<String>();
+        Set<String> roles = new HashSet<String>();
         for (Long roleId : roleIdList) {
             List<Map<Long, String>> resourceList = roleMapper.selectResourceListByRoleId(roleId);
             if (resourceList != null) {
@@ -92,8 +95,14 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
                     }
                 }
             }
+            Role role = roleMapper.selectById(roleId);
+            if (role != null) {
+                roles.add(role.getName());
+            }
         }
-        return urlSet;
+        resourceMap.put("urls", urlSet);
+        resourceMap.put("roles", roles);
+        return resourceMap;
     }
 
 }

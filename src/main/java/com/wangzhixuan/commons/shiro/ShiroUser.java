@@ -18,6 +18,7 @@ public class ShiroUser implements Serializable {
     private final String loginName;
     private final String name;
     private final Set<String> urlSet;
+    private Set<String> roles;
 
     public ShiroUser(Long id, String loginName, String name, Set<String> urlSet) {
         this.id = id;
@@ -40,6 +41,14 @@ public class ShiroUser implements Serializable {
 
     public Set<String> getUrlSet() {
         return urlSet;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 
     /**

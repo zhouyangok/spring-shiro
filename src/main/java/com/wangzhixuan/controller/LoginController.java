@@ -8,6 +8,7 @@ import org.apache.shiro.authc.DisabledAccountException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +44,7 @@ public class LoginController extends BaseController {
      * @param model
      * @return
      */
+    @RequiresRoles("test")
     @GetMapping("/index")
     public String index(Model model) {
         return "index";

@@ -1,6 +1,7 @@
 package com.wangzhixuan.commons.shiro;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
@@ -31,14 +32,9 @@ import com.wangzhixuan.service.IUserService;
 public class ShiroDbRealm extends AuthorizingRealm {
     private static final Logger LOGGER = LogManager.getLogger(ShiroDbRealm.class);
 
-    @Autowired
-    private IUserService userService;
-    @Autowired
-    private IRoleService roleService;
+    @Autowired private IUserService userService;
+    @Autowired private IRoleService roleService;
     
-    public ShiroDbRealm() {
-        super();
-    }
     public ShiroDbRealm(CacheManager cacheManager, CredentialsMatcher matcher) {
         super(cacheManager, matcher);
     }
@@ -63,8 +59,12 @@ public class ShiroDbRealm extends AuthorizingRealm {
         if (user.getStatus() == 1) {
             return null;
         }
-        Set<String> urlSet = roleService.selectResourceUrlListByUserId(user.getId());
-        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginName(), user.getName(), urlSet);
+        // 读取用户的url和角色
+        Map<String, Set<String>> resourceMap = roleService.selectResourceMapByUserId(user.getId());
+        Set<String> urls = resourceMap.get("urls");
+        Set<String> roles = resourceMap.get("roles");
+        ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginName(), user.getName(), urls);
+        shiroUser.setRoles(roles);
         // 认证缓存信息
         return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
     }
@@ -78,8 +78,10 @@ public class ShiroDbRealm extends AuthorizingRealm {
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
         
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.setRoles(shiroUser.getRoles());
         info.addStringPermissions(shiroUser.getUrlSet());
         
         return info;
     }
+
 }

@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-		"classpath:springmvc-servlet.xml",
+		"classpath:spring-mvc.xml",
 		"classpath:spring-config.xml"
 })
 @WebAppConfiguration
