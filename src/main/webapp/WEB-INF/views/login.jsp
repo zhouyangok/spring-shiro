@@ -8,12 +8,12 @@
     <meta name="description" content="如梦技术作为中国最权威的java在线教育平台,拥有海量高清java职业课程,涵盖个个组件,根据java在线学习特点,如梦技术推出java学习知识体系图,java职业学习实战路径图,帮助java学习者从零基础起步,结合java实战案例演练,系统学习,助你快速成为java优秀技术人才！">
     <meta name="viewport" content="width=device-width">
     <%@ include file="/commons/basejs.jsp" %>
-    <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/login.css" />
-    <script type="text/javascript" src="${staticPath }/static/login.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/login.css?v=20161220" />
+    <script type="text/javascript" src="${staticPath }/static/login.js?v=20161220" charset="utf-8"></script>
 </head>
 <body onkeydown="enterlogin();">
 <div class="top_div"></div>
-<div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231); border-image: none; width: 400px; height: 200px; text-align: center;">
+<div style="background: rgb(255, 255, 255); margin: -100px auto auto; border: 1px solid rgb(231, 231, 231);border-image:none;width:400px;text-align: center;">
     <form method="post" id="loginform">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div style="width: 165px; height: 96px; position: absolute;">
@@ -23,13 +23,20 @@
         </div>
         <P style="padding: 30px 0px 10px; position: relative;">
             <span class="u_logo"></span>
-            <input class="ipt" type="text" name="username" placeholder="请输入用户名或邮箱" value="" />
+            <input class="ipt" type="text" name="username" placeholder="请输入用户名或邮箱"/>
         </P>
         <P style="position: relative;">
             <span class="p_logo"></span>
-            <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码" value="" />
+            <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码"/>
         </P>
-        <div style="height: 50px; line-height: 50px; margin-top: 30px; border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
+        <P style="padding: 10px 0px 10px; position: relative;">
+            <input class="captcha" type="text" name="captcha" placeholder="请输入验证码"/>
+            <img id="captcha" alt="验证码" src="${path }/captcha.jpg" data-src="${path }/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;cursor: pointer;">
+        </P>
+        <P style="position: relative;text-align: left;">
+            <input class="rememberMe" type="checkbox" name="rememberMe" value="1" checked style="vertical-align:middle;margin-left:40px;height:20px;"/> 记住密码
+        </P>
+        <div style="height: 50px; line-height: 50px; margin-top: 10px;border-top-color: rgb(231, 231, 231); border-top-width: 1px; border-top-style: solid;">
             <P style="margin: 0px 35px 20px 45px;">
                 <span style="float: left;">
                     <a style="color: rgb(204, 204, 204);" href="javascript:;">忘记密码?</a>

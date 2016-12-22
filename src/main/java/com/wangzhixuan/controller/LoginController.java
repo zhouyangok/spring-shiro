@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
@@ -74,19 +75,26 @@ public class LoginController extends BaseController {
     @PostMapping("/login")
     @CsrfToken(remove = true)
     @ResponseBody
-    public Object loginPost(String username, String password) {
+    public Object loginPost(HttpServletRequest request, String username, String password, String captcha, 
+            @RequestParam(value = "rememberMe", defaultValue = "1") Integer rememberMe) {
         logger.info("POST请求登录");
-
+        // 改为全部抛出异常，避免ajax csrf token被刷新
         if (StringUtils.isBlank(username)) {
-            return renderError("用户名不能为空");
+            throw new RuntimeException("用户名不能为空");
         }
         if (StringUtils.isBlank(password)) {
-            return renderError("密码不能为空");
+            throw new RuntimeException("密码不能为空");
+        }
+        if (StringUtils.isBlank(captcha)) {
+            throw new RuntimeException("验证码不能为空");
+        }
+        if (!CaptchaUtils.validate(request, captcha)) {
+            throw new RuntimeException("验证码错误");
         }
         Subject user = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        // 默认设置为记住密码，你可以自己在表单中加一个参数来控制
-        token.setRememberMe(true);
+        // 设置记住密码
+        token.setRememberMe(1 == rememberMe);
         try {
             user.login(token);
             return renderSuccess();

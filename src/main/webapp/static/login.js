@@ -39,6 +39,12 @@ $(function () {
         $("#right_hand").attr("class", "initial_right_hand");
         $("#right_hand").attr("style", "right:-112px;top:-12px");
     });
+    // 验证码
+    $("#captcha").click(function() {
+        var $this = $(this);
+        var url = $this.data("src") + new Date().getTime();
+        $this.attr("src", url);
+    });
     // 登录
     $('#loginform').form({
         url: basePath + '/login',
