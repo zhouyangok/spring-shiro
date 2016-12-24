@@ -24,9 +24,7 @@ import com.wangzhixuan.service.IResourceService;
  */
 @Service
 public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resource> implements IResourceService {
-
     private static final int RESOURCE_MENU = 0; // 菜单
-    private static final int RESOURCE_BUTTON = 1; // 按钮
 
     @Autowired
     private ResourceMapper resourceMapper;
@@ -42,20 +40,6 @@ public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resour
         return resourceMapper.selectList(wrapper);
     }
     
-    public List<Resource> selectByPidAndType(Integer pid, Integer type) {
-        EntityWrapper<Resource> wrapper = new EntityWrapper<Resource>();
-        Resource resource = new Resource();
-        wrapper.setEntity(resource);
-        if (pid == null) {
-            wrapper.isNull("pid");
-        } else {
-            wrapper.addFilter("pid = {0}", pid);
-        }
-        wrapper.addFilter("resource_type = {0}", type);
-        wrapper.orderBy("seq");
-        return resourceMapper.selectList(wrapper);
-    }
-    
     public List<Resource> selectByType(Integer type) {
         EntityWrapper<Resource> wrapper = new EntityWrapper<Resource>();
         Resource resource = new Resource();
@@ -66,108 +50,45 @@ public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resour
     }
     
     @Override
-    public List<Tree> selectAllTree() {
+    public List<Tree> selectAllMenu() {
         List<Tree> trees = new ArrayList<Tree>();
-        // 查询所有的一级树
-        List<Resource> resources = resourceMapper.selectAllByTypeAndPIdNull(RESOURCE_MENU);
+        // 查询所有菜单
+        List<Resource> resources = this.selectByType(RESOURCE_MENU);
         if (resources == null) {
-            return null;
+            return trees;
         }
-        for (Resource resourceOne : resources) {
-            Tree treeOne = new Tree();
-
-            treeOne.setId(resourceOne.getId());
-            treeOne.setText(resourceOne.getName());
-            treeOne.setIconCls(resourceOne.getIcon());
-            treeOne.setAttributes(resourceOne.getUrl());
-            // 查询所有一级树下的菜单
-            List<Resource> resourceSon = resourceMapper.selectAllByTypeAndPId(RESOURCE_MENU, resourceOne.getId());
-
-            if (resourceSon != null) {
-                List<Tree> tree = new ArrayList<Tree>();
-                for (Resource resourceTwo : resourceSon) {
-                    Tree treeTwo = new Tree();
-                    treeTwo.setId(resourceTwo.getId());
-                    treeTwo.setText(resourceTwo.getName());
-                    treeTwo.setIconCls(resourceTwo.getIcon());
-                    treeTwo.setAttributes(resourceTwo.getUrl());
-                    tree.add(treeTwo);
-                }
-                treeOne.setChildren(tree);
-            } else {
-                treeOne.setState("closed");
-            }
-            trees.add(treeOne);
+        for (Resource resource : resources) {
+            Tree tree = new Tree();
+            tree.setId(resource.getId());
+            tree.setPid(resource.getPid());
+            tree.setText(resource.getName());
+            tree.setIconCls(resource.getIcon());
+            tree.setAttributes(resource.getUrl());
+            trees.add(tree);
         }
         return trees;
     }
-
+    
     @Override
-    public List<Tree> selectAllTrees() {
-        List<Tree> treeOneList = new ArrayList<Tree>();
-
-        // 查询所有的一级树
-        List<Resource> resources = resourceMapper.selectAllByTypeAndPIdNull(RESOURCE_MENU);
+    public List<Tree> selectAllTree() {
+        // 获取所有的资源 tree形式，展示
+        List<Tree> trees = new ArrayList<Tree>();
+        List<Resource> resources = this.selectAll();
         if (resources == null) {
-            return null;
+            return trees;
         }
-
-        for (Resource resourceOne : resources) {
-            Tree treeOne = new Tree();
-
-            treeOne.setId(resourceOne.getId());
-            treeOne.setPid(resourceOne.getPid());
-            treeOne.setText(resourceOne.getName());
-            treeOne.setIconCls(resourceOne.getIcon());
-            treeOne.setAttributes(resourceOne.getUrl());
-
-            List<Resource> resourceSon = resourceMapper.selectAllByTypeAndPId(RESOURCE_MENU, resourceOne.getId());
-
-            if (resourceSon == null) {
-                treeOne.setState("closed");
-            } else {
-                List<Tree> treeTwoList = new ArrayList<Tree>();
-
-                for (Resource resourceTwo : resourceSon) {
-                    Tree treeTwo = new Tree();
-
-                    treeTwo.setId(resourceTwo.getId());
-                    treeTwo.setText(resourceTwo.getName());
-                    treeTwo.setIconCls(resourceTwo.getIcon());
-                    treeTwo.setAttributes(resourceTwo.getUrl());
-
-                    /***************************************************/
-                    List<Resource> resourceSons = resourceMapper.selectAllByTypeAndPId(RESOURCE_BUTTON, resourceTwo.getId());
-
-                    if (resourceSons == null) {
-                        treeTwo.setState("closed");
-                    } else {
-                        List<Tree> treeThreeList = new ArrayList<Tree>();
-
-                        for (Resource resourceThree : resourceSons) {
-                            Tree treeThree = new Tree();
-
-                            treeThree.setId(resourceThree.getId());
-                            treeThree.setText(resourceThree.getName());
-                            treeThree.setIconCls(resourceThree.getIcon());
-                            treeThree.setAttributes(resourceThree.getUrl());
-
-                            treeThreeList.add(treeThree);
-                        }
-                        treeTwo.setChildren(treeThreeList);
-                    }
-                    /***************************************************/
-
-                    treeTwoList.add(treeTwo);
-                }
-                treeOne.setChildren(treeTwoList);
-            }
-
-            treeOneList.add(treeOne);
+        for (Resource resource : resources) {
+            Tree tree = new Tree();
+            tree.setId(resource.getId());
+            tree.setPid(resource.getPid());
+            tree.setText(resource.getName());
+            tree.setIconCls(resource.getIcon());
+            tree.setAttributes(resource.getUrl());
+            trees.add(tree);
         }
-        return treeOneList;
+        return trees;
     }
-
+    
     @Override
     public List<Tree> selectTree(ShiroUser shiroUser) {
         List<Tree> trees = new ArrayList<Tree>();

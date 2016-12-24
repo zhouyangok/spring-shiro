@@ -1,9 +1,5 @@
 package com.wangzhixuan.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.baomidou.mybatisplus.mapper.AutoMapper;
 import com.wangzhixuan.model.Resource;
 
@@ -13,9 +9,5 @@ import com.wangzhixuan.model.Resource;
  *
  */
 public interface ResourceMapper extends AutoMapper<Resource> {
-
-    List<Resource> selectAllByTypeAndPIdNull(@Param("resourceType")Integer resourceType);
-
-    List<Resource> selectAllByTypeAndPId(@Param("resourceType")Integer resourceType, @Param("pId")Long pId);
 
 }

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.commons.shiro.ShiroUser;
 import com.wangzhixuan.model.Resource;
-import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.IResourceService;
 
 /**
@@ -86,25 +85,21 @@ public class ResourceController extends BaseController {
     }
 
     /**
-     * 二级资源树
-     *
-     * @return
+     * 查询所有的菜单
      */
     @RequestMapping("/allTree")
     @ResponseBody
-    public Object allTree() {
-        return resourceService.selectAllTree();
+    public Object allMenu() {
+        return resourceService.selectAllMenu();
     }
 
     /**
-     * 三级资源树
-     *
-     * @return
+     * 查询所有的资源tree
      */
-    @PostMapping("/allTrees")
+    @RequestMapping("/allTrees")
     @ResponseBody
-    public Object allTrees() {
-        return resourceService.selectAllTrees();
+    public Object allTree() {
+        return resourceService.selectAllTree();
     }
 
     /**

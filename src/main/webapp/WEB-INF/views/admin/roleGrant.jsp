@@ -8,8 +8,7 @@
             parentField : 'pid',
             lines : true,
             checkbox : true,
-            onClick : function(node) {
-            },
+            onClick : function(node) {},
             onLoadSuccess : function(node, data) {
                 progressLoad();
                 $.post( '${path }/role/findResourceIdListByRoleId', {

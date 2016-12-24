@@ -16,9 +16,9 @@ public interface IResourceService extends ISuperService<Resource> {
 
     List<Resource> selectAll();
 
-    List<Tree> selectAllTree();
+    List<Tree> selectAllMenu();
 
-    List<Tree> selectAllTrees();
+    List<Tree> selectAllTree();
 
     List<Tree> selectTree(ShiroUser shiroUser);
 
