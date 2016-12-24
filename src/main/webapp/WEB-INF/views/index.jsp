@@ -23,17 +23,17 @@
                 }).data('tabTitle', title);
             },
             tools : [{
-                iconCls : 'icon-home',
+                iconCls : 'fi-home',
                 handler : function() {
                     index_tabs.tabs('select', 0);
                 }
             }, {
-                iconCls : 'icon-refresh',
+                iconCls : 'fi-loop',
                 handler : function() {
                     refreshTab();
                 }
             }, {
-                iconCls : 'icon-del',
+                iconCls : 'fi-page-delete',
                 handler : function() {
                     var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
                     var tab = index_tabs.tabs('getTab', index);
@@ -163,12 +163,13 @@
     <div id="index_layout">
         <div data-options="region:'north',border:false" style="overflow: hidden;">
             <div>
-                <span style="float: right; padding-right: 20px; margin-top: 15px; color: #333">欢迎 
+                <span style="float: right; padding-right: 20px; margin-top: 15px; color: #333">
+                    <i class="fi-torso"></i>
                     <b><shiro:principal></shiro:principal></b>&nbsp;&nbsp; 
                     <shiro:hasPermission name="/user/editPwdPage">
-                        <a href="javascript:void(0)" onclick="editUserPwd()" class="easyui-linkbutton" plain="true" icon="icon-edit" >修改密码</a>
+                        <a href="javascript:void(0)" onclick="editUserPwd()" class="easyui-linkbutton" plain="true" icon="fi-unlock" >修改密码</a>
                     </shiro:hasPermission>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" onclick="logout()" class="easyui-linkbutton" plain="true" icon="icon-clear">安全退出</a>
+                    <a href="javascript:void(0)" onclick="logout()" class="easyui-linkbutton" plain="true" icon="fi-x">安全退出</a>
                 </span>
                 <span class="header"></span>
             </div>
@@ -180,7 +181,7 @@
         </div>
         <div data-options="region:'center'" style="overflow: hidden;">
             <div id="index_tabs" style="overflow: hidden;">
-                <div title="首页" data-options="iconCls:'l-btn-icon icon-home',border:false" style="overflow: hidden;">
+                <div title="首页" data-options="iconCls:'fi-home',border:false" style="overflow: hidden;">
                     <script src='https://git.oschina.net/wangzhixuan/spring-shiro-training/widget_preview'></script>
                     <style>
                         .pro_name a{color: #4183c4;}

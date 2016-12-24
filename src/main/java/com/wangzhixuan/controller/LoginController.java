@@ -1,7 +1,6 @@
 package com.wangzhixuan.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -134,12 +133,4 @@ public class LoginController extends BaseController {
         return renderSuccess();
     }
 
-    /**
-     * 图形验证码
-     */
-    @GetMapping("/captcha.jpg")
-    public void captcha(HttpServletRequest request, HttpServletResponse response) {
-        CaptchaUtils.generate(request, response);
-    }
-    
 }

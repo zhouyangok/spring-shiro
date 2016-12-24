@@ -53,23 +53,23 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/role/grant">
-                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-ok" data-options="plain:true,iconCls:\'icon-ok\'" onclick="grantRoleFun(\'{0}\');" >授权</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-ok" data-options="plain:true,iconCls:\'fi-check\'" onclick="grantRoleFun(\'{0}\');" >授权</a>', row.id);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/role/edit">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editRoleFun(\'{0}\');" >编辑</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'fi-pencil\'" onclick="editRoleFun(\'{0}\');" >编辑</a>', row.id);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/role/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteRoleFun(\'{0}\');" >删除</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="role-easyui-linkbutton-del" data-options="plain:true,iconCls:\'fi-x\'" onclick="deleteRoleFun(\'{0}\');" >删除</a>', row.id);
                         </shiro:hasPermission>
                     return str;
                 }
             } ] ],
             onLoadSuccess:function(data){
-                $('.role-easyui-linkbutton-ok').linkbutton({text:'授权',plain:true,iconCls:'icon-ok'});
-                $('.role-easyui-linkbutton-edit').linkbutton({text:'编辑',plain:true,iconCls:'icon-edit'});
-                $('.role-easyui-linkbutton-del').linkbutton({text:'删除',plain:true,iconCls:'icon-del'});
+                $('.role-easyui-linkbutton-ok').linkbutton({text:'授权'});
+                $('.role-easyui-linkbutton-edit').linkbutton({text:'编辑'});
+                $('.role-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
             toolbar : '#toolbar'
         });
@@ -169,6 +169,6 @@
 </div>
 <div id="toolbar" style="display: none;">
     <shiro:hasPermission name="/role/add">
-        <a onclick="addRoleFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
+        <a onclick="addRoleFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus'">添加</a>
     </shiro:hasPermission>
 </div>
