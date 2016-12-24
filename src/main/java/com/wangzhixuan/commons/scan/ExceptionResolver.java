@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -25,6 +26,8 @@ import com.wangzhixuan.commons.utils.WebUtils;
 public class ExceptionResolver implements HandlerExceptionResolver {
 	private static final Logger LOGGER = LogManager.getLogger(ExceptionResolver.class);
 
+	@Autowired private JacksonObjectMapper jacksonObjectMapper;
+	
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request,
 		 HttpServletResponse response, Object handler, Exception e) {
@@ -39,7 +42,10 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 		if (WebUtils.isAjax(handlerMethod)) {
 			Result result = new Result();
 			result.setMsg(e.getMessage());
-			return new ModelAndView(new MappingJackson2JsonView(), BeanUtils.toMap(result));
+			MappingJackson2JsonView view = new MappingJackson2JsonView();
+			view.setObjectMapper(jacksonObjectMapper);
+			view.setContentType("text/html;charset=UTF-8");
+			return new ModelAndView(view, BeanUtils.toMap(result));
 		}
 
 		// 页面指定状态为500，便于上层的resion或者nginx的500页面跳转，由于error/error不适合对用户展示
