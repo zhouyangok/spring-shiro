@@ -213,6 +213,7 @@ INSERT INTO `role_resource` VALUES ('459', '8', '224');
 INSERT INTO `role_resource` VALUES ('460', '8', '221');
 INSERT INTO `role_resource` VALUES ('461', '8', '227');
 INSERT INTO `role_resource` VALUES ('462', '8', '228');
+INSERT INTO `role_resource` VALUES ('478', '8', '229');
 
 -- ----------------------------
 -- Table structure for `sys_log`

@@ -33,7 +33,7 @@
                     refreshTab();
                 }
             }, {
-                iconCls : 'fi-page-delete',
+                iconCls : 'fi-x',
                 handler : function() {
                     var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
                     var tab = index_tabs.tabs('getTab', index);
