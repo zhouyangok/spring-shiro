@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.baomidou.framework.service.ISuperService;
 import com.wangzhixuan.commons.result.Tree;
+import com.wangzhixuan.commons.shiro.ShiroUser;
 import com.wangzhixuan.model.Resource;
-import com.wangzhixuan.model.User;
 
 /**
  *
@@ -20,6 +20,6 @@ public interface IResourceService extends ISuperService<Resource> {
 
     List<Tree> selectAllTrees();
 
-    List<Tree> selectTree(User currentUser);
+    List<Tree> selectTree(ShiroUser shiroUser);
 
 }

@@ -24,10 +24,4 @@
         and pid = #{pId} order by seq
     </select>
 
-    <select id="selectAll" resultType="Resource">
-        select
-        <include refid="Base_Column_List"/>
-        from resource order by seq
-    </select>
-
 </mapper>

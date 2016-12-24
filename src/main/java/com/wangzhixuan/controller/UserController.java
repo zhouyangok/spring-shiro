@@ -165,7 +165,8 @@ public class UserController extends BaseController {
     @RequestMapping("/editUserPwd")
     @ResponseBody
     public Object editUserPwd(String oldPwd, String pwd) {
-        if (!getCurrentUser().getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
+        User user = userService.selectById(getUserId());
+        if (!user.getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
             return renderError("老密码不正确!");
         }
 

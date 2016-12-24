@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.shiro.ShiroUser;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.IResourceService;
@@ -35,8 +36,8 @@ public class ResourceController extends BaseController {
     @PostMapping("/tree")
     @ResponseBody
     public Object tree() {
-        User currentUser = getCurrentUser();
-        return resourceService.selectTree(currentUser);
+        ShiroUser shiroUser = getShiroUser();
+        return resourceService.selectTree(shiroUser);
     }
 
     /**

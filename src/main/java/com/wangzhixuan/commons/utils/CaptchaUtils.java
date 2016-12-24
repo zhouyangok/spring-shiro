@@ -25,7 +25,7 @@ public class CaptchaUtils {
 	// 默认的验证码大小
 	private static final int WIDTH = 108, HEIGHT = 40;
 	// 验证码随机字符数组
-	private static final String[] strArr = {"3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "M", "N", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"};
+	protected static final char[] charArray = "3456789ABCDEFGHJKMNPQRSTUVWXY".toCharArray();
 	// 验证码字体
 	private static final Font[] RANDOM_FONT = new Font[] {
 		new Font("nyala", Font.BOLD, 38),
@@ -85,14 +85,14 @@ public class CaptchaUtils {
 		for(int i = 0; i < 20; i++){
 			color = getRandColor(120, 200);
 			g.setColor(color);
-			String rand = String.valueOf(strArr[random.nextInt(strArr.length)]);
+			String rand = String.valueOf(charArray[random.nextInt(charArray.length)]);
 			g.drawString(rand, random.nextInt(WIDTH), random.nextInt(HEIGHT));
 			color = null;
 		}
 		// 取随机产生的认证码(4位数字)
 		String sRand = "";
 		for (int i = 0; i < 4; i++){
-			String rand = String.valueOf(strArr[random.nextInt(strArr.length)]);
+			String rand = String.valueOf(charArray[random.nextInt(charArray.length)]);
 			sRand += rand;
 			//旋转度数 最好小于45度
 			int degree = random.nextInt(28);

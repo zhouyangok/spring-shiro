@@ -2,17 +2,19 @@ package com.wangzhixuan.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.wangzhixuan.commons.result.Tree;
+import com.wangzhixuan.commons.shiro.ShiroUser;
 import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.mapper.RoleMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Resource;
-import com.wangzhixuan.model.User;
 import com.wangzhixuan.service.IResourceService;
 
 /**
@@ -35,9 +37,34 @@ public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resour
     
     @Override
     public List<Resource> selectAll() {
-        return resourceMapper.selectAll();
+        EntityWrapper<Resource> wrapper = new EntityWrapper<Resource>();
+        wrapper.orderBy("seq");
+        return resourceMapper.selectList(wrapper);
     }
-
+    
+    public List<Resource> selectByPidAndType(Integer pid, Integer type) {
+        EntityWrapper<Resource> wrapper = new EntityWrapper<Resource>();
+        Resource resource = new Resource();
+        wrapper.setEntity(resource);
+        if (pid == null) {
+            wrapper.isNull("pid");
+        } else {
+            wrapper.addFilter("pid = {0}", pid);
+        }
+        wrapper.addFilter("resource_type = {0}", type);
+        wrapper.orderBy("seq");
+        return resourceMapper.selectList(wrapper);
+    }
+    
+    public List<Resource> selectByType(Integer type) {
+        EntityWrapper<Resource> wrapper = new EntityWrapper<Resource>();
+        Resource resource = new Resource();
+        wrapper.setEntity(resource);
+        wrapper.addFilter("resource_type = {0}", type);
+        wrapper.orderBy("seq");
+        return resourceMapper.selectList(wrapper);
+    }
+    
     @Override
     public List<Tree> selectAllTree() {
         List<Tree> trees = new ArrayList<Tree>();
@@ -89,6 +116,7 @@ public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resour
             Tree treeOne = new Tree();
 
             treeOne.setId(resourceOne.getId());
+            treeOne.setPid(resourceOne.getPid());
             treeOne.setText(resourceOne.getName());
             treeOne.setIconCls(resourceOne.getIcon());
             treeOne.setAttributes(resourceOne.getUrl());
@@ -141,75 +169,50 @@ public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resour
     }
 
     @Override
-    public List<Tree> selectTree(User user) {
+    public List<Tree> selectTree(ShiroUser shiroUser) {
         List<Tree> trees = new ArrayList<Tree>();
-        // 超级管理
-        if (user.getLoginName().equals("admin")) {
-            List<Resource> resourceFather = resourceMapper.selectAllByTypeAndPIdNull(RESOURCE_MENU);
-            if (resourceFather == null) {
-                return null;
+        // shiro中缓存的用户角色
+        Set<String> roles = shiroUser.getRoles();
+        if (roles == null) {
+            return trees;
+        }
+        // 如果有超级管理员权限
+        if (roles.contains("admin")) {
+            List<Resource> resourceList = this.selectByType(RESOURCE_MENU);
+            if (resourceList == null) {
+                return trees;
             }
-
-            for (Resource resourceOne : resourceFather) {
+            for (Resource resourceOne : resourceList) {
                 Tree treeOne = new Tree();
-
                 treeOne.setId(resourceOne.getId());
+                treeOne.setPid(resourceOne.getPid());
                 treeOne.setText(resourceOne.getName());
                 treeOne.setIconCls(resourceOne.getIcon());
                 treeOne.setAttributes(resourceOne.getUrl());
-                List<Resource> resourceSon = resourceMapper.selectAllByTypeAndPId(RESOURCE_MENU, resourceOne.getId());
-
-                if (resourceSon != null) {
-                    List<Tree> tree = new ArrayList<Tree>();
-                    for (Resource resourceTwo : resourceSon) {
-                        Tree treeTwo = new Tree();
-                        treeTwo.setId(resourceTwo.getId());
-                        treeTwo.setText(resourceTwo.getName());
-                        treeTwo.setIconCls(resourceTwo.getIcon());
-                        treeTwo.setAttributes(resourceTwo.getUrl());
-                        tree.add(treeTwo);
-                    }
-                    treeOne.setChildren(tree);
-                } else {
-                    treeOne.setState("closed");
-                }
                 trees.add(treeOne);
             }
             return trees;
         }
-
         // 普通用户
-        List<Resource> resourceIdList = new ArrayList<Resource>();
-        List<Long> roleIdList = userRoleMapper.selectRoleIdListByUserId(user.getId());
-        for (Long id : roleIdList) {
-            List<Resource> resourceIdLists = roleMapper.selectResourceIdListByRoleIdAndType(id);
-            for (Resource resource: resourceIdLists) {
-                resourceIdList.add(resource);
-            }
+        List<Long> roleIdList = userRoleMapper.selectRoleIdListByUserId(shiroUser.getId());
+        if (roleIdList == null) {
+            return trees;
         }
-        for (Resource resource : resourceIdList) {
-            if (resource != null && resource.getPid() == null) {
-                Tree treeOne = new Tree();
-                treeOne.setId(resource.getId());
-                treeOne.setText(resource.getName());
-                treeOne.setIconCls(resource.getIcon());
-                treeOne.setAttributes(resource.getUrl());
-                List<Tree> tree = new ArrayList<Tree>();
-                for (Resource resourceTwo : resourceIdList) {
-                    if (resourceTwo.getPid() != null && resource.getId().longValue() == resourceTwo.getPid().longValue()) {
-                        Tree treeTwo = new Tree();
-                        treeTwo.setId(resourceTwo.getId());
-                        treeTwo.setText(resourceTwo.getName());
-                        treeTwo.setIconCls(resourceTwo.getIcon());
-                        treeTwo.setAttributes(resourceTwo.getUrl());
-                        tree.add(treeTwo);
-                    }
-                }
-                treeOne.setChildren(tree);
-                trees.add(treeOne);
-            }
+        List<Resource> resourceLists = roleMapper.selectResourceListByRoleIdList(roleIdList);
+        if (resourceLists == null) {
+            return trees;
+        }
+        for (Resource resource : resourceLists) {
+            Tree treeOne = new Tree();
+            treeOne.setId(resource.getId());
+            treeOne.setPid(resource.getPid());
+            treeOne.setText(resource.getName());
+            treeOne.setIconCls(resource.getIcon());
+            treeOne.setAttributes(resource.getUrl());
+            trees.add(treeOne);
         }
         return trees;
     }
 
+    
 }

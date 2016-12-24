@@ -23,10 +23,10 @@
             r.id = #{id}
     </select>
 
-    <select id="selectResourceIdListByRoleIdAndType" resultType="Resource"
+    <select id="selectResourceListByRoleIdList" resultType="Resource"
             parameterType="java.lang.Long">
         SELECT
-            s.id AS id,
+            DISTINCT s.id AS id,
             s. NAME AS 'name',
             s.url AS url,
             s.description AS description,
@@ -41,8 +41,12 @@
         LEFT JOIN role_resource e ON r.id = e.role_id
         LEFT JOIN resource s ON e.resource_id = s.id
         WHERE
-            r.id = #{id}
+            r.id in  
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">  
+                #{item}
+            </foreach>
         AND s.resource_type = 0
+        ORDER BY seq
     </select>
 
     <select id="selectResourceListByRoleId" resultType="java.util.HashMap" parameterType="java.lang.Long">

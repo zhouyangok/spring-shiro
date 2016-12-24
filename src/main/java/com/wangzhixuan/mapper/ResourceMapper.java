@@ -18,6 +18,4 @@ public interface ResourceMapper extends AutoMapper<Resource> {
 
     List<Resource> selectAllByTypeAndPId(@Param("resourceType")Integer resourceType, @Param("pId")Long pId);
 
-    List<Resource> selectAll();
-
 }

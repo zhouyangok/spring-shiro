@@ -21,7 +21,7 @@ public interface RoleMapper extends AutoMapper<Role> {
 
     List<Long> selectResourceIdListByRoleId(@Param("id") Long id);
 
-    List<Resource> selectResourceIdListByRoleIdAndType(@Param("id") Long id);
+    List<Resource> selectResourceListByRoleIdList(@Param("list") List<Long> list);
 
     List<Map<Long, String>> selectResourceListByRoleId(@Param("id") Long id);
 
