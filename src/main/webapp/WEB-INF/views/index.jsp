@@ -197,9 +197,9 @@
         <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2015 power by <a href="http://www.dreamlu.net/" target="_blank">如梦技术</a></div>
     </div>
     <div id="tabsMenu">
-        <div data-options="iconCls:'icon-refresh'" type="refresh" style="font-size: 12px;">刷新</div>
+        <div data-options="iconCls:'fi-loop'" type="refresh" style="font-size: 12px;">刷新</div>
         <div class="menu-sep"></div>
-        <div data-options="iconCls:'icon-del'" type="close" style="font-size: 12px;">关闭</div>
+        <div data-options="iconCls:'fi-x'" type="close" style="font-size: 12px;">关闭</div>
         <div data-options="iconCls:''" type="closeOther">关闭其他</div>
         <div data-options="iconCls:''" type="closeAll">关闭所有</div>
     </div>
