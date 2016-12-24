@@ -2,8 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-
-        $('#pid').combotree({
+        $('#resourceAddPid').combotree({
             url : '${path }/resource/allTree',
             parentField : 'pid',
             lines : true,
@@ -66,7 +65,7 @@
             </tr>
             <tr>
                 <td>上级资源</td>
-                <td colspan="3"><select id="pid" name="pid" style="width: 200px; height: 29px;"></select>
+                <td colspan="3"><select id="resourceAddPid" name="pid" style="width: 200px; height: 29px;"></select>
                 <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a></td>
             </tr>
         </table>

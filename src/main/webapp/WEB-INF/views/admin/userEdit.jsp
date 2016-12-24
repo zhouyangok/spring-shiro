@@ -2,8 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-        var roleIds = ${roleIds };
-        $('#organizationId').combotree({
+        $('#userEditorganizationId').combotree({
             url : '${path }/organization/tree',
             parentField : 'pid',
             lines : true,
@@ -11,7 +10,7 @@
             value : '${user.organizationId}'
         });
 
-        $('#roleIds').combotree({
+        $('#userEditRoleIds').combotree({
             url : '${path }/role/tree',
             parentField : 'pid',
             lines : true,
@@ -19,7 +18,7 @@
             multiple : true,
             required : true,
             cascadeCheck : false,
-            value : roleIds
+            value : ${roleIds }
         });
 
         $('#userEditForm').form({
@@ -43,9 +42,9 @@
                 }
             }
         });
-        $("#sex").val('${user.sex}');
-        $("#userType").val('${user.userType}');
-        $("#status").val('${user.status}');
+        $("#userEditSex").val('${user.sex}');
+        $("#userEditUserType").val('${user.userType}');
+        $("#userEditStatus").val('${user.status}');
     });
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -66,7 +65,7 @@
                     <td>密码</td>
                     <td><input type="text" name="password"/></td>
                     <td>性别</td>
-                    <td><select name="sex" id="sex"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <td><select id="userEditSex" name="sex" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">男</option>
                             <option value="1">女</option>
                     </select></td>
@@ -75,16 +74,16 @@
                     <td>年龄</td>
                     <td><input type="text" name="age" value="${user.age}" class="easyui-numberbox"/></td>
                     <td>用户类型</td>
-                    <td><select id="userType" name="userType"  class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <td><select id="userEditUserType" name="userType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">管理员</option>
                             <option value="1">用户</option>
                     </select></td>
                 </tr>
                 <tr>
                     <td>部门</td>
-                    <td><select id="organizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
+                    <td><select id="userEditorganizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
                     <td>角色</td>
-                    <td><input  id="roleIds" name="roleIds" style="width: 140px; height: 29px;"/></td>
+                    <td><input  id="userEditRoleIds" name="roleIds" style="width: 140px; height: 29px;"/></td>
                 </tr>
                 <tr>
                     <td>电话</td>
@@ -92,7 +91,7 @@
                         <input type="text" name="phone" class="easyui-numberbox" value="${user.phone}"/>
                     </td>
                     <td>用户类型</td>
-                    <td><select id="state" name="status" value="${user.status}" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <td><select id="userEditStatus" name="status" value="${user.status}" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">正常</option>
                             <option value="1">停用</option>
                     </select></td>

@@ -7,17 +7,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>主页</title>
 <script type="text/javascript">
-    var index_layout;
     var index_tabs;
-    var layout_west_tree;
-
+    var indexTabsMenu;
     $(function() {
-        index_layout = $('#index_layout').layout({
-            fit : true
-        });
+        $('#index_layout').layout({fit : true});
+        
         index_tabs = $('#index_tabs').tabs({
             fit : true,
             border : false,
+            onContextMenu : function(e, title) {
+                e.preventDefault();
+                indexTabsMenu.menu('show', {
+                    left : e.pageX,
+                    top : e.pageY
+                }).data('tabTitle', title);
+            },
             tools : [{
                 iconCls : 'icon-home',
                 handler : function() {
@@ -26,19 +30,7 @@
             }, {
                 iconCls : 'icon-refresh',
                 handler : function() {
-                    var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
-                    var tab = index_tabs.tabs('getTab', index);
-                    var options = tab.panel('options');
-                    if (options.content) {
-                        index_tabs.tabs('update', {
-                            tab: tab,
-                            options: {
-                                content: options.content
-                            }
-                        });
-                    } else {
-                        tab.panel('refresh', options.href);
-                    }
+                    refreshTab();
                 }
             }, {
                 iconCls : 'icon-del',
@@ -51,49 +43,88 @@
                 }
             } ]
         });
+        // 选项卡菜单
+        indexTabsMenu = $('#tabsMenu').menu({
+            onClick : function(item) {
+                var curTabTitle = $(this).data('tabTitle');
+                var type = $(item.target).attr('type');
+                if (type === 'refresh') {
+                    refreshTab();
+                    return;
+                }
+                if (type === 'close') {
+                    var t = index_tabs.tabs('getTab', curTabTitle);
+                    if (t.panel('options').closable) {
+                        index_tabs.tabs('close', curTabTitle);
+                    }
+                    return;
+                }
+                var allTabs = index_tabs.tabs('tabs');
+                var closeTabsTitle = [];
+                $.each(allTabs, function() {
+                    var opt = $(this).panel('options');
+                    if (opt.closable && opt.title != curTabTitle
+                            && type === 'closeOther') {
+                        closeTabsTitle.push(opt.title);
+                    } else if (opt.closable && type === 'closeAll') {
+                        closeTabsTitle.push(opt.title);
+                    }
+                });
+                for ( var i = 0; i < closeTabsTitle.length; i++) {
+                    index_tabs.tabs('close', closeTabsTitle[i]);
+                }
+            }
+        });
         
-        layout_west_tree = $('#layout_west_tree').tree({
+        $('#layout_west_tree').tree({
             url : '${path }/resource/tree',
             parentField : 'pid',
             lines : true,
             onClick : function(node) {
-                if (node.attributes.indexOf("http") >= 0) {
-                    var url = node.attributes;
-                    addTab({
-                        title : node.text,
-                        url : url,
-                        iconCls : node.iconCls
-                    });
+                var opts = {
+                    title : node.text,
+                    border : false,
+                    closable : true,
+                    fit : true,
+                    iconCls : node.iconCls
+                };
+                var url = node.attributes;
+                if (url.indexOf("http") >= 0 || url.indexOf("druid") >= 0) {
+                    opts.content = '<iframe src="' + url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
+                    addTab(opts);
                 } else if (node.attributes) {
-                    var url = '${path }' + node.attributes;
-                    addTab({
-                        title : node.text,
-                        url : url,
-                        iconCls : node.iconCls
-                    });
+                    opts.href = '${path }' + url;
+                    addTab(opts);
                 }
             }
         });
     });
 
-    function addTab(params) {
-        var iframe = '<iframe src="' + params.url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
+    function addTab(opts) {
         var t = $('#index_tabs');
-        var opts = {
-            title : params.title,
-            closable : true,
-            iconCls : params.iconCls,
-            content : iframe,
-            border : false,
-            fit : true
-        };
         if (t.tabs('exists', opts.title)) {
             t.tabs('select', opts.title);
         } else {
             t.tabs('add', opts);
         }
     }
-
+    
+    function refreshTab() {
+        var index = index_tabs.tabs('getTabIndex', index_tabs.tabs('getSelected'));
+        var tab = index_tabs.tabs('getTab', index);
+        var options = tab.panel('options');
+        if (options.content) {
+            index_tabs.tabs('update', {
+                tab: tab,
+                options: {
+                    content: options.content
+                }
+            });
+        } else {
+            tab.panel('refresh', options.href);
+        }
+    }
+    
     function logout(){
         $.messager.confirm('提示','确定要退出?',function(r){
             if (r){
@@ -123,7 +154,6 @@
             } ]
         });
     }
-
 </script>
 </head>
 <body>
@@ -134,11 +164,11 @@
         <div data-options="region:'north',border:false" style="overflow: hidden;">
             <div>
                 <span style="float: right; padding-right: 20px; margin-top: 15px; color: #333">欢迎 
-	                <b><shiro:principal></shiro:principal></b>&nbsp;&nbsp; 
-	                <shiro:hasPermission name="/user/editPwdPage">
-	                    <a href="javascript:void(0)" onclick="editUserPwd()" class="easyui-linkbutton" plain="true" icon="icon-edit" >修改密码</a>
-	                </shiro:hasPermission>&nbsp;&nbsp;
-	                <a href="javascript:void(0)" onclick="logout()" class="easyui-linkbutton" plain="true" icon="icon-clear">安全退出</a>
+                    <b><shiro:principal></shiro:principal></b>&nbsp;&nbsp; 
+                    <shiro:hasPermission name="/user/editPwdPage">
+                        <a href="javascript:void(0)" onclick="editUserPwd()" class="easyui-linkbutton" plain="true" icon="icon-edit" >修改密码</a>
+                    </shiro:hasPermission>&nbsp;&nbsp;
+                    <a href="javascript:void(0)" onclick="logout()" class="easyui-linkbutton" plain="true" icon="icon-clear">安全退出</a>
                 </span>
                 <span class="header"></span>
             </div>
@@ -165,12 +195,18 @@
         </div>
         <div data-options="region:'south',border:false" style="height: 30px;line-height:30px; overflow: hidden;text-align: center;background-color: #eee" >Copyright © 2015 power by <a href="http://www.dreamlu.net/" target="_blank">如梦技术</a></div>
     </div>
-
+    <div id="tabsMenu">
+        <div data-options="iconCls:'icon-refresh'" type="refresh" style="font-size: 12px;">刷新</div>
+        <div class="menu-sep"></div>
+        <div data-options="iconCls:'icon-del'" type="close" style="font-size: 12px;">关闭</div>
+        <div data-options="iconCls:''" type="closeOther">关闭其他</div>
+        <div data-options="iconCls:''" type="closeAll">关闭所有</div>
+    </div>
+    
     <!--[if lte IE 7]>
     <div id="ie6-warning"><p>您正在使用 低版本浏览器，在本页面可能会导致部分功能无法使用。建议您升级到 <a href="http://www.microsoft.com/china/windows/internet-explorer/" target="_blank">Internet Explorer 8</a> 或以下浏览器：
     <a href="http://www.mozillaonline.com/" target="_blank">Firefox</a> / <a href="http://www.google.com/chrome/?hl=zh-CN" target="_blank">Chrome</a> / <a href="http://www.apple.com.cn/safari/" target="_blank">Safari</a> / <a href="http://www.operachina.com/" target="_blank">Opera</a></p></div>
     <![endif]-->
-
     <style>
         /*ie6提示*/
         #ie6-warning{width:100%;position:absolute;top:0;left:0;background:#fae692;padding:5px 0;font-size:12px}

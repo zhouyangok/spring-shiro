@@ -24,9 +24,7 @@
             }
         });
         
-        
-        $("#description").val('${role.description}');
-        
+        $("#roleEditStatus").val('${role.status}');
     });
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -45,7 +43,7 @@
                 <tr>
                     <td>状态</td>
                     <td >
-                        <select id="status" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <select id="roleEditStatus" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                             <option value="0">正常</option>
                             <option value="1">停用</option>
                         </select>
@@ -53,7 +51,7 @@
                 </tr>
                 <tr>
                     <td>备注</td>
-                    <td colspan="3"><textarea id="description" name="description" rows="" cols="" ></textarea></td>
+                    <td colspan="3"><textarea name="description">${role.description}</textarea></td>
                 </tr>
             </table>
         </form>

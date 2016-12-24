@@ -2,7 +2,6 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-
         $('#editUserPwdForm').form({
             url : '${path }/user/editUserPwd',
             onSubmit : function() {

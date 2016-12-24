@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
-
     $(function() {
-        
-        $('#pid').combotree({
+        $('#organizationAddPid').combotree({
             url : '${path }/organization/tree',
             parentField : 'pid',
             lines : true,
@@ -45,19 +43,18 @@
             </tr>
             <tr>
                 <td>排序</td>
-                <td><input name="seq"  class="easyui-numberspinner" style="width: 140px; height: 29px;" required="required" data-options="editable:false" value="0"></td>
+                <td><input name="seq" class="easyui-numberspinner" style="width: 140px; height: 29px;" required="required" data-options="editable:false" value="0"></td>
                 <td>菜单图标</td>
                 <td><input  name="icon" value="icon-folder"/></td>
             </tr>
             <tr>
                 <td>地址</td>
-                <td colspan="3"><input  name="address" style="width: 300px;"/></td>
+                <td colspan="3"><input name="address" style="width: 300px;"/></td>
             </tr>
             <tr>
                 <td>上级部门</td>
-                <td colspan="3"><select id="pid" name="pid" style="width:200px;height: 29px;"></select>
+                <td colspan="3"><select id="organizationAddPid" name="pid" style="width:200px;height: 29px;"></select>
                 <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a></td>
-                
             </tr>
         </table>
     </form>

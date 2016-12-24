@@ -75,7 +75,10 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 
 
 ## 更新记录
-> 2016-12-20 v1.1.1 修改若干`bug`，cache改为spring-cache，shiro添加密码错误次数限制，密码加密改为shiro处理。
+> 2016-12-20 v1.2.0 tab加载修改ajax或者iframe，页面默认采用ajax加载！
+> 老版本请查看：[v1.1.1](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/v1.1.1/)
+
+> 2016-12-20 v1.1.1 修改若干`bug`，菜单改为无限级，cache改为spring-cache，shiro添加密码错误次数限制，密码加密改为shiro处理。
 
 > 2016-10-11 v1.1.0 采用`mybatis-plus`简化数据库，去除主从数据库，老版本升级需要执行`database/update_xxxx.sql`。
 

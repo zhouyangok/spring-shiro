@@ -2,8 +2,7 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-
-        $('#pid').combotree({
+        $('#resourceEditPid').combotree({
             url : '${path }/resource/tree',
             parentField : 'pid',
             lines : true,
@@ -32,8 +31,8 @@
             }
         });
 
-        $("#status").val('${resource.status}');
-        $("#resourcetype").val('${resource.resourceType}');
+        $("#resourceEditStatus").val('${resource.status}');
+        $("#resourceEditType").val('${resource.resourceType}');
     });
 </script>
 <div style="padding: 3px;">
@@ -47,7 +46,7 @@
                 </td>
                 <td>资源类型</td>
                 <td>
-                    <select id="resourcetype" name="resourceType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <select id="resourceEditType" name="resourceType" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                         <option value="0">菜单</option>
                         <option value="1">按钮</option>
                     </select>
@@ -64,7 +63,7 @@
                 <td><input name="icon" value="${resource.icon}"/></td>
                 <td>状态</td>
                 <td>
-                    <select id="status" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                    <select id="resourceEditStatus" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                         <option value="0">正常</option>
                         <option value="1">停用</option>
                     </select>
@@ -72,7 +71,7 @@
             </tr>
             <tr>
                 <td>上级资源</td>
-                <td colspan="3"><select id="pid" name="pid" style="width: 200px; height: 29px;"></select>
+                <td colspan="3"><select id="resourceEditPid" name="pid" style="width: 200px; height: 29px;"></select>
                 <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a></td>
             </tr>
         </table>

@@ -1,15 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<%@ include file="/commons/basejs.jsp" %>
-<meta http-equiv="X-UA-Compatible" content="edge" />
-<title>机构管理</title>
 <script type="text/javascript">
-    var treeGrid;
+    var organizationTreeGrid;
     $(function() {
-        treeGrid = $('#treeGrid').treegrid({
+        organizationTreeGrid = $('#organizationTreeGrid').treegrid({
             url : '${path }/organization/treeGrid',
             idField : 'id',
             treeField : 'name',
@@ -59,11 +53,11 @@
                 formatter : function(value, row, index) {
                     var str = '';
                         <shiro:hasPermission name="/organization/edit">
-                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editFun(\'{0}\');" >编辑</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-edit" data-options="plain:true,iconCls:\'icon-edit\'" onclick="editOrganizationFun(\'{0}\');" >编辑</a>', row.id);
                         </shiro:hasPermission>
                         <shiro:hasPermission name="/organization/delete">
                             str += '&nbsp;&nbsp;|&nbsp;&nbsp;';
-                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteFun(\'{0}\');" >删除</a>', row.id);
+                            str += $.formatString('<a href="javascript:void(0)" class="organization-easyui-linkbutton-del" data-options="plain:true,iconCls:\'icon-del\'" onclick="deleteOrganizationFun(\'{0}\');" >删除</a>', row.id);
                         </shiro:hasPermission>
                     return str;
                 }
@@ -76,11 +70,11 @@
         });
     });
     
-    function editFun(id) {
+    function editOrganizationFun(id) {
         if (id != undefined) {
-            treeGrid.treegrid('select', id);
+            organizationTreeGrid.treegrid('select', id);
         }
-        var node = treeGrid.treegrid('getSelected');
+        var node = organizationTreeGrid.treegrid('getSelected');
         if (node) {
             parent.$.modalDialog({
                 title : '编辑',
@@ -90,7 +84,7 @@
                 buttons : [ {
                     text : '编辑',
                     handler : function() {
-                        parent.$.modalDialog.openner_treeGrid = treeGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
+                        parent.$.modalDialog.openner_treeGrid = organizationTreeGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
                         var f = parent.$.modalDialog.handler.find('#organizationEditForm');
                         f.submit();
                     }
@@ -99,11 +93,11 @@
         }
     }
     
-    function deleteFun(id) {
+    function deleteOrganizationFun(id) {
         if (id != undefined) {
-            treeGrid.treegrid('select', id);
+            organizationTreeGrid.treegrid('select', id);
         }
-        var node = treeGrid.treegrid('getSelected');
+        var node = organizationTreeGrid.treegrid('getSelected');
         if (node) {
             parent.$.messager.confirm('询问', '您是否要删除当前资源？删除当前资源会连同子资源一起删除!', function(b) {
                 if (b) {
@@ -113,7 +107,7 @@
                     }, function(result) {
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
-                            treeGrid.treegrid('reload');
+                            organizationTreeGrid.treegrid('reload');
                         }else{
                             parent.$.messager.alert('提示', result.msg, 'info');
                         }
@@ -124,7 +118,7 @@
         }
     }
     
-    function addFun() {
+    function addOrganizationFun() {
         parent.$.modalDialog({
             title : '添加',
             width : 500,
@@ -133,26 +127,21 @@
             buttons : [ {
                 text : '添加',
                 handler : function() {
-                    parent.$.modalDialog.openner_treeGrid = treeGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
+                    parent.$.modalDialog.openner_treeGrid = organizationTreeGrid;//因为添加成功之后，需要刷新这个treeGrid，所以先预定义好
                     var f = parent.$.modalDialog.handler.find('#organizationAddForm');
                     f.submit();
                 }
             } ]
         });
     }
-    </script>
-</head>
-<body>
-    <div class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'center',border:false"  style="overflow: hidden;">
-            <table id="treeGrid"></table>
-        </div>
-        
-        <div id="toolbar" style="display: none;">
-            <shiro:hasPermission name="/organization/add">
-                <a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
-            </shiro:hasPermission>
-        </div>
+</script>
+<div class="easyui-layout" data-options="fit:true,border:false">
+    <div data-options="region:'center',border:false"  style="overflow: hidden;">
+        <table id="organizationTreeGrid"></table>
     </div>
-</body>
-</html>
+    <div id="toolbar" style="display: none;">
+        <shiro:hasPermission name="/organization/add">
+            <a onclick="addOrganizationFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add'">添加</a>
+        </shiro:hasPermission>
+    </div>
+</div>

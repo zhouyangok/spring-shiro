@@ -2,15 +2,14 @@
 <%@ include file="/commons/global.jsp" %>
 <script type="text/javascript">
     $(function() {
-
-        $('#organizationId').combotree({
+        $('#userAddOrganizationId').combotree({
             url : '${path }/organization/tree',
             parentField : 'pid',
             lines : true,
             panelHeight : 'auto'
         });
 
-        $('#roleIds').combotree({
+        $('#userAddRoleIds').combotree({
             url: '${path }/role/tree',
             multiple: true,
             required: true,
@@ -75,9 +74,9 @@
                 </tr>
                 <tr>
                     <td>部门</td>
-                    <td><select id="organizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
+                    <td><select id="userAddOrganizationId" name="organizationId" style="width: 140px; height: 29px;" class="easyui-validatebox" data-options="required:true"></select></td>
                     <td>角色</td>
-                    <td><select id="roleIds" name="roleIds" style="width: 140px; height: 29px;"></select></td>
+                    <td><select id="userAddRoleIds" name="roleIds" style="width: 140px; height: 29px;"></select></td>
                 </tr>
                 <tr>
                     <td>电话</td>
@@ -86,7 +85,7 @@
                     </td>
                     <td>用户状态</td>
                     <td>
-                        <select id="status" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <select name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                                 <option value="0">正常</option>
                                 <option value="1">停用</option>
                         </select>
