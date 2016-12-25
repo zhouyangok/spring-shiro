@@ -1501,15 +1501,18 @@ $(function(){
     $("#clipIcon").on("click", "input", function(){
         var color = $(this).val();
         if (color && color != '') {
-            var _class = $("#clipIcon i").attr("class");
-            var xClass = [color];
-            $.map(_class.split(" "), function(item) {
-                if (item.indexOf("fi-") != -1) {
-                    xClass.push(item);
-                }
+            $("#clipIcon i").map(function() {
+                var xClass = [color];
+                var $this  = $(this);
+                var _class = $this.attr("class");
+                $.map(_class.split(" "), function(item) {
+                    if (item.indexOf("fi-") != -1) {
+                        xClass.push(item);
+                    }
+                });
+                var iClass = xClass.join(' ');
+                $this.removeClass().addClass(iClass);
             });
-            var iClass = xClass.join(' ');
-            $("#clipIcon i").removeClass().addClass(iClass);
         }
     });
     // 图标点击触发剪切板复制
