@@ -5,13 +5,13 @@
 
 二次开发可采用`jetty maven plugin`启动，`pom.xml`中已经配置。
 
-如果觉得数据校验不够，请自行添加hibernate-validator在Bean上做校验！
+如果觉得数据校验不够，请自行添加`hibernate-validator`在Bean上做校验！
 
 另外，你需要根据自己的业务添加`shiro注解`，实现请求控制。
 
 更多`shiro`的教程请参考（开涛博客`《跟我学Shiro》`）：http://jinnianshilongnian.iteye.com/category/305053
 
-另外欢迎`Pull Requests`给我们一起完善该项目！
+另外欢迎`Pull Requests`，和我们一起完善该项目！
 
 ## 运行环境
 `jdk7 + tomcat7`或以上！
@@ -24,6 +24,8 @@
 
 ## 说明
 `Webhook`是结合`osc@git`[Webhook功能](http://git.mydoc.io/?t=83172)开发的项目自动更新打包部署功能！
+
+如果不需要该功能可以删除`event`目录和`controller`目录下的`WebHooks`相关java文件！
 
 ## 效果图
 <p>
@@ -70,9 +72,8 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 <img src="http://ww3.sinaimg.cn/small/907f4c96jw1f3sjdhkn0rj20by0byq33.jpg" alt="支付宝" />
 </p>
 
-### 捐助记录
-
-
+## 捐助记录
+silent 5元
 
 ## 更新记录
 > 2016-12-20 v1.2.0 tab加载修改ajax或者iframe，页面默认采用ajax加载！

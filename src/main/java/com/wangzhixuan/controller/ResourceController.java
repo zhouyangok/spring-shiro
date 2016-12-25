@@ -80,6 +80,11 @@ public class ResourceController extends BaseController {
     @ResponseBody
     public Object add(Resource resource) {
         resource.setCreateTime(new Date());
+        // 选择菜单时将openMode设置为null
+        Integer type = resource.getResourceType();
+        if (null != type && type == 0) {
+            resource.setOpenMode(null);
+        }
         resourceService.insert(resource);
         return renderSuccess("添加成功！");
     }
@@ -125,6 +130,11 @@ public class ResourceController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Resource resource) {
+        // 选择菜单时将openMode设置为null
+        Integer type = resource.getResourceType();
+        if (null != type && type == 0) {
+            resource.setOpenMode(null);
+        }
         resourceService.updateSelectiveById(resource);
         return renderSuccess("编辑成功！");
     }
