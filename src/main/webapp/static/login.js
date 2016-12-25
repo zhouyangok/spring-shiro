@@ -62,11 +62,7 @@ $(function () {
             if (result.success) {
                 window.location.href = basePath + '/index';
             }else{
-                $.messager.show({
-                    title:'提示',
-                    msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>'+result.msg+'</div></div>',
-                    showType:'show'
-                });
+                showMsg(result.msg);
             }
         }
     });

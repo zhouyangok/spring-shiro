@@ -512,3 +512,15 @@ $(document).keydown(function (e) {
     if (doPrevent) 
     e.preventDefault(); 
 });
+
+/**
+ * 显示消息
+ */
+function showMsg(msg) {
+    top.window.$.messager.show({
+        title: '提示',
+        msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>' + msg||"消息内容！" + '</div></div>',
+        timeout: 3000,
+        showType: 'slide'
+    });
+}

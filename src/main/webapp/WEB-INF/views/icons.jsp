@@ -1,9 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/commons/global.jsp"%>
 <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/icons-view.css?v=60" />
+<script type="text/javascript" src="${staticPath }/static/clipboard/clipboard.min.js" charset="utf-8"></script>
 <div class="container">
     <div class="interchange-body">
-        <div class="large-12 columns">
+        <div id="clipIcon" class="large-12 columns">
+            <h2 class="with-download-link">图标颜色</h2>
+            <ul class="small-block-grid-2 large-block-grid-4">
+                <li class="fi-default" style="font-size: 12px;">
+                    <input type="radio" name="icon" checked> 默认
+                </li>
+                <li class="icon-blue">
+                    <input type="radio" name="icon" value="icon-blue"> 蓝色
+                </li>
+                <li class="icon-purple">
+                    <input type="radio" name="icon" value="icon-purple"> 紫色
+                </li>
+                <li class="icon-green">
+                    <input type="radio" name="icon" value="icon-green"> 绿色
+                </li>
+                <li class="icon-red">
+                    <input type="radio" name="icon" value="icon-red"> 红色
+                </li>
+                <li class="icon-yellow">
+                    <input type="radio" name="icon" value="icon-yellow"> 黄色
+                </li>
+                <li class="icon-gray">
+                    <input type="radio" name="icon" value="icon-gray"> 灰色
+                </li>
+                <li class="icon-black">
+                    <input type="radio" name="icon" value="icon-black"> 黑色
+                </li>
+            </ul>
             <h2 class="with-download-link">普通图标</h2>
             <ul class="small-block-grid-2 large-block-grid-4">
                 <li>
@@ -1457,3 +1485,48 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(function(){
+    $('#clipIcon p').tooltip({
+        position: 'bottom',
+        content: '<span style="color:#fff">双击复制该图标~</span>',
+        onShow: function(){
+            $(this).tooltip('tip').css({
+                backgroundColor: '#666',
+                borderColor: '#666'
+            });
+        }
+    });
+    // 颜色切换
+    $("#clipIcon").on("click", "input", function(){
+        var color = $(this).val();
+        if (color && color != '') {
+            var _class = $("#clipIcon i").attr("class");
+            var xClass = [color];
+            $.map(_class.split(" "), function(item) {
+                if (item.indexOf("fi-") != -1) {
+                    xClass.push(item);
+                }
+            });
+            var iClass = xClass.join(' ');
+            $("#clipIcon i").removeClass().addClass(iClass);
+        }
+    });
+    // 图标点击触发剪切板复制
+    $("#clipIcon").on("click", "p", function(){
+        var clipboard = new Clipboard(this, {
+            text: function(trigger) {
+                return $(trigger).find("i").attr("class");
+            }
+        });
+        clipboard.on('success', function(e) {
+            showMsg("复制成功！");
+            e.clearSelection();
+        });
+        clipboard.on('error', function(e) {
+            showMsg("复制失败，可能是不支持低版本IE浏览器！");
+        });
+        return false;
+    })
+});
+</script>
