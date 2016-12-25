@@ -31,8 +31,9 @@
             }
         });
 
-        $("#resourceEditStatus").val('${resource.status}');
-        $("#resourceEditType").val('${resource.resourceType}');
+        $("#resourceEditStatus").val("${resource.status}");
+        $("#resourceEditType").val("${resource.resourceType}");
+        $("#resourceEditOpenMode").val("${resource.openMode}");
     });
 </script>
 <div style="padding: 3px;">
@@ -55,15 +56,24 @@
             <tr>
                 <td>资源路径</td>
                 <td><input name="url" type="text" value="${resource.url}" placeholder="请输入资源路径" class="easyui-validatebox span2" ></td>
-                <td>排序</td>
-                <td><input name="seq" value="${resource.seq}"  class="easyui-numberspinner" style="width: 140px; height: 29px;" required="required" data-options="editable:false"></td>
+                <td>打开方式</td>
+                <td>
+                    <select id="resourceEditOpenMode" name="openMode" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option value="ajax">ajax</option>
+                        <option value="iframe">iframe</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>菜单图标</td>
                 <td><input name="icon" value="${resource.icon}"/></td>
+                <td>排序</td>
+                <td><input name="seq" value="${resource.seq}" class="easyui-numberspinner" style="width: 140px; height: 29px;" required="required" data-options="editable:false"></td>
+            </tr>
+            <tr>
                 <td>状态</td>
-                <td>
-                    <select id="resourceEditStatus" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                <td colspan="3">
+                    <select id="resourceEditStatus" name="status" class="easyui-combobox" data-options="width:200,height:29,editable:false,panelHeight:'auto'">
                         <option value="0">正常</option>
                         <option value="1">停用</option>
                     </select>

@@ -49,15 +49,24 @@
             <tr>
                 <td>资源路径</td>
                 <td><input name="url" type="text" placeholder="请输入资源路径" class="easyui-validatebox span2" data-options="width:140,height:29" ></td>
+                <td>打开方式</td>
+                <td>
+                    <select name="openMode" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option value="ajax" selected="selected">ajax</option>
+                        <option value="iframe">iframe</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>菜单图标</td>
+                <td ><input name="icon" /></td>
                 <td>排序</td>
                 <td><input name="seq" value="0"  class="easyui-numberspinner" style="width: 140px; height: 29px;" required="required" data-options="editable:false"></td>
             </tr>
             <tr>
-                <td>菜单图标</td>
-                <td ><input  name="icon" /></td>
                 <td>状态</td>
-                <td>
-                    <select name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                <td colspan="3">
+                    <select name="status" class="easyui-combobox" data-options="width:200,height:29,editable:false,panelHeight:'auto'">
                         <option value="0">正常</option>
                         <option value="1">停用</option>
                     </select>
@@ -65,8 +74,10 @@
             </tr>
             <tr>
                 <td>上级资源</td>
-                <td colspan="3"><select id="resourceAddPid" name="pid" style="width: 200px; height: 29px;"></select>
-                <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a></td>
+                <td colspan="3">
+                    <select id="resourceAddPid" name="pid" style="width: 200px; height: 29px;"></select>
+                    <a class="easyui-linkbutton" href="javascript:void(0)" onclick="$('#pid').combotree('clear');" >清空</a>
+                </td>
             </tr>
         </table>
     </form>

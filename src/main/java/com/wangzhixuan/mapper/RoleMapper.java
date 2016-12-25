@@ -17,8 +17,6 @@ import com.wangzhixuan.model.Role;
  */
 public interface RoleMapper extends AutoMapper<Role> {
 
-    List<Role> selectAll();
-
     List<Long> selectResourceIdListByRoleId(@Param("id") Long id);
 
     List<Resource> selectResourceListByRoleIdList(@Param("list") List<Long> list);

@@ -7,12 +7,6 @@
         id, name, seq, description, status
     </sql>
 
-    <select id="selectAll" resultType="Role">
-        select
-        <include refid="Base_Column_List"/>
-        from role order by seq
-    </select>
-
     <select id="selectResourceIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long">
         SELECT
             e.resource_id AS id

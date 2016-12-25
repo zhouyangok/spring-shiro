@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-        id, name, url, description, icon, pid, seq, status, resource_type AS resourceType, create_time AS createTime
+        id, name, url, description, icon, pid, seq, status, open_mode as openMode, resource_type AS resourceType, create_time AS createTime
     </sql>
 
 </mapper>

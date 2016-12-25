@@ -18,6 +18,10 @@ public class Tree implements java.io.Serializable {
     private List<Tree> children;
     private String iconCls;
     private Long pid;
+    /**
+     * ajax,iframe,
+     */
+    private String openMode;
 
     public Long getId() {
         return id;
@@ -81,6 +85,14 @@ public class Tree implements java.io.Serializable {
 
     public void setPid(Long pid) {
         this.pid = pid;
+    }
+
+    public String getOpenMode() {
+        return openMode;
+    }
+
+    public void setOpenMode(String openMode) {
+        this.openMode = openMode;
     }
 
 }

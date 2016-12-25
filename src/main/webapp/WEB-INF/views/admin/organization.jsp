@@ -32,7 +32,7 @@
             }, {
                 field : 'iconCls',
                 title : '图标',
-                width : 100
+                width : 120
             },  {
                 width : '130',
                 title : '创建时间',

@@ -103,14 +103,15 @@ public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resour
             if (resourceList == null) {
                 return trees;
             }
-            for (Resource resourceOne : resourceList) {
-                Tree treeOne = new Tree();
-                treeOne.setId(resourceOne.getId());
-                treeOne.setPid(resourceOne.getPid());
-                treeOne.setText(resourceOne.getName());
-                treeOne.setIconCls(resourceOne.getIcon());
-                treeOne.setAttributes(resourceOne.getUrl());
-                trees.add(treeOne);
+            for (Resource resource : resourceList) {
+                Tree tree = new Tree();
+                tree.setId(resource.getId());
+                tree.setPid(resource.getPid());
+                tree.setText(resource.getName());
+                tree.setIconCls(resource.getIcon());
+                tree.setAttributes(resource.getUrl());
+                tree.setOpenMode(resource.getOpenMode());
+                trees.add(tree);
             }
             return trees;
         }
@@ -124,13 +125,14 @@ public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resour
             return trees;
         }
         for (Resource resource : resourceLists) {
-            Tree treeOne = new Tree();
-            treeOne.setId(resource.getId());
-            treeOne.setPid(resource.getPid());
-            treeOne.setText(resource.getName());
-            treeOne.setIconCls(resource.getIcon());
-            treeOne.setAttributes(resource.getUrl());
-            trees.add(treeOne);
+            Tree tree = new Tree();
+            tree.setId(resource.getId());
+            tree.setPid(resource.getPid());
+            tree.setText(resource.getName());
+            tree.setIconCls(resource.getIcon());
+            tree.setAttributes(resource.getUrl());
+            tree.setOpenMode(resource.getOpenMode());
+            trees.add(tree);
         }
         return trees;
     }

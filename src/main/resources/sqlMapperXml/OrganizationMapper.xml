@@ -19,9 +19,4 @@
         from organization where pid = #{pId} order by seq
     </select>
 
-    <select id="selectAll" resultType="Organization">
-        select
-        <include refid="Base_Column_List"/>
-        from organization order by seq
-    </select>
 </mapper>

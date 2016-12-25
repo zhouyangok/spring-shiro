@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.commons.utils.PageInfo;
@@ -36,7 +37,13 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
     private UserRoleMapper userRoleMapper;
     @Autowired
     private RoleResourceMapper roleResourceMapper;
-
+    
+    public List<Role> selectAll() {
+        EntityWrapper<Role> wrapper = new EntityWrapper<Role>();
+        wrapper.orderBy("seq");
+        return roleMapper.selectList(wrapper);
+    }
+    
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<Role> page = new Page<Role>(pageInfo.getNowpage(), pageInfo.getSize());
@@ -48,7 +55,7 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
     @Override
     public Object selectTree() {
         List<Tree> trees = new ArrayList<Tree>();
-        List<Role> roles = roleMapper.selectAll();
+        List<Role> roles = this.selectAll();
         for (Role role : roles) {
             Tree tree = new Tree();
             tree.setId(role.getId());

@@ -8,6 +8,7 @@
 <title>主页</title>
 <script type="text/javascript">
     var index_tabs;
+    var layout_west_tree;
     var indexTabsMenu;
     $(function() {
         $('#index_layout').layout({fit : true});
@@ -76,7 +77,7 @@
             }
         });
         
-        $('#layout_west_tree').tree({
+        layout_west_tree = $('#layout_west_tree').tree({
             url : '${path }/resource/tree',
             parentField : 'pid',
             lines : true,
@@ -89,11 +90,14 @@
                     iconCls : node.iconCls
                 };
                 var url = node.attributes;
-                if (url.indexOf("http") >= 0 || url.indexOf("druid") >= 0) {
+                if (url && url.indexOf("http") == -1) {
+                    url = '${path }' + url;
+                }
+                if (node.openMode == 'iframe') {
                     opts.content = '<iframe src="' + url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
                     addTab(opts);
-                } else if (node.attributes) {
-                    opts.href = '${path }' + url;
+                } else if (url) {
+                    opts.href = url;
                     addTab(opts);
                 }
             }

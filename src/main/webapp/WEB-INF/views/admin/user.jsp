@@ -48,7 +48,7 @@
                 title : '所属部门',
                 field : 'organizationName'
             },{
-                width : '130s',
+                width : '130',
                 title : '创建时间',
                 field : 'createTime',
                 sortable : true

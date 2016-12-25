@@ -29,7 +29,7 @@
                 title: '内容',
                 field: 'optContent'
             }, {
-                width: '200',
+                width: '130',
                 title: '创建时间',
                 field: 'createTime'
             }]]

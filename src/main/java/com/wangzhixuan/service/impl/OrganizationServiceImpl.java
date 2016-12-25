@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.mapper.OrganizationMapper;
 import com.wangzhixuan.model.Organization;
@@ -60,7 +61,9 @@ public class OrganizationServiceImpl extends SuperServiceImpl<OrganizationMapper
 
     @Override
     public List<Organization> selectTreeGrid() {
-        return organizationMapper.selectAll();
+        EntityWrapper<Organization> wrapper = new EntityWrapper<Organization>();
+        wrapper.orderBy("seq");
+        return organizationMapper.selectList(wrapper);
     }
 
 

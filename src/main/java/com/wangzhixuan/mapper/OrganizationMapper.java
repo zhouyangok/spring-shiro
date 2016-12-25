@@ -19,6 +19,4 @@ public interface OrganizationMapper extends AutoMapper<Organization> {
 
     List<Organization> selectAllByPId(@Param("pId") Long pid);
 
-    List<Organization> selectAll();
-
 }

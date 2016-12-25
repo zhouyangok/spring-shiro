@@ -25,13 +25,17 @@
                 title : '资源路径',
                 width : 200
             }, {
+                field : 'openMode',
+                title : '打开方式',
+                width : 60
+            }, {
                 field : 'seq',
                 title : '排序',
                 width : 40
             }, {
                 field : 'iconCls',
                 title : '图标',
-                width : 90
+                width : 120
             }, {
                 field : 'resourceType',
                 title : '资源类型',
@@ -117,12 +121,12 @@
             parent.$.messager.confirm('询问', '您是否要删除当前资源？删除当前资源会连同子资源一起删除!', function(b) {
                 if (b) {
                     progressLoad();
-                    $.post('${pageContext.request.contextPath}/resource/delete', {
+                    $.post('${path }/resource/delete', {
                         id : node.id
                     }, function(result) {
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
-                            treeGrid.treegrid('reload');
+                            resourceTreeGrid.treegrid('reload');
                             parent.layout_west_tree.tree('reload');
                         }
                         progressClose();

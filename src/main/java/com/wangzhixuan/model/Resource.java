@@ -29,6 +29,11 @@ public class Resource implements Serializable {
 	/** 资源路径 */
 	private String url;
 
+	/** 打开方式 ajax,iframe */
+	@TableField(value = "open_mode")
+	private String openMode;
+
+
 	/** 资源介绍 */
 	private String description;
 
@@ -75,6 +80,14 @@ public class Resource implements Serializable {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getOpenMode() {
+		return openMode;
+	}
+
+	public void setOpenMode(String openMode) {
+		this.openMode = openMode;
 	}
 
 	public String getDescription() {
