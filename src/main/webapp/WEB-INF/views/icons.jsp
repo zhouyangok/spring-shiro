@@ -1502,14 +1502,15 @@ $(function(){
         var color = $(this).val();
         if (color && color != '') {
             $("#clipIcon i").map(function() {
-                var xClass = [color];
                 var $this  = $(this);
                 var _class = $this.attr("class");
+                var xClass = [];
                 $.map(_class.split(" "), function(item) {
                     if (item.indexOf("fi-") != -1) {
                         xClass.push(item);
                     }
                 });
+                xClass.push(color);
                 var iClass = xClass.join(' ');
                 $this.removeClass().addClass(iClass);
             });
