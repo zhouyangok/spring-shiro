@@ -14,11 +14,15 @@ import java.util.Set;
 public class ShiroUser implements Serializable {
     private static final long serialVersionUID = -1373760761780840081L;
     
-    private final Long id;
+    private Long id;
     private final String loginName;
-    private final String name;
-    private final Set<String> urlSet;
+    private String name;
+    private Set<String> urlSet;
     private Set<String> roles;
+
+    public ShiroUser(String loginName) {
+        this.loginName = loginName;
+    }
 
     public ShiroUser(Long id, String loginName, String name, Set<String> urlSet) {
         this.id = id;
@@ -31,16 +35,24 @@ public class ShiroUser implements Serializable {
         return id;
     }
 
-    public String getLoginName() {
-        return loginName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Set<String> getUrlSet() {
         return urlSet;
+    }
+
+    public void setUrlSet(Set<String> urlSet) {
+        this.urlSet = urlSet;
     }
 
     public Set<String> getRoles() {
@@ -49,6 +61,10 @@ public class ShiroUser implements Serializable {
 
     public void setRoles(Set<String> roles) {
         this.roles = roles;
+    }
+
+    public String getLoginName() {
+        return loginName;
     }
 
     /**

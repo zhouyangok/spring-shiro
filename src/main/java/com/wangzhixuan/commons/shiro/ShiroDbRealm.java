@@ -87,7 +87,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
     /**
      * 清除用户缓存
-     * @param userId
+     * @param shiroUser
      */
     public void removeUserCache(ShiroUser shiroUser){
         SimplePrincipalCollection principals = new SimplePrincipalCollection();
@@ -96,4 +96,14 @@ public class ShiroDbRealm extends AuthorizingRealm {
         super.clearCachedAuthenticationInfo(principals);
     }
 
+    /**
+     * 清除用户缓存
+     * @param loginName
+     */
+    public void removeUserCache(String loginName){
+        SimplePrincipalCollection principals = new SimplePrincipalCollection();
+        principals.add(new ShiroUser(loginName), super.getName());
+        super.clearCachedAuthorizationInfo(principals);
+        super.clearCachedAuthenticationInfo(principals);
+    }
 }
