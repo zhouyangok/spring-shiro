@@ -9,7 +9,6 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.mapper.SysLogMapper;
-import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.SysLog;
 import com.wangzhixuan.service.ISysLogService;
 
@@ -27,7 +26,7 @@ public class SysLogServiceImpl extends SuperServiceImpl<SysLogMapper, SysLog> im
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<SysLog> page = new Page<SysLog>(pageInfo.getNowpage(), pageInfo.getSize());
-        List<Role> list = sysLogMapper.selectSysLogList(page);
+        List<SysLog> list = sysLogMapper.selectSysLogList(page);
         pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());
     }

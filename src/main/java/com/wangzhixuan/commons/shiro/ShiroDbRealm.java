@@ -17,6 +17,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wangzhixuan.model.User;
@@ -82,6 +83,17 @@ public class ShiroDbRealm extends AuthorizingRealm {
         info.addStringPermissions(shiroUser.getUrlSet());
         
         return info;
+    }
+
+    /**
+     * 清除用户缓存
+     * @param userId
+     */
+    public void removeUserCache(ShiroUser shiroUser){
+        SimplePrincipalCollection principals = new SimplePrincipalCollection();
+        principals.add(shiroUser, super.getName());
+        super.clearCachedAuthorizationInfo(principals);
+        super.clearCachedAuthenticationInfo(principals);
     }
 
 }

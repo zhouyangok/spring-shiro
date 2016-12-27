@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.mapper.AutoMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
-import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.SysLog;
 
 /**
@@ -14,6 +13,6 @@ import com.wangzhixuan.model.SysLog;
  */
 public interface SysLogMapper extends AutoMapper<SysLog> {
 
-    List<Role> selectSysLogList(Pagination page);
+    List<SysLog> selectSysLogList(Pagination page);
 
 }
