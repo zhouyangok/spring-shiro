@@ -1,5 +1,6 @@
 package com.wangzhixuan.generator;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import org.springframework.core.io.ClassPathResource;
@@ -18,7 +19,7 @@ public class GenerateCode {
     /* 生成代码包名 */
     private static final String PACKAGE_NAME = "com.wangzhixuan";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         /* 获取 JDBC 配置文件 */
         Properties props = getProperties();
 
@@ -27,13 +28,14 @@ public class GenerateCode {
 
         /* Mysql 数据库相关配置 */
         cg.setDbDriverName("com.mysql.jdbc.Driver");
-        cg.setDbUrl(props.getProperty("db.url"));
-        cg.setDbUser(props.getProperty("db.user"));
-        cg.setDbPassword(props.getProperty("db.password"));
+        cg.setDbUrl(props.getProperty("db.master.url"));
+        cg.setDbUser(props.getProperty("db.master.user"));
+        cg.setDbPassword(props.getProperty("db.master.password"));
 
         /* 设置数据库前缀（例如`mp_user`生成实体类，false 为 MpUser.java , true 为 User.java）*/
         cg.setDbPrefix(false);
-
+        // 设置生成的表名
+//        cg.setTableNames(new String[]{"user"});
          /*
          * true 表示数据库设置全局下划线命名规则，默认 false
          * ------------------------------------------------------------------------------------
@@ -52,6 +54,8 @@ public class GenerateCode {
          */
         cg.setIdType(IdType.AUTO);
 
+        // 更新时是否覆盖文件
+        cg.setFileOverride(false);
         /* 生成文件保存位置 */
         cg.setSaveDir("C:/git_coding/generator/code");
 
@@ -59,6 +63,7 @@ public class GenerateCode {
         cg.setEntityPackage(PACKAGE_NAME + ".model"); //entity 实体包路径
         cg.setMapperPackage(PACKAGE_NAME + ".mapper"); //mapper 映射文件路径
         cg.setServicePackage(PACKAGE_NAME + ".service"); //service 层路径
+        cg.setControllerPackage(PACKAGE_NAME + ".controller");
         cg.setXmlPackage("sqlMapperXml"); //xml层路径
         
         /* 生成代码 */
