@@ -21,15 +21,16 @@
             parameterType="java.lang.Long">
         SELECT
             DISTINCT s.id AS id,
-            s. NAME AS 'name',
+            s.NAME AS 'name',
             s.url AS url,
             s.description AS description,
             s.icon AS icon,
             s.pid AS pid,
             s.seq AS seq,
-            s. STATUS AS 'status',
-            s.resource_type AS resource_type,
-            s.create_time AS create_time
+            s.STATUS AS 'status',
+            s.open_mode AS openMode,
+            s.resource_type AS resourceType,
+            s.create_time AS createTime
         FROM
             role r
         LEFT JOIN role_resource e ON r.id = e.role_id
