@@ -46,15 +46,15 @@
     <!--spring cache-->
     <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager"
           c:redisOperations-ref="redisTemplate">
-        <!-- 默认缓存5分钟 -->
-        <property name="defaultExpiration" value="300"/>
+        <!-- 默认缓存10分钟 -->
+        <property name="defaultExpiration" value="600"/>
         <property name="usePrefix" value="true"/>
-        <!-- cacheName 缓存超时配置，10分钟，半小时，一小时 -->
+        <!-- cacheName 缓存超时配置，半小时，一小时，一天 -->
         <property name="expires">
             <map key-type="java.lang.String" value-type="java.lang.Long">
-                <entry key="tenMinutesCache" value="600"/>
-                <entry key="halfHourCache" value="1800"/>
-                <entry key="oneHourCache" value="3600"/>
+                <entry key="halfHour" value="1800"/>
+                <entry key="hour" value="3600"/>
+                <entry key="oneDay" value="86400"/>
                 <!-- shiro cache keys -->
                 <entry key="authorizationCache" value="1800"/>
                 <entry key="authenticationCache" value="1800"/>

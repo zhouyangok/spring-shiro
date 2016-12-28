@@ -24,7 +24,7 @@
         <!-- cache debug -->
         <logger name="net.sf.ehcache" level="DEBUG"/>
         <logger name="org.springframework.cache" level="ALL"/>
-        <logger name="org.apache.shiro.cache.ehcache" level="ALL"/>
+        <logger name="com.wangzhixuan.commons.shiro.cache" level="ALL"/>
         
         <!-- 业务debug日志 -->
         <logger name="com.wangzhixuan" level="DEBUG"/>
