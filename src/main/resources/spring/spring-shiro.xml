@@ -12,14 +12,14 @@
         <!--设置自定义Realm-->
         <property name="realm" ref="shiroDbRealm"/>
         <!--将缓存管理器，交给安全管理器-->
-        <property name="cacheManager" ref="shiroEhcacheManager"/>
+        <property name="cacheManager" ref="shiroSpringCacheManager"/>
         <!-- 记住密码管理 -->
         <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
     <!-- 項目自定义的Realm -->
     <bean id="shiroDbRealm" class="com.wangzhixuan.commons.shiro.ShiroDbRealm">
-        <constructor-arg index="0" name="cacheManager" ref="shiroEhcacheManager"/>
+        <constructor-arg index="0" name="cacheManager" ref="shiroSpringCacheManager"/>
         <constructor-arg index="1" name="matcher" ref="credentialsMatcher"/>
         <!-- 启用身份验证缓存，即缓存AuthenticationInfo信息，默认false -->
         <property name="authenticationCachingEnabled" value="true"/>
@@ -70,9 +70,9 @@
         </property>
     </bean>
 
-    <!-- 用户授权信息Cache, 采用EhCache -->
-    <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManager" ref="ehcacheManager"/>
+    <!-- 用户授权信息Cache, 采用spring-cache, 具体请查看spring-ehcache.xml、spring-redis.xml -->
+    <bean id="shiroSpringCacheManager" class="com.wangzhixuan.commons.shiro.cache.ShiroSpringCacheManager">
+        <property name="cacheManager" ref="cacheManager"/>
     </bean>
 
     <!-- 在方法中 注入  securityManager ，进行代理控制 -->
@@ -83,7 +83,7 @@
 
     <!-- 密码错误5次锁定半小时 -->
     <bean id="credentialsMatcher" class="com.wangzhixuan.commons.shiro.RetryLimitCredentialsMatcher">
-        <constructor-arg ref="shiroEhcacheManager"/>
+        <constructor-arg ref="shiroSpringCacheManager"/>
         <!-- 密码加密 1次md5,增强密码可修改此处 -->
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="1"/>
