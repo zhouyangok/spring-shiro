@@ -55,6 +55,9 @@
                 <entry key="tenMinutesCache" value="600"/>
                 <entry key="halfHourCache" value="1800"/>
                 <entry key="oneHourCache" value="3600"/>
+                <!-- shiro cache keys -->
+                <entry key="authorizationCache" value="1800"/>
+                <entry key="authenticationCache" value="1800"/>
             </map>
         </property>
     </bean>
