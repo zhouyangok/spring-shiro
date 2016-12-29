@@ -20,6 +20,15 @@
            statistics="true">
     </cache>
     
+    <cache name="activeSessionCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+    
     <!-- 缓存半小时 -->
     <cache name="halfHour" 
         maxElementsInMemory="10000"
