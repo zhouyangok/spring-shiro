@@ -73,7 +73,9 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 </p>
 
 ## 捐助记录
-silent 5元
+`silent`  5元
+
+`truetxw` 5元
 
 ## 更新记录
 > 2016-12-20 v1.2.0 tab加载修改ajax或者iframe，页面默认采用ajax加载！

@@ -31,20 +31,32 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * 输错5次密码锁定半小时，ehcache.xml配置
  * @author L.cm
  */
-public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher {
-	private final Logger logger = LogManager.getLogger(RetryLimitCredentialsMatcher.class);
+public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher implements InitializingBean {
+	private final static Logger logger = LogManager.getLogger(RetryLimitCredentialsMatcher.class);
+	private final static String DEFAULT_CHACHE_NAME = "retryLimitCache";
 	
+	private final CacheManager cacheManager;
+	private String retryLimitCacheName;
 	private Cache<String, AtomicInteger> passwordRetryCache;
-
+	
 	public RetryLimitCredentialsMatcher(CacheManager cacheManager) {
-		passwordRetryCache = cacheManager.getCache("halfHour");
+		this.cacheManager = cacheManager;
+		this.retryLimitCacheName = DEFAULT_CHACHE_NAME;
 	}
-
+	
+	public String getRetryLimitCacheName() {
+		return retryLimitCacheName;
+	}
+	public void setRetryLimitCacheName(String retryLimitCacheName) {
+		this.retryLimitCacheName = retryLimitCacheName;
+	}
+	
 	@Override
 	public boolean doCredentialsMatch(AuthenticationToken authcToken, AuthenticationInfo info) {
 		String username = (String) authcToken.getPrincipal();
@@ -66,5 +78,10 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher {
 			passwordRetryCache.remove(username);
 		}
 		return matches;
+	}
+	
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		this.passwordRetryCache = cacheManager.getCache(retryLimitCacheName);
 	}
 }

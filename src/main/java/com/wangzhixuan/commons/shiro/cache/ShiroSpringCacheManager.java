@@ -49,7 +49,7 @@ public class ShiroSpringCacheManager implements CacheManager, Destroyable {
 	@Override
 	public <K, V> Cache<K, V> getCache(String name) throws CacheException {
 		if (logger.isTraceEnabled()) {
-			logger.trace("Acquiring EhCache instance named [" + name + "]");
+			logger.trace("Acquiring ShiroSpringCache instance named [" + name + "]");
 		}
 		org.springframework.cache.Cache cache = cacheManager.getCache(name);
 		return new ShiroSpringCache<K, V>(cache);
