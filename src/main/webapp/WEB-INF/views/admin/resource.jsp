@@ -85,7 +85,7 @@
                 $('.resource-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.resource-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#toolbar'
+            toolbar : '#resourceToolbar'
         });
     });
 
@@ -158,7 +158,7 @@
         <table id="resourceTreeGrid"></table>
     </div>
 </div>
-<div id="toolbar" style="display: none;">
+<div id="resourceToolbar" style="display: none;">
     <shiro:hasPermission name="/resource/add">
         <a onclick="addResourceFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>

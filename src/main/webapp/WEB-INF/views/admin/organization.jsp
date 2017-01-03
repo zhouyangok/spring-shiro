@@ -66,7 +66,7 @@
                 $('.organization-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.organization-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#toolbar'
+            toolbar : '#orgToolbar'
         });
     });
     
@@ -139,7 +139,7 @@
     <div data-options="region:'center',border:false"  style="overflow: hidden;">
         <table id="organizationTreeGrid"></table>
     </div>
-    <div id="toolbar" style="display: none;">
+    <div id="orgToolbar" style="display: none;">
         <shiro:hasPermission name="/organization/add">
             <a onclick="addOrganizationFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
         </shiro:hasPermission>

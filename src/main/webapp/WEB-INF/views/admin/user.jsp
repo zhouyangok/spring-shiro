@@ -134,7 +134,7 @@
                 $('.user-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.user-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#toolbar'
+            toolbar : '#userToolbar'
         });
     });
     
@@ -242,7 +242,7 @@
         <ul id="organizationTree" style="width:160px;margin: 10px 10px 10px 10px"></ul>
     </div>
 </div>
-<div id="toolbar" style="display: none;">
+<div id="userToolbar" style="display: none;">
     <shiro:hasPermission name="/user/add">
         <a onclick="addUserFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>

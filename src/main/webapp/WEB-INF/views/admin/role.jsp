@@ -71,7 +71,7 @@
                 $('.role-easyui-linkbutton-edit').linkbutton({text:'编辑'});
                 $('.role-easyui-linkbutton-del').linkbutton({text:'删除'});
             },
-            toolbar : '#toolbar'
+            toolbar : '#roleToolbar'
         });
     });
 
@@ -167,7 +167,7 @@
         <table id="roleDataGrid" data-options="fit:true,border:false"></table>
     </div>
 </div>
-<div id="toolbar" style="display: none;">
+<div id="roleToolbar" style="display: none;">
     <shiro:hasPermission name="/role/add">
         <a onclick="addRoleFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'fi-plus icon-green'">添加</a>
     </shiro:hasPermission>
