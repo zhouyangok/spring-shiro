@@ -7,16 +7,4 @@
         id, name, address, code, icon, pid, seq, create_time AS createTime
     </sql>
 
-    <select id="selectByPIdNull" resultType="Organization">
-        select distinct
-        <include refid="Base_Column_List"/>
-        from organization where pid is null order by seq
-    </select>
-
-    <select id="selectAllByPId" resultType="Organization">
-        select distinct
-        <include refid="Base_Column_List"/>
-        from organization where pid = #{pId} order by seq
-    </select>
-
 </mapper>

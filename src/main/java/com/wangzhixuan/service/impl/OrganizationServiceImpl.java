@@ -26,34 +26,17 @@ public class OrganizationServiceImpl extends SuperServiceImpl<OrganizationMapper
     
     @Override
     public List<Tree> selectTree() {
+        List<Organization> organizationList = selectTreeGrid();
+
         List<Tree> trees = new ArrayList<Tree>();
-
-        List<Organization> organizationFather = organizationMapper.selectByPIdNull();
-
-        if (organizationFather != null) {
-            for (Organization organizationOne : organizationFather) {
-                Tree treeOne = new Tree();
-
-                treeOne.setId(organizationOne.getId());
-                treeOne.setText(organizationOne.getName());
-                treeOne.setIconCls(organizationOne.getIcon());
-
-                List<Organization> organizationSon = organizationMapper.selectAllByPId(organizationOne.getId());
-
-                if (organizationSon != null) {
-                    List<Tree> tree = new ArrayList<Tree>();
-                    for (Organization organizationTwo : organizationSon) {
-                        Tree treeTwo = new Tree();
-                        treeTwo.setId(organizationTwo.getId());
-                        treeTwo.setText(organizationTwo.getName());
-                        treeTwo.setIconCls(organizationTwo.getIcon());
-                        tree.add(treeTwo);
-                    }
-                    treeOne.setChildren(tree);
-                } else {
-                    treeOne.setState("closed");
-                }
-                trees.add(treeOne);
+        if (organizationList != null) {
+            for (Organization organization : organizationList) {
+                Tree tree = new Tree();
+                tree.setId(organization.getId());
+                tree.setText(organization.getName());
+                tree.setIconCls(organization.getIcon());
+                tree.setPid(organization.getPid());
+                trees.add(tree);
             }
         }
         return trees;
