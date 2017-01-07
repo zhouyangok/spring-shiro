@@ -1,12 +1,7 @@
 package com.wangzhixuan.mapper;
 
-import com.wangzhixuan.model.Organization;
-
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.wangzhixuan.model.Organization;
 
 /**
  *
@@ -14,9 +9,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  *
  */
 public interface OrganizationMapper extends AutoMapper<Organization> {
-
-    List<Organization> selectByPIdNull();
-
-    List<Organization> selectAllByPId(@Param("pId") Long pid);
 
 }
