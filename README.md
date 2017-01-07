@@ -1,13 +1,43 @@
+# Spring Shiro学习系统
+
 ## 简介
 基于springmvc、spring、mybatis-plus、shiro、easyui、Log4j2简单实用的权限系统。
 
+界面基于EasyUI，图标采用较为开放的`Foundation Icon`(MIT协议)。
+
+## 技术和功能
+> Spring-cache
+
+> Spring-data-redis
+
+> Spring-Task
+
+> Shiro
+
+> Spring-cache-shiro
+
+> maven profile多环境配置
+
+> 权限管理
+
+> 角色管理
+
+> 用户管理
+
+> 部门管理
+
+> 登陆日志
+
+> 图标管理
+
+## 学习vs开发
 项目导入请百度`eclipse`、`myeclipse`、`idea`等IDE导入`maven web`项目。
 
-二次开发可采用`jetty maven plugin`启动，`pom.xml`中已经配置。
+项目启动可采用内置jetty maven plugin，`mvn jerry:run`！
+
+你需要根据自己的业务添加`shiro注解`，实现请求控制。
 
 如果觉得数据校验不够，请自行添加`hibernate-validator`在Bean上做校验！
-
-另外，你需要根据自己的业务添加`shiro注解`，实现请求控制。
 
 更多`shiro`的教程请参考（开涛博客`《跟我学Shiro》`）：http://jinnianshilongnian.iteye.com/category/305053
 
