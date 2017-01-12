@@ -107,6 +107,10 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 
 `truetxw` 5元
 
+`福地` 10元
+
+`AfenG` 10元
+
 ## 更新记录
 > 2016-12-20 v1.2.0 tab加载修改ajax或者iframe，页面默认采用ajax加载！
 > 老版本请查看：[v1.1.1](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/v1.1.1/)
