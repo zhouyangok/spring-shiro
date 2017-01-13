@@ -21,10 +21,10 @@
         <logger name="com.baomidou.mybatisplus" level="INFO"/>
         <logger name="org.apache.ibatis.io" level="INFO"/>
         
-        <!-- cache debug -->
-        <logger name="net.sf.ehcache" level="DEBUG"/>
-        <logger name="org.springframework.cache" level="ALL"/>
-        <logger name="com.wangzhixuan.commons.shiro.cache" level="ALL"/>
+        <!-- cache INFO -->
+        <logger name="net.sf.ehcache" level="INFO"/>
+        <logger name="org.springframework.cache" level="INFO"/>
+        <logger name="com.wangzhixuan.commons.shiro.cache" level="INFO"/>
         
         <!-- 业务debug日志 -->
         <logger name="com.wangzhixuan" level="DEBUG"/>
