@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.shiro.ShiroDbRealm;
 import com.wangzhixuan.commons.utils.DigestUtils;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringUtils;
@@ -30,6 +31,7 @@ import com.wangzhixuan.service.IUserService;
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
+    @Autowired private ShiroDbRealm shiroDbRealm;
 
     @Autowired
     private IUserService userService;
@@ -169,7 +171,7 @@ public class UserController extends BaseController {
         if (!user.getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
             return renderError("老密码不正确!");
         }
-
+        shiroDbRealm.removeUserCache(getShiroUser());
         userService.updatePwdByUserId(getUserId(), DigestUtils.md5Hex(pwd));
         return renderSuccess("密码修改成功！");
     }
