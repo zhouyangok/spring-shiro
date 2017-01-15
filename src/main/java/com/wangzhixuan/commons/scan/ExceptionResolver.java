@@ -48,9 +48,9 @@ public class ExceptionResolver implements HandlerExceptionResolver {
 			return new ModelAndView(view, BeanUtils.toMap(result));
 		}
 
-		// 页面指定状态为500，便于上层的resion或者nginx的500页面跳转，由于error/error不适合对用户展示
+		// 页面指定状态为500，便于上层的resion或者nginx的500页面跳转，由于error/500不适合对用户展示
 //		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		return new ModelAndView("error/500");
+		return new ModelAndView("error/500").addObject("error", e.getMessage());
 	}
 
 }

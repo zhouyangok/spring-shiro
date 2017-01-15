@@ -2,10 +2,10 @@ package com.wangzhixuan.service.impl;
 
 import org.springframework.stereotype.Service;
 
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.model.RoleResource;
 import com.wangzhixuan.service.IRoleResourceService;
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
  *
  */
 @Service
-public class RoleResourceServiceImpl extends SuperServiceImpl<RoleResourceMapper, RoleResource> implements IRoleResourceService {
+public class RoleResourceServiceImpl extends ServiceImpl<RoleResourceMapper, RoleResource> implements IRoleResourceService {
 
 
 }

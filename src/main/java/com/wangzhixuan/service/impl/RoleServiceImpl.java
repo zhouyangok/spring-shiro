@@ -10,9 +10,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringUtils;
@@ -29,7 +29,7 @@ import com.wangzhixuan.service.IRoleService;
  *
  */
 @Service
-public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implements IRoleService {
+public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
 
     @Autowired
     private RoleMapper roleMapper;
@@ -71,7 +71,7 @@ public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implemen
         // 先删除后添加,有点爆力
         RoleResource roleResource = new RoleResource();
         roleResource.setRoleId(roleId);
-        roleResourceMapper.deleteSelective(roleResource);
+        roleResourceMapper.delete(new EntityWrapper<RoleResource>(roleResource));
         
         String[] resourceIdArray = resourceIds.split(",");
         for (String resourceId : resourceIdArray) {

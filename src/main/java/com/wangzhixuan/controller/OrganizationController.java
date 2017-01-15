@@ -106,7 +106,7 @@ public class OrganizationController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Organization organization) {
-        organizationService.updateSelectiveById(organization);
+        organizationService.updateById(organization);
         return renderSuccess("编辑成功！");
     }
 

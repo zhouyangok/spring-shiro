@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.mapper.SysLogMapper;
 import com.wangzhixuan.model.SysLog;
@@ -18,7 +18,7 @@ import com.wangzhixuan.service.ISysLogService;
  *
  */
 @Service
-public class SysLogServiceImpl extends SuperServiceImpl<SysLogMapper, SysLog> implements ISysLogService {
+public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements ISysLogService {
 
     @Autowired
     private SysLogMapper sysLogMapper;

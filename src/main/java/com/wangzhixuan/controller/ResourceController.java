@@ -135,7 +135,7 @@ public class ResourceController extends BaseController {
         if (null != type && type == 0) {
             resource.setOpenMode(null);
         }
-        resourceService.updateSelectiveById(resource);
+        resourceService.updateById(resource);
         return renderSuccess("编辑成功！");
     }
 

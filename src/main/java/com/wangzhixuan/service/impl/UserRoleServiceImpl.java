@@ -2,7 +2,7 @@ package com.wangzhixuan.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.UserRole;
 import com.wangzhixuan.service.IUserRoleService;
@@ -13,6 +13,6 @@ import com.wangzhixuan.service.IUserRoleService;
  *
  */
 @Service
-public class UserRoleServiceImpl extends SuperServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
+public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements IUserRoleService {
 
 }

@@ -129,7 +129,7 @@ public class RoleController extends BaseController {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(Role role) {
-        roleService.updateSelectiveById(role);
+        roleService.updateById(role);
         return renderSuccess("编辑成功！");
     }
 

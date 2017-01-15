@@ -6,9 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wangzhixuan.commons.utils.BeanUtils;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringUtils;
@@ -25,7 +25,7 @@ import com.wangzhixuan.service.IUserService;
  *
  */
 @Service
-public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
@@ -71,7 +71,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         if (StringUtils.isBlank(user.getPassword())) {
             user.setPassword(null);
         }
-        this.updateSelectiveById(user);
+        this.updateById(user);
         
         Long id = userVo.getId();
         List<UserRole> userRoles = userRoleMapper.selectByUserId(id);
@@ -95,7 +95,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         User user = new User();
         user.setId(userId);
         user.setPassword(md5Hex);
-        this.updateSelectiveById(user);
+        this.updateById(user);
     }
 
     @Override

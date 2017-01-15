@@ -2,7 +2,7 @@ package com.wangzhixuan.service;
 
 import java.util.List;
 
-import com.baomidou.framework.service.ISuperService;
+import com.baomidou.mybatisplus.service.IService;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.model.vo.UserVo;
@@ -12,7 +12,7 @@ import com.wangzhixuan.model.vo.UserVo;
  * User 表数据服务层接口
  *
  */
-public interface IUserService extends ISuperService<User> {
+public interface IUserService extends IService<User> {
 
     List<User> selectByLoginName(UserVo userVo);
 

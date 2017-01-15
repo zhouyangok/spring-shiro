@@ -7,8 +7,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.commons.shiro.ShiroUser;
 import com.wangzhixuan.mapper.ResourceMapper;
@@ -23,7 +23,7 @@ import com.wangzhixuan.service.IResourceService;
  *
  */
 @Service
-public class ResourceServiceImpl extends SuperServiceImpl<ResourceMapper, Resource> implements IResourceService {
+public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> implements IResourceService {
     private static final int RESOURCE_MENU = 0; // 菜单
 
     @Autowired

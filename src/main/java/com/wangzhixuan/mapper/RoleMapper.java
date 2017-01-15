@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.baomidou.mybatisplus.mapper.AutoMapper;
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.baomidou.mybatisplus.plugins.pagination.Pagination;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.model.Role;
@@ -15,7 +15,7 @@ import com.wangzhixuan.model.Role;
  * Role 表数据库控制层接口
  *
  */
-public interface RoleMapper extends AutoMapper<Role> {
+public interface RoleMapper extends BaseMapper<Role> {
 
     List<Long> selectResourceIdListByRoleId(@Param("id") Long id);
 

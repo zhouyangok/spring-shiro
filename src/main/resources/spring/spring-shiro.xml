@@ -97,7 +97,7 @@
         <property name="staticMethod" value="org.apache.shiro.SecurityUtils.setSecurityManager"/>
         <property name="arguments" ref="securityManager"/>
     </bean>
-
+    
     <!-- 密码错误5次锁定半小时 -->
     <bean id="credentialsMatcher" class="com.wangzhixuan.commons.shiro.RetryLimitCredentialsMatcher">
         <constructor-arg ref="shiroSpringCacheManager"/>

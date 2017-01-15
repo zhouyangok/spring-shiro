@@ -6,8 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.mapper.OrganizationMapper;
 import com.wangzhixuan.model.Organization;
@@ -19,7 +19,7 @@ import com.wangzhixuan.service.IOrganizationService;
  *
  */
 @Service
-public class OrganizationServiceImpl extends SuperServiceImpl<OrganizationMapper, Organization> implements IOrganizationService {
+public class OrganizationServiceImpl extends ServiceImpl<OrganizationMapper, Organization> implements IOrganizationService {
 
     @Autowired
     private OrganizationMapper organizationMapper;

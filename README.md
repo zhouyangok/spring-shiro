@@ -112,6 +112,9 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 `AfenG` 10元
 
 ## 更新记录
+> 2017-01-15 v1.3.0 升级到mybatis-plus 2.0.1，添加页面生成！
+> 老版本请查看：[v1.2.0](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/v1.2.0/)
+
 > 2016-12-20 v1.2.0 tab加载修改ajax或者iframe，页面默认采用ajax加载！
 > 老版本请查看：[v1.1.1](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/v1.1.1/)
 

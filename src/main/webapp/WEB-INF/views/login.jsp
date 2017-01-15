@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width">
     <%@ include file="/commons/basejs.jsp" %>
     <link rel="stylesheet" type="text/css" href="${staticPath }/static/style/css/login.css?v=201612202107" />
-    <script type="text/javascript" src="${staticPath }/static/login.js?v=20161220" charset="utf-8"></script>
+    <script type="text/javascript" src="${staticPath }/static/login.js?v=20170115" charset="utf-8"></script>
 </head>
 <body onkeydown="enterlogin();">
 <div class="top_div"></div>

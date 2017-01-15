@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.baomidou.framework.service.ISuperService;
+import com.baomidou.mybatisplus.service.IService;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.model.Role;
 
@@ -13,7 +13,7 @@ import com.wangzhixuan.model.Role;
  * Role 表数据服务层接口
  *
  */
-public interface IRoleService extends ISuperService<Role> {
+public interface IRoleService extends IService<Role> {
 
     void selectDataGrid(PageInfo pageInfo);
 
