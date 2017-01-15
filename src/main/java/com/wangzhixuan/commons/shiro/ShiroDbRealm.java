@@ -84,16 +84,20 @@ public class ShiroDbRealm extends AuthorizingRealm {
         
         return info;
     }
+    
+    @Override
+    public void onLogout(PrincipalCollection principals) {
+        super.clearCachedAuthorizationInfo(principals);
+        ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
+        removeUserCache(shiroUser);
+    }
 
     /**
      * 清除用户缓存
      * @param shiroUser
      */
     public void removeUserCache(ShiroUser shiroUser){
-        SimplePrincipalCollection principals = new SimplePrincipalCollection();
-        principals.add(shiroUser, super.getName());
-        super.clearCachedAuthorizationInfo(principals);
-        super.clearCachedAuthenticationInfo(principals);
+        removeUserCache(shiroUser.getLoginName());
     }
 
     /**
@@ -102,8 +106,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
      */
     public void removeUserCache(String loginName){
         SimplePrincipalCollection principals = new SimplePrincipalCollection();
-        principals.add(new ShiroUser(loginName), super.getName());
-        super.clearCachedAuthorizationInfo(principals);
+        principals.add(loginName, super.getName());
         super.clearCachedAuthenticationInfo(principals);
     }
 }

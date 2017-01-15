@@ -52,7 +52,7 @@ public class ShiroSpringCache<K, V> implements org.apache.shiro.cache.Cache<K, V
 	@Override
 	public V get(K key) throws CacheException {
 		if (logger.isTraceEnabled()) {
-			logger.trace("Getting object from cache [" + this.cache.getName() + "] for key [" + key + "]");
+			logger.trace("Getting object from cache [" + this.cache.getName() + "] for key [" + key + "]key type:" + key.getClass());
 		}
 		ValueWrapper valueWrapper = cache.get(key);
 		if (valueWrapper == null) {
@@ -67,16 +67,17 @@ public class ShiroSpringCache<K, V> implements org.apache.shiro.cache.Cache<K, V
 	@Override
 	public V put(K key, V value) throws CacheException {
 		if (logger.isTraceEnabled()) {
-			logger.trace("Putting object in cache [" + this.cache.getName() + "] for key [" + key + "]");
+			logger.trace("Putting object in cache [" + this.cache.getName() + "] for key [" + key + "]key type:" + key.getClass());
 		}
+		V previous = get(key);
 		cache.put(key, value);
-		return value;
+		return previous;
 	}
 
 	@Override
 	public V remove(K key) throws CacheException {
 		if (logger.isTraceEnabled()) {
-			logger.trace("Removing object from cache [" + this.cache.getName() + "] for key [" + key + "]");
+			logger.trace("Removing object from cache [" + this.cache.getName() + "] for key [" + key + "]key type:" + key.getClass());
 		}
 		V previous = get(key);
 		cache.evict(key);

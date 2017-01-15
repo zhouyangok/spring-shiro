@@ -8,7 +8,6 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.commons.csrf.CsrfToken;
-import com.wangzhixuan.commons.shiro.ShiroDbRealm;
 import com.wangzhixuan.commons.utils.CaptchaUtils;
 import com.wangzhixuan.commons.utils.StringUtils;
 
@@ -29,8 +27,6 @@ import com.wangzhixuan.commons.utils.StringUtils;
  */
 @Controller
 public class LoginController extends BaseController {
-    @Autowired private ShiroDbRealm shiroDbRealm;
-
     /**
      * 首页
      *
@@ -130,7 +126,6 @@ public class LoginController extends BaseController {
     @ResponseBody
     public Object logout() {
         logger.info("登出");
-        shiroDbRealm.removeUserCache(getShiroUser());
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return renderSuccess();
