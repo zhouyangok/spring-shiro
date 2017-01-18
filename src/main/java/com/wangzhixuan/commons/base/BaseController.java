@@ -10,8 +10,10 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
+import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.commons.shiro.ShiroUser;
+import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringEscapeEditor;
 
 /**
@@ -103,4 +105,23 @@ public abstract class BaseController {
         result.setObj(obj);
         return result;
     }
+    
+    public <T> Page<T> getPage(int current, int size, String sort, String order){
+        Page<T> page = new Page<T>(current, size, sort);
+        if ("desc".equals(order)) {
+            page.setAsc(false);
+        } else {
+            page.setAsc(true);
+        }
+        return page;
+    }
+    
+    public <T> PageInfo pageToPageInfo(Page<T> page) {
+        PageInfo pageInfo = new PageInfo();
+        pageInfo.setRows(page.getRecords());
+        pageInfo.setTotal(page.getTotal());
+        pageInfo.setOrder(page.getOrderByField());
+        return pageInfo;
+    }
+
 }

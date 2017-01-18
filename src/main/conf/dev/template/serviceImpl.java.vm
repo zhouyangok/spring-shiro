@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 @Service
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
-	@Autowired private ${entity}Mapper ${table.entityPath}Mapper;
-	
-	
+    @Autowired private ${entity}Mapper ${table.entityPath}Mapper;
+    
+    
 }

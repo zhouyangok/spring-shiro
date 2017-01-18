@@ -141,7 +141,7 @@ public class RoleController extends BaseController {
      * @return
      */
     @GetMapping("/grantPage")
-    public String grantPage(Long id, Model model) {
+    public String grantPage(Model model, Long id) {
         model.addAttribute("id", id);
         return "admin/roleGrant";
     }

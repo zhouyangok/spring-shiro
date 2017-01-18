@@ -16,8 +16,6 @@ import com.gzcx.commons.utils.PageInfo;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 
-
-
 /**
  * <p>
  * ${table.comment}  前端控制器
@@ -32,10 +30,10 @@ public class ${table.controllerName} extends ${superControllerClass} {
 #else
 public class ${table.controllerName} {
 #end
-	
-	@Autowired private ${table.serviceName} ${table.entityPath}Service;
-	
-	@GetMapping("/manager")
+    
+    @Autowired private ${table.serviceName} ${table.entityPath}Service;
+    
+    @GetMapping("/manager")
     public String manager() {
         return "admin/${table.entityPath}/${table.entityPath}";
     }
@@ -44,11 +42,11 @@ public class ${table.controllerName} {
     @PostMapping("/dataGrid")
     @ResponseBody
     public PageInfo dataGrid(${entity} ${table.entityPath}, Integer page, Integer rows, String sort,String order) {
-    	${table.entityPath}.setDeleteFlag(0);
-    	EntityWrapper<${entity}> ew = new EntityWrapper<${entity}>();
-		ew.setEntity(${table.entityPath});
-    	Page<${entity}> pages = getPage(page, rows, sort, order);
-    	pages = ${table.entityPath}Service.selectPage(pages,ew);
+        ${table.entityPath}.setDeleteFlag(0);
+        EntityWrapper<${entity}> ew = new EntityWrapper<${entity}>();
+        ew.setEntity(${table.entityPath});
+        Page<${entity}> pages = getPage(page, rows, sort, order);
+        pages = ${table.entityPath}Service.selectPage(pages,ew);
         return pageToPageInfo(pages);
     }
     
@@ -69,14 +67,14 @@ public class ${table.controllerName} {
     @PostMapping("/add")
     @ResponseBody
     public Object add(${entity} ${table.entityPath}) {
-    	${table.entityPath}.setCreateTime(new Date());
-    	${table.entityPath}.setUpdateTime(new Date());
+        ${table.entityPath}.setCreateTime(new Date());
+        ${table.entityPath}.setUpdateTime(new Date());
         boolean b = ${table.entityPath}Service.insert(${table.entityPath});
         if (b) {
-        	return renderSuccess("添加成功！");
-		} else {
-			return renderError("添加失败！");
-		}
+            return renderSuccess("添加成功！");
+        } else {
+            return renderError("添加失败！");
+        }
     }
 
     /**
@@ -87,16 +85,16 @@ public class ${table.controllerName} {
     @RequestMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
-    	${entity} ${table.entityPath} = new ${entity}();
-    	${table.entityPath}.setId(id);
-    	${table.entityPath}.setUpdateTime(new Date());
-    	${table.entityPath}.setDeleteFlag(1);
-    	boolean b = ${table.entityPath}Service.updateById(${table.entityPath});
-    	if (b) {
-        	return renderSuccess("删除成功！");
-		} else {
-			return renderError("删除失败！");
-		}
+        ${entity} ${table.entityPath} = new ${entity}();
+        ${table.entityPath}.setId(id);
+        ${table.entityPath}.setUpdateTime(new Date());
+        ${table.entityPath}.setDeleteFlag(1);
+        boolean b = ${table.entityPath}Service.updateById(${table.entityPath});
+        if (b) {
+            return renderSuccess("删除成功！");
+        } else {
+            return renderError("删除失败！");
+        }
     }
 
     /**
@@ -120,16 +118,13 @@ public class ${table.controllerName} {
     @RequestMapping("/edit")
     @ResponseBody
     public Object edit(${entity} ${table.entityPath}) {
-    	${table.entityPath}.setUpdateTime(new Date());
-    	boolean b = ${table.entityPath}Service.updateById(${table.entityPath});
+        ${table.entityPath}.setUpdateTime(new Date());
+        boolean b = ${table.entityPath}Service.updateById(${table.entityPath});
         if (b) {
-        	return renderSuccess("编辑成功！");
-		} else {
-			return renderError("编辑失败！");
-		}
+            return renderSuccess("编辑成功！");
+        } else {
+            return renderError("编辑失败！");
+        }
     }
     
-	
-	
-	
 }

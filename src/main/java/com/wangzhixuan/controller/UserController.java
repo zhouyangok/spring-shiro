@@ -112,7 +112,7 @@ public class UserController extends BaseController {
      * @return
      */
     @GetMapping("/editPage")
-    public String editPage(Long id, Model model) {
+    public String editPage(Model model, Long id) {
         UserVo userVo = userService.selectVoById(id);
         List<Role> rolesList = userVo.getRolesList();
         List<Long> ids = new ArrayList<Long>();

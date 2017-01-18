@@ -42,20 +42,20 @@ public class ${entity} implements Serializable {
 #set($keyPropertyName=${field.propertyName})
 #end
 #if(${field.comment})
-	/**
-	 * ${field.comment}
-	 */
+    /**
+     * ${field.comment}
+     */
 #end
 #if(${field.keyFlag})
-	@TableId(type = IdType.AUTO)#if(${field.convert})(value="${field.name}")
+    @TableId(type = IdType.AUTO)#if(${field.convert})(value="${field.name}")
 #end
 
 #else
 #if(${field.convert})
-	@TableField(value="${field.name}")
+    @TableField(value="${field.name}")
 #end
 #end
-	private ${field.propertyType} ${field.propertyName};
+    private ${field.propertyType} ${field.propertyName};
 #end
 
 #foreach($field in ${table.fields})
@@ -65,37 +65,37 @@ public class ${entity} implements Serializable {
 #set($getprefix="get")
 #end
 
-	public ${field.propertyType} ${getprefix}${field.capitalName}() {
-		return ${field.propertyName};
-	}
+    public ${field.propertyType} ${getprefix}${field.capitalName}() {
+        return ${field.propertyName};
+    }
 
 #if(${entityBuliderModel})
-	public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public ${entity} set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
 #else
-	public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
+    public void set${field.capitalName}(${field.propertyType} ${field.propertyName}) {
 #end
-		this.${field.propertyName} = ${field.propertyName};
+        this.${field.propertyName} = ${field.propertyName};
 #if(${entityBuliderModel})
-		return this;
+        return this;
 #end
-	}
+    }
 #end
 
 #if(${entityColumnConstant})
 #foreach($field in ${table.fields})
-	public static final String ${field.name.toUpperCase()} = "${field.name}";
+    public static final String ${field.name.toUpperCase()} = "${field.name}";
 
 #end
 #end
 #if(${activeRecord})
-	@Override
-	protected Serializable pkVal() {
+    @Override
+    protected Serializable pkVal() {
 #if(${keyPropertyName})
-		return this.${keyPropertyName};
+        return this.${keyPropertyName};
 #else
-		return this.id;
+        return this.id;
 #end
-	}
+    }
 
 #end
 }
