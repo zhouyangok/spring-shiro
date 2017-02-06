@@ -31,20 +31,4 @@ public interface CsrfTokenRepository {
 	 * @return the {@link CsrfTokenBean} or null if none exists
 	 */
 	CsrfTokenBean loadToken(HttpServletRequest request);
-
-	/**
-	 * 缓存来源的url
-	 * @param request request the {@link HttpServletRequest} to use
-	 * @param response the {@link HttpServletResponse} to use
-	 */
-	void cacheUrl(HttpServletRequest request, HttpServletResponse response);
-
-	/**
-	 * 获取并清理来源的url
-	 * @param request the {@link HttpServletRequest} to use
-	 * @param response the {@link HttpServletResponse} to use
-	 * @return 来源url
-	 */
-	String getRemoveCacheUrl(HttpServletRequest request, HttpServletResponse response);
-
 }

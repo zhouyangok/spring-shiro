@@ -47,8 +47,6 @@ public class CsrfInterceptor extends HandlerInterceptorAdapter {
 		if (csrfToken.create()) {
 			CsrfTokenBean token = csrfTokenRepository.generateToken(request);
 			csrfTokenRepository.saveToken(token, request, response);
-			// 缓存一个表单页面地址的url
-			csrfTokenRepository.cacheUrl(request, response);
 			request.setAttribute(token.getParameterName(), token);
 			return true;
 		}
@@ -71,17 +69,9 @@ public class CsrfInterceptor extends HandlerInterceptorAdapter {
 	
 	private boolean renderError(HttpServletRequest request, HttpServletResponse response, 
 			boolean isAjax, String message) throws IOException {
-		// 获取缓存的cacheUrl
-		String cachedUrl = csrfTokenRepository.getRemoveCacheUrl(request, response);
-		// ajax请求直接抛出异常，因为{@link ExceptionResolver}会去处理
-		if (isAjax) {
-			throw new RuntimeException(message);
-		}
 		// 非ajax CsrfToken校验异常，先清理token
 		csrfTokenRepository.saveToken(null, request, response);
-		logger.info("Csrf[redirectUrl]:\t" + cachedUrl);
-		response.sendRedirect(cachedUrl);
-		return false;
+		throw new RuntimeException(message);
 	}
 
 	/**
@@ -99,7 +89,6 @@ public class CsrfInterceptor extends HandlerInterceptorAdapter {
 		if (csrfToken == null || !csrfToken.remove()) {
 			return;
 		}
-		csrfTokenRepository.getRemoveCacheUrl(request, response);
 		csrfTokenRepository.saveToken(null, request, response);
 	}
 
