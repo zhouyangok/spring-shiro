@@ -13,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.wangzhixuan.commons.scan.ExceptionResolver;
-import com.wangzhixuan.commons.utils.WebUtils;
 
 /**
  * Csrf拦截器，用来生成或去除CsrfToken
@@ -41,7 +40,7 @@ public class CsrfInterceptor extends HandlerInterceptorAdapter {
 		// create、remove同时为true时异常
 		if (csrfToken.create() && csrfToken.remove()) {
 			logger.error("CsrfToken attr create and remove can Not at the same time to true!");
-			return renderError(request, response, Boolean.FALSE, "CsrfToken attr create and remove can Not at the same time to true!");
+			return renderError(request, response, "CsrfToken attr create and remove can Not at the same time to true!");
 		}
 		// 创建
 		if (csrfToken.create()) {
@@ -50,30 +49,28 @@ public class CsrfInterceptor extends HandlerInterceptorAdapter {
 			request.setAttribute(token.getParameterName(), token);
 			return true;
 		}
-		// 判断是否ajax请求
-		boolean isAjax = WebUtils.isAjax(handlerMethod);
 		// 校验，并且清除
 		CsrfTokenBean tokenBean = csrfTokenRepository.loadToken(request);
 		if (tokenBean == null) {
-			return renderError(request, response, isAjax, "CsrfToken is null!");
+			return renderError(request, response, "CsrfToken is null!");
 		}
 		String actualToken = request.getHeader(tokenBean.getHeaderName());
 		if (actualToken == null) {
 			actualToken = request.getParameter(tokenBean.getParameterName());
 		}
 		if (!tokenBean.getToken().equals(actualToken)) {
-			return renderError(request, response, isAjax, "CsrfToken not eq!");
+			return renderError(request, response, "CsrfToken not eq!");
 		}
 		return true;
 	}
 	
 	private boolean renderError(HttpServletRequest request, HttpServletResponse response, 
-			boolean isAjax, String message) throws IOException {
+			String message) throws IOException {
 		// 非ajax CsrfToken校验异常，先清理token
 		csrfTokenRepository.saveToken(null, request, response);
 		throw new RuntimeException(message);
 	}
-
+	
 	/**
 	 * 用于清理@CsrfToken保证只能请求成功一次
 	 */
