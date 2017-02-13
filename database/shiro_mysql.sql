@@ -53,6 +53,7 @@ CREATE TABLE `resource` (
   `pid` bigint(19) DEFAULT NULL COMMENT '父级资源id',
   `seq` tinyint(2) NOT NULL DEFAULT '0' COMMENT '排序',
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
+  `opened` tinyint(2) NOT NULL DEFAULT '1' COMMENT '打开状态',
   `resource_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '资源类别',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)

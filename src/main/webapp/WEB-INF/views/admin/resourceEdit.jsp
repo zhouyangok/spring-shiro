@@ -30,10 +30,10 @@
                 }
             }
         });
-
         $("#resourceEditStatus").val("${resource.status}");
         $("#resourceEditType").val("${resource.resourceType}");
         $("#resourceEditOpenMode").val("${resource.openMode}");
+        $("#resourceEditOpened").val("${resource.opened}");
     });
 </script>
 <div style="padding: 3px;">
@@ -72,10 +72,17 @@
             </tr>
             <tr>
                 <td>状态</td>
-                <td colspan="3">
-                    <select id="resourceEditStatus" name="status" class="easyui-combobox" data-options="width:200,height:29,editable:false,panelHeight:'auto'">
+                <td>
+                    <select id="resourceEditStatus" name="status" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
                         <option value="0">正常</option>
                         <option value="1">停用</option>
+                    </select>
+                </td>
+                <td>菜单状态</td>
+                <td>
+                    <select id="resourceEditOpened" name="opened" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option value="0">关闭</option>
+                        <option value="1">打开</option>
                     </select>
                 </td>
             </tr>

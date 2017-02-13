@@ -46,7 +46,11 @@ public class Tree implements java.io.Serializable {
     public void setState(String state) {
         this.state = state;
     }
-
+    
+    public void setState(Integer opened) {
+        this.state = (null != opened && opened == 1) ? "open" : "closed";
+    }
+    
     public boolean isChecked() {
         return checked;
     }

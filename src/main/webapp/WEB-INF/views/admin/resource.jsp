@@ -29,6 +29,17 @@
                 title : '打开方式',
                 width : 60
             }, {
+                field : 'opened',
+                title : '菜单状态',
+                width : 60,
+                formatter : function(value, row, index) {
+                    if (value == 1) {
+                        return '打开';
+                    } else {
+                        return '关闭';
+                    }
+                }
+            }, {
                 field : 'seq',
                 title : '排序',
                 width : 40
