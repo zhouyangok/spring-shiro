@@ -62,37 +62,36 @@ CREATE TABLE `resource` (
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('1', '权限管理', '', null, '系统管理', 'fi-folder', null, '0', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('11', '资源管理', '/resource/manager', 'ajax', '资源管理', 'fi-database', '1', '1', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('12', '角色管理', '/role/manager', 'ajax', '角色管理', 'fi-torso-business', '1', '2', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('13', '用户管理', '/user/manager', 'ajax', '用户管理', 'fi-torsos-all', '1', '3', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('14', '部门管理', '/organization/manager', 'ajax', '部门管理', 'fi-results-demographics', '1', '4', '0', '0', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('111', '列表', '/resource/treeGrid', 'ajax', '资源列表', 'fi-list', '11', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('112', '添加', '/resource/add', 'ajax', '资源添加', 'fi-page-add', '11', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('113', '编辑', '/resource/edit', 'ajax', '资源编辑', 'fi-page-edit', '11', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('114', '删除', '/resource/delete', 'ajax', '资源删除', 'fi-page-delete', '11', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('121', '列表', '/role/dataGrid', 'ajax', '角色列表', 'fi-list', '12', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('122', '添加', '/role/add', 'ajax', '角色添加', 'fi-page-add', '12', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('123', '编辑', '/role/edit', 'ajax', '角色编辑', 'fi-page-edit', '12', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('124', '删除', '/role/delete', 'ajax', '角色删除', 'fi-page-delete', '12', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('125', '授权', '/role/grant', 'ajax', '角色授权', 'fi-check', '12', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('131', '列表', '/user/dataGrid', 'ajax', '用户列表', 'fi-list', '13', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('132', '添加', '/user/add', 'ajax', '用户添加', 'fi-page-add', '13', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('133', '编辑', '/user/edit', 'ajax', '用户编辑', 'fi-page-edit', '13', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('134', '删除', '/user/delete', 'ajax', '用户删除', 'fi-page-delete', '13', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('141', '列表', '/organization/treeGrid', 'ajax', '用户列表', 'fi-list', '14', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('142', '添加', '/organization/add', 'ajax', '部门添加', 'fi-page-add', '14', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('143', '编辑', '/organization/edit', 'ajax', '部门编辑', 'fi-page-edit', '14', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('144', '删除', '/organization/delete', 'ajax', '部门删除', 'fi-page-delete', '14', '0', '0', '1', '2014-02-19 01:00:00');
-INSERT INTO `resource` VALUES ('221', '日志监控', '', null, null, 'fi-folder', null, '2', '0', '0', '2015-12-01 11:44:20');
-INSERT INTO `resource` VALUES ('222', '视频教程', '', null, null, 'fi-folder', null, '1', '0', '0', '2015-12-06 12:40:42');
-INSERT INTO `resource` VALUES ('223', '官方网站', 'http://www.dreamlu.net/', 'iframe', null, 'fi-home', '222', '0', '0', '0', '2015-12-06 12:42:42');
-INSERT INTO `resource` VALUES ('224', 'jfinal视频', 'http://blog.dreamlu.net/blog/79', 'iframe', null, 'fi-video', '222', '1', '0', '0', '2015-12-06 12:45:28');
-INSERT INTO `resource` VALUES ('226', '修改密码', '/user/editPwdPage', 'ajax', null, 'fi-unlock', null, '3', '0', '1', '2015-12-07 20:23:06');
-INSERT INTO `resource` VALUES ('227', '登录日志', '/sysLog/manager', 'ajax', null, 'fi-info', '221', '0', '0', '0', '2016-09-30 22:10:53');
-INSERT INTO `resource` VALUES ('228', 'Druid监控', '/druid', 'iframe', null, 'fi-monitor', '221', '0', '0', '0', '2016-09-30 22:12:50');
-INSERT INTO `resource` VALUES ('229', '系统图标', '/icons.html', 'ajax', null, 'fi-photo', '221', '0', '0', '0', '2016-12-24 15:53:47');
-
+INSERT INTO `resource` VALUES ('1', '权限管理', '', null, '系统管理', 'fi-folder', null, '0', '0', '1', '0', '2014-02-19 01:00:00'), 
+                              ('11', '资源管理', '/resource/manager', 'ajax', '资源管理', 'fi-database', '1', '1', '0', '1', '0', '2014-02-19 01:00:00'), 
+                              ('12', '角色管理', '/role/manager', 'ajax', '角色管理', 'fi-torso-business', '1', '2', '0', '1', '0', '2014-02-19 01:00:00'), 
+                              ('13', '用户管理', '/user/manager', 'ajax', '用户管理', 'fi-torsos-all', '1', '3', '0', '1', '0', '2014-02-19 01:00:00'), 
+                              ('14', '部门管理', '/organization/manager', 'ajax', '部门管理', 'fi-results-demographics', '1', '4', '0', '1', '0', '2014-02-19 01:00:00'), 
+                              ('111', '列表', '/resource/treeGrid', 'ajax', '资源列表', 'fi-list', '11', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('112', '添加', '/resource/add', 'ajax', '资源添加', 'fi-page-add', '11', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('113', '编辑', '/resource/edit', 'ajax', '资源编辑', 'fi-page-edit', '11', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('114', '删除', '/resource/delete', 'ajax', '资源删除', 'fi-page-delete', '11', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('121', '列表', '/role/dataGrid', 'ajax', '角色列表', 'fi-list', '12', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('122', '添加', '/role/add', 'ajax', '角色添加', 'fi-page-add', '12', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('123', '编辑', '/role/edit', 'ajax', '角色编辑', 'fi-page-edit', '12', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('124', '删除', '/role/delete', 'ajax', '角色删除', 'fi-page-delete', '12', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('125', '授权', '/role/grant', 'ajax', '角色授权', 'fi-check', '12', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('131', '列表', '/user/dataGrid', 'ajax', '用户列表', 'fi-list', '13', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('132', '添加', '/user/add', 'ajax', '用户添加', 'fi-page-add', '13', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('133', '编辑', '/user/edit', 'ajax', '用户编辑', 'fi-page-edit', '13', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('134', '删除', '/user/delete', 'ajax', '用户删除', 'fi-page-delete', '13', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('141', '列表', '/organization/treeGrid', 'ajax', '用户列表', 'fi-list', '14', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('142', '添加', '/organization/add', 'ajax', '部门添加', 'fi-page-add', '14', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('143', '编辑', '/organization/edit', 'ajax', '部门编辑', 'fi-page-edit', '14', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('144', '删除', '/organization/delete', 'ajax', '部门删除', 'fi-page-delete', '14', '0', '0', '0', '1', '2014-02-19 01:00:00'), 
+                              ('221', '日志监控', '', null, null, 'fi-folder', null, '2', '0', '0', '0', '2015-12-01 11:44:20'), 
+                              ('222', '视频教程', '', null, null, 'fi-folder', null, '1', '0', '0', '0', '2015-12-06 12:40:42'), 
+                              ('223', '官方网站', 'http://www.dreamlu.net/', 'iframe', null, 'fi-home', '222', '0', '0', '1', '0', '2015-12-06 12:42:42'), 
+                              ('224', 'jfinal视频', 'http://blog.dreamlu.net/blog/79', 'iframe', null, 'fi-video', '222', '1', '0', '1', '0', '2015-12-06 12:45:28'), 
+                              ('226', '修改密码', '/user/editPwdPage', 'ajax', null, 'fi-unlock', null, '3', '0', '0', '1', '2015-12-07 20:23:06'), 
+                              ('227', '登录日志', '/sysLog/manager', 'ajax', null, 'fi-info', '221', '0', '0', '1', '0', '2016-09-30 22:10:53'), 
+                              ('228', 'Druid监控', '/druid', 'iframe', null, 'fi-monitor', '221', '0', '0', '1', '0', '2016-09-30 22:12:50'), 
+                              ('229', '系统图标', '/icons.html', 'ajax', null, 'fi-photo', '221', '0', '0', '1', '0', '2016-12-24 15:53:47');
 -- ----------------------------
 -- Table structure for `role`
 -- ----------------------------
