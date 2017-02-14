@@ -29,6 +29,7 @@
             s.seq AS seq,
             s.STATUS AS 'status',
             s.open_mode AS openMode,
+            s.opened as opened,
             s.resource_type AS resourceType,
             s.create_time AS createTime
         FROM
@@ -54,13 +55,6 @@
         LEFT JOIN resource s ON e.resource_id = s.id
         WHERE
             r.id = #{id}
-    </select>
-
-    <select id="selectRoleList" resultType="Role">
-        select
-        <include refid="Base_Column_List"/>
-        from role
-        order by ${sort} ${order}
     </select>
 
 </mapper>

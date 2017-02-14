@@ -47,8 +47,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<Role> page = new Page<Role>(pageInfo.getNowpage(), pageInfo.getSize());
-        List<Role> list = roleMapper.selectRoleList(page, pageInfo.getSort(), pageInfo.getOrder());
-        pageInfo.setRows(list);
+        
+        EntityWrapper<Role> wrapper = new EntityWrapper<Role>();
+        wrapper.orderBy(pageInfo.getSort(), pageInfo.getOrder().equalsIgnoreCase("ASC"));
+        selectPage(page, wrapper);
+        
+        pageInfo.setRows(page.getRecords());
         pageInfo.setTotal(page.getTotal());
     }
 
