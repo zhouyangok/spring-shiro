@@ -33,7 +33,6 @@ public class Resource implements Serializable {
 	@TableField(value = "open_mode")
 	private String openMode;
 
-
 	/** 资源介绍 */
 	private String description;
 
@@ -49,6 +48,9 @@ public class Resource implements Serializable {
 
 	/** 状态 */
 	private Integer status;
+
+	/** 打开的 */
+	private Integer opened;
 
 	/** 资源类别 */
 	@TableField(value = "resource_type")
@@ -128,6 +130,14 @@ public class Resource implements Serializable {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Integer getOpened() {
+		return opened;
+	}
+
+	public void setOpened(Integer opened) {
+		this.opened = opened;
 	}
 
 	public Integer getResourceType() {

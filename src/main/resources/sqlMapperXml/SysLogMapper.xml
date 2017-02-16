@@ -7,10 +7,4 @@
         id, login_name AS loginName, role_name AS roleName, opt_content AS optContent, client_ip AS clientIp, create_time AS createTime
     </sql>
 
-    <select id="selectSysLogList" resultType="SysLog">
-        select
-        <include refid="Base_Column_List" />
-        from sys_log ORDER BY create_time DESC
-    </select>
-
 </mapper>

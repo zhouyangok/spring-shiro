@@ -2,6 +2,9 @@ package com.wangzhixuan.commons.result;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 /**
  * @description：TreeVO
  * @author：zhixuan.wang
@@ -15,7 +18,8 @@ public class Tree implements java.io.Serializable {
     private String state = "open";// open,closed
     private boolean checked = false;
     private Object attributes;
-    private List<Tree> children;
+    @JsonInclude(Include.NON_NULL)
+    private List<Tree> children; // null不输出
     private String iconCls;
     private Long pid;
     /**
@@ -46,7 +50,11 @@ public class Tree implements java.io.Serializable {
     public void setState(String state) {
         this.state = state;
     }
-
+    
+    public void setState(Integer opened) {
+        this.state = (null != opened && opened == 1) ? "open" : "closed";
+    }
+    
     public boolean isChecked() {
         return checked;
     }

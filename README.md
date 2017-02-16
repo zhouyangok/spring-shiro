@@ -5,6 +5,8 @@
 
 界面基于EasyUI，图标采用较为开放的`Foundation Icon`(MIT协议)。
 
+代码生成详见：[MysqlGenerator](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/master/src/test/java/com/wangzhixuan/generator)
+
 ## 技术和功能
 > Spring-cache
 
@@ -114,6 +116,10 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 `Sky` 50元
 
 ## 更新记录
+> 2017-02-13 升级到mybaits plus 2.0.2
+
+> 2017-02-13 添加菜单的默认打开状态控制
+
 > 2017-01-15 v1.3.0 升级到mybatis-plus 2.0.1，添加页面生成！
 > 老版本请查看：[v1.2.0](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/v1.2.0/)
 

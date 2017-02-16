@@ -1,8 +1,6 @@
 package com.wangzhixuan.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,9 +50,6 @@ public class RoleController extends BaseController {
     @ResponseBody
     public Object dataGrid(Integer page, Integer rows, String sort, String order) {
         PageInfo pageInfo = new PageInfo(page, rows, sort, order);
-        Map<String, Object> condition = new HashMap<String, Object>();
-        pageInfo.setCondition(condition);
-
         roleService.selectDataGrid(pageInfo);
         return pageInfo;
     }

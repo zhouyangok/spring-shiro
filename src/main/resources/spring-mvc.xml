@@ -29,8 +29,8 @@
     <mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
     <mvc:resources mapping="/favicon.ico" location="/static/style/images/favicon.ico" cache-period="31556926"/>
 
-    <!-- csrf HttpSessionCsrfTokenRepository -->
-    <bean class="com.wangzhixuan.commons.csrf.HttpSessionCsrfTokenRepository" />
+    <!-- csrf CookieCsrfTokenRepository -->
+    <bean class="com.wangzhixuan.commons.csrf.CookieCsrfTokenRepository" />
     
     <!-- Spring csrf 拦截器 -->
     <mvc:interceptors>

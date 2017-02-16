@@ -56,7 +56,7 @@ public class UserController extends BaseController {
     @PostMapping("/dataGrid")
     @ResponseBody
     public Object dataGrid(UserVo userVo, Integer page, Integer rows, String sort, String order) {
-        PageInfo pageInfo = new PageInfo(page, rows);
+        PageInfo pageInfo = new PageInfo(page, rows, sort, order);
         Map<String, Object> condition = new HashMap<String, Object>();
 
         if (StringUtils.isNotBlank(userVo.getName())) {

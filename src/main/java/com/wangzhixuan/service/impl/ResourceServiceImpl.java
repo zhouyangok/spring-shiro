@@ -64,6 +64,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             tree.setText(resource.getName());
             tree.setIconCls(resource.getIcon());
             tree.setAttributes(resource.getUrl());
+            tree.setState(resource.getOpened());
             trees.add(tree);
         }
         return trees;
@@ -84,6 +85,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             tree.setText(resource.getName());
             tree.setIconCls(resource.getIcon());
             tree.setAttributes(resource.getUrl());
+            tree.setState(resource.getOpened());
             trees.add(tree);
         }
         return trees;
@@ -111,6 +113,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
                 tree.setIconCls(resource.getIcon());
                 tree.setAttributes(resource.getUrl());
                 tree.setOpenMode(resource.getOpenMode());
+                tree.setState(resource.getOpened());
                 trees.add(tree);
             }
             return trees;
@@ -132,6 +135,7 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
             tree.setIconCls(resource.getIcon());
             tree.setAttributes(resource.getUrl());
             tree.setOpenMode(resource.getOpenMode());
+            tree.setState(resource.getOpened());
             trees.add(tree);
         }
         return trees;
