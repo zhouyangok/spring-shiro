@@ -1,11 +1,5 @@
 package com.wangzhixuan.service.impl;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
@@ -18,6 +12,12 @@ import com.wangzhixuan.model.User;
 import com.wangzhixuan.model.UserRole;
 import com.wangzhixuan.model.vo.UserVo;
 import com.wangzhixuan.service.IUserService;
+import net.sf.ehcache.search.Direction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -101,6 +101,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
         Page<UserVo> page = new Page<UserVo>(pageInfo.getNowpage(), pageInfo.getSize());
+        String orderField = com.baomidou.mybatisplus.toolkit.StringUtils.camelToUnderline(pageInfo.getSort());
+        page.setOrderByField(orderField);
+        page.setAsc(pageInfo.getOrder().equalsIgnoreCase("asc"));
         List<UserVo> list = userMapper.selectUserVoPage(page, pageInfo.getCondition());
         pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());

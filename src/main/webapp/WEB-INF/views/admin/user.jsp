@@ -25,7 +25,7 @@
             singleSelect : true,
             idField : 'id',
             sortName : 'createTime',
-            sortOrder : 'asc',
+	        sortOrder : 'asc',
             pageSize : 20,
             pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
             columns : [ [ {
@@ -80,7 +80,6 @@
                 width : '200',
                 title : '角色',
                 field : 'rolesList',
-                sortable : true,
                 formatter : function(value, row, index) {
                     var roles = [];
                     for(var i = 0; i< value.length; i++) {
