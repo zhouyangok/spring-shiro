@@ -213,7 +213,7 @@
         userDataGrid.datagrid('load', $.serializeObject($('#searchUserForm')));
     }
     function cleanUserFun() {
-        $('#searchForm input').val('');
+        $('#searchUserForm input').val('');
         userDataGrid.datagrid('load', {});
     }
 </script>
