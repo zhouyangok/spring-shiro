@@ -35,7 +35,7 @@ public class ${table.controllerName} {
     
     @GetMapping("/manager")
     public String manager() {
-        return "admin/${table.entityPath}/${table.entityPath}";
+        return "admin/${table.entityPath}/${table.entityPath}List";
     }
 
 

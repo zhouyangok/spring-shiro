@@ -21,6 +21,7 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.toolkit.StringUtils;
 
 /**
  * <p>
@@ -126,19 +127,19 @@ public class MysqlGenerator {
 		focList.add(new FileOutConfig("/template/add.jsp.vm") {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
-				return viewOutputDir + tableInfo.getEntityName() + "Add.jsp";
+				return getGeneratorViewPath(viewOutputDir, tableInfo, "Add.jsp");
 			}
 		});
 		focList.add(new FileOutConfig("/template/edit.jsp.vm") {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
-				return viewOutputDir + tableInfo.getEntityName() + "Edit.jsp";
+				return getGeneratorViewPath(viewOutputDir, tableInfo, "Edit.jsp");
 			}
 		});
 		focList.add(new FileOutConfig("/template/list.jsp.vm") {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
-				return viewOutputDir + tableInfo.getEntityName() + "List.jsp";
+				return getGeneratorViewPath(viewOutputDir, tableInfo, "List.jsp");
 			}
 		});
 		cfg.setFileOutConfigList(focList);
@@ -165,4 +166,16 @@ public class MysqlGenerator {
 		return props;
 	}
 	
+	/**
+	 * 页面生成的文件名
+	 */
+	private static String getGeneratorViewPath(String viewOutputDir, TableInfo tableInfo, String suffixPath) {
+		String name = StringUtils.firstToLowerCase(tableInfo.getEntityName());
+		String path = viewOutputDir + "/" + name + "/" + name + suffixPath;
+		File viewDir = new File(path).getParentFile();
+		if (!viewDir.exists()) {
+			viewDir.mkdirs();
+		}
+		return path;
+	}
 }
