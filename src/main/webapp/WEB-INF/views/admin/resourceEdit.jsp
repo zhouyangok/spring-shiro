@@ -59,6 +59,7 @@
                 <td>打开方式</td>
                 <td>
                     <select id="resourceEditOpenMode" name="openMode" class="easyui-combobox" data-options="width:140,height:29,editable:false,panelHeight:'auto'">
+                        <option>无(用于上层菜单)</option>
                         <option value="ajax">ajax</option>
                         <option value="iframe">iframe</option>
                     </select>
