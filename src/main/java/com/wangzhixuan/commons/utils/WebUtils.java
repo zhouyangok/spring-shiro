@@ -20,7 +20,7 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 		if (null != responseBody) {
 			return true;
 		}
-		RestController restAnnotation = handlerMethod.getBean().getClass().getAnnotation(RestController.class);
+		RestController restAnnotation = handlerMethod.getBeanType().getAnnotation(RestController.class);
 		if (null != restAnnotation) {
 			return true;
 		}
