@@ -3,6 +3,8 @@ package com.wangzhixuan.commons.shiro.captcha;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,21 +19,20 @@ import com.wangzhixuan.commons.utils.WebUtils;
  *
  */
 public class DreamCaptcha implements InitializingBean {
-	private static final String DEFAULT_COOKIE_NAME = "dreamCaptcha";
+	private final static Logger logger = LogManager.getLogger(DreamCaptcha.class);
+	private static final String DEFAULT_COOKIE_NAME = "dream-captcha";
 	private final static String DEFAULT_CHACHE_NAME = "dreamCaptchaCache";
-	private final static int DEFAULT_MAX_AGE = -1;
+	private final static int DEFAULT_MAX_AGE = -1; // cookie超时默认为session会话状态
 	
 	private CacheManager cacheManager;
 	private String cacheName;
 	private String cookieName;
-	private int maxAge;
 	
 	private Cache<String, String> dreamCaptchaCache;
 	
 	public DreamCaptcha() {
 		this.cacheName = DEFAULT_CHACHE_NAME;
 		this.cookieName = DEFAULT_COOKIE_NAME;
-		this.maxAge = DEFAULT_MAX_AGE;
 	}
 	
 	public DreamCaptcha(CacheManager cacheManager) {
@@ -62,14 +63,6 @@ public class DreamCaptcha implements InitializingBean {
 	public void setCookieName(String cookieName) {
 		this.cookieName = cookieName;
 	}
-
-	public int getMaxAge() {
-		return maxAge;
-	}
-	
-	public void setMaxAge(int maxAge) {
-		this.maxAge = maxAge;
-	}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -85,10 +78,18 @@ public class DreamCaptcha implements InitializingBean {
 	public void generate(HttpServletRequest request, HttpServletResponse response) {
 		// 先检查cookie的uuid是否存在
 		String cookieValue = WebUtils.getCookieValue(request, cookieName);
+		boolean hasCookie = true;
 		if (StringUtils.isBlank(cookieValue)) {
+			hasCookie = false;
 			cookieValue = StringUtils.getUUId();
 		}
-		String captchaCode = CaptchaUtils.generate(response, cookieName, cookieValue, maxAge);
+		String captchaCode = CaptchaUtils.generateCode().toUpperCase();// 转成大写重要
+		// 不存在cookie时设置cookie
+		if (!hasCookie) {
+			WebUtils.setCookie(response, cookieName, cookieValue, DEFAULT_MAX_AGE);
+		}
+		// 生成验证码
+		CaptchaUtils.generate(response, captchaCode);
 		dreamCaptchaCache.put(cookieValue, captchaCode);
 	}
 	
@@ -100,6 +101,9 @@ public class DreamCaptcha implements InitializingBean {
 	 * @return 验证通过返回 true, 否则返回 false
 	 */
 	public boolean validate(HttpServletRequest request, HttpServletResponse response, String userInputCaptcha) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("validate captcha userInputCaptcha is " + userInputCaptcha);
+		}
 		String cookieValue = WebUtils.getCookieValue(request, cookieName);
 		if (StringUtils.isBlank(cookieValue)) {
 			return false;
