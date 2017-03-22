@@ -1,5 +1,9 @@
 package com.wangzhixuan.commons.utils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
@@ -25,5 +29,40 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * 读取cookie
+	 * @param request
+	 * @param key
+	 * @return
+	 */
+	public static String getCookieValue(HttpServletRequest request, String name) {
+		Cookie cookie = getCookie(request, name);
+		return cookie != null ? cookie.getValue() : null;
+	}
+
+	/**
+	 * 清除 某个指定的cookie 
+	 * @param response
+	 * @param key
+	 */
+	public static void removeCookie(HttpServletResponse response, String key) {
+		setCookie(response, key, null, 0);
+	}
+
+	/**
+	 * 设置cookie
+	 * @param response
+	 * @param name
+	 * @param value
+	 * @param maxAgeInSeconds
+	 */
+	public static void setCookie(HttpServletResponse response, String name, String value, int maxAgeInSeconds) {
+		Cookie cookie = new Cookie(name, value);
+		cookie.setPath("/");
+		cookie.setMaxAge(maxAgeInSeconds);
+		cookie.setHttpOnly(true);
+		response.addCookie(cookie);
 	}
 }

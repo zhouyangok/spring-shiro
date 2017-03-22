@@ -3,10 +3,11 @@ package com.wangzhixuan.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.wangzhixuan.commons.utils.CaptchaUtils;
+import com.wangzhixuan.commons.shiro.captcha.DreamCaptcha;
 
 /**
  * 通用的控制器
@@ -15,7 +16,9 @@ import com.wangzhixuan.commons.utils.CaptchaUtils;
  */
 @Controller
 public class CommonsController {
-
+    @Autowired
+    private DreamCaptcha dreamCaptcha;
+    
     /**
      * 图标页
      */
@@ -23,12 +26,12 @@ public class CommonsController {
     public String icons() {
         return "icons";
     }
-	
+    
     /**
      * 图形验证码
      */
     @GetMapping("captcha.jpg")
     public void captcha(HttpServletRequest request, HttpServletResponse response) {
-        CaptchaUtils.generate(request, response);
+    	dreamCaptcha.generate(request, response);
     }
 }

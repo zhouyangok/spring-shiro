@@ -1,4 +1,4 @@
-package com.wangzhixuan.commons.utils;
+package com.wangzhixuan.commons.shiro.captcha;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -11,17 +11,16 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
+import com.wangzhixuan.commons.utils.IOUtils;
+import com.wangzhixuan.commons.utils.WebUtils;
 
 /**
  * 验证码工具类
  * @author L.cm
  */
-public class CaptchaUtils {
-	private static final String CAPTCHA_ATTR = CaptchaUtils.class.getName().concat(".CAPTCHA");
-	
+class CaptchaUtils {
 	// 默认的验证码大小
 	private static final int WIDTH = 108, HEIGHT = 40;
 	// 验证码随机字符数组
@@ -39,13 +38,10 @@ public class CaptchaUtils {
 	/**
 	 * 生成验证码
 	 */
-	public static void generate(HttpServletRequest request, HttpServletResponse response) {
+	static String generate(HttpServletResponse response, String cookieName, String cookieValue, int maxAgeInSeconds) {
 		BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		String vCode = drawGraphic(image);
 		vCode = vCode.toUpperCase();// 转成大写重要
-		
-		HttpSession session = request.getSession();
-		session.setAttribute(CAPTCHA_ATTR, vCode);
 		
 		response.setHeader("Pragma","no-cache");
 		response.setHeader("Cache-Control","no-cache");
@@ -54,9 +50,13 @@ public class CaptchaUtils {
 		
 		ServletOutputStream sos = null;
 		try {
+			// 设置cookie
+			WebUtils.setCookie(response, cookieName, cookieValue, maxAgeInSeconds);
+			
 			sos = response.getOutputStream();
 			ImageIO.write(image, "JPEG", sos);
 			sos.flush();
+			return vCode;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -140,26 +140,4 @@ public class CaptchaUtils {
 		int b = fc + random.nextInt(bc - fc);
 		return new Color(r, g, b);
 	}
-
-	/**
-	 * 仅能验证一次，验证后立即删除session
-	 * @param controller 控制器
-	 * @param userInputCaptcha 用户输入的验证码
-	 * @return 验证通过返回 true, 否则返回 false
-	 */
-	public static boolean validate(HttpServletRequest request, String userInputCaptcha) {
-		HttpSession session = request.getSession(false);
-		if (null == session) {
-			return false;
-		}
-		// 转成大写重要
-		userInputCaptcha = userInputCaptcha.toUpperCase();
-		String code = (String) session.getAttribute(CAPTCHA_ATTR);
-		boolean result = userInputCaptcha.equals(code);
-		if (result) {
-			session.removeAttribute(CAPTCHA_ATTR);
-		}
-		return result;
-	}
-
 }

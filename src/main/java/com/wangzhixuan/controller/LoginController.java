@@ -1,6 +1,7 @@
 package com.wangzhixuan.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -8,6 +9,7 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
 import com.wangzhixuan.commons.csrf.CsrfToken;
-import com.wangzhixuan.commons.utils.CaptchaUtils;
+import com.wangzhixuan.commons.shiro.captcha.DreamCaptcha;
 import com.wangzhixuan.commons.utils.StringUtils;
 
 /**
@@ -27,6 +29,8 @@ import com.wangzhixuan.commons.utils.StringUtils;
  */
 @Controller
 public class LoginController extends BaseController {
+    @Autowired
+    private DreamCaptcha dreamCaptcha;
     /**
      * 首页
      *
@@ -72,7 +76,8 @@ public class LoginController extends BaseController {
     @PostMapping("/login")
     @CsrfToken(remove = true)
     @ResponseBody
-    public Object loginPost(HttpServletRequest request, String username, String password, String captcha, 
+    public Object loginPost(HttpServletRequest request, HttpServletResponse response,
+            String username, String password, String captcha, 
             @RequestParam(value = "rememberMe", defaultValue = "1") Integer rememberMe) {
         logger.info("POST请求登录");
         // 改为全部抛出异常，避免ajax csrf token被刷新
@@ -85,7 +90,7 @@ public class LoginController extends BaseController {
         if (StringUtils.isBlank(captcha)) {
             throw new RuntimeException("验证码不能为空");
         }
-        if (!CaptchaUtils.validate(request, captcha)) {
+        if (!dreamCaptcha.validate(request, response, captcha)) {
             throw new RuntimeException("验证码错误");
         }
         Subject user = SecurityUtils.getSubject();

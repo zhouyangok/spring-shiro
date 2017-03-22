@@ -1,6 +1,7 @@
 package com.wangzhixuan.commons.utils;
 
 import java.util.Collection;
+import java.util.UUID;
 
 /**
  * 继承自Spring util的工具类，减少jar依赖
@@ -68,5 +69,13 @@ public class StringUtils extends org.springframework.util.StringUtils {
      */
     public static String join(Object[] arr, String delim) {
         return StringUtils.arrayToDelimitedString(arr, delim);
+    }
+    
+    /**
+     * 生成uuid
+     * @return UUID
+     */
+    public static String getUUId() {
+        return UUID.randomUUID().toString();
     }
 }
