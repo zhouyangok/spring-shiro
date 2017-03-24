@@ -43,7 +43,7 @@ public class MysqlGenerator {
 		Properties props = getProperties();
 		AutoGenerator mpg = new AutoGenerator();
 
-		String outputDir = "D:/git_coding/generator/code";
+		String outputDir = "/Users/lcm/Desktop/generator/code";
 		final String viewOutputDir = outputDir + "/view/";
 		
 		// 全局配置
@@ -79,11 +79,9 @@ public class MysqlGenerator {
 		// strategy.setCapitalMode(true);// 全局大写命名
 		// strategy.setDbColumnUnderline(true);//全局下划线命名
 //		strategy.setTablePrefix(new String[] { "bmd_", "mp_" });// 此处可以修改为您的表前缀
-		strategy.setNaming(NamingStrategy.remove_prefix_and_camel);// 表名生成策略
+		strategy.setNaming(NamingStrategy.underline_to_camel);// 表名生成策略
 		// strategy.setInclude(new String[] { "user" }); // 需要生成的表
 		// strategy.setExclude(new String[]{"test"}); // 排除生成的表
-		// 字段名生成策略
-		strategy.setFieldNaming(NamingStrategy.underline_to_camel);
 		// 自定义实体父类
 		// strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
 		// 自定义实体，公共字段
@@ -124,19 +122,19 @@ public class MysqlGenerator {
 			viewDir.mkdirs();
 		}
 		List<FileOutConfig> focList = new ArrayList<FileOutConfig>();
-		focList.add(new FileOutConfig("/template/add.jsp.vm") {
+		focList.add(new FileOutConfig("/templates/add.jsp.vm") {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
 				return getGeneratorViewPath(viewOutputDir, tableInfo, "Add.jsp");
 			}
 		});
-		focList.add(new FileOutConfig("/template/edit.jsp.vm") {
+		focList.add(new FileOutConfig("/templates/edit.jsp.vm") {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
 				return getGeneratorViewPath(viewOutputDir, tableInfo, "Edit.jsp");
 			}
 		});
-		focList.add(new FileOutConfig("/template/list.jsp.vm") {
+		focList.add(new FileOutConfig("/templates/list.jsp.vm") {
 			@Override
 			public String outputFile(TableInfo tableInfo) {
 				return getGeneratorViewPath(viewOutputDir, tableInfo, "List.jsp");
