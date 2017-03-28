@@ -18,6 +18,7 @@ import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wangzhixuan.model.User;
@@ -67,7 +68,8 @@ public class ShiroDbRealm extends AuthorizingRealm {
         ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginName(), user.getName(), urls);
         shiroUser.setRoles(roles);
         // 认证缓存信息
-        return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
+        return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), 
+                ByteSource.Util.bytes(user.getSalt()), getName());
     }
 
     /**

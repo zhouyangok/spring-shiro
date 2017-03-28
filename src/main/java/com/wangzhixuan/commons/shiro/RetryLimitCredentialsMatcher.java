@@ -32,6 +32,7 @@ import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.util.Assert;
 
 /**
  * 输错5次密码锁定半小时，ehcache.xml配置
@@ -44,6 +45,7 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher imple
 	private final CacheManager cacheManager;
 	private String retryLimitCacheName;
 	private Cache<String, AtomicInteger> passwordRetryCache;
+	private PasswordHash passwordHash;
 	
 	public RetryLimitCredentialsMatcher(CacheManager cacheManager) {
 		this.cacheManager = cacheManager;
@@ -57,6 +59,10 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher imple
 		this.retryLimitCacheName = retryLimitCacheName;
 	}
 	
+	public void setPasswordHash(PasswordHash passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
 	@Override
 	public boolean doCredentialsMatch(AuthenticationToken authcToken, AuthenticationInfo info) {
 		String username = (String) authcToken.getPrincipal();
@@ -82,6 +88,9 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher imple
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		Assert.notNull(passwordHash, "you must set passwordHash!");
+		super.setHashAlgorithmName(passwordHash.getAlgorithmName());
+		super.setHashIterations(passwordHash.getHashIterations());
 		this.passwordRetryCache = cacheManager.getCache(retryLimitCacheName);
 	}
 }

@@ -238,6 +238,7 @@ CREATE TABLE `user` (
   `login_name` varchar(64) NOT NULL COMMENT '登陆名',
   `name` varchar(64) NOT NULL COMMENT '用户名',
   `password` varchar(64) NOT NULL COMMENT '密码',
+  `salt` varchar(36) DEFAULT NULL COMMENT '密码加密盐',
   `sex` tinyint(2) NOT NULL DEFAULT '0' COMMENT '性别',
   `age` tinyint(2) DEFAULT '0' COMMENT '年龄',
   `phone` varchar(20) DEFAULT NULL COMMENT '手机号',
@@ -251,10 +252,10 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'admin', 'admin', '098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '0', '0', '1', '2015-12-06 13:14:05');
-INSERT INTO `user` VALUES ('13', 'snoopy', 'snoopy', '098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '1', '0', '3', '2015-10-01 13:12:07');
-INSERT INTO `user` VALUES ('14', 'dreamlu', 'dreamlu', '098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '1', '0', '5', '2015-10-11 23:12:58');
-INSERT INTO `user` VALUES ('15', 'test', 'test', '098f6bcd4621d373cade4e832627b4f6', '0', '25', '18707173376', '1', '0', '6', '2015-12-06 13:13:03');
+INSERT INTO `user` VALUES ('1', 'admin', 'admin', '05a671c66aefea124cc08b76ea6d30bb', 'test', '0', '25', '18707173376', '0', '0', '1', '2015-12-06 13:14:05');
+INSERT INTO `user` VALUES ('13', 'snoopy', 'snoopy', '05a671c66aefea124cc08b76ea6d30bb', 'test', '0', '25', '18707173376', '1', '0', '3', '2015-10-01 13:12:07');
+INSERT INTO `user` VALUES ('14', 'dreamlu', 'dreamlu', '05a671c66aefea124cc08b76ea6d30bb', 'test', '0', '25', '18707173376', '1', '0', '5', '2015-10-11 23:12:58');
+INSERT INTO `user` VALUES ('15', 'test', 'test', '05a671c66aefea124cc08b76ea6d30bb', 'test', '0', '25', '18707173376', '1', '0', '6', '2015-12-06 13:13:03');
 
 -- ----------------------------
 -- Table structure for `user_role`

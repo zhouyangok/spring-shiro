@@ -104,12 +104,17 @@
         <property name="arguments" ref="securityManager"/>
     </bean>
     
+    <!-- shiro密码加密配置 -->
+    <bean id="passwordHash" class="com.wangzhixuan.commons.shiro.PasswordHash">
+        <!-- 密码加密 1次md5,增强密码可修改此处 -->
+        <property name="algorithmName" value="md5"/>
+        <property name="hashIterations" value="1"/>
+    </bean>
+    
     <!-- 密码错误5次锁定半小时 -->
     <bean id="credentialsMatcher" class="com.wangzhixuan.commons.shiro.RetryLimitCredentialsMatcher">
         <constructor-arg ref="shiroSpringCacheManager"/>
         <property name="retryLimitCacheName" value="halfHour"/>
-        <!-- 密码加密 1次md5,增强密码可修改此处 -->
-        <property name="hashAlgorithmName" value="md5"/>
-        <property name="hashIterations" value="1"/>
+        <property name="passwordHash" ref="passwordHash"/>
     </bean>
 </beans>

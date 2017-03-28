@@ -31,6 +31,9 @@ public class User implements Serializable {
 
 	/** 密码 */
 	private String password;
+	
+	/** 密码加密盐 */
+	private String salt;
 
 	/** 性别 */
 	private Integer sex;
@@ -87,6 +90,14 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public Integer getSex() {

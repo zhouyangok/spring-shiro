@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.commons.utils.DigestUtils;
+import com.wangzhixuan.commons.shiro.PasswordHash;
 import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.model.Role;
@@ -32,6 +32,8 @@ import com.wangzhixuan.service.IUserService;
 public class UserController extends BaseController {
     @Autowired
     private IUserService userService;
+    @Autowired
+    private PasswordHash passwordHash;
 
     /**
      * 用户管理页
@@ -99,7 +101,10 @@ public class UserController extends BaseController {
         if (list != null && !list.isEmpty()) {
             return renderError("用户名已存在!");
         }
-        userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+        String salt = StringUtils.getUUId();
+        String pwd = passwordHash.toHex(userVo.getPassword(), salt);
+        userVo.setSalt(salt);
+        userVo.setPassword(pwd);
         userService.insertByVo(userVo);
         return renderSuccess("添加成功");
     }
@@ -137,8 +142,12 @@ public class UserController extends BaseController {
         if (list != null && !list.isEmpty()) {
             return renderError("用户名已存在!");
         }
+        // 更新密码
         if (StringUtils.isNotBlank(userVo.getPassword())) {
-            userVo.setPassword(DigestUtils.md5Hex(userVo.getPassword()));
+            User user = userService.selectById(userVo.getId());
+            String salt = user.getSalt();
+            String pwd = passwordHash.toHex(userVo.getPassword(), salt);
+            userVo.setPassword(pwd);
         }
         userService.updateByVo(userVo);
         return renderSuccess("修改成功！");
@@ -165,10 +174,11 @@ public class UserController extends BaseController {
     @ResponseBody
     public Object editUserPwd(String oldPwd, String pwd) {
         User user = userService.selectById(getUserId());
-        if (!user.getPassword().equals(DigestUtils.md5Hex(oldPwd))) {
+        String salt = user.getSalt();
+        if (!user.getPassword().equals(passwordHash.toHex(oldPwd, salt))) {
             return renderError("老密码不正确!");
         }
-        userService.updatePwdByUserId(getUserId(), DigestUtils.md5Hex(pwd));
+        userService.updatePwdByUserId(getUserId(), passwordHash.toHex(pwd, salt));
         return renderSuccess("密码修改成功！");
     }
 

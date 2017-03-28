@@ -52,7 +52,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         Long id = user.getId();
         String[] roles = userVo.getRoleIds().split(",");
         UserRole userRole = new UserRole();
-
         for (String string : roles) {
             userRole.setUserId(id);
             userRole.setRoleId(Long.valueOf(string));
