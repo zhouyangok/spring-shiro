@@ -120,9 +120,10 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 `王刚` 20元
 
 ## 更新记录
-> 2017-02-13 升级到mybaits plus 2.0.4，更改验证码为`cookie + cache`存储。
-
-> 2017-02-13 升级到mybaits plus 2.0.2
+> 2017-03-28 升级到mybaits plus 2.0.5，
+> 更改验证码为`cookie + cache`存储。
+> 用户添加密码加密盐。
+> 适配`mybaits plus 2.0.5`设置主键自增bug。
 
 > 2017-02-13 添加菜单的默认打开状态控制
 
