@@ -135,7 +135,7 @@ public class UserController extends BaseController {
      * @param userVo
      * @return
      */
-    @RequestMapping("/edit")
+    @PostMapping("/edit")
     @ResponseBody
     public Object edit(UserVo userVo) {
         List<User> list = userService.selectByLoginName(userVo);
@@ -170,7 +170,7 @@ public class UserController extends BaseController {
      * @param pwd
      * @return
      */
-    @RequestMapping("/editUserPwd")
+    @PostMapping("/editUserPwd")
     @ResponseBody
     public Object editUserPwd(String oldPwd, String pwd) {
         User user = userService.selectById(getUserId());
@@ -188,9 +188,13 @@ public class UserController extends BaseController {
      * @param id
      * @return
      */
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
+        Long currentUserId = getUserId();
+        if (id == currentUserId) {
+            return renderError("不可以删除自己！");
+        }
         userService.deleteUserById(id);
         return renderSuccess("删除成功！");
     }

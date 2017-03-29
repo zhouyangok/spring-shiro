@@ -20,6 +20,7 @@
         <logger name="org.springframework" level="INFO"/>
         <logger name="com.baomidou.mybatisplus" level="INFO"/>
         <logger name="org.apache.ibatis.io" level="INFO"/>
+        <logger name="org.apache.velocity" level="INFO"/>
         
         <!-- cache INFO -->
         <logger name="net.sf.ehcache" level="INFO"/>

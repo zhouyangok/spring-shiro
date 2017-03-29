@@ -163,24 +163,18 @@
         }
         parent.$.messager.confirm('询问', '您是否要删除当前用户？', function(b) {
             if (b) {
-                var currentUserId = '${sessionInfo.id}';/*当前登录用户的ID*/
-                if (currentUserId != id) {
-                    progressLoad();
-                    $.post('${path }/user/delete', {
-                        id : id
-                    }, function(result) {
-                        if (result.success) {
-                            parent.$.messager.alert('提示', result.msg, 'info');
-                            userDataGrid.datagrid('reload');
-                        }
-                        progressClose();
-                    }, 'JSON');
-                } else {
-                    parent.$.messager.show({
-                        title : '提示',
-                        msg : '不可以删除自己！'
-                    });
-                }
+                progressLoad();
+                $.post('${path }/user/delete', {
+                    id : id
+                }, function(result) {
+                    if (result.success) {
+                        parent.$.messager.alert('提示', result.msg, 'info');
+                        userDataGrid.datagrid('reload');
+                    } else {
+                        parent.$.messager.alert('错误', result.msg, 'error');
+                    }
+                    progressClose();
+                }, 'JSON');
             }
         });
     }
