@@ -111,12 +111,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public void deleteUserById(Long id) {
         this.deleteById(id);
-        List<UserRole> userRoles = userRoleMapper.selectByUserId(id);
-        if (userRoles != null && !userRoles.isEmpty()) {
-            for (UserRole userRole : userRoles) {
-                userRoleMapper.deleteById(userRole.getId());
-            }
-        }
+        userRoleMapper.deleteByUserId(id);
     }
 
 }

@@ -7,13 +7,4 @@
         id, role_id AS roleId, resource_id AS resourceId
     </sql>
 
-    <select id="selectIdListByRoleId" resultType="java.lang.Long" parameterType="java.lang.Long">
-        SELECT
-            e.id AS id
-        FROM
-            role r
-        LEFT JOIN role_resource e ON r.id = e.role_id
-        WHERE
-            r.id = #{id}
-    </select>
 </mapper>

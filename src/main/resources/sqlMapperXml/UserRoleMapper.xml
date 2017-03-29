@@ -14,11 +14,4 @@
         where user_id = #{userId}
     </select>
 
-    <select id="selectRoleIdListByUserId" resultType="java.lang.Long" parameterType="java.lang.Long">
-        select 
-        role_id AS roleId
-        from user_role
-        where user_id = #{userId}
-    </select>
-
 </mapper>

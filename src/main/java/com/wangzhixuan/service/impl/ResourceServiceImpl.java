@@ -1,5 +1,6 @@
 package com.wangzhixuan.service.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -13,6 +14,7 @@ import com.wangzhixuan.commons.result.Tree;
 import com.wangzhixuan.commons.shiro.ShiroUser;
 import com.wangzhixuan.mapper.ResourceMapper;
 import com.wangzhixuan.mapper.RoleMapper;
+import com.wangzhixuan.mapper.RoleResourceMapper;
 import com.wangzhixuan.mapper.UserRoleMapper;
 import com.wangzhixuan.model.Resource;
 import com.wangzhixuan.service.IResourceService;
@@ -32,6 +34,8 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
     private UserRoleMapper userRoleMapper;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private RoleResourceMapper roleResourceMapper;
     
     @Override
     public List<Resource> selectAll() {
@@ -141,5 +145,9 @@ public class ResourceServiceImpl extends ServiceImpl<ResourceMapper, Resource> i
         return trees;
     }
 
-    
+	@Override
+	public boolean deleteById(Serializable resourceId) {
+		roleResourceMapper.deleteByResourceId(resourceId);
+		return super.deleteById(resourceId);
+	}
 }

@@ -27,21 +27,21 @@ public class WebHooksListener implements ApplicationListener<WebHooksEvent> {
 	/**
 	 * 新线程需要同时 @EnableAsync + @Async
 	 */
-    @Async
+	@Async
 	@Override
 	public void onApplicationEvent(WebHooksEvent event) {
-        Map<String, Object> hookMap = (Map<String, Object>) event.getSource();
-        Object password = hookMap.get("password");
-        // 密码不一致
-        if (null == password || !password.equals(hookPwd)) {
-            return;
-        }
-        Object hookName = hookMap.get("hook_name");
-        if (null == hookName || !hookName.equals("push_hooks")) {
-            return;
-        }
-        // 执行自动部署脚本
-        RuntimeUtils.runShell(scriptPath);
+		Map<String, Object> hookMap = (Map<String, Object>) event.getSource();
+		Object password = hookMap.get("password");
+		// 密码不一致
+		if (null == password || !password.equals(hookPwd)) {
+			return;
+		}
+		Object hookName = hookMap.get("hook_name");
+		if (null == hookName || !hookName.equals("push_hooks")) {
+			return;
+		}
+		// 执行自动部署脚本
+		RuntimeUtils.runShell(scriptPath);
 	}
 
 }
