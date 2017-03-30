@@ -128,11 +128,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache-core</artifactId>
-            <version>${ehcache.version}</version>
-        </dependency>
         <!-- shiro end -->
         <!-- 可选配置，spring时间处理增强 -->
         <dependency>
@@ -141,11 +136,17 @@
             <version>${joda-time.version}</version>
             <optional>true</optional>
         </dependency>
+        <!-- ehcache和redis必选其一，也可同时使用（需要注意） -->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache-core</artifactId>
+            <version>${ehcache.version}</version>
+        </dependency>
         <!-- redis
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-redis</artifactId>
-            <version>1.7.5.RELEASE</version>
+            <version>1.8.1.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
