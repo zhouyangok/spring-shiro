@@ -5,7 +5,7 @@
 
 界面基于EasyUI，图标采用较为开放的`Foundation Icon`(MIT协议)。
 
-代码生成详见：[MysqlGenerator](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/master/src/test/java/com/wangzhixuan/generator)
+`代码生成详见`：[src/test/java/com/wangzhixuan/generator/MysqlGenerator](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/master/src/test/java/com/wangzhixuan/generator)
 
 ## 技术和功能
 > Spring-cache

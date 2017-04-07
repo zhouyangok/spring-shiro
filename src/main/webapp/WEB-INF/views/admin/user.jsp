@@ -79,14 +79,7 @@
             {
                 width : '200',
                 title : '角色',
-                field : 'rolesList',
-                formatter : function(value, row, index) {
-                    var roles = [];
-                    for(var i = 0; i< value.length; i++) {
-                        roles.push(value[i].name);  
-                    }
-                    return(roles.join('\n'));
-                }
+                field : 'rolesList'
             }, {
                 width : '60',
                 title : '用户类型',
