@@ -54,24 +54,13 @@
         </where>
     </select>
 
-    <select id="selectUserVoPage" resultMap="userVoResultMap">
-        SELECT
-        t.id,
-        login_name,
-        t.`name`,
-        `password`,
-        sex,
-        age,
-        user_type,
-        t.`status`,
-        organization_id,
-        t.create_time,
-        phone,
-        s.`name` AS organizationName,
-        o.id AS roleId,
-        o.`name` AS roleName
-        FROM
-        user t
+    <select id="selectUserPage" resultType="Map">
+        SELECT 
+        t.id, t.login_name AS loginName, t.`name`, t.phone, t.`password`, 
+        t.sex, t.age, t.create_time AS createTime, t.user_type AS userType, 
+        t.`status`, t.organization_id AS organizationId,  
+        s.`name` AS organizationName, group_concat(o.`name`) AS rolesList
+        FROM user t
         LEFT JOIN user_role r ON t.id = r.user_id
         LEFT JOIN role o ON r.role_id = o.id
         LEFT JOIN organization s ON s.id = t.organization_id
@@ -89,6 +78,7 @@
                 <![CDATA[ and t.create_time <= #{endTime} ]]>
             </if>
         </where>
+        GROUP BY t.id
     </select>
 
 </mapper>

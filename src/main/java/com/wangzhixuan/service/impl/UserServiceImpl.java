@@ -2,6 +2,7 @@ package com.wangzhixuan.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -99,11 +100,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public void selectDataGrid(PageInfo pageInfo) {
-        Page<UserVo> page = new Page<UserVo>(pageInfo.getNowpage(), pageInfo.getSize());
-        String orderField = com.baomidou.mybatisplus.toolkit.StringUtils.camelToUnderline(pageInfo.getSort());
-        page.setOrderByField(orderField);
+        Page<Map<String, Object>> page = new Page<Map<String, Object>>(pageInfo.getNowpage(), pageInfo.getSize());
+        page.setOrderByField(pageInfo.getSort());
         page.setAsc(pageInfo.getOrder().equalsIgnoreCase("asc"));
-        List<UserVo> list = userMapper.selectUserVoPage(page, pageInfo.getCondition());
+        List<Map<String, Object>> list = userMapper.selectUserPage(page, pageInfo.getCondition());
         pageInfo.setRows(list);
         pageInfo.setTotal(page.getTotal());
     }

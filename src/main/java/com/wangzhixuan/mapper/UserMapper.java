@@ -19,6 +19,6 @@ public interface UserMapper extends BaseMapper<User> {
 
     UserVo selectUserVoById(@Param("id") Long id);
 
-    List<UserVo> selectUserVoPage(Pagination page, Map<String, Object> params);
+    List<Map<String, Object>> selectUserPage(Pagination page, Map<String, Object> params);
 
 }
