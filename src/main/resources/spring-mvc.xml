@@ -59,7 +59,13 @@
         </property>
         <property name="objectMapper" ref="jacksonObjectMapper" />
     </bean>
-
+    
+    <!-- ueditor -->
+    <bean class="com.wangzhixuan.commons.ueditor.UeditorManager"/>
+    <bean class="com.wangzhixuan.commons.ueditor.UeditorService"/>
+    <!-- 使用spring servlet3.0 默认上传 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+    
     <!-- 启用shrio 控制器授权注解拦截方式 -->
     <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
         <property name="securityManager" ref="securityManager"/>

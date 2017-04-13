@@ -13,7 +13,6 @@
         <jdk.version>1.7</jdk.version>
         <junit.version>4.12</junit.version>
         <servlet.version>3.0.1</servlet.version>
-
         <log4j2.version>2.7</log4j2.version>
         <spring.version>4.3.7.RELEASE</spring.version>
         <mybaitsplus.version>2.0.5</mybaitsplus.version>
@@ -23,6 +22,7 @@
         <ehcache.version>2.6.11</ehcache.version>
         <jackson.version>2.8.7</jackson.version>
         <joda-time.version>2.9.7</joda-time.version>
+        <commons-io.version>2.5</commons-io.version>
     </properties>
 
     <dependencies>
@@ -93,6 +93,11 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
         <!-- spring end -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
         <!-- Mybatis-Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
