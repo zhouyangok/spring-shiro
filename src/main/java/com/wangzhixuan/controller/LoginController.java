@@ -78,7 +78,7 @@ public class LoginController extends BaseController {
     @ResponseBody
     public Object loginPost(HttpServletRequest request, HttpServletResponse response,
             String username, String password, String captcha, 
-            @RequestParam(value = "rememberMe", defaultValue = "1") Integer rememberMe) {
+            @RequestParam(value = "rememberMe", defaultValue = "0") Integer rememberMe) {
         logger.info("POST请求登录");
         // 改为全部抛出异常，避免ajax csrf token被刷新
         if (StringUtils.isBlank(username)) {
