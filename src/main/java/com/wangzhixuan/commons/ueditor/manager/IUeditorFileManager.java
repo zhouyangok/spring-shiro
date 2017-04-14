@@ -1,8 +1,8 @@
 package com.wangzhixuan.commons.ueditor.manager;
 
 import java.io.InputStream;
-import java.util.Map;
 
+import com.wangzhixuan.commons.ueditor.ActionConfig;
 import com.wangzhixuan.commons.ueditor.define.State;
 
 public interface IUeditorFileManager {
@@ -12,7 +12,7 @@ public interface IUeditorFileManager {
 	 * @param start 开始
 	 * @return state 状态接口
 	 */
-	State list(Map<String, Object> conf, int start);
+	State list(ActionConfig conf, int start);
 	
 	/**
 	 * 保存二进制文件

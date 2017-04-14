@@ -1,7 +1,5 @@
 package com.wangzhixuan.commons.ueditor;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,7 @@ import com.wangzhixuan.commons.ueditor.hunter.ImageHunter;
 import com.wangzhixuan.commons.ueditor.manager.IUeditorFileManager;
 import com.wangzhixuan.commons.ueditor.upload.Uploader;
 import com.wangzhixuan.commons.utils.JsonUtils;
+import com.wangzhixuan.commons.utils.StringUtils;
 
 public class UeditorService {
 	@Autowired 
@@ -33,8 +32,7 @@ public class UeditorService {
 
 	private String invoke(HttpServletRequest request) {
 		String actionType = request.getParameter("action");
-		@SuppressWarnings("deprecation")
-		String rootPath = request.getRealPath("/");
+		String rootPath = request.getServletContext().getRealPath("/");
 		String ctxPath  = request.getContextPath();
 		
 		if (actionType == null || !ActionMap.mapping.containsKey(actionType)) {
@@ -48,7 +46,7 @@ public class UeditorService {
 		
 		State state = null;
 		int actionCode = ActionMap.getType(actionType);
-		Map<String, Object> conf = null;
+		ActionConfig conf = null;
 
 		switch (actionCode) {
 
@@ -63,31 +61,30 @@ public class UeditorService {
 			String imageManagerUrlPrefix = allConfig.getImageManagerUrlPrefix();
 			String fileManagerUrlPrefix = allConfig.getFileManagerUrlPrefix();
 
-			if (null == imageUrlPrefix || "".equals(imageUrlPrefix.trim())) {
+			if (StringUtils.isBlank(imageUrlPrefix)) {
 				allConfig.setImageUrlPrefix(ctxPath);
 			}
-			if (null == scrawlUrlPrefix || "".equals(scrawlUrlPrefix.trim())) {
+			if (StringUtils.isBlank(scrawlUrlPrefix)) {
 				allConfig.setScrawlUrlPrefix(ctxPath);
 			}
-			if (null == snapscreenUrlPrefix || "".equals(snapscreenUrlPrefix.trim())) {
+			if (StringUtils.isBlank(snapscreenUrlPrefix)) {
 				allConfig.setSnapscreenUrlPrefix(ctxPath);
 			}
-			if (null == catcherUrlPrefix || "".equals(catcherUrlPrefix.trim())) {
+			if (StringUtils.isBlank(catcherUrlPrefix)) {
 				allConfig.setCatcherUrlPrefix(ctxPath);
 			}
-			if (null == videoUrlPrefix || "".equals(videoUrlPrefix.trim())) {
+			if (StringUtils.isBlank(videoUrlPrefix)) {
 				allConfig.setVideoUrlPrefix(ctxPath);
 			}
-			if (null == fileUrlPrefix || "".equals(fileUrlPrefix.trim())) {
+			if (StringUtils.isBlank(fileUrlPrefix)) {
 				allConfig.setFileUrlPrefix(ctxPath);
 			}
-			if (null == imageManagerUrlPrefix || "".equals(imageManagerUrlPrefix.trim())) {
+			if (StringUtils.isBlank(imageManagerUrlPrefix)) {
 				allConfig.setImageManagerUrlPrefix(ctxPath);
 			}
-			if (null == fileManagerUrlPrefix || "".equals(fileManagerUrlPrefix.trim())) {
+			if (StringUtils.isBlank(fileManagerUrlPrefix)) {
 				allConfig.setFileManagerUrlPrefix(ctxPath);
 			}
-
 			return JsonUtils.toJson(allConfig);
 
 		case ActionMap.UPLOAD_IMAGE:
@@ -100,7 +97,7 @@ public class UeditorService {
 
 		case ActionMap.CATCH_IMAGE:
 			conf = ueditorManager.getConfig(actionCode, rootPath);
-			String[] list = request.getParameterValues((String) conf.get("fieldName"));
+			String[] list = request.getParameterValues(conf.getFieldName());
 			state = new ImageHunter(fileManager, conf).capture(list);
 			break;
 

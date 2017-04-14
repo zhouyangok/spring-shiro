@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wangzhixuan.commons.shiro.captcha.DreamCaptcha;
 import com.wangzhixuan.commons.ueditor.UeditorService;
@@ -45,7 +46,7 @@ public class CommonsController {
     /**
      * ueditor编辑器
      */
-    @GetMapping("ueditor")
+    @RequestMapping("ueditor")
     public void ueditor(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html");
         String json = ueditorService.exec(request);

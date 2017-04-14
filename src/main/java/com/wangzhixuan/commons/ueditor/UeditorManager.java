@@ -1,8 +1,6 @@
 package com.wangzhixuan.commons.ueditor;
 
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.Assert;
@@ -59,64 +57,64 @@ public class UeditorManager implements InitializingBean {
 		return jsonConfig;
 	}
 
-	public Map<String, Object> getConfig(int type, String rootPath) {
-		Map<String, Object> conf = new HashMap<String, Object>();
+	public ActionConfig getConfig(int type, String rootPath) {
+		ActionConfig conf = new ActionConfig();
 		String savePath = null;
 		switch (type) {
 		case ActionMap.UPLOAD_FILE:
-			conf.put("isBase64", "false");
-			conf.put("maxSize", jsonConfig.getFileMaxSize());
-			conf.put("allowFiles", jsonConfig.getFileAllowFiles());
-			conf.put("fieldName", jsonConfig.getFileFieldName());
+			conf.setBase64(false);
+			conf.setMaxSize(jsonConfig.getFileMaxSize());
+			conf.setAllowFiles(jsonConfig.getFileAllowFiles());
+			conf.setFieldName(jsonConfig.getFileFieldName());
 			savePath = jsonConfig.getFilePathFormat();
 			break;
 
 		case ActionMap.UPLOAD_IMAGE:
-			conf.put("isBase64", "false");
-			conf.put("maxSize", jsonConfig.getImageMaxSize());
-			conf.put("allowFiles", jsonConfig.getImageAllowFiles());
-			conf.put("fieldName", jsonConfig.getImageFieldName());
+			conf.setBase64(false);
+			conf.setMaxSize(jsonConfig.getImageMaxSize());
+			conf.setAllowFiles(jsonConfig.getImageAllowFiles());
+			conf.setFieldName(jsonConfig.getImageFieldName());
 			savePath = jsonConfig.getImagePathFormat();
 			break;
 
 		case ActionMap.UPLOAD_VIDEO:
-			conf.put("maxSize", jsonConfig.getVideoMaxSize());
-			conf.put("allowFiles", jsonConfig.getVideoAllowFiles());
-			conf.put("fieldName", jsonConfig.getVideoFieldName());
+			conf.setMaxSize(jsonConfig.getVideoMaxSize());
+			conf.setAllowFiles(jsonConfig.getVideoAllowFiles());
+			conf.setFieldName(jsonConfig.getVideoFieldName());
 			savePath = jsonConfig.getVideoPathFormat();
 			break;
 
 		case ActionMap.UPLOAD_SCRAWL:
-			conf.put("filename", "scrawl");
-			conf.put("maxSize", jsonConfig.getScrawlMaxSize());
-			conf.put("fieldName", jsonConfig.getScrawlFieldName());
-			conf.put("isBase64", "true");
+			conf.setFilename("scrawl");
+			conf.setMaxSize(jsonConfig.getScrawlMaxSize());
+			conf.setFieldName(jsonConfig.getScrawlFieldName());
+			conf.setBase64(true);
 			savePath = jsonConfig.getScrawlPathFormat();
 			break;
 
 		case ActionMap.CATCH_IMAGE:
-			conf.put("filename", "remote");
-			conf.put("filter", jsonConfig.getCatcherLocalDomain());
-			conf.put("maxSize", jsonConfig.getCatcherMaxSize());
-			conf.put("allowFiles", jsonConfig.getCatcherAllowFiles());
-			conf.put("fieldName", jsonConfig.getCatcherFieldName() + "[]");
+			conf.setFilename("remote");
+			conf.setFilter(jsonConfig.getCatcherLocalDomain());
+			conf.setMaxSize(jsonConfig.getCatcherMaxSize());
+			conf.setAllowFiles(jsonConfig.getCatcherAllowFiles());
+			conf.setFieldName(jsonConfig.getCatcherFieldName() + "[]");
 			savePath = jsonConfig.getCatcherPathFormat();
 			break;
 
 		case ActionMap.LIST_IMAGE:
-			conf.put("allowFiles", jsonConfig.getImageManagerAllowFiles());
-			conf.put("dir", jsonConfig.getImageManagerListPath());
-			conf.put("count", jsonConfig.getImageManagerListSize());
+			conf.setAllowFiles(jsonConfig.getImageManagerAllowFiles());
+			conf.setDir(jsonConfig.getImageManagerListPath());
+			conf.setCount(jsonConfig.getImageManagerListSize());
 			break;
 
 		case ActionMap.LIST_FILE:
-			conf.put("allowFiles", jsonConfig.getFileManagerAllowFiles());
-			conf.put("dir", jsonConfig.getFileManagerListPath());
-			conf.put("count", jsonConfig.getFileManagerListSize());
+			conf.setAllowFiles(jsonConfig.getFileManagerAllowFiles());
+			conf.setDir(jsonConfig.getFileManagerListPath());
+			conf.setCount(jsonConfig.getFileManagerListSize());
 			break;
 		}
-		conf.put("savePath", savePath);
-		conf.put("rootPath", rootPath);
+		conf.setSavePath(savePath);
+		conf.setRootPath(rootPath);
 		return conf;
 	}
 	

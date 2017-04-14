@@ -10,10 +10,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 
+import com.wangzhixuan.commons.ueditor.ActionConfig;
 import com.wangzhixuan.commons.ueditor.PathFormat;
 import com.wangzhixuan.commons.ueditor.define.AppInfo;
 import com.wangzhixuan.commons.ueditor.define.BaseState;
@@ -44,11 +44,11 @@ public class DefaultFileManager implements IUeditorFileManager {
 	}
 	
 	@Override
-	public State list(Map<String, Object> conf, int start) {
-		String rootPath = (String) conf.get("rootPath");
-		String dirPath = rootPath + (String) conf.get("dir");
-		List<String> allowFiles = ManagerUtils.getAllowFiles(conf.get("allowFiles"));
-		int count = (Integer) conf.get("count");
+	public State list(ActionConfig conf, int start) {
+		String rootPath = conf.getRootPath();
+		String dirPath = rootPath + conf.getDir();
+		List<String> allowFiles = ManagerUtils.getAllowFiles(conf.getAllowFiles());
+		int count = conf.getCount();
 		
 		File dir = new File(dirPath);
 
@@ -125,9 +125,7 @@ public class DefaultFileManager implements IUeditorFileManager {
 			if (!state.isSuccess()) {
 				tmpFile.delete();
 			}
-
 			return state;
-
 		} catch (IOException e) {
 			// ignore
 		}
@@ -156,7 +154,6 @@ public class DefaultFileManager implements IUeditorFileManager {
 			if (!state.isSuccess()) {
 				tmpFile.delete();
 			}
-
 			return state;
 		} catch (IOException e) {
 			// ignore
@@ -188,7 +185,6 @@ public class DefaultFileManager implements IUeditorFileManager {
 		State state = new BaseState(true);
 		state.putInfo("size", targetFile.length());
 		state.putInfo("title", targetFile.getName());
-
 		return state;
 	}
 

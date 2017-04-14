@@ -1,28 +1,27 @@
 package com.wangzhixuan.commons.ueditor.upload;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
+import com.wangzhixuan.commons.ueditor.ActionConfig;
 import com.wangzhixuan.commons.ueditor.define.State;
 import com.wangzhixuan.commons.ueditor.manager.IUeditorFileManager;
 
 public class Uploader {
 	private HttpServletRequest request = null;
-	private Map<String, Object> conf = null;
+	private ActionConfig conf = null;
 
-	public Uploader(HttpServletRequest request, Map<String, Object> conf) {
+	public Uploader(HttpServletRequest request, ActionConfig conf) {
 		this.request = request;
 		this.conf = conf;
 	}
 
 	public final State doExec(IUeditorFileManager fileManager) {
-		String filedName = (String) this.conf.get("fieldName");
+		String filedName = conf.getFieldName();
 		State state = null;
-		if ("true".equals(this.conf.get("isBase64"))) {
-			state = Base64Uploader.save(fileManager, this.request.getParameter(filedName), this.conf);
+		if (conf.isBase64()) {
+			state = Base64Uploader.save(fileManager, request.getParameter(filedName), conf);
 		} else {
-			state = BinaryUploader.save(fileManager, this.request, this.conf);
+			state = BinaryUploader.save(fileManager, request, conf);
 		}
 		return state;
 	}

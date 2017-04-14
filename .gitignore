@@ -1,4 +1,3 @@
-/target/
 # maven ignore
 target/
 *.jar
@@ -37,3 +36,4 @@ logs
 Thumbs.db
 Servers
 .metadata
+upload

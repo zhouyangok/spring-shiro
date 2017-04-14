@@ -4,16 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FileType {
-
 	public static final String JPG = "JPG";
 
 	private static final Map<String, String> types = new HashMap<String, String>() {
 		private static final long serialVersionUID = -935543810424292061L;
-
 		{
-
 			put(FileType.JPG, ".jpg");
-
 		}
 	};
 

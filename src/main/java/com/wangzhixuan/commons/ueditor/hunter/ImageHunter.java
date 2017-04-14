@@ -3,8 +3,8 @@ package com.wangzhixuan.commons.ueditor.hunter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-import java.util.Map;
 
+import com.wangzhixuan.commons.ueditor.ActionConfig;
 import com.wangzhixuan.commons.ueditor.PathFormat;
 import com.wangzhixuan.commons.ueditor.define.AppInfo;
 import com.wangzhixuan.commons.ueditor.define.BaseState;
@@ -28,15 +28,14 @@ public class ImageHunter {
 	private IUeditorFileManager fileManager;
 	private List<String> filters = null;
 
-	@SuppressWarnings("unchecked")
-	public ImageHunter(IUeditorFileManager fileManager, Map<String, Object> conf) {
+	public ImageHunter(IUeditorFileManager fileManager, ActionConfig conf) {
 		this.fileManager = fileManager;
-		this.filename = (String) conf.get("filename");
-		this.savePath = (String) conf.get("savePath");
-		this.rootPath = (String) conf.get("rootPath");
-		this.maxSize = (Long) conf.get("maxSize");
-		this.allowTypes = (List<String>) conf.get("allowFiles");
-		this.filters = (List<String>) conf.get("filter");
+		this.filename = conf.getFilename();
+		this.savePath = conf.getSavePath();
+		this.rootPath = conf.getRootPath();
+		this.maxSize = conf.getMaxSize();
+		this.allowTypes = conf.getAllowFiles();
+		this.filters = conf.getFilter();
 	}
 
 	public State capture(String[] list) {
@@ -51,7 +50,6 @@ public class ImageHunter {
 		HttpURLConnection connection = null;
 		URL url = null;
 		String suffix = null;
-
 		try {
 			url = new URL(urlStr);
 
@@ -85,7 +83,6 @@ public class ImageHunter {
 				state.putInfo("url", PathFormat.format(savePath));
 				state.putInfo("source", urlStr);
 			}
-
 			return state;
 		} catch (Exception e) {
 			return new BaseState(false, AppInfo.REMOTE_FAIL);

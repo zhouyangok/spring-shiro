@@ -1,9 +1,8 @@
 package com.wangzhixuan.commons.ueditor.upload;
 
-import java.util.Map;
-
 import org.apache.shiro.codec.Base64;
 
+import com.wangzhixuan.commons.ueditor.ActionConfig;
 import com.wangzhixuan.commons.ueditor.PathFormat;
 import com.wangzhixuan.commons.ueditor.define.AppInfo;
 import com.wangzhixuan.commons.ueditor.define.BaseState;
@@ -14,9 +13,9 @@ import com.wangzhixuan.commons.ueditor.manager.IUeditorFileManager;
 
 public final class Base64Uploader {
 
-	public static State save(IUeditorFileManager fileManager, String content, Map<String, Object> conf) {
+	public static State save(IUeditorFileManager fileManager, String content, ActionConfig conf) {
 		byte[] data = decode(content);
-		long maxSize = ((Long) conf.get("maxSize")).longValue();
+		long maxSize = conf.getMaxSize();
 
 		if (!validSize(data, maxSize)) {
 			return new BaseState(false, AppInfo.MAX_SIZE);
@@ -24,11 +23,10 @@ public final class Base64Uploader {
 
 		String suffix = FileType.getSuffix("JPG");
 
-		String savePath = PathFormat.parse((String) conf.get("savePath"),
-				(String) conf.get("filename"));
+		String savePath = PathFormat.parse(conf.getSavePath(),  conf.getFilename());
 
 		savePath = savePath + suffix;
-		String rootPath = (String) conf.get("rootPath");
+		String rootPath = conf.getRootPath();
 
 		State storageState = fileManager.saveFile(data, rootPath, savePath);
 
