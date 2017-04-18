@@ -449,6 +449,14 @@ $.ajaxSetup({
         } catch (e) {
             alert(XMLHttpRequest.responseText);
         }
+    },
+    complete(XMLHttpRequest, textStatus, xhr) {
+        //ajax session超时处理:通过XMLHttpRequest取得响应头,oauthstatus
+        var oauthstatus = XMLHttpRequest.getResponseHeader("oauthstatus");
+        if(oauthstatus == '401'){
+            self.location.href = basePath + "/login";
+            return;
+        }
     }
 });
 
