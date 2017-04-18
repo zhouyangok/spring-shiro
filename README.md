@@ -7,6 +7,8 @@
 
 `代码生成详见`：[src/test/java/com/wangzhixuan/generator/MysqlGenerator](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/master/src/test/java/com/wangzhixuan/generator)
 
+`ueditor`: https://shiro.dreamlu.net/static/ueditor/index.html
+
 ## 技术和功能
 > Spring-cache
 
@@ -122,6 +124,8 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 `slieery` 10元
 
 ## 更新记录
+> 2017-04-18 添加ueditor，fixed ajax session timeout。
+
 > 2017-03-28 升级到mybaits plus 2.0.5，
 > 更改验证码为`cookie + cache`存储。
 > 用户添加密码加密盐。
