@@ -126,17 +126,11 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 `slieery` 10元
 
 ## 更新记录
-> 2017-04-18 添加ueditor，fixed ajax session timeout。
-
-> 2017-03-28 升级到mybaits plus 2.0.5，
+> 2017-04-20 v1.3.0 添加ueditor，fixed ajax session timeout。
+> 升级到mybaits plus 2.0.6，
 > 更改验证码为`cookie + cache`存储。
 > 用户添加密码加密盐。
-> 适配`mybaits plus 2.0.5`设置主键自增bug。
-
-> 2017-02-13 添加菜单的默认打开状态控制
-
-> 2017-01-15 v1.3.0 升级到mybatis-plus 2.0.1，添加页面生成！
-> 老版本请查看：[v1.2.0](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/v1.2.0/)
+> 添加菜单的默认打开状态控制。
 
 > 2016-12-20 v1.2.0 tab加载修改ajax或者iframe，页面默认采用ajax加载！
 > 老版本请查看：[v1.1.1](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/v1.1.1/)
