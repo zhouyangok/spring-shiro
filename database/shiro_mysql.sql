@@ -121,7 +121,8 @@ CREATE TABLE `role_resource` (
   `id` bigint(19) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `role_id` bigint(19) NOT NULL COMMENT '角色id',
   `resource_id` bigint(19) NOT NULL COMMENT '资源id',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_role_resource_ids` (`role_id`,`resource_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=463 DEFAULT CHARSET=utf8 COMMENT='角色资源';
 
 -- ----------------------------
@@ -246,7 +247,8 @@ CREATE TABLE `user` (
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '用户状态',
   `organization_id` int(11) NOT NULL DEFAULT '0' COMMENT '所属机构',
   `create_time` datetime NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `IDx_user_login_name` (`login_name`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='用户';
 
 -- ----------------------------
@@ -265,7 +267,8 @@ CREATE TABLE `user_role` (
   `id` bigint(19) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `user_id` bigint(19) NOT NULL COMMENT '用户id',
   `role_id` bigint(19) NOT NULL COMMENT '角色id',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `idx_user_role_ids` (`user_id`,`role_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 COMMENT='用户角色';
 
 -- ----------------------------
