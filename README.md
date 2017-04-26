@@ -41,7 +41,9 @@
 
 项目启动可采用内置jetty maven plugin，`mvn jerry:run`！
 
-你需要根据自己的业务添加`shiro注解`，实现请求控制。
+`注意：`你需要根据自己的业务添加`shiro注解`，实现请求控制。
+
+目前对`用户`和`授权`部分添加了`@RequiresRoles("admin")`注解，防止部分无聊的朋友修改数据库！
 
 如果觉得数据校验不够，请自行添加`hibernate-validator`在Bean上做校验！
 
