@@ -92,6 +92,9 @@ INSERT INTO `resource` VALUES ('226', '修改密码', '/user/editPwdPage', 'ajax
 INSERT INTO `resource` VALUES ('227', '登录日志', '/sysLog/manager', 'ajax', null, 'fi-info', '221', '0', '0', '1', '0', '2016-09-30 22:10:53');
 INSERT INTO `resource` VALUES ('228', 'Druid监控', '/druid', 'iframe', null, 'fi-monitor', '221', '0', '0', '1', '0', '2016-09-30 22:12:50');
 INSERT INTO `resource` VALUES ('229', '系统图标', '/icons.html', 'ajax', null, 'fi-photo', '221', '0', '0', '1', '0', '2016-12-24 15:53:47');
+INSERT INTO `resource` VALUES ('230', '文章管理', '', 'ajax', null, 'fi-page-multiple', null, '0', '0', '0', '0', '2016-12-24 15:53:47');
+INSERT INTO `resource` VALUES ('231', '新建文章', '/article/create', 'ajax', null, 'fi-page-edit', '230', '0', '0', '1', '0', '2016-12-24 15:53:47');
+
 -- ----------------------------
 -- Table structure for `role`
 -- ----------------------------
@@ -215,6 +218,8 @@ INSERT INTO `role_resource` VALUES ('460', '8', '221');
 INSERT INTO `role_resource` VALUES ('461', '8', '227');
 INSERT INTO `role_resource` VALUES ('462', '8', '228');
 INSERT INTO `role_resource` VALUES ('478', '8', '229');
+INSERT INTO `role_resource` VALUES ('479', '8', '230');
+INSERT INTO `role_resource` VALUES ('480', '8', '231');
 
 -- ----------------------------
 -- Table structure for `sys_log`
