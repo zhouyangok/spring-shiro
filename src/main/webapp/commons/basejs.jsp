@@ -19,4 +19,5 @@
 <link rel="stylesheet" type="text/css" href="${staticPath }/static/foundation-icons/foundation-icons.css" />
 <script type="text/javascript">
     var basePath = "${staticPath }";
+    window.UEDITOR_HOME_URL = "${staticPath }/static/ueditor/";
 </script>
