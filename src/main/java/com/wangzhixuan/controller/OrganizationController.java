@@ -33,7 +33,7 @@ public class OrganizationController extends BaseController {
      */
     @GetMapping(value = "/manager")
     public String manager() {
-        return "admin/organization";
+        return "admin/organization/organization";
     }
 
     /**
@@ -65,7 +65,7 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/addPage")
     public String addPage() {
-        return "admin/organizationAdd";
+        return "admin/organization/organizationAdd";
     }
 
     /**
@@ -93,7 +93,7 @@ public class OrganizationController extends BaseController {
     public String editPage(Model model, Long id) {
         Organization organization = organizationService.selectById(id);
         model.addAttribute("organization", organization);
-        return "admin/organizationEdit";
+        return "admin/organization/organizationEdit";
     }
 
     /**

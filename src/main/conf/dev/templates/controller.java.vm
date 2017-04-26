@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.gzcx.commons.base.BaseController;
-import com.gzcx.commons.utils.PageInfo;
+import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.utils.PageInfo;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 

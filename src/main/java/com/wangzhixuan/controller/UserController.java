@@ -42,7 +42,7 @@ public class UserController extends BaseController {
      */
     @GetMapping("/manager")
     public String manager() {
-        return "admin/user";
+        return "admin/user/user";
     }
 
     /**
@@ -85,7 +85,7 @@ public class UserController extends BaseController {
      */
     @GetMapping("/addPage")
     public String addPage() {
-        return "admin/userAdd";
+        return "admin/user/userAdd";
     }
 
     /**
@@ -126,7 +126,7 @@ public class UserController extends BaseController {
         }
         model.addAttribute("roleIds", ids);
         model.addAttribute("user", userVo);
-        return "admin/userEdit";
+        return "admin/user/userEdit";
     }
 
     /**
@@ -160,7 +160,7 @@ public class UserController extends BaseController {
      */
     @GetMapping("/editPwdPage")
     public String editPwdPage() {
-        return "admin/userEditPwd";
+        return "admin/user/userEditPwd";
     }
 
     /**

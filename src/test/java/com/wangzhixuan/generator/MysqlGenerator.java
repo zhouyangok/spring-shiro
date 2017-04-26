@@ -93,7 +93,7 @@ public class MysqlGenerator {
 		// 自定义 service 实现类父类
 		// strategy.setSuperServiceImplClass("com.baomidou.demo.TestServiceImpl");
 		// 自定义 controller 父类
-		// strategy.setSuperControllerClass("com.baomidou.demo.TestController");
+		strategy.setSuperControllerClass("com.wangzhixuan.commons.base.BaseController");
 		// 【实体】是否生成字段常量（默认 false）
 		// public static final String ID = "test_id";
 		// strategy.setEntityColumnConstant(true);
