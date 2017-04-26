@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -135,6 +136,7 @@ public class UserController extends BaseController {
      * @param userVo
      * @return
      */
+    @RequiresRoles("admin")
     @PostMapping("/edit")
     @ResponseBody
     public Object edit(UserVo userVo) {
@@ -188,6 +190,7 @@ public class UserController extends BaseController {
      * @param id
      * @return
      */
+    @RequiresRoles("admin")
     @PostMapping("/delete")
     @ResponseBody
     public Object delete(Long id) {
