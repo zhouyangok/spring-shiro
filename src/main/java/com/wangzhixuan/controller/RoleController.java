@@ -2,6 +2,7 @@ package com.wangzhixuan.controller;
 
 import java.util.List;
 
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -161,6 +162,7 @@ public class RoleController extends BaseController {
      * @param resourceIds
      * @return
      */
+    @RequiresRoles("admin")
     @RequestMapping("/grant")
     @ResponseBody
     public Object grant(Long id, String resourceIds) {
