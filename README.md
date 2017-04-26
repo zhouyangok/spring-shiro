@@ -9,8 +9,6 @@
 
 `代码生成详见`：[src/test/java/com/wangzhixuan/generator/MysqlGenerator](http://git.oschina.net/wangzhixuan/spring-shiro-training/tree/master/src/test/java/com/wangzhixuan/generator)
 
-`ueditor`: https://shiro.dreamlu.net/static/ueditor/index.html
-
 ## 技术和功能
 > Spring-cache
 
