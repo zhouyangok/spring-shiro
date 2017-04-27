@@ -100,7 +100,7 @@ public class UserController extends BaseController {
     public Object add(UserVo userVo) {
         List<User> list = userService.selectByLoginName(userVo);
         if (list != null && !list.isEmpty()) {
-            return renderError("用户名已存在!");
+            return renderError("登录名已存在!");
         }
         String salt = StringUtils.getUUId();
         String pwd = passwordHash.toHex(userVo.getPassword(), salt);
@@ -142,7 +142,7 @@ public class UserController extends BaseController {
     public Object edit(UserVo userVo) {
         List<User> list = userService.selectByLoginName(userVo);
         if (list != null && !list.isEmpty()) {
-            return renderError("用户名已存在!");
+            return renderError("登录名已存在!");
         }
         // 更新密码
         if (StringUtils.isNotBlank(userVo.getPassword())) {
