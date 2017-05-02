@@ -20,7 +20,8 @@
                     parent.$.modalDialog.openner_dataGrid.datagrid('reload');
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
-                    parent.$.messager.alert('错误', result.msg, 'error');
+                    var form = $('#${table.entityPath}AddForm');
+                    parent.$.messager.alert('错误', eval(result.msg), 'error');
                 }
             }
         });

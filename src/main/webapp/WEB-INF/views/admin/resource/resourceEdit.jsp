@@ -28,7 +28,8 @@
                     parent.layout_west_tree.tree('reload');
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
-                    parent.$.messager.alert('提示', result.msg, 'warning');
+                    var form = $('#resourceEditForm');
+                    parent.$.messager.alert('提示', eval(result.msg), 'warning');
                 }
             }
         });

@@ -87,10 +87,11 @@ public abstract class BaseController {
     public Object renderError(BindingResult result) {
         FieldError error = result.getFieldError();
         StringBuilder errorMsg = new StringBuilder(100);
-        errorMsg.append("“");
+        errorMsg.append("$(form).find(\"[name=\\\"");
         errorMsg.append(error.getField());
-        errorMsg.append("”");
+        errorMsg.append("\\\"]\").closest(\"td\").prev().text() + \"，");
         errorMsg.append(error.getDefaultMessage());
+        errorMsg.append("\"");
         return renderError(errorMsg.toString());
     }
     

@@ -33,7 +33,8 @@
                     parent.$.modalDialog.openner_dataGrid.datagrid('reload');//之所以能在这里调用到parent.$.modalDialog.openner_dataGrid这个对象，是因为user.jsp页面预定义好了
                     parent.$.modalDialog.handler.dialog('close');
                 } else {
-                    parent.$.messager.alert('提示', result.msg, 'warning');
+                    var form = $('#userAddForm');
+                    parent.$.messager.alert('提示', eval(result.msg), 'warning');
                 }
             }
         });
