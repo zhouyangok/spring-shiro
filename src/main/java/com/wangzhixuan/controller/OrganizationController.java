@@ -2,9 +2,12 @@ package com.wangzhixuan.controller;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,7 +79,10 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public Object add(Organization organization) {
+    public Object add(@Valid Organization organization, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         organization.setCreateTime(new Date());
         organizationService.insert(organization);
         return renderSuccess("添加成功！");
@@ -104,7 +110,10 @@ public class OrganizationController extends BaseController {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Object edit(Organization organization) {
+    public Object edit(@Valid Organization organization, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         organizationService.updateById(organization);
         return renderSuccess("编辑成功！");
     }
