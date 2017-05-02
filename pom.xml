@@ -23,6 +23,7 @@
         <jackson.version>2.8.8</jackson.version>
         <joda-time.version>2.9.7</joda-time.version>
         <commons-io.version>2.5</commons-io.version>
+        <hibernate-validator.version>5.3.5.Final</hibernate-validator.version>
     </properties>
 
     <dependencies>
@@ -140,6 +141,12 @@
             <artifactId>joda-time</artifactId>
             <version>${joda-time.version}</version>
             <optional>true</optional>
+        </dependency>
+        <!-- hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
         </dependency>
         <!-- ehcache和redis必选其一，也可同时使用（需要注意） -->
         <dependency>

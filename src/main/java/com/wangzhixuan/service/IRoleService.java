@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.model.Role;
 
 /**

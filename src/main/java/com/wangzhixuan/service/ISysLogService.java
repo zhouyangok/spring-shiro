@@ -1,7 +1,7 @@
 package com.wangzhixuan.service;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.model.SysLog;
 
 /**

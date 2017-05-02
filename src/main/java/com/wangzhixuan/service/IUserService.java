@@ -3,7 +3,7 @@ package com.wangzhixuan.service;
 import java.util.List;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.model.User;
 import com.wangzhixuan.model.vo.UserVo;
 

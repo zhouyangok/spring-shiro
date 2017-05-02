@@ -1524,10 +1524,12 @@ $(function(){
             }
         });
         clipboard.on('success', function(e) {
+            clipboard.destroy();
             showMsg("复制成功！");
             e.clearSelection();
         });
         clipboard.on('error', function(e) {
+            clipboard.destroy();
             showMsg("复制失败，可能是不支持低版本IE浏览器！");
         });
         return false;

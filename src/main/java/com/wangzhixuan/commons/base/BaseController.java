@@ -7,13 +7,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
 import com.baomidou.mybatisplus.plugins.Page;
+import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.commons.shiro.ShiroUser;
-import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringEscapeEditor;
 
 /**
@@ -71,7 +73,26 @@ public abstract class BaseController {
         result.setMsg(msg);
         return result;
     }
-
+    
+    /**
+     * bean validation异常
+     * 
+     * 此处只是粗略的构造了错误信息，只处理了第一条错误
+     * 
+     * 如果要做的完美，需要将所有的错误信息展示于页面
+     * 
+     * @param result
+     * @return
+     */
+    public Object renderError(BindingResult result) {
+        FieldError error = result.getFieldError();
+        StringBuilder errorMsg = new StringBuilder(100);
+        errorMsg.append(error.getRejectedValue());
+        errorMsg.append(" ");
+        errorMsg.append(error.getDefaultMessage());
+        return renderError(errorMsg.toString());
+    }
+    
     /**
      * ajax成功
      * @return {Object}
@@ -81,7 +102,7 @@ public abstract class BaseController {
         result.setSuccess(true);
         return result;
     }
-
+    
     /**
      * ajax成功
      * @param msg 消息

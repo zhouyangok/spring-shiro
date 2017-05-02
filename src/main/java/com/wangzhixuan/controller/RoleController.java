@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
-import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.service.IRoleService;
 

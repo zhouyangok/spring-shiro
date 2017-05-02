@@ -5,18 +5,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wangzhixuan.commons.base.BaseController;
+import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.commons.shiro.PasswordHash;
-import com.wangzhixuan.commons.utils.PageInfo;
 import com.wangzhixuan.commons.utils.StringUtils;
 import com.wangzhixuan.model.Role;
 import com.wangzhixuan.model.User;
@@ -97,7 +100,10 @@ public class UserController extends BaseController {
      */
     @PostMapping("/add")
     @ResponseBody
-    public Object add(UserVo userVo) {
+    public Object add(@Valid UserVo userVo, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         List<User> list = userService.selectByLoginName(userVo);
         if (list != null && !list.isEmpty()) {
             return renderError("登录名已存在!");
@@ -139,7 +145,10 @@ public class UserController extends BaseController {
     @RequiresRoles("admin")
     @PostMapping("/edit")
     @ResponseBody
-    public Object edit(UserVo userVo) {
+    public Object edit(@Valid UserVo userVo, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         List<User> list = userService.selectByLoginName(userVo);
         if (list != null && !list.isEmpty()) {
             return renderError("登录名已存在!");

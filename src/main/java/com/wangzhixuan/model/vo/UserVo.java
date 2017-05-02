@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wangzhixuan.commons.utils.JsonUtils;
 import com.wangzhixuan.model.Role;
@@ -19,6 +23,8 @@ public class UserVo implements Serializable {
 	
 	private Long id;
 
+	@NotBlank
+	@Size(min = 4, max = 64)
 	private String loginName;
 
 	private String name;

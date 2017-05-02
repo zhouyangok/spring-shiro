@@ -36,7 +36,7 @@ public class DigestUtils extends org.springframework.util.DigestUtils {
      * @return 加密后的字符
      */
     public static String hashByShiro(String algorithmName, Object source, Object salt, int hashIterations) {
-    	return new SimpleHash(algorithmName, source, salt, hashIterations).toHex();
+        return new SimpleHash(algorithmName, source, salt, hashIterations).toHex();
     }
     
 }

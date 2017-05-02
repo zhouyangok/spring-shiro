@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.wangzhixuan.commons.utils.PageInfo;
+import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.mapper.SysLogMapper;
 import com.wangzhixuan.model.SysLog;
 import com.wangzhixuan.service.ISysLogService;

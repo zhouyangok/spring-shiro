@@ -1,4 +1,4 @@
-package com.wangzhixuan.commons.utils;
+package com.wangzhixuan.commons.result;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
