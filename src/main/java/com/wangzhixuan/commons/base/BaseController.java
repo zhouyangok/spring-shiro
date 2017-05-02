@@ -77,9 +77,9 @@ public abstract class BaseController {
     /**
      * bean validation异常
      * 
-     * 此处只是粗略的构造了错误信息，只处理了第一条错误
+     * 此处只是粗略的构造了错误信息，只处理了第一条错误。
      * 
-     * 如果要做的完美，需要将所有的错误信息展示于页面
+     * 如果要做的完美，需要将所有的错误信息展示于页面。
      * 
      * @param result
      * @return
@@ -87,8 +87,9 @@ public abstract class BaseController {
     public Object renderError(BindingResult result) {
         FieldError error = result.getFieldError();
         StringBuilder errorMsg = new StringBuilder(100);
-        errorMsg.append(error.getRejectedValue());
-        errorMsg.append(" ");
+        errorMsg.append("“");
+        errorMsg.append(error.getField());
+        errorMsg.append("”");
         errorMsg.append(error.getDefaultMessage());
         return renderError(errorMsg.toString());
     }

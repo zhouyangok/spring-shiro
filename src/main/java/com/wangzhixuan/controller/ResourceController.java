@@ -2,9 +2,12 @@ package com.wangzhixuan.controller;
 
 import java.util.Date;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,7 +81,10 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public Object add(Resource resource) {
+    public Object add(@Valid Resource resource, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         resource.setCreateTime(new Date());
         // 选择菜单时将openMode设置为null
         Integer type = resource.getResourceType();
@@ -129,7 +135,10 @@ public class ResourceController extends BaseController {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Object edit(Resource resource) {
+    public Object edit(@Valid Resource resource, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         resourceService.updateById(resource);
         return renderSuccess("编辑成功！");
     }

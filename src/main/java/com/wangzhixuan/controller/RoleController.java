@@ -2,10 +2,13 @@ package com.wangzhixuan.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,7 +87,10 @@ public class RoleController extends BaseController {
      */
     @PostMapping("/add")
     @ResponseBody
-    public Object add(Role role) {
+    public Object add(@Valid Role role, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         roleService.insert(role);
         return renderSuccess("添加成功！");
     }
@@ -124,7 +130,10 @@ public class RoleController extends BaseController {
      */
     @RequestMapping("/edit")
     @ResponseBody
-    public Object edit(Role role) {
+    public Object edit(@Valid Role role, BindingResult result) {
+        if (result.hasErrors()) {
+            return renderError(result);
+        }
         roleService.updateById(role);
         return renderSuccess("编辑成功！");
     }

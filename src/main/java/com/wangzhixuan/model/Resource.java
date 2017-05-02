@@ -3,6 +3,8 @@ package com.wangzhixuan.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -24,6 +26,7 @@ public class Resource implements Serializable {
 	private Long id;
 
 	/** 资源名称 */
+	@NotBlank
 	private String name;
 
 	/** 资源路径 */
