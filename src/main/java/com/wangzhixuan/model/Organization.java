@@ -3,6 +3,8 @@ package com.wangzhixuan.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
@@ -24,12 +26,14 @@ public class Organization implements Serializable {
 	private Long id;
 
 	/** 组织名 */
+	@NotBlank
 	private String name;
 
 	/** 地址 */
 	private String address;
 
 	/** 编号 */
+	@NotBlank
 	private String code;
 
 	/** 图标 */
