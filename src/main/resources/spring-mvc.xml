@@ -47,6 +47,8 @@
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg value="UTF-8"/>
             </bean>
+            <!-- 下载使用 -->
+            <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
             <ref bean="jacksonMessageConverter" />
         </mvc:message-converters>
     </mvc:annotation-driven>

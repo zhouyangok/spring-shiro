@@ -104,6 +104,8 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 
 `slieery` 10元
 
+`回音哥` 10元
+
 ## License
 
 ( The MIT License )
