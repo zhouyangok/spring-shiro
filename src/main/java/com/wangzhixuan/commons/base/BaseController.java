@@ -1,22 +1,37 @@
 package com.wangzhixuan.commons.base;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.commons.shiro.ShiroUser;
+import com.wangzhixuan.commons.utils.Charsets;
+import com.wangzhixuan.commons.utils.IOUtils;
 import com.wangzhixuan.commons.utils.StringEscapeEditor;
+import com.wangzhixuan.commons.utils.URLUtils;
 
 /**
  * @description：基础 controller
@@ -147,4 +162,62 @@ public abstract class BaseController {
         return pageInfo;
     }
 
+
+	/**
+	 * redirect跳转
+	 * @param url 目标url
+	 */
+	protected String redirect(String url) {
+		return new StringBuilder("redirect:").append(url).toString();
+	}
+	
+	/**
+	 * 下载文件
+	 * @param file 文件
+	 */
+	protected ResponseEntity<byte[]> download(File file) throws IOException {
+		String fileName = file.getName();
+		return download(file, fileName);
+	}
+	
+	/**
+	 * 下载文件
+	 * @param file 文件
+	 * @param fileName 写出的文件名
+	 */
+	protected ResponseEntity<byte[]> download(File file, String fileName) throws IOException {
+		InputStream in = null;
+		try {
+			in = new FileInputStream(file);
+			byte[] body = IOUtils.copyToByteArray(in);
+			return download(body, fileName);
+		} finally {
+			IOUtils.closeQuietly(in);
+		}
+	}
+	
+	/**
+	 * 下载
+	 * @param body 数据
+	 * @param fileName 生成的文件名
+	 * @return {ResponseEntity}
+	 */
+	protected ResponseEntity<byte[]> download(byte[] body, String fileName) {
+		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+				.getRequestAttributes()).getRequest();
+		String header = request.getHeader("User-Agent").toUpperCase();
+		HttpStatus status;
+		if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
+			fileName = URLUtils.encodeURL(fileName, Charsets.UTF_8.name());
+			status = HttpStatus.OK;
+		} else {
+			fileName = new String(fileName.getBytes(Charsets.UTF_8), Charsets.ISO_8859_1);
+			status = HttpStatus.CREATED;
+		}
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+		headers.setContentDispositionFormData("attachment", fileName);
+		headers.setContentLength(body.length);
+		return new ResponseEntity<byte[]>(body, headers, status);
+	}
 }

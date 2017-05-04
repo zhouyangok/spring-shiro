@@ -1,13 +1,13 @@
 package com.wangzhixuan.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,16 +47,10 @@ public class CommonsController {
      * ueditor编辑器
      */
     @RequestMapping("ueditor")
-    public void ueditor(HttpServletRequest request, HttpServletResponse response) {
-        response.setContentType("text/html");
+    public ResponseEntity<String> ueditor(HttpServletRequest request) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_HTML);
         String json = ueditorService.exec(request);
-        PrintWriter writer = null;
-        try {
-            writer = response.getWriter();
-            writer.write(json);
-            writer.flush();
-        } catch (IOException e) {
-            IOUtils.closeQuietly(writer);
-        }
+        return new ResponseEntity<String>(json, headers, HttpStatus.OK);
     }
 }
