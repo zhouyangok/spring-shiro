@@ -106,6 +106,8 @@ git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.g
 
 `回音哥` 10元
 
+`青菜萝卜白菜` 88.88元
+
 ## License
 
 ( The MIT License )
