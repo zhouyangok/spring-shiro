@@ -76,6 +76,8 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher imple
 			//if retry count > 5 throw
 			logger.warn("username: " + username + " tried to login more than 5 times in period");  
 			throw new ExcessiveAttemptsException("用户名: " + username + " 密码连续输入错误超过5次，锁定半小时！"); 
+		} else {
+			passwordRetryCache.put(username, retryCount);
 		}
 
 		boolean matches = super.doCredentialsMatch(authcToken, info);
