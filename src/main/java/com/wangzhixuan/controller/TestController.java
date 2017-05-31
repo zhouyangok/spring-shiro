@@ -39,7 +39,7 @@ public class TestController extends BaseController {
      */
     @GetMapping("/down")
     public ResponseEntity<Resource> down() {
-        File file = new File("/Users/lcm/Desktop/个人小客车配置指标申请表.pdf");
+        File file = new File("/Users/lcm/Downloads/归档.zip");
         return download(file);
     }
 }
