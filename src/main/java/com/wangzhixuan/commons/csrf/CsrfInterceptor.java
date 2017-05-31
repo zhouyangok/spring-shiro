@@ -12,15 +12,13 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.wangzhixuan.commons.scan.ExceptionResolver;
-
 /**
  * Csrf拦截器，用来生成或去除CsrfToken
  * 
  * @author L.cm
  */
 public class CsrfInterceptor extends HandlerInterceptorAdapter {
-	private static final Logger logger = LogManager.getLogger(ExceptionResolver.class);
+	private static final Logger logger = LogManager.getLogger(CsrfInterceptor.class);
 	
 	@Autowired 
 	private CsrfTokenRepository csrfTokenRepository;

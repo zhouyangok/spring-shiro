@@ -1,9 +1,9 @@
 package com.wangzhixuan.controller;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,10 +36,9 @@ public class TestController extends BaseController {
     /**
      * 下载测试
      * @return
-     * @throws IOException
      */
     @GetMapping("/down")
-    public ResponseEntity<byte[]> down() throws IOException {
+    public ResponseEntity<Resource> down() {
         File file = new File("/Users/lcm/Desktop/个人小客车配置指标申请表.pdf");
         return download(file);
     }

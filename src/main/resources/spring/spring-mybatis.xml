@@ -10,15 +10,13 @@
     http://www.springframework.org/schema/tx
     http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <!-- base dataSource -->
+    <!-- dataSource -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="url" value="${db.master.url}" />
         <property name="username" value="${db.master.user}" />
         <property name="password" value="${db.master.password}" />
-        
         <!-- 配置监控统计拦截的filters -->
         <property name="filters" value="mergeStat,wall,log4j2" />
-        
         <property name="initialSize" value="5" />
         <property name="maxActive" value="100" />
         <property name="minIdle" value="10" />
@@ -46,6 +44,7 @@
                 <!-- 分页插件配置 -->
                 <bean id="paginationInterceptor" class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
                     <property name="dialectType" value="mysql"/>
+                    <property name="optimizeType" value="aliDruid" />
                 </bean>
             </array>
         </property>

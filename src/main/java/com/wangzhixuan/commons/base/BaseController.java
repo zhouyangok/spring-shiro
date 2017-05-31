@@ -1,9 +1,6 @@
 package com.wangzhixuan.commons.base;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,12 +10,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -29,7 +26,6 @@ import com.wangzhixuan.commons.result.PageInfo;
 import com.wangzhixuan.commons.result.Result;
 import com.wangzhixuan.commons.shiro.ShiroUser;
 import com.wangzhixuan.commons.utils.Charsets;
-import com.wangzhixuan.commons.utils.IOUtils;
 import com.wangzhixuan.commons.utils.StringEscapeEditor;
 import com.wangzhixuan.commons.utils.URLUtils;
 
@@ -87,27 +83,6 @@ public abstract class BaseController {
         Result result = new Result();
         result.setMsg(msg);
         return result;
-    }
-    
-    /**
-     * bean validation异常
-     * 
-     * 此处只是粗略的构造了错误信息，只处理了第一条错误。
-     * 
-     * 如果要做的完美，需要将所有的错误信息展示于页面。
-     * 
-     * @param result
-     * @return
-     */
-    public Object renderError(BindingResult result) {
-        FieldError error = result.getFieldError();
-        StringBuilder errorMsg = new StringBuilder(100);
-        errorMsg.append("$(form).find(\"[name=\\\"");
-        errorMsg.append(error.getField());
-        errorMsg.append("\\\"]\").closest(\"td\").prev().text() + \"，");
-        errorMsg.append(error.getDefaultMessage());
-        errorMsg.append("\"");
-        return renderError(errorMsg.toString());
     }
     
     /**
@@ -175,40 +150,28 @@ public abstract class BaseController {
 	 * 下载文件
 	 * @param file 文件
 	 */
-	protected ResponseEntity<byte[]> download(File file) throws IOException {
+	protected ResponseEntity<Resource> download(File file) {
 		String fileName = file.getName();
 		return download(file, fileName);
 	}
 	
 	/**
-	 * 下载文件
-	 * @param file 文件
-	 * @param fileName 写出的文件名
-	 */
-	protected ResponseEntity<byte[]> download(File file, String fileName) throws IOException {
-		InputStream in = null;
-		try {
-			in = new FileInputStream(file);
-			byte[] body = IOUtils.copyToByteArray(in);
-			return download(body, fileName);
-		} finally {
-			IOUtils.closeQuietly(in);
-		}
-	}
-	
-	/**
 	 * 下载
-	 * @param body 数据
+	 * @param file 文件
 	 * @param fileName 生成的文件名
 	 * @return {ResponseEntity}
 	 */
-	protected ResponseEntity<byte[]> download(byte[] body, String fileName) {
+	protected ResponseEntity<Resource> download(File file, String fileName) {
+		Resource resource = new FileSystemResource(file);
+		
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
 				.getRequestAttributes()).getRequest();
-		String header = request.getHeader("User-Agent").toUpperCase();
+		String header = request.getHeader("User-Agent");
+		// 避免空指针
+		header = header == null ? "" : header.toUpperCase();
 		HttpStatus status;
 		if (header.contains("MSIE") || header.contains("TRIDENT") || header.contains("EDGE")) {
-			fileName = URLUtils.encodeURL(fileName, Charsets.UTF_8.name());
+			fileName = URLUtils.encodeURL(fileName, Charsets.UTF_8);
 			status = HttpStatus.OK;
 		} else {
 			fileName = new String(fileName.getBytes(Charsets.UTF_8), Charsets.ISO_8859_1);
@@ -217,7 +180,6 @@ public abstract class BaseController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		headers.setContentDispositionFormData("attachment", fileName);
-		headers.setContentLength(body.length);
-		return new ResponseEntity<byte[]>(body, headers, status);
+		return new ResponseEntity<Resource>(resource, headers, status);
 	}
 }

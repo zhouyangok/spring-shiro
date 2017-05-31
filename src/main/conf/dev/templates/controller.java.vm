@@ -7,7 +7,6 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,10 +69,7 @@ public class ${table.controllerName} {
 	 */
 	@PostMapping("/add")
 	@ResponseBody
-	public Object add(@Valid ${entity} ${table.entityPath}, BindingResult result) {
-		if (result.hasErrors()) {
-			return renderError(result);
-		}
+	public Object add(@Valid ${entity} ${table.entityPath}) {
 		${table.entityPath}.setCreateTime(new Date());
 		${table.entityPath}.setUpdateTime(new Date());
 		${table.entityPath}.setDeleteFlag(0);
@@ -125,10 +121,7 @@ public class ${table.controllerName} {
 	 */
 	@PostMapping("/edit")
 	@ResponseBody
-	public Object edit(@Valid ${entity} ${table.entityPath}, BindingResult result) {
-		if (result.hasErrors()) {
-			return renderError(result);
-		}
+	public Object edit(@Valid ${entity} ${table.entityPath}) {
 		${table.entityPath}.setUpdateTime(new Date());
 		boolean b = ${table.entityPath}Service.updateById(${table.entityPath});
 		if (b) {

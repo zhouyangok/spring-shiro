@@ -1,6 +1,7 @@
 package com.wangzhixuan.commons.utils;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 /**
  * url处理工具类
@@ -11,15 +12,16 @@ public class URLUtils extends org.springframework.web.util.UriUtils {
 	/**
 	 * url 编码
 	 * @param source url
-	 * @param encoding 字符集
+	 * @param charset 字符集
 	 * @return 编码后的url
 	 */
-	public static String encodeURL(String source, String encoding) {
+	public static String encodeURL(String source, Charset charset) {
 		try {
-			return URLUtils.encode(source, encoding);
+			return URLUtils.encode(source, charset.name());
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
 	}
+
 
 }

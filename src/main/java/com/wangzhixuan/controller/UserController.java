@@ -11,7 +11,6 @@ import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,10 +99,7 @@ public class UserController extends BaseController {
      */
     @PostMapping("/add")
     @ResponseBody
-    public Object add(@Valid UserVo userVo, BindingResult result) {
-        if (result.hasErrors()) {
-            return renderError(result);
-        }
+    public Object add(@Valid UserVo userVo) {
         List<User> list = userService.selectByLoginName(userVo);
         if (list != null && !list.isEmpty()) {
             return renderError("登录名已存在!");
@@ -145,10 +141,7 @@ public class UserController extends BaseController {
     @RequiresRoles("admin")
     @PostMapping("/edit")
     @ResponseBody
-    public Object edit(@Valid UserVo userVo, BindingResult result) {
-        if (result.hasErrors()) {
-            return renderError(result);
-        }
+    public Object edit(@Valid UserVo userVo) {
         List<User> list = userService.selectByLoginName(userVo);
         if (list != null && !list.isEmpty()) {
             return renderError("登录名已存在!");
