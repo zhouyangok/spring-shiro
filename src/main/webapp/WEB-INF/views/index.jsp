@@ -8,7 +8,6 @@
 <title>主页</title>
 <script type="text/javascript">
     var index_tabs;
-    var layout_west_tree;
     var indexTabsMenu;
     $(function() {
         $('#index_layout').layout({fit : true});
@@ -77,28 +76,53 @@
             }
         });
         
-        layout_west_tree = $('#layout_west_tree').tree({
-            url : '${path }/resource/tree',
-            parentField : 'pid',
-            lines : true,
-            onClick : function(node) {
-                var opts = {
-                    title : node.text,
-                    border : false,
-                    closable : true,
-                    fit : true,
-                    iconCls : node.iconCls
-                };
-                var url = node.attributes;
-                if (url && url.indexOf("http") == -1) {
-                    url = '${path }' + url;
+        $.fn.zTree.init($("#layout_west_tree"), {
+            data: {
+                key: {
+                    name: "text"
+                },
+                simpleData: {
+                    enable: true,
+                    idKey: "id",
+                    pIdKey: "pid",
+                    rootPId: 1
                 }
-                if (node.openMode == 'iframe') {
-                    opts.content = '<iframe src="' + url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
-                    addTab(opts);
-                } else if (url) {
-                    opts.href = url;
-                    addTab(opts);
+            },
+            async: {
+                enable: true,
+                url:"${path}/resource/tree",
+                dataFilter: function (treeId, parentNode, responseData) {
+                    if (responseData) {
+                        for (var i =0; i < responseData.length; i++) {
+                            var node = responseData[i];
+                            if (node.state == "open") {
+                                node.open = true;
+                            }
+                        }
+                    }
+                    return responseData;
+                }
+            },
+            callback: {
+                onClick: function(event, treeId, node) {
+                    var opts = {
+                        title : node.text,
+                        border : false,
+                        closable : true,
+                        fit : true,
+                        iconCls : node.iconCls
+                    };
+                    var url = node.attributes;
+                    if (url && url.indexOf("http") == -1) {
+                        url = '${path }' + url;
+                    }
+                    if (node.openMode == 'iframe') {
+                        opts.content = '<iframe src="' + url + '" frameborder="0" style="border:0;width:100%;height:99.5%;"></iframe>';
+                        addTab(opts);
+                    } else if (url) {
+                        opts.href = url;
+                        addTab(opts);
+                    }
                 }
             }
         });
@@ -180,7 +204,7 @@
         </div>
         <div data-options="region:'west',split:true" title="菜单" style="width: 160px; overflow: hidden;overflow-y:auto; padding:0px">
             <div class="well well-small" style="padding: 5px 5px 5px 5px;">
-                <ul id="layout_west_tree"></ul>
+                <ul id="layout_west_tree" class="ztree"></ul>
             </div>
         </div>
         <div data-options="region:'center'" style="overflow: hidden;">
