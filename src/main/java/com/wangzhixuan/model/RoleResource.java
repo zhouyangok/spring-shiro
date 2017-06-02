@@ -1,34 +1,25 @@
 package com.wangzhixuan.model;
 
-import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.IdType;
 import com.wangzhixuan.commons.utils.JsonUtils;
+
+import java.io.Serializable;
 
 /**
  *
  * 角色资源
  *
  */
-@TableName("role_resource")
 public class RoleResource implements Serializable {
 
-	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
 
 	/** 主键id */
-	@TableId(type = IdType.AUTO)
 	private Long id;
 
 	/** 角色id */
-	@TableField(value = "role_id")
 	private Long roleId;
 
 	/** 资源id */
-	@TableField(value = "resource_id")
 	private Long resourceId;
 
 

@@ -1,15 +1,11 @@
 package com.wangzhixuan.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wangzhixuan.commons.utils.JsonUtils;
+import org.hibernate.validator.constraints.NotBlank;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -18,11 +14,9 @@ import com.wangzhixuan.commons.utils.JsonUtils;
  */
 public class Resource implements Serializable {
 
-	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
 
 	/** 主键 */
-	@TableId(type = IdType.AUTO)
 	private Long id;
 
 	/** 资源名称 */
@@ -33,7 +27,6 @@ public class Resource implements Serializable {
 	private String url;
 
 	/** 打开方式 ajax,iframe */
-	@TableField(value = "open_mode")
 	private String openMode;
 
 	/** 资源介绍 */
@@ -56,11 +49,9 @@ public class Resource implements Serializable {
 	private Integer opened;
 
 	/** 资源类别 */
-	@TableField(value = "resource_type")
 	private Integer resourceType;
 
 	/** 创建时间 */
-	@TableField(value = "create_time")
 	private Date createTime;
 
 	public Long getId() {

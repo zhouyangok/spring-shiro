@@ -1,13 +1,9 @@
 package com.wangzhixuan.model;
 
-import java.io.Serializable;
-
+import com.wangzhixuan.commons.utils.JsonUtils;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.enums.IdType;
-import com.wangzhixuan.commons.utils.JsonUtils;
+import java.io.Serializable;
 
 /**
  *
@@ -16,11 +12,9 @@ import com.wangzhixuan.commons.utils.JsonUtils;
  */
 public class Role implements Serializable {
 
-	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
 
 	/** 主键id */
-	@TableId(type = IdType.AUTO)
 	private Long id;
 
 	/** 角色名 */

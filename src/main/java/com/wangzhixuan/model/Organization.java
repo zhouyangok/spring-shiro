@@ -1,15 +1,11 @@
 package com.wangzhixuan.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.enums.IdType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wangzhixuan.commons.utils.JsonUtils;
+import org.hibernate.validator.constraints.NotBlank;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -18,11 +14,9 @@ import com.wangzhixuan.commons.utils.JsonUtils;
  */
 public class Organization implements Serializable {
 
-	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
 
 	/** 主键id */
-	@TableId(type = IdType.AUTO)
 	private Long id;
 
 	/** 组织名 */
@@ -47,7 +41,6 @@ public class Organization implements Serializable {
 	private Integer seq;
 
 	/** 创建时间 */
-	@TableField(value = "create_time")
 	private Date createTime;
 
 	public Long getId() {
