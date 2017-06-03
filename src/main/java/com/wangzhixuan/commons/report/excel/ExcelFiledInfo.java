@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 /**
  * Created by lcm on 16/4/22.
  */
-public class ExcelFiledInfo implements Comparable<ExcelFiledInfo> {
+class ExcelFiledInfo implements Comparable<ExcelFiledInfo> {
 	private final Field field;
 	private final String cellName;
 	private final ExcelCellType type;
