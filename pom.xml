@@ -10,7 +10,7 @@
 
     <properties>
         <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-        <jdk.version>1.7</jdk.version>
+        <jdk.version>1.8</jdk.version>
         <junit.version>4.12</junit.version>
         <servlet.version>3.0.1</servlet.version>
         <log4j2.version>2.8.2</log4j2.version>
@@ -21,7 +21,6 @@
         <shiro.version>1.3.2</shiro.version>
         <ehcache.version>2.6.11</ehcache.version>
         <jackson.version>2.8.8</jackson.version>
-        <joda-time.version>2.9.7</joda-time.version>
         <commons-io.version>2.5</commons-io.version>
         <hibernate-validator.version>5.3.5.Final</hibernate-validator.version>
         <poi.version>3.16</poi.version>
@@ -148,13 +147,6 @@
             </exclusions>
         </dependency>
         <!-- shiro end -->
-        <!-- 可选配置，spring时间处理增强 -->
-        <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
-            <version>${joda-time.version}</version>
-            <optional>true</optional>
-        </dependency>
         <!-- hibernate-validator -->
         <dependency>
             <groupId>org.hibernate</groupId>
