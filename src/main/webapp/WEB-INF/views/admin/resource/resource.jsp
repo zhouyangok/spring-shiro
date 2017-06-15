@@ -138,7 +138,7 @@
                         if (result.success) {
                             parent.$.messager.alert('提示', result.msg, 'info');
                             resourceTreeGrid.treegrid('reload');
-                            parent.layout_west_tree.tree('reload');
+                            parent.indexMenuZTree.reAsyncChildNodes(null, "refresh");
                         }
                         progressClose();
                     }, 'JSON');

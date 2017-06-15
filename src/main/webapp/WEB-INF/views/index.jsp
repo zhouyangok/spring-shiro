@@ -9,6 +9,7 @@
 <script type="text/javascript">
     var index_tabs;
     var indexTabsMenu;
+    var indexMenuZTree;
     $(function() {
         $('#index_layout').layout({fit : true});
         
@@ -76,7 +77,7 @@
             }
         });
         
-        $.fn.zTree.init($("#layout_west_tree"), {
+        indexMenuZTree = $.fn.zTree.init($("#layout_west_tree"), {
             data: {
                 key: {
                     name: "text"
