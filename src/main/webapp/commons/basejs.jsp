@@ -23,4 +23,5 @@
 <script type="text/javascript">
     var basePath = "${staticPath }";
     window.UEDITOR_HOME_URL = "${staticPath }/static/ueditor/";
+    window.UEDITOR_SERVER_URL = "${staticPath }/ueditor";
 </script>
