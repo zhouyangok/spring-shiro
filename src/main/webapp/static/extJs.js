@@ -450,7 +450,7 @@ $.ajaxSetup({
             alert(XMLHttpRequest.responseText);
         }
     },
-    complete(XMLHttpRequest, textStatus, xhr) {
+    complete: function(XMLHttpRequest, textStatus, xhr) {
         //ajax session超时处理:通过XMLHttpRequest取得响应头,oauthstatus
         var oauthstatus = XMLHttpRequest.getResponseHeader("oauthstatus");
         if(oauthstatus == '401'){
