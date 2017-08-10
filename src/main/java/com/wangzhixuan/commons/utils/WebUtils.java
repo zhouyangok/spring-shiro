@@ -4,8 +4,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 
 /**
@@ -24,13 +24,15 @@ public class WebUtils extends org.springframework.web.util.WebUtils {
 		if (null != responseBody) {
 			return true;
 		}
-		RestController restAnnotation = handlerMethod.getBeanType().getAnnotation(RestController.class);
-		if (null != restAnnotation) {
+		// 获取类上面的Annotation，可能包含组合注解，故采用spring的工具类
+		Class<?> beanType = handlerMethod.getBeanType();
+		responseBody = AnnotationUtils.getAnnotation(beanType, ResponseBody.class);
+		if (null != responseBody) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 读取cookie
 	 * @param request
