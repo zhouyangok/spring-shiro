@@ -77,6 +77,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         roleResource.setRoleId(roleId);
         roleResourceMapper.delete(new EntityWrapper<RoleResource>(roleResource));
         
+        // 如果资源id为空，判断为清空角色资源
+        if (StringUtils.isBlank(resourceIds)) {
+            return;
+        }
+        
         String[] resourceIdArray = resourceIds.split(",");
         for (String resourceId : resourceIdArray) {
             roleResource = new RoleResource();
