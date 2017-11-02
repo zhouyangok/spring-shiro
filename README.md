@@ -59,54 +59,13 @@
 <img src="http://static.oschina.net/uploads/img/201512/06161621_NiiM.jpg"/>
 </p>
 
-## 鸣谢
-<p>
-<a href="http://my.oschina.net/qq596392912" target="_blank">@Dreamlu</a>&nbsp;
-<a href="http://my.oschina.net/u/993551" target="_blank">@刘晓枫</a>
-</p>
-
-## 演示效果
-<p>
-<a href="http://shiro.dreamlu.net" target="_blank">http://shiro.dreamlu.net</a> 账号：test 密码：test
-</p>
-
 ## 技术咨询
-<p>
-QQ群：523720304 &nbsp; 不提供全权限账号，人多手杂，维护时间有限，可本地导入项目运行，admin密码和test一样，谢谢。
-</p>
 <p>
 git地址：<a href="https://git.oschina.net/wangzhixuan/spring-shiro-training.git" target="_blank">https://git.oschina.net/wangzhixuan/spring-shiro-training.git</a>
 </p>
 <p>
 欢迎star、fork，不好的地方，接受狂喷，本着共同学习的心态。
 </p>
-
-## 捐助共勉
-<p>
-<img src="http://ww2.sinaimg.cn/small/907f4c96jw1f3sjdhn1dcj208w0aiq3d.jpg" alt="微信" />
-<img src="http://ww3.sinaimg.cn/small/907f4c96jw1f3sjdhkn0rj20by0byq33.jpg" alt="支付宝" />
-</p>
-
-## 捐助记录
-`silent`  5元
-
-`truetxw` 5元
-
-`福地` 10元
-
-`AfenG` 10元
-
-`Sky` 50元
-
-`昆明-TOM` 10元
-
-`王刚` 20元
-
-`slieery` 10元
-
-`回音哥` 10元
-
-`青菜萝卜白菜` 88.88元
 
 ## License
 
